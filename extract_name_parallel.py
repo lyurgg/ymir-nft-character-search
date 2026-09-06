@@ -123,36 +123,28 @@ def get_streamed_field(soup: BeautifulSoup, field_name: str) -> str | None:
 
 
     streamed_container = property_element.parent
-
     streamed_id = streamed_container.get("id")
 
-    if not streamed_id:
-        return None
-
-    if not streamed_id.startswith("S:"):
+    if not streamed_id or not streamed_id.startswith("S:"):
         return None
 
 
-    suffix = streamed_id[2:]
-
-    placeholder_id = f"P:{suffix}"
-
-
+    # The page streams each label into S:<id> and leaves a matching
+    # P:<id> placeholder in the actual stats row.
     placeholder = soup.find(
         "template",
-        id=placeholder_id,
+        id=f"P:{streamed_id[2:]}",
     )
 
-    if placeholder is None:
+    if placeholder is None or placeholder.parent is None:
         return None
 
 
     row = placeholder.parent
 
-    if row is None:
-        return None
 
-
+    # Server and Starting Price currently have their value directly
+    # inside the row.
     value_element = row.find(
         "div",
         class_=lambda classes: (
@@ -161,13 +153,48 @@ def get_streamed_field(soup: BeautifulSoup, field_name: str) -> str | None:
         ),
     )
 
-    if value_element is None:
-        return None
+    if value_element is not None:
+        return value_element.get_text(strip=True) or None
 
 
-    return value_element.get_text(
-        strip=True
-    )
+    # Class is streamed separately: the next P:<id> in the same row
+    # points to an S:<id> container holding sectionCharacter_value.
+    passed_property_placeholder = False
+
+    for candidate in row.find_all("template"):
+
+        if candidate is placeholder:
+            passed_property_placeholder = True
+            continue
+
+        if not passed_property_placeholder:
+            continue
+
+        candidate_id = candidate.get("id", "")
+
+        if not candidate_id.startswith("P:"):
+            continue
+
+        value_container = soup.find(
+            id=f"S:{candidate_id[2:]}",
+        )
+
+        if value_container is None:
+            continue
+
+        value_element = value_container.find(
+            "div",
+            class_=lambda classes: (
+                classes
+                and "sectionCharacter_value" in classes
+            ),
+        )
+
+        if value_element is not None:
+            return value_element.get_text(strip=True) or None
+
+
+    return None
 
 
 # ============================================================
@@ -234,6 +261,8 @@ def get_character_info(nft_id: int):
                 "character_name": None,
                 "server": None,
                 "gp": None,
+                "character_class": None,
+                "starting_price": None,
                 "error": None,
             }
 
@@ -275,12 +304,34 @@ def get_character_info(nft_id: int):
         )
 
 
+        # ====================================================
+        # Class / Job
+        # ====================================================
+
+        character_class = get_streamed_field(
+            soup,
+            "Class",
+        )
+
+
+        # ====================================================
+        # Current marketplace starting price
+        # ====================================================
+
+        starting_price = get_streamed_field(
+            soup,
+            "Starting Price",
+        )
+
+
         return {
             "nft_id": nft_id,
             "status": "found",
             "character_name": character_name,
             "server": server,
             "gp": gp,
+            "character_class": character_class,
+            "starting_price": starting_price,
             "error": None,
         }
 
@@ -293,6 +344,8 @@ def get_character_info(nft_id: int):
             "character_name": None,
             "server": None,
             "gp": None,
+            "character_class": None,
+            "starting_price": None,
             "error": str(e),
         }
 
@@ -350,6 +403,8 @@ def main():
                     "character_name": result["character_name"],
                     "server": result["server"],
                     "gp": result["gp"],
+                    "character_class": result["character_class"],
+                    "starting_price": result["starting_price"],
                 })
 
 
@@ -358,7 +413,9 @@ def main():
                     f"{nft_id:4d} -> "
                     f"{result['character_name']} | "
                     f"{result['server']} | "
-                    f"{result['gp']}"
+                    f"{result['gp']} | "
+                    f"{result['character_class']} | "
+                    f"{result['starting_price'] or 'NOT LISTED'}"
                 )
 
 
@@ -419,6 +476,8 @@ def main():
                 "character_name",
                 "server",
                 "gp",
+                "character_class",
+                "starting_price",
             ],
         )
 
