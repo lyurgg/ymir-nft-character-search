@@ -82,7 +82,7 @@ function renderGraph(subgraph) {
         const title=svgElement('title');title.textContent=network.directed?`${nftLabel(edge.nft_id)}: ${nodeLabel(edge.source,true)} to ${nodeLabel(edge.target,true)} · ${graphDate(edge.at*1000)}`:`${edge.current?'Current owner snapshot':'Historical ownership'}: ${nodeLabel(edge.target,true)}`;line.appendChild(title);
         viewport.appendChild(line);
         let label=null;
-        if(network.directed && subgraph.edges.length<=45) { label=svgElement('text',{class:'edge-label','text-anchor':'middle','data-open-nft':edge.nft_id,role:'link',tabindex:0});label.textContent=nftLabel(edge.nft_id,true)+' · '+new Date(edge.at*1000).toISOString().slice(0,10);viewport.appendChild(label); }
+        if(network.directed) { label=svgElement('text',{class:'edge-label','text-anchor':'middle','data-open-nft':edge.nft_id,role:'link',tabindex:0});label.textContent=nftLabel(edge.nft_id,true)+' · '+new Date(edge.at*1000).toISOString().slice(0,10);viewport.appendChild(label); }
         const parallels=subgraph.edges.filter(other=>other.source===edge.source&&other.target===edge.target);
         const curve=parallels.length>1?(parallels.indexOf(edge)-(parallels.length-1)/2)*38:14;
         renderedEdges.push({edge,element:line,label,curve});
@@ -90,13 +90,17 @@ function renderGraph(subgraph) {
     for(const node of subgraph.nodes) {
         const group=svgElement('g',{class:`graph-node ${node.type} ${node.id===rootId?'root':''} ${pathNodes.has(node.id)?'in-path':''} ${walletNotes[node.wallet]?.tag?'tagged':''}`,tabindex:0,role:'button','data-node':node.id,'aria-label':nodeLabel(node.id,true)});
         group.appendChild(svgElement('circle',{r:node.type==='nft'?19:14}));
-        const label=svgElement('text',{y:node.type==='nft'?35:30,'text-anchor':'middle'});
+        const label=svgElement('text',{y:node.type==='nft'?35:30,'text-anchor':'middle',class:node.type==='nft'?'nft-node-label':'wallet-node-label'});
         const full=walletNotes[node.wallet]?.name || nodeLabel(node.id);label.textContent=node.type==='nft'?nftLabel(node.nft_id,true):full.length>27?full.slice(0,25)+'…':full;group.appendChild(label);
         const title=svgElement('title');title.textContent=nodeLabel(node.id,true);group.appendChild(title);
         viewport.appendChild(group);nodeElements.set(node.id,group);
     }
-    updateGraphGeometry();view={x:0,y:0,zoom:1};setGraphView();
+    updateGraphGeometry();updateNFTLabels();view={x:0,y:0,zoom:1};setGraphView();
 }
+function updateNFTLabels() {
+    svg.setAttribute('data-nft-labels',document.getElementById('showNFTLabels').checked?'shown':'hidden');
+}
+document.getElementById('showNFTLabels').addEventListener('change',updateNFTLabels);
 function nodeUrl(id) {
     const node=network.nodes.get(id);
     return node?.type==='wallet'?'https://scan.wemix.com/address/'+node.wallet:node?.type==='nft'?'index.html?nft='+node.nft_id:null;

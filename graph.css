@@ -40,3 +40,5 @@ aside h2 { font-size:20px; margin-top:0; } aside p,aside li { line-height:1.6; f
 .wallet-stats b { display:block; font-size:21px; }
 @media(max-width:600px) { .graph-settings input { min-width:0; width:100%; } }
 .graph-panel { max-height:760px; overflow:auto; }
+#network[data-nft-labels=hidden] .edge-label,
+#network[data-nft-labels=hidden] .nft-node-label { display:none; }

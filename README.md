@@ -146,7 +146,9 @@ graph and character dossier. Both pages load the reference's Nunito, Patrick Han
 and Press Start 2P fonts with local fallbacks.
 
 The graph defaults to **Directed transfers**, with arrows from sender wallet to
-recipient wallet, labeled by NFT and date when at most 45 edges are visible.
+recipient wallet, labeled by IGN (NFT ID) and date at every graph size.
+The checked-by-default Show NFT labels control can hide transfer labels and NFT
+node labels without changing the layout, zoom, or wallet labels.
 Click a wallet node to open its WEMIX Scan address. Click an NFT node in the
 ownership view, or an NFT label on a transfer, to open character information.
 Use the separate Inspect actions to see records, center a node, exclude a wallet,

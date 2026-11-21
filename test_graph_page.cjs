@@ -14,6 +14,7 @@ class Element {
 const get=id=>{if(!elements.has(id)) elements.set(id,new Element());return elements.get(id);};
 get('graphDepth').value='4';
 get('graphMode').value='associations';
+get('showNFTLabels').checked=true;
 const opened=[],storage={},clickHandlers=[];
 const context=vm.createContext({document:{getElementById:get,createElementNS:()=>new Element(),addEventListener:(name,handler)=>clickHandlers.push(handler)},window:{open:(...args)=>opened.push(args)},localStorage:{getItem:key=>storage[key],setItem:(key,value)=>storage[key]=value},URL,URLSearchParams,location:{href:'https://example.test/graph.html',search:''},history:{replaceState(){}}});
 const run=code=>vm.runInContext(code,context);
@@ -44,6 +45,20 @@ assert.equal(run('network.directed'),true);
 assert.match(get('graphLegend').innerHTML,/source → destination/);
 assert.match(get('nodeInfo').innerHTML,/Wallet/);
 assert.ok(get('graphViewport').children.some(item=>item.attributes['marker-end']==='url(#transferArrow)'));
+// Regression: the old 45-edge threshold suppressed every name/ID in large graphs.
+run(`{
+ const edge=[...network.edges.values()][0];
+ renderGraph({nodes:[network.nodes.get(edge.source),network.nodes.get(edge.target)],edges:Array.from({length:60},(_,i)=>({...edge,id:'label-regression-'+i}))});
+ view={x:12,y:34,zoom:2};setGraphView();
+}`);
+assert.equal(get('graphViewport').children.filter(item=>item.attributes.class==='edge-label').length,60);
+assert.equal(get('network').attributes['data-nft-labels'],'shown');
+const transform=get('graphViewport').attributes.transform;
+get('showNFTLabels').checked=false;get('showNFTLabels').listeners.change();
+assert.equal(get('network').attributes['data-nft-labels'],'hidden');
+assert.equal(get('graphViewport').attributes.transform,transform);
+get('showNFTLabels').checked=true;get('showNFTLabels').listeners.change();
+assert.equal(get('network').attributes['data-nft-labels'],'shown');
 get('graphTarget').value='not-indexed';
 run('exploreGraph()');
 assert.match(get('graphStatus').textContent,/not found/);
