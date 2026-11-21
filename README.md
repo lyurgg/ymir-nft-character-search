@@ -7,7 +7,9 @@ Open `index.html` or serve it with `python -m http.server`.
 ## Prices and availability
 
 YMIR's "Starting Price" can remain on an NFT after its listing ends. Current
-listing state comes from the public WEMIX detail page's `__NEXT_DATA__` NFT data.
+listing state and character metadata come from WEMIX's public JSON NFT detail endpoint.
+This avoids downloading and parsing large HTML pages, including the YMIR pages
+that may not expose newer characters.
 Listed price is shown only for a sale or an unexpired auction. Bid and offer
 availability use the marketplace's explicit flags. Missing data means Unknown.
 Expired auction deadlines override stale bidding flags.
@@ -19,8 +21,8 @@ currency's 18 decimals were checked against WEMIX's rendered price; unknown
 currencies are left blank rather than converted with guessed decimals.
 
 All values are scan snapshots. Check times are displayed in Philippine time.
-The current local preview has live checks for IDs 7, 8, 9 and 836; other records retain
-legacy prices with unknown availability until the next full scrape.
+A full local scan of IDs 1–5000 found 4,199 characters in 107.5 seconds. All IDs
+in 3700–4200 were present. Runtime on GitHub depends on API latency and retries.
 
 ## Name history and persistence
 
@@ -55,8 +57,8 @@ run the generator afterward to update the local page.
 The public WEMIX NFT history query (`POST /market/order/trade-history`) returns
 transfer and sale records with sending/receiving wallets, dates, event types, and
 transaction hashes. The collector saves them without duplicating records and
-retains them if a later request fails. The current owner comes from the NFT detail
-page. Archive owner observations have scan times; transfer records have the event
+retains them if a later request fails. The current owner comes from the JSON NFT detail
+response. Archive owner observations have scan times; transfer records have the event
 times supplied by WEMIX. The UI shows history coverage and partial responses.
 These public site endpoints can change, so failures are shown rather than treated
 as empty histories. No wallet connection, private key, or API secret is required.
@@ -98,12 +100,18 @@ Price per 100,000 power uses listed token amounts. Choose a currency before
 comparing prices across denominations. Favorites use browser local storage and
 are specific to that browser. The table renders 100 rows per page.
 
-The collector refreshes through the highest archived ID (with 5,000 as its initial
-baseline), then probes new sequential IDs in batches of 100 until a full batch is
-empty or 1,000 additional IDs have been checked. This is bounded discovery, not
-proof that IDs beyond a large empty gap do not exist. Configure
-`--discovery-batch` and `--discovery-limit` to probe farther. `--ids 7 8 9` refreshes
-selected characters without probing. Failed source requests are retried separately;
-market and transfer retries do not refetch successful character pages.
-`scan_report.json` records failures, missing archived pages, discovered IDs and scan
-scope. It is persisted with the archive by the daily workflow.
+The collector scans IDs 1 through 5,000, including gaps inside the existing archive.
+It does not stop at empty ranges and does not probe beyond the ceiling. The workflow
+explicitly passes `--end-id 5000`; `--ids 4000 4200` is available for a focused check.
+Progress is printed every 50 completed IDs. Transient source failures are retried in
+parallel. Ownership history refreshes when the owner changes, the previous request
+failed or was partial, or its last successful check is at least seven days old.
+Metadata, prices, and current owners are still refreshed on every run. Intermediate
+transfers that return to the same wallet are collected on the next weekly history
+refresh. Existing histories remain visible with their original check times.
+`scan_report.json` records runtime, failures, missing archived pages, and scan scope.
+It is persisted with the archive by the daily workflow.
+
+Both pages now share `theme.css`, embedded by the generators. Upload this source
+file along with the other generator, JavaScript, CSS, and template files. Generated
+HTML files remain self-contained for GitHub Pages.

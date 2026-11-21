@@ -10,6 +10,7 @@ def generate_graph(characters):
         for character in characters]
     html = (root / "graph-template.html").read_text(encoding="utf-8")
     html = html.replace("__GRAPH_CSS__", (root / "graph.css").read_text(encoding="utf-8"))
+    html = html.replace("__THEME_CSS__", (root / "theme.css").read_text(encoding="utf-8"))
     script = (root / "graph-core.js").read_text(encoding="utf-8") + "\n" + (root / "graph.js").read_text(encoding="utf-8")
     # Names and other upstream text must never terminate the inline script.
     encoded = json.dumps(data, ensure_ascii=False).replace("</", "<\\/")

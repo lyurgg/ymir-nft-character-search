@@ -7,7 +7,7 @@ from pathlib import Path
 
 from bs4 import BeautifulSoup
 from character_history import load_history, observe, save_history, clean_price
-from extract_name_parallel import get_streamed_field, discovery_frontier, scan_batch, refresh
+from extract_name_parallel import get_streamed_field, discovery_frontier, scan_batch, refresh, history_due, get_character_info
 from marketplace import COLLECTION, parse_marketplace, token_price, parse_transfers
 
 TOKEN = "0x7d72b22a74a216af4a002a1095c8c707d6ec1c5f"
@@ -138,6 +138,30 @@ class HistoryTests(unittest.TestCase):
 
 
 class CollectionTests(unittest.TestCase):
+    def test_recent_character_comes_from_json_without_html(self):
+        info = json.loads(BeautifulSoup(market_html(), "html.parser").script.string)["props"]["pageProps"]["nftInfo"]
+        info.update(tid=4200, nftName="Recent character", metaData={"attributes": [
+            {"key": "Class", "value": "Warlord"}, {"key": "Server", "value": "ASIA - SAKURA"},
+            {"key": "GrowthPower", "value": 385832}]})
+        with patch("extract_name_parallel.fetch_nft_data", return_value=info), patch("extract_name_parallel.fetch_transfers", return_value={"events": [], "total_count": 0, "all_returned": True}):
+            result = get_character_info(4200)
+        self.assertEqual(result["status"], "found")
+        self.assertEqual(result["server"], "SAKURA")
+        self.assertEqual(result["gp"], "385,832")
+        self.assertEqual(result["character_name"], "Recent character")
+
+    def test_history_refreshes_for_new_owner_old_cache_or_partial_response(self):
+        from datetime import datetime, timezone
+        now = datetime(2026, 11, 21, tzinfo=timezone.utc)
+        entry = {"character": {"market": {"owner": "wallet-a"}},
+                 "transfer_check": {"checked_at": "2026-11-20T00:00:00Z", "all_returned": True}}
+        self.assertFalse(history_due(entry, "wallet-a", now))
+        self.assertTrue(history_due(entry, "wallet-b", now))
+        entry["transfer_check"]["all_returned"] = False
+        self.assertTrue(history_due(entry, "wallet-a", now))
+        entry["transfer_check"] = {"checked_at": "2026-11-01T00:00:00Z"}
+        self.assertTrue(history_due(entry, "wallet-a", now))
+
     def test_discovery_follows_archive_past_5000(self):
         self.assertEqual(discovery_frontier({"6501": {}}), 6501)
         self.assertEqual(discovery_frontier({}), 5000)

@@ -70,6 +70,10 @@ def parse_marketplace(html, nft_id, now=None):
     script = soup.find("script", id="__NEXT_DATA__")
     data = json.loads(script.string) if script else {}
     info = data.get("props", {}).get("pageProps", {}).get("nftInfo")
+    return parse_market_info(info, nft_id, now)
+
+
+def parse_market_info(info, nft_id, now=None):
     if not isinstance(info, dict) or str(info.get("tid")) != str(nft_id) or str(info.get("collectionAddress", "")).lower() != COLLECTION:
         raise ValueError("Marketplace NFT data missing or mismatched")
     flags = info.get("currentStatus") or info.get("nftConditionStatus") or {}
@@ -96,6 +100,21 @@ def parse_marketplace(html, nft_id, now=None):
 
 
 def fetch_marketplace(session, nft_id):
-    response = session.get(BASE_URL + str(nft_id), timeout=(10, 45))
+    info = fetch_nft_data(session, nft_id)
+    return parse_market_info(info, nft_id)
+
+
+def fetch_nft_data(session, nft_id):
+    response = session.get(API_URL + "/market/explore/v3/nft-detail",
+                           params={"address": COLLECTION, "tid": nft_id}, timeout=(5, 20))
     response.raise_for_status()
-    return parse_marketplace(response.text, nft_id)
+    payload = response.json()
+    if payload.get("result") == 203 and payload.get("data", {}).get("result") is None:
+        return None
+    if payload.get("result") != 0:
+        raise ValueError("Marketplace NFT query failed")
+    info = payload.get("data", {}).get("result")
+    if not isinstance(info, dict):
+        raise ValueError("Marketplace NFT schema changed")
+    parse_market_info(info, nft_id)  # Validate identity before using metadata.
+    return info
