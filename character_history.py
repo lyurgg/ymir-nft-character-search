@@ -1,8 +1,8 @@
 """Durable observations keyed by NFT ID, never by mutable character name."""
 import csv
-import json
 import re
 from pathlib import Path
+from json_store import load_json, save_json
 
 HISTORY_PATH = Path("character_history.json")
 
@@ -14,7 +14,7 @@ def clean_price(value):
 
 def load_history(path=HISTORY_PATH, csv_path="characters.csv"):
     if Path(path).exists():
-        return json.loads(Path(path).read_text(encoding="utf-8"))
+        return load_json(path)
     history = {}
     if Path(csv_path).exists():
         with open(csv_path, encoding="utf-8", newline="") as source:
@@ -99,7 +99,4 @@ def record_scan_failure(history, nft_id, status, checked_at):
 
 
 def save_history(history, path=HISTORY_PATH):
-    target = Path(path)
-    temporary = target.with_suffix(".tmp")
-    temporary.write_text(json.dumps(history, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    temporary.replace(target)
+    save_json(path, history)

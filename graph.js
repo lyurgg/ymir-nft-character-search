@@ -23,6 +23,11 @@ function nftLabel(nftId, compact=false) {
     const letters=Array.from(name);
     return (compact&&letters.length>20?letters.slice(0,19).join('')+'…':name)+' ('+nftId+')';
 }
+function edgeDisplayName(edge) {
+    if(edge.kind==='funding')return wemixAmount(edge.amount_wei)+' WEMIX';
+    if(edge.kind==='purchase')return 'Bought '+nftLabel(edge.nft_id,true);
+    return nftLabel(edge.nft_id,true);
+}
 function nodeLabel(id, full=false) {
     const node=network.nodes.get(id);
     if(!node) return id;
@@ -78,11 +83,11 @@ function renderGraph(subgraph) {
     const pathNodes=new Set(selectedPath?.nodes || []);
     positions=layoutGraph(subgraph.nodes,subgraph.edges);
     for(const edge of subgraph.edges) {
-        const line=svgElement('path',{class:`graph-edge ${edge.current?'current':'former'} ${pathEdges.has(edge.id)?'in-path':''}`,tabindex:0,'data-edge':edge.id,'marker-end':network.directed?'url(#transferArrow)':'','aria-label':`${nodeLabel(edge.source)} ${network.directed?'sends '+nftLabel(edge.nft_id)+' to':edge.current?'current owner snapshot':'historical ownership'} ${nodeLabel(edge.target)}`});
-        const title=svgElement('title');title.textContent=network.directed?`${nftLabel(edge.nft_id)}: ${nodeLabel(edge.source,true)} to ${nodeLabel(edge.target,true)} · ${graphDate(edge.at*1000)}`:`${edge.current?'Current owner snapshot':'Historical ownership'}: ${nodeLabel(edge.target,true)}`;line.appendChild(title);
+        const line=svgElement('path',{class:`graph-edge ${edge.current?'current':'former'} ${pathEdges.has(edge.id)?'in-path':''}`,tabindex:0,'data-edge':edge.id,'marker-end':network.directed?'url(#transferArrow)':'','aria-label':`${nodeLabel(edge.source)} ${network.directed?'sends '+edgeDisplayName(edge)+' to':edge.current?'current owner snapshot':'historical ownership'} ${nodeLabel(edge.target)}`});
+        const title=svgElement('title');title.textContent=network.directed?`${edgeDisplayName(edge)}: ${nodeLabel(edge.source,true)} to ${nodeLabel(edge.target,true)} · ${graphDate(edge.at*1000)}`:`${edge.current?'Current owner snapshot':'Historical ownership'}: ${nodeLabel(edge.target,true)}`;line.appendChild(title);
         viewport.appendChild(line);
         let label=null;
-        if(network.directed) { label=svgElement('text',{class:'edge-label','text-anchor':'middle','data-open-nft':edge.nft_id,role:'link',tabindex:0});label.textContent=nftLabel(edge.nft_id,true)+' · '+new Date(edge.at*1000).toISOString().slice(0,10);viewport.appendChild(label); }
+        if(network.directed) { label=svgElement('text',{class:'edge-label','text-anchor':'middle','data-open-nft':edge.nft_id,role:'link',tabindex:0});label.textContent=edgeDisplayName(edge)+' · '+new Date(edge.at*1000).toISOString().slice(0,10);viewport.appendChild(label); }
         const parallels=subgraph.edges.filter(other=>other.source===edge.source&&other.target===edge.target);
         const curve=parallels.length>1?(parallels.indexOf(edge)-(parallels.length-1)/2)*38:14;
         renderedEdges.push({edge,element:line,label,curve});
@@ -107,6 +112,7 @@ function nodeUrl(id) {
 }
 function openGraphNode(id) { const url=nodeUrl(id);if(url)window.open(url,'_blank','noopener,noreferrer'); }
 function nodeActions(node) {
+    if(network.kind==='funding')return fundingNodeActions(node);
     const url=nodeUrl(node.id);
     let html=`<p><a href="${graphEscape(url)}" target="_blank" rel="noopener noreferrer">${node.type==='wallet'?'Open WEMIX Scan':'Open character info'}</a></p><button data-focus-node="${node.id}">Center this node</button>`;
     if(node.type!=='wallet')return html;
@@ -127,12 +133,12 @@ function inspectGraphNode(id) {
     const check=character?.transfer_check || {};
     document.getElementById('nodeInfo').innerHTML=`<h2>${node.type==='nft'?'Character':'Wallet'}</h2><p class="${node.type==='wallet'?'wallet':''}">${graphEscape(nodeLabel(id,true))}</p>
         ${node.type==='nft'?`<p><a href="index.html?nft=${node.nft_id}">View character details</a></p><p>Owner snapshot: ${graphEscape(graphDate(character?.market?.checked_at))}</p><p>Transfer history: ${check.checked_at?graphEscape(graphDate(check.checked_at)):'not yet fetched'}${check.error?' · latest check failed':''}${check.all_returned===false?' · partial response':''}</p>`:''}
-        <p>${related.length} recorded links. Use Inspect to review a node without opening another page.</p>${nodeActions(node)}<ul>${related.slice(0,50).map(next=>`<li><a href="${graphEscape(nodeUrl(next.id))}" target="_blank" rel="noopener noreferrer">${graphEscape(nodeLabel(next.id))}</a> <button data-inspect-node="${next.id}">Inspect</button> · ${network.directed?(next.edge.source===id?'Sent':'Received')+' '+graphEscape(nftLabel(next.edge.nft_id)):next.edge.current?'current owner snapshot':'historical ownership'}</li>`).join('')}</ul>`;
+        <p>${related.length} recorded links. Use Inspect to review a node without opening another page.</p>${nodeActions(node)}<ul>${related.slice(0,50).map(next=>`<li><a href="${graphEscape(nodeUrl(next.id))}" target="_blank" rel="noopener noreferrer">${graphEscape(nodeLabel(next.id))}</a> <button data-inspect-node="${next.id}">Inspect</button> · ${network.kind==='funding'?(next.edge.kind==='funding'?(next.edge.source===id?'Sent ':'Received ')+graphEscape(wemixAmount(next.edge.amount_wei))+' WEMIX':'NFT purchase '+graphEscape(nftLabel(next.edge.nft_id))):network.directed?(next.edge.source===id?'Sent':'Received')+' '+graphEscape(nftLabel(next.edge.nft_id)):next.edge.current?'current owner snapshot':'historical ownership'}</li>`).join('')}</ul>`;
 }
 function inspectGraphEdge(id) {
     const edge=network.edges.get(id);
     if(!edge) return;
-    document.getElementById('nodeInfo').innerHTML=`<h2>${network.directed?graphEscape(nftLabel(edge.nft_id))+' transfer':edge.current?'Current owner snapshot':'Historical ownership'}</h2><p><b>From</b><br><span class="wallet">${graphEscape(nodeLabel(edge.source,true))}</span></p><p><b>To</b><br><span class="wallet">${graphEscape(nodeLabel(edge.target,true))}</span></p>${network.directed?`<p><a href="index.html?nft=${edge.nft_id}" target="_blank">View ${graphEscape(nftLabel(edge.nft_id))}</a> · ${graphEscape(graphDate(edge.at*1000))}</p>`:""}${network.directed?'':`<p>Last owner check: ${graphEscape(graphDate(edge.checked_at))}</p>`}<h3>Recorded evidence</h3><ul>${edge.evidence.map(item=>`<li>${graphEscape(item.kind)}<br>${graphEscape(graphDate(item.at))}${item.last_seen?'<br>Last seen '+graphEscape(graphDate(item.last_seen)):''}${item.tx_hash?'<br><span class="transaction">'+graphEscape(item.tx_hash)+'</span>':''}</li>`).join('')}</ul>`;
+    document.getElementById('nodeInfo').innerHTML=`<h2>${network.directed?graphEscape(edgeDisplayName(edge)):edge.current?'Current owner snapshot':'Historical ownership'}</h2><p><b>From</b><br><span class="wallet">${graphEscape(nodeLabel(edge.source,true))}</span></p><p><b>To</b><br><span class="wallet">${graphEscape(nodeLabel(edge.target,true))}</span></p>${network.directed?`<p><a href="index.html?nft=${edge.nft_id}" target="_blank">View ${graphEscape(nftLabel(edge.nft_id))}</a> · ${graphEscape(graphDate(edge.at*1000))}</p>`:""}${network.directed?'':`<p>Last owner check: ${graphEscape(graphDate(edge.checked_at))}</p>`}<h3>Recorded evidence</h3><ul>${edge.evidence.map(item=>`<li>${graphEscape(item.kind)}<br>${graphEscape(graphDate(item.at))}${item.last_seen?'<br>Last seen '+graphEscape(graphDate(item.last_seen)):''}${item.tx_hash?'<br><span class="transaction">'+graphEscape(item.tx_hash)+'</span>':''}</li>`).join('')}</ul>`;
 }
 function renderConnectionPath(path) {
     const panel=document.getElementById('connectionPath');
@@ -141,9 +147,22 @@ function renderConnectionPath(path) {
     const walletEndpoints=path.nodes[0].startsWith('wallet:')&&path.nodes.at(-1).startsWith('wallet:');
     panel.innerHTML=`<h2>${path.temporal?"Chronological transfer path":"Shortest recorded connection"}</h2><p>${path.edges.length} ownership edges${walletEndpoints?' · '+walletDistance+' wallet-to-wallet steps through NFTs':''}.</p>${path.edges.length?`<ol>${path.edges.map((edge,i)=>`<li><strong>${graphEscape(nodeLabel(path.nodes[i],true))}</strong><br>${path.temporal?'Sent '+graphEscape(nftLabel(edge.nft_id))+' · '+graphEscape(graphDate(edge.at*1000)):edge.current?'Current owner snapshot':'Historical ownership'}${path.temporal?'':' · last owner check '+graphEscape(graphDate(edge.checked_at))}<br><strong>${graphEscape(nodeLabel(path.nodes[i+1],true))}</strong></li>`).join('')}</ol>`:'<p>Start and destination are the same node.</p>'}<p class="muted">${path.temporal?"Each arrow follows a recorded transfer forward in time. This finds an earliest-arrival path, not necessarily the fewest steps. Same-second transfers are not chained without a known ordering.":"This is the shortest association path; ownership dates may differ."} A path may span different NFTs and does not imply a shared player.</p>`;
 }
+function updateGraphControls() {
+    const funding=document.getElementById('graphMode').value==='funding';
+    document.getElementById('graphDepthControl').hidden=funding;
+    document.getElementById('fundingDepthControl').hidden=!funding;
+    document.getElementById('fundingDaysControl').hidden=!funding;
+    document.getElementById('graphDepth').disabled=funding;
+    document.getElementById('fundingDepth').disabled=!funding;
+    document.getElementById('fundingDays').disabled=!funding;
+}
 function exploreGraph(event) {
     if(event) event.preventDefault();
+    updateGraphControls();
     const mode=document.getElementById('graphMode').value;
+    if(mode==='funding') { exploreFunding();return; }
+    document.getElementById('fundingResults').innerHTML='';
+    document.getElementById('graphDepth').disabled=false;
     const directed=mode==='transfers';
     const after=document.getElementById('afterDate').value,before=document.getElementById('beforeDate').value;
     network=filterGraph(directed?transferNetwork:associationNetwork,{excluded:excludedWallets,
@@ -204,6 +223,9 @@ document.getElementById('addExclusion').addEventListener('click',()=>excludeWall
 document.addEventListener('click',event=>{
     const button=event.target.closest('button');if(!button)return;
     const data=button.dataset;
+    if(data.fundingTarget){document.getElementById('graphTarget').value=data.fundingTarget;exploreGraph();}
+    if(data.fundingPage!==undefined)exploreFunding(Number(data.fundingPage));
+    if(data.fundingDiscover){document.getElementById('graphTarget').value='';exploreGraph();}
     if(data.inspectNode)inspectGraphNode(data.inspectNode);
     if(data.focusNode){document.getElementById('graphRoot').value=data.focusNode.replace(/^wallet:|^nft:/,'');document.getElementById('graphTarget').value='';exploreGraph();}
     if(data.excludeWallet)excludeWallet(data.excludeWallet);
@@ -212,6 +234,7 @@ document.addEventListener('click',event=>{
 });
 
 document.getElementById('graphForm').addEventListener('submit',exploreGraph);
+document.getElementById('graphMode').addEventListener('change',()=>exploreGraph());
 document.getElementById('fitGraph').addEventListener('click',()=>{view={x:0,y:0,zoom:1};setGraphView();});
 document.getElementById('graphRoot').addEventListener('input',event=>{
     const value=event.target.value.toLowerCase();
@@ -260,5 +283,8 @@ const params=new URLSearchParams(location.search);
 document.getElementById('graphRoot').value=params.get('root') || String(graphCharacters.find(character=>character.nft_id===8&&character.market?.owner)?.nft_id || graphCharacters.find(character=>character.market?.owner)?.nft_id || graphCharacters[0]?.nft_id || '');
 document.getElementById('graphTarget').value=params.get('to') || '';
 if(params.get('view'))document.getElementById('graphMode').value=params.get('view');
+if(['1','2','3'].includes(params.get('fundingDepth')))document.getElementById('fundingDepth').value=params.get('fundingDepth');
+if(['1','7','30','90'].includes(params.get('fundingDays')))document.getElementById('fundingDays').value=params.get('fundingDays');
+if(['0','1'].includes(params.get('buyerRoots')))document.getElementById('fundingBuyerRoots').checked=params.get('buyerRoots')==='1';
 renderExclusions();
 exploreGraph();

@@ -4,6 +4,46 @@ Install dependencies with `python -m pip install -r requirements.txt`.
 Run `python extract_name_parallel.py`, then `python generate_html.py`.
 Open `index.html` or serve it with `python -m http.server`.
 
+## Uploading through GitHub without Git or folder uploads
+
+Run `python prepare_upload.py` after making local changes. A clean `github-upload`
+folder is already prepared in this workspace. It contains only small, flat files:
+source code, tests, CSV, and split history data. Every file is under 1,000,000 bytes.
+Upload the **files inside** that local folder at the GitHub repository root; do not
+upload the folder itself. No cloning, pushing, or folder upload is required.
+
+1. First update the existing `.github/workflows/deploy.yml` using GitHub's web
+   editor: replace its contents with the updated local workflow file and commit.
+   This makes future scans commit all history parts along with their index.
+2. At the repository root, use **Add file → Upload files → choose your files**.
+   Select all files inside local `github-upload` and commit them together. Keep
+   their names unchanged. The package currently fits GitHub's 100-file upload
+   limit; if a future archive grows beyond that, upload parts first in batches,
+   then upload the small index files and source files last.
+3. Let the latest workflow run build and deploy both pages. A run triggered by
+   the workflow edit may fail before the new source files are uploaded; the run
+   after the complete upload has all required inputs.
+
+The upload set excludes `index.html`, `graph.html`, `_site/`, `.venv/`, caches,
+and `sample_*` investigation files. The workflow builds the large HTML pages.
+There is no need to upload them manually or delete older generated pages on GitHub.
+`UPLOAD_MANIFEST.json` lists the prepared upload files and their checksums.
+`UPLOAD_INSTRUCTIONS.txt` contains these browser steps.
+
+`character_history.json` and `funding_history.json` are now small index files.
+Their records are in adjacent `character_history.part-*.json` and
+`funding_history.part-*.json` files, grouped by common filename prefixes. Keep
+**every part referenced by each index**. `json_store.py` reconstructs the original
+JSON automatically, validates sizes, checksums and record counts, and accepts
+legacy unsplit JSON as well. Missing, mixed, or damaged parts fail clearly instead
+of dropping observations. New parts are written before the index is switched;
+subsequent scans retain this split format and remove obsolete managed parts.
+Older unreferenced parts left on GitHub are ignored safely.
+
+These split files are source/build inputs. The site's optional single-file import
+still accepts normalized, unsplit native-transfer JSON; importing an index file
+alone cannot provide its transfer parts.
+
 ## Prices and availability
 
 YMIR's "Starting Price" can remain on an NFT after its listing ends. Current
@@ -32,12 +72,14 @@ in 3700–4200 were present. Runtime on GitHub depends on API latency and retrie
 
 ## Name history and persistence
 
-`character_history.json` is durable state keyed by NFT ID. It seeds the existing
+`character_history.json` and its `character_history.part-*.json` files hold durable
+state keyed by NFT ID. It seeds the existing
 CSV names and prices with unknown dates, then records name transitions, first and
 last observation times, the latest successful character data, and last known price.
 Name reversions are retained. Search includes previous names and NFT IDs.
 Changes before the archive and changes between daily scans cannot be recovered.
-Keep this file across runs; do not regenerate it from scratch.
+Keep the index and all its referenced part files across runs; do not regenerate
+the archive from scratch.
 
 The daily GitHub Pages workflow commits the CSV and history back to `main` with
 `[skip ci]` before deployment. Repository settings must allow the workflow token
@@ -180,3 +222,125 @@ Character dossiers now use a summary, current-wallet section, collapsible owners
 price, name and related-character histories, with transaction hashes behind a
 Transaction details disclosure. Wallet addresses open Scan; Related searches the
 local index for wallet associations.
+
+## Shared WEMIX funding sources
+
+Select **Shared WEMIX funders**, enter a focused NFT ID or exact name, and leave
+**Compare with** blank to discover other characters with shared funding sources.
+Choose a lookback window and maximum funding depth, then Explore connections.
+For example, focus on **1358 (Bunn1eSSS)** with depth 3, a 90-day lookback, and
+buyer roots enabled to discover kufuking (3433), kufuking2 (1154), and
+GèenWoo/kufuking3 (3871) in the included snapshot. Character info popups also have
+a **Discover shared funders** link that opens this single-NFT view.
+
+Results show `IGN (NFT ID)`, the number of shared sources, and the shortest
+connection's maximum branch depth. They are sorted by shorter branches, then more
+shared sources, then NFT ID, with 20 characters per page. **View connection** opens
+a specific pair's graph and transaction evidence; **Find other NFTs with shared
+funders** returns to discovery. The graph and evidence follow the current result
+page, with an 80-node graph limit. Same-buyer 0-hop matches are labeled explicitly.
+Only sources connecting to the focused NFT are returned; unrelated pairs sharing
+a source are excluded. Excluded wallets also break discovery branches.
+
+Enter a second NFT ID (for example 3871) in **Compare with** for a specific pair.
+Both modes match a common source
+wallet sending at least 1 native WEMIX to **different purchase buyers** before the
+two NFTs' recorded purchases. It includes former purchase buyers, not just current
+owners, and considers each recorded mainnet purchase separately. User-transfers
+are not treated as purchases. Supported lookback windows are 1, 7, 30 and 90 days.
+Exclusions apply to both matching and display. Exact amounts, funding dates,
+purchase dates and both transaction hashes are shown. The graph distinguishes
+native-funding edges from buyer-to-NFT purchase edges.
+
+**Maximum funding depth** defaults to 1 hop. Choose 2 or 3 hops to include one or
+two intermediate wallets on each branch. Funding depth and lookback appear in the
+main controls when **Shared WEMIX funders** is selected. The ownership/transfer
+view has a separate depth selector with 1, 2, 3, and 4 steps (default 2).
+**Include buyer wallets as sources (0 hops)**
+is enabled by default: a purchase buyer can itself be the source sending WEMIX to
+the other buyer. A 0-hop branch identifies that buyer, not an incoming transfer.
+Disable the checkbox to require incoming funding on every branch. Each source keeps its shortest discovered
+valid branch to each purchase buyer. Branches may have different lengths, each
+within the selected limit. Transfers must strictly increase in time toward the
+buyer and occur before the purchase; same-second ordering is not assumed. Every
+hop must fall inside the purchase's lookback window and carry at least 1 WEMIX.
+Repeated wallets are excluded from a branch, and excluded intermediate wallets
+break its path. The evidence list and graph include every intermediate transfer.
+Pair analysis is capped at 20,000 incoming-edge checks; discovery has a shared
+500,000-check budget across the index and processes the focused NFT first. Hitting
+either cap is reported as incomplete. Discovery shows the number of NFTs with
+recorded purchases visited. Intermediate-wallet histories are included in
+coverage checks. Discovery uses the loaded dataset and does not fetch missing
+histories automatically; it cannot establish that an undiscovered connection
+does not exist. NFTs without recorded purchases cannot be compared by this mode.
+
+NFT transfer history cannot supply incoming WEMIX funding. The included native
+WEMIX snapshot was collected from the current WEMIX Scan API. Captured checks for
+kufuking (3433), kufuking2 (1154), GèenWoo/kufuking3 (3871), and Bunn1eSSS (1358)
+are saved in `funding_case_report.json`. All 13 native transfers used in those
+results were also checked against WEMIX mainnet RPC for successful execution,
+addresses, exact value, and block timestamp. Automated tests replay this evidence
+offline. Some upstream histories remain partial due to busy-wallet API limits;
+a missing match is not proof of no connection.
+
+`collect_funding.py` is an optional bounded collector for the current documented
+[WEMIX Scan account API](https://certik.gitbook.io/wemix-explorer-docs/reference/api-reference/accounts).
+The default Scan provider requires no API key:
+
+```text
+python collect_funding.py --nft-ids 1358 3871 --max-pages 3
+python build_site.py
+```
+
+The API must be reachable and compatible with the documented schema. The older
+Explorer API is available with `--provider legacy` and `WEMIX_EXPLORER_API_KEY`
+in the environment; credentials are never embedded in the site. This collection is separate from the daily NFT scrape
+to prevent an unavailable transaction indexer from delaying deployment. Successful
+records persist in `funding_history.json` and its `funding_history.part-*.json` files; incomplete/failed wallet queries retain
+existing evidence and report their coverage. This file is embedded by the graph
+generator when present. The collector queries at most three pages of 1,000 records
+per wallet by default, newest first, and follows the documented request rate.
+The Scan API exposes a maximum 10,000-record pagination window per wallet; reaching
+that window is reported as partial history. Completeness refers
+only to the external native-transaction list, not internal calls or wrapped tokens.
+
+For upstream collection, match the intended search settings:
+
+```text
+python collect_funding.py --nft-ids 1358 3871 --max-depth 3 --lookback-days 30 --max-wallets 100
+```
+
+The collector expands incoming sources from buyers to intermediate wallets in
+bounded layers. It preserves prior evidence, applies page/wallet limits and records
+partial coverage when those limits or a query failure prevent a complete scan.
+Increasing depth in the browser does not fetch missing histories automatically;
+import or collect those intermediate histories first. URLs retain the selected
+funding depth using `fundingDepth=1`, `fundingDepth=2`, or `fundingDepth=3`,
+lookback using `fundingDays=7` (or 1, 30, 90), and the buyer option using `buyerRoots=1`
+or `buyerRoots=0`. For the test pair, select 1358 and 3871, depth 3, and 90 days
+to see both the buyer-to-buyer transfer and the older shared source.
+
+Alternatively, the funding-history disclosure accepts a **normalized JSON** file
+with `schema_version: 1`, `chain_id: 1111`, `asset: "WEMIX"`, `transfers: [...]` and
+optional `coverage: [...]`. Each transfer needs `from`, `to`, positive decimal-string
+`amount_wei`, Unix-seconds `at`, `tx_hash`, `asset: "WEMIX"`, and `chain_id: 1111`.
+Coverage entries use `wallet` and `complete`; missing entries mean incomplete.
+The Python `funding.scan_native_transfer` function converts current Scan records
+(`funding.native_transfer` supports the legacy Explorer format)
+and rejects failed or zero-value transactions. Raw Scan CSV is not accepted directly.
+Imported JSON stays in page memory and is explicitly labeled not independently
+verified. No live result is fabricated from the ownership network.
+
+Native WEMIX, WWEMIX and internal transfers must remain separate until their
+respective evidence is collected. A shared source may be an exchange or custodian.
+Even a timed funding match does not prove common identity or that those precise
+fungible coins paid for an NFT. Evidence can be reviewed, tagged or excluded.
+
+Additional source files for this feature: `funding.py`, `collect_funding.py`,
+`funding-core.js`, `funding-ui.js`, `test_funding.py`, and `test_funding.cjs`.
+
+Upload the small `funding_history.json` index **and every referenced
+`funding_history.part-*.json` file** with the source files to include this collected
+snapshot in the deployed graph. `prepare_upload.py` assembles the complete set. `funding_case_report.json` is the captured evidence used by
+tests; keep it with the test files. Files beginning with `sample_` are local
+investigation scratch files and should stay excluded.

@@ -175,7 +175,7 @@ function showDetails(nftId) {
         <div class="detail-hero"><span class="surface-eyebrow">Character dossier · NFT #${character.nft_id}</span><h2 id="detailsTitle">${escapeHtml(character.character_name)}</h2>
         <div class="detail-stat-grid"><div><span>Class</span><strong>${escapeHtml(character.character_class || "Unknown")}</strong></div><div><span>Server</span><strong>${escapeHtml(character.server || "Unknown")}</strong></div><div><span>Growth power</span><strong>${escapeHtml(character.gp || "—")}</strong></div></div></div>
         <section class="detail-market">${marketDetails(character)}</section>
-        <p class="detail-actions"><a href="__MARKET_URL__${character.nft_id}" target="_blank" rel="noopener noreferrer">Open WEMIX record</a> · <a href="graph.html?root=${character.nft_id}">Explore ownership graph</a></p>
+        <p class="detail-actions"><a href="__MARKET_URL__${character.nft_id}" target="_blank" rel="noopener noreferrer">Open WEMIX record</a> · <a href="graph.html?root=${character.nft_id}">Explore ownership graph</a> · <a href="graph.html?root=${character.nft_id}&amp;view=funding&amp;fundingDepth=3&amp;fundingDays=90&amp;buyerRoots=1">Discover shared funders</a></p>
         <section class="detail-owner"><h3>Current wallet</h3><p>${walletButton(market.owner)}</p>
         <p class="muted">Last observed: ${escapeHtml(observedDate(market.checked_at))}. A wallet association does not identify the player or prove that characters share a player.</p></section>
         <div class="detail-sections"><details class="detail-section" open><summary>Ownership and transfers <span>${transfers.length} records</span></summary><section>

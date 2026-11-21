@@ -1,0 +1,165 @@
+{
+  "_format": "ymir-split-json-v1",
+  "kind": "array-field",
+  "record_count": 35507,
+  "parts": [
+    {
+      "file": "funding_history.part-001-dd855902ee43.json",
+      "bytes": 999956,
+      "sha256": "dd855902ee437f3e8ef004547de807dc8a2dc028f78745ff540fb39bf141baf7",
+      "records": 3148
+    },
+    {
+      "file": "funding_history.part-002-db29810c3b28.json",
+      "bytes": 999921,
+      "sha256": "db29810c3b283afb8e8377c94edcf69b22b4795ab1267cb97494c234cc082e99",
+      "records": 3157
+    },
+    {
+      "file": "funding_history.part-003-b2f79d4ec155.json",
+      "bytes": 999783,
+      "sha256": "b2f79d4ec155130a1b23e3b49ce05e9687a70d7db76236bb63669cb7440283d4",
+      "records": 3155
+    },
+    {
+      "file": "funding_history.part-004-a12eba1c7750.json",
+      "bytes": 999907,
+      "sha256": "a12eba1c7750ae87f279a16dfd169490b73943bde8676418c013ad68248334a0",
+      "records": 3151
+    },
+    {
+      "file": "funding_history.part-005-cf77cc0469eb.json",
+      "bytes": 999952,
+      "sha256": "cf77cc0469eb4a8ef34249fe41eea1f270f0a41d23beaf68b87ac2ae21cce470",
+      "records": 3153
+    },
+    {
+      "file": "funding_history.part-006-9950b412d497.json",
+      "bytes": 999760,
+      "sha256": "9950b412d497c4f80b66596e17d501f074505cc72287e2f4016813090e060c66",
+      "records": 3158
+    },
+    {
+      "file": "funding_history.part-007-8b44ce84a574.json",
+      "bytes": 999858,
+      "sha256": "8b44ce84a5740c991ba64bd0bd36bf7674b0b2053ab607b90e2a19a634eff350",
+      "records": 3160
+    },
+    {
+      "file": "funding_history.part-008-fb2ccdb273af.json",
+      "bytes": 999864,
+      "sha256": "fb2ccdb273afce81c8fdd7e0fee91daad0ed21eea0f9ce3659d25f0520695a44",
+      "records": 3158
+    },
+    {
+      "file": "funding_history.part-009-ec54322ffe1f.json",
+      "bytes": 999803,
+      "sha256": "ec54322ffe1f0199448147a9d3e015065073448ae528ebb85cba8f0af86cd39d",
+      "records": 3154
+    },
+    {
+      "file": "funding_history.part-010-217fa9f3d3c5.json",
+      "bytes": 999735,
+      "sha256": "217fa9f3d3c5d07e2ec877937a294fd272b824d34156dc8c8809d8b2bb5ad2d9",
+      "records": 3142
+    },
+    {
+      "file": "funding_history.part-011-160cfd2403e9.json",
+      "bytes": 999828,
+      "sha256": "160cfd2403e9b2d6083da39706bfbc200d7cf595b7125e05461e292adccd4742",
+      "records": 3139
+    },
+    {
+      "file": "funding_history.part-012-d792bb3e62c5.json",
+      "bytes": 265011,
+      "sha256": "d792bb3e62c5d8974d59aa090b10cd3df4ff1a376116ccc1b0760579e09b11e8",
+      "records": 832
+    }
+  ],
+  "field": "transfers",
+  "base": {
+    "schema_version": 1,
+    "chain_id": 1111,
+    "asset": "WEMIX",
+    "checked_at": "2026-11-21T08:45:11.491070+00:00",
+    "coverage": [
+      {
+        "wallet": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+        "complete": true,
+        "records_checked": 24
+      },
+      {
+        "wallet": "0x7c60296f746d1ab31357dc1450023494f077e996",
+        "complete": true,
+        "records_checked": 393
+      },
+      {
+        "wallet": "0x7dda6bdce0a579a5470ba0cd7f341c9bf2d8abb4",
+        "complete": true,
+        "records_checked": 1052
+      },
+      {
+        "wallet": "0x93c0c224cbc91a16caacf9443431f743fd5d4719",
+        "complete": true,
+        "records_checked": 2250
+      },
+      {
+        "wallet": "0xb61a190f2b87a244460a080eaf3cd1490d01043a",
+        "complete": true,
+        "records_checked": 99
+      },
+      {
+        "wallet": "0x0d0707963952f2fba59dd06f2b425ace40b492fe",
+        "complete": false,
+        "records_checked": 10000
+      },
+      {
+        "wallet": "0x3369163dca8f3ab294b208c678a5aa8fee7b6009",
+        "complete": true,
+        "records_checked": 3092
+      },
+      {
+        "wallet": "0x49653f38585862d312847cab5aef5c644f6ce120",
+        "complete": true,
+        "records_checked": 197
+      },
+      {
+        "wallet": "0x5ff3a550a76f2b02dc60226039ac04117661b256",
+        "complete": true,
+        "records_checked": 339
+      },
+      {
+        "wallet": "0x647a24b0281444b747bb0d5372324ed0905be0e5",
+        "complete": false,
+        "records_checked": 10000
+      },
+      {
+        "wallet": "0x85c5ccaf01337beb2eaaaf2ece0be53af432bbfb",
+        "complete": true,
+        "records_checked": 188
+      },
+      {
+        "wallet": "0xdb3ded7731c781224ec292e2163d9554c094fd7c",
+        "complete": true,
+        "records_checked": 780
+      },
+      {
+        "wallet": "0xeaa73bad9a5f3c403e9aa1e7bbe22c6219008bc6",
+        "complete": true,
+        "records_checked": 143
+      },
+      {
+        "wallet": "0xf77516f86a9362ffde6600c2eabc6cbc17f431f1",
+        "complete": true,
+        "records_checked": 7653
+      }
+    ],
+    "source": "WEMIX Scan API (CertiK)",
+    "scope": "external native WEMIX transfers only",
+    "max_depth": 3,
+    "lookback_days": 90,
+    "wallet_limit_reached": false,
+    "search_limit_reached": true,
+    "status": "partial"
+  }
+}

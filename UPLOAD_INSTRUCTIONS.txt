@@ -1,0 +1,23 @@
+UPLOAD THESE FILES, NOT THE FOLDER
+
+1. On GitHub, open .github/workflows/deploy.yml and choose Edit.
+   Replace its contents with the updated local .github/workflows/deploy.yml.
+   Commit the edit. The workflow now saves the JSON parts after each scan.
+
+2. At the repository ROOT, choose Add file > Upload files > choose your files.
+   Open this local github-upload folder, select ALL FILES inside it, and upload.
+   Do not upload the github-upload folder itself. Keep every filename unchanged.
+   Commit the files together. All files are under 1 MB; no folder upload is needed.
+
+3. The upload triggers the workflow, which generates and publishes both pages.
+   A run triggered by step 1 may fail before step 2 supplies the new source files;
+   the run after step 2 has everything it needs. Re-run that latest run if needed.
+
+character_history.json and funding_history.json are now small index files.
+Their part files contain the original observations and transfers. Keep ALL of
+them together. Missing or mixed parts stop the build instead of dropping history.
+Unused old part files already on GitHub are ignored by the current indexes.
+
+Do not add index.html, graph.html, _site, .venv, __pycache__, or sample_* files.
+The workflow generates the large pages automatically. UPLOAD_MANIFEST.json and
+this instructions file may be uploaded with the rest; they are harmless records.

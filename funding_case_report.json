@@ -1,0 +1,2524 @@
+{
+  "checked_at": "2026-11-21T08:49:27.890500+00:00",
+  "chain_id": 1111,
+  "asset": "WEMIX",
+  "source": "WEMIX Scan API (CertiK)",
+  "verification_rpc": "https://api.wemix.com",
+  "nft_labels": {
+    "3433": "kufuking",
+    "1154": "kufuking2",
+    "3871": "GèenWoo (user identifies as kufuking3)",
+    "1358": "Bunn1eSSS"
+  },
+  "purchases": [
+    {
+      "nft_id": 3433,
+      "buyer": "0x7c60296f746d1ab31357dc1450023494f077e996",
+      "at": 1784548409,
+      "tx_hash": "0xdd9627355d8ec91e9286199611b29b1d6ac15e43af4407d5977dc79651e36670",
+      "price": "800",
+      "currency": "0x7d72b22a74a216af4a002a1095c8c707d6ec1c5f"
+    },
+    {
+      "nft_id": 1154,
+      "buyer": "0x7dda6bdce0a579a5470ba0cd7f341c9bf2d8abb4",
+      "at": 1779531953,
+      "tx_hash": "0xaa5fc41384d135c919c38a4c3549c3a3d2405f961482d5b94d2b9ed9e085a6c1",
+      "price": "13,000",
+      "currency": "0x7d72b22a74a216af4a002a1095c8c707d6ec1c5f"
+    },
+    {
+      "nft_id": 1154,
+      "buyer": "0xb61a190f2b87a244460a080eaf3cd1490d01043a",
+      "at": 1789933190,
+      "tx_hash": "0x054c8bb5caf2655dbf46b2561e7fed283888a1a47f7a6cd79c9ecd95910d1761",
+      "price": "20,000",
+      "currency": "0x7d72b22a74a216af4a002a1095c8c707d6ec1c5f"
+    },
+    {
+      "nft_id": 3871,
+      "buyer": "0x93c0c224cbc91a16caacf9443431f743fd5d4719",
+      "at": 1790557042,
+      "tx_hash": "0xbbeec83078e83707c2afeb3cdc5c25460f9e49db3e23549eeaa1c1061b1576da",
+      "price": "57,000",
+      "currency": "0x7d72b22a74a216af4a002a1095c8c707d6ec1c5f"
+    },
+    {
+      "nft_id": 1358,
+      "buyer": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+      "at": 1794262326,
+      "tx_hash": "0x469e3dea2c63126c0b336a2c9fe233e526626cd8f7523f52e2a2ce2b38f1a325",
+      "price": "58,000",
+      "currency": "0x7d72b22a74a216af4a002a1095c8c707d6ec1c5f"
+    }
+  ],
+  "transfers": [
+    {
+      "from": "0x647a24b0281444b747bb0d5372324ed0905be0e5",
+      "to": "0x7c60296f746d1ab31357dc1450023494f077e996",
+      "amount_wei": "262630000000000000000",
+      "at": 1781771463.0,
+      "tx_hash": "0x0b67bccbc0ca1313584267e852c43ba73be59252162ad95bd2234ef7e4f02112",
+      "asset": "WEMIX",
+      "chain_id": 1111,
+      "block_number": "115537608",
+      "transaction_index": 0
+    },
+    {
+      "from": "0x647a24b0281444b747bb0d5372324ed0905be0e5",
+      "to": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+      "amount_wei": "4900000000000000000",
+      "at": 1790427363.0,
+      "tx_hash": "0x6080e04679d3720d926674ae3f89e2670ed7b46b4b73260298a3cfb10c71fbf3",
+      "asset": "WEMIX",
+      "chain_id": 1111,
+      "block_number": "124193608",
+      "transaction_index": 0
+    },
+    {
+      "from": "0x0d0707963952f2fba59dd06f2b425ace40b492fe",
+      "to": "0x49653f38585862d312847cab5aef5c644f6ce120",
+      "amount_wei": "102476220000000000000",
+      "at": 1776964266.0,
+      "tx_hash": "0x55c38da39bf6cf92987edf8726a6771a892b0e2ed8aa1325c15b32596f9e1f92",
+      "asset": "WEMIX",
+      "chain_id": 1111,
+      "block_number": "110730355",
+      "transaction_index": 0
+    },
+    {
+      "from": "0x49653f38585862d312847cab5aef5c644f6ce120",
+      "to": "0x7c60296f746d1ab31357dc1450023494f077e996",
+      "amount_wei": "100000000000000000000",
+      "at": 1776964527.0,
+      "tx_hash": "0x130174e6fcf4fde18c9cc6a6fca196fa9e5bc1f33372c0bbc96cd04331ade9ba",
+      "asset": "WEMIX",
+      "chain_id": 1111,
+      "block_number": "110730616",
+      "transaction_index": 1
+    },
+    {
+      "from": "0x0d0707963952f2fba59dd06f2b425ace40b492fe",
+      "to": "0xdb3ded7731c781224ec292e2163d9554c094fd7c",
+      "amount_wei": "19731013773100000000000",
+      "at": 1791373535.0,
+      "tx_hash": "0xd3ffc2a7a767ea7a60a4e66248b28d055bcf71ce265bbcf86d6e11fea1b6fe2a",
+      "asset": "WEMIX",
+      "chain_id": 1111,
+      "block_number": "125139791",
+      "transaction_index": 0
+    },
+    {
+      "from": "0xdb3ded7731c781224ec292e2163d9554c094fd7c",
+      "to": "0x93c0c224cbc91a16caacf9443431f743fd5d4719",
+      "amount_wei": "2440593200000000000000",
+      "at": 1794044733.0,
+      "tx_hash": "0x77a0f54626ad7db72e0ea9409fbaabd83b727d6a33292866b331f36bbad5354e",
+      "asset": "WEMIX",
+      "chain_id": 1111,
+      "block_number": "127811020",
+      "transaction_index": 0
+    },
+    {
+      "from": "0x93c0c224cbc91a16caacf9443431f743fd5d4719",
+      "to": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+      "amount_wei": "60025000000000000000000",
+      "at": 1794244800.0,
+      "tx_hash": "0xa87c6a96569d836496757cae73c32d77d9d866df218b8f493e890e4952e38e62",
+      "asset": "WEMIX",
+      "chain_id": 1111,
+      "block_number": "128011089",
+      "transaction_index": 0
+    },
+    {
+      "from": "0x647a24b0281444b747bb0d5372324ed0905be0e5",
+      "to": "0xb61a190f2b87a244460a080eaf3cd1490d01043a",
+      "amount_wei": "3511860000000000000000",
+      "at": 1789351921.0,
+      "tx_hash": "0x2b62bc93fbc979453493aefd9222e43785036771bda85cf8f796dbc51ec6eb5b",
+      "asset": "WEMIX",
+      "chain_id": 1111,
+      "block_number": "123118153",
+      "transaction_index": 0
+    },
+    {
+      "from": "0x647a24b0281444b747bb0d5372324ed0905be0e5",
+      "to": "0x93c0c224cbc91a16caacf9443431f743fd5d4719",
+      "amount_wei": "4590280000000000000000",
+      "at": 1793665623.0,
+      "tx_hash": "0xe64e15e3958a245ea66ebff259e19e03e6066c662e6b2998acddbe4a41769493",
+      "asset": "WEMIX",
+      "chain_id": 1111,
+      "block_number": "127431905",
+      "transaction_index": 0
+    },
+    {
+      "from": "0x647a24b0281444b747bb0d5372324ed0905be0e5",
+      "to": "0xb61a190f2b87a244460a080eaf3cd1490d01043a",
+      "amount_wei": "100000000000000000000",
+      "at": 1789138984.0,
+      "tx_hash": "0x7a8140c3911039792767378053c447cec431e1c8054b836ea737ef268f012917",
+      "asset": "WEMIX",
+      "chain_id": 1111,
+      "block_number": "122905214",
+      "transaction_index": 0
+    },
+    {
+      "from": "0xb61a190f2b87a244460a080eaf3cd1490d01043a",
+      "to": "0x93c0c224cbc91a16caacf9443431f743fd5d4719",
+      "amount_wei": "420000000000000000000",
+      "at": 1791052120.0,
+      "tx_hash": "0xb9bf4a362d1fdd9e306a540083ad22c50d6968aecdf3148e4bcd37158dbd0cca",
+      "asset": "WEMIX",
+      "chain_id": 1111,
+      "block_number": "124818372",
+      "transaction_index": 0
+    },
+    {
+      "from": "0x0d0707963952f2fba59dd06f2b425ace40b492fe",
+      "to": "0x7dda6bdce0a579a5470ba0cd7f341c9bf2d8abb4",
+      "amount_wei": "1239839000000000000000",
+      "at": 1771780838.0,
+      "tx_hash": "0x53eafae5aefdf52347a922a8b0c91d3b496aee052938a293dfae04880be6edad",
+      "asset": "WEMIX",
+      "chain_id": 1111,
+      "block_number": "105546867",
+      "transaction_index": 0
+    },
+    {
+      "from": "0x647a24b0281444b747bb0d5372324ed0905be0e5",
+      "to": "0x93c0c224cbc91a16caacf9443431f743fd5d4719",
+      "amount_wei": "50585460000000000000000",
+      "at": 1790208662.0,
+      "tx_hash": "0x3870c0074eed7cb237d6ee14826e8e13166dcd7fbe4af07dddf42513435d2742",
+      "asset": "WEMIX",
+      "chain_id": 1111,
+      "block_number": "123974904",
+      "transaction_index": 0
+    }
+  ],
+  "rpc_verification": [
+    {
+      "tx_hash": "0x0b67bccbc0ca1313584267e852c43ba73be59252162ad95bd2234ef7e4f02112",
+      "block_number": 115537608,
+      "status": "success",
+      "checked_from_to_value_timestamp": true
+    },
+    {
+      "tx_hash": "0x6080e04679d3720d926674ae3f89e2670ed7b46b4b73260298a3cfb10c71fbf3",
+      "block_number": 124193608,
+      "status": "success",
+      "checked_from_to_value_timestamp": true
+    },
+    {
+      "tx_hash": "0x55c38da39bf6cf92987edf8726a6771a892b0e2ed8aa1325c15b32596f9e1f92",
+      "block_number": 110730355,
+      "status": "success",
+      "checked_from_to_value_timestamp": true
+    },
+    {
+      "tx_hash": "0x130174e6fcf4fde18c9cc6a6fca196fa9e5bc1f33372c0bbc96cd04331ade9ba",
+      "block_number": 110730616,
+      "status": "success",
+      "checked_from_to_value_timestamp": true
+    },
+    {
+      "tx_hash": "0xd3ffc2a7a767ea7a60a4e66248b28d055bcf71ce265bbcf86d6e11fea1b6fe2a",
+      "block_number": 125139791,
+      "status": "success",
+      "checked_from_to_value_timestamp": true
+    },
+    {
+      "tx_hash": "0x77a0f54626ad7db72e0ea9409fbaabd83b727d6a33292866b331f36bbad5354e",
+      "block_number": 127811020,
+      "status": "success",
+      "checked_from_to_value_timestamp": true
+    },
+    {
+      "tx_hash": "0xa87c6a96569d836496757cae73c32d77d9d866df218b8f493e890e4952e38e62",
+      "block_number": 128011089,
+      "status": "success",
+      "checked_from_to_value_timestamp": true
+    },
+    {
+      "tx_hash": "0x2b62bc93fbc979453493aefd9222e43785036771bda85cf8f796dbc51ec6eb5b",
+      "block_number": 123118153,
+      "status": "success",
+      "checked_from_to_value_timestamp": true
+    },
+    {
+      "tx_hash": "0xe64e15e3958a245ea66ebff259e19e03e6066c662e6b2998acddbe4a41769493",
+      "block_number": 127431905,
+      "status": "success",
+      "checked_from_to_value_timestamp": true
+    },
+    {
+      "tx_hash": "0x7a8140c3911039792767378053c447cec431e1c8054b836ea737ef268f012917",
+      "block_number": 122905214,
+      "status": "success",
+      "checked_from_to_value_timestamp": true
+    },
+    {
+      "tx_hash": "0xb9bf4a362d1fdd9e306a540083ad22c50d6968aecdf3148e4bcd37158dbd0cca",
+      "block_number": 124818372,
+      "status": "success",
+      "checked_from_to_value_timestamp": true
+    },
+    {
+      "tx_hash": "0x53eafae5aefdf52347a922a8b0c91d3b496aee052938a293dfae04880be6edad",
+      "block_number": 105546867,
+      "status": "success",
+      "checked_from_to_value_timestamp": true
+    },
+    {
+      "tx_hash": "0x3870c0074eed7cb237d6ee14826e8e13166dcd7fbe4af07dddf42513435d2742",
+      "block_number": 123974904,
+      "status": "success",
+      "checked_from_to_value_timestamp": true
+    }
+  ],
+  "cases": [
+    {
+      "nft_ids": [
+        3433,
+        1358
+      ],
+      "days": 7,
+      "max_depth": 1,
+      "include_buyer_roots": true,
+      "matches": [],
+      "incomplete_wallets": [],
+      "search_truncated": false
+    },
+    {
+      "nft_ids": [
+        3433,
+        1358
+      ],
+      "days": 7,
+      "max_depth": 2,
+      "include_buyer_roots": true,
+      "matches": [],
+      "incomplete_wallets": [],
+      "search_truncated": false
+    },
+    {
+      "nft_ids": [
+        3433,
+        1358
+      ],
+      "days": 7,
+      "max_depth": 3,
+      "include_buyer_roots": true,
+      "matches": [],
+      "incomplete_wallets": [
+        "0x0d0707963952f2fba59dd06f2b425ace40b492fe",
+        "0x647a24b0281444b747bb0d5372324ed0905be0e5"
+      ],
+      "search_truncated": false
+    },
+    {
+      "nft_ids": [
+        3433,
+        1358
+      ],
+      "days": 90,
+      "max_depth": 1,
+      "include_buyer_roots": true,
+      "matches": [
+        {
+          "source": "0x647a24b0281444b747bb0d5372324ed0905be0e5",
+          "evidence": [
+            {
+              "purchase": {
+                "nft_id": 3433,
+                "buyer": "0x7c60296f746d1ab31357dc1450023494f077e996",
+                "at": 1784548409,
+                "tx_hash": "0xdd9627355d8ec91e9286199611b29b1d6ac15e43af4407d5977dc79651e36670",
+                "price": "800",
+                "currency": "0x7d72b22a74a216af4a002a1095c8c707d6ec1c5f"
+              },
+              "funding": {
+                "from": "0x647a24b0281444b747bb0d5372324ed0905be0e5",
+                "to": "0x7c60296f746d1ab31357dc1450023494f077e996",
+                "amount_wei": "262630000000000000000",
+                "at": 1781771463.0,
+                "tx_hash": "0x0b67bccbc0ca1313584267e852c43ba73be59252162ad95bd2234ef7e4f02112",
+                "asset": "WEMIX",
+                "chain_id": 1111,
+                "block_number": "115537608",
+                "transaction_index": 0
+              },
+              "path": [
+                {
+                  "from": "0x647a24b0281444b747bb0d5372324ed0905be0e5",
+                  "to": "0x7c60296f746d1ab31357dc1450023494f077e996",
+                  "amount_wei": "262630000000000000000",
+                  "at": 1781771463.0,
+                  "tx_hash": "0x0b67bccbc0ca1313584267e852c43ba73be59252162ad95bd2234ef7e4f02112",
+                  "asset": "WEMIX",
+                  "chain_id": 1111,
+                  "block_number": "115537608",
+                  "transaction_index": 0
+                }
+              ],
+              "depth": 1
+            },
+            {
+              "purchase": {
+                "nft_id": 1358,
+                "buyer": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+                "at": 1794262326,
+                "tx_hash": "0x469e3dea2c63126c0b336a2c9fe233e526626cd8f7523f52e2a2ce2b38f1a325",
+                "price": "58,000",
+                "currency": "0x7d72b22a74a216af4a002a1095c8c707d6ec1c5f"
+              },
+              "funding": {
+                "from": "0x647a24b0281444b747bb0d5372324ed0905be0e5",
+                "to": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+                "amount_wei": "4900000000000000000",
+                "at": 1790427363.0,
+                "tx_hash": "0x6080e04679d3720d926674ae3f89e2670ed7b46b4b73260298a3cfb10c71fbf3",
+                "asset": "WEMIX",
+                "chain_id": 1111,
+                "block_number": "124193608",
+                "transaction_index": 0
+              },
+              "path": [
+                {
+                  "from": "0x647a24b0281444b747bb0d5372324ed0905be0e5",
+                  "to": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+                  "amount_wei": "4900000000000000000",
+                  "at": 1790427363.0,
+                  "tx_hash": "0x6080e04679d3720d926674ae3f89e2670ed7b46b4b73260298a3cfb10c71fbf3",
+                  "asset": "WEMIX",
+                  "chain_id": 1111,
+                  "block_number": "124193608",
+                  "transaction_index": 0
+                }
+              ],
+              "depth": 1
+            }
+          ]
+        }
+      ],
+      "incomplete_wallets": [],
+      "search_truncated": false
+    },
+    {
+      "nft_ids": [
+        3433,
+        1358
+      ],
+      "days": 90,
+      "max_depth": 2,
+      "include_buyer_roots": true,
+      "matches": [
+        {
+          "source": "0x647a24b0281444b747bb0d5372324ed0905be0e5",
+          "evidence": [
+            {
+              "purchase": {
+                "nft_id": 3433,
+                "buyer": "0x7c60296f746d1ab31357dc1450023494f077e996",
+                "at": 1784548409,
+                "tx_hash": "0xdd9627355d8ec91e9286199611b29b1d6ac15e43af4407d5977dc79651e36670",
+                "price": "800",
+                "currency": "0x7d72b22a74a216af4a002a1095c8c707d6ec1c5f"
+              },
+              "funding": {
+                "from": "0x647a24b0281444b747bb0d5372324ed0905be0e5",
+                "to": "0x7c60296f746d1ab31357dc1450023494f077e996",
+                "amount_wei": "262630000000000000000",
+                "at": 1781771463.0,
+                "tx_hash": "0x0b67bccbc0ca1313584267e852c43ba73be59252162ad95bd2234ef7e4f02112",
+                "asset": "WEMIX",
+                "chain_id": 1111,
+                "block_number": "115537608",
+                "transaction_index": 0
+              },
+              "path": [
+                {
+                  "from": "0x647a24b0281444b747bb0d5372324ed0905be0e5",
+                  "to": "0x7c60296f746d1ab31357dc1450023494f077e996",
+                  "amount_wei": "262630000000000000000",
+                  "at": 1781771463.0,
+                  "tx_hash": "0x0b67bccbc0ca1313584267e852c43ba73be59252162ad95bd2234ef7e4f02112",
+                  "asset": "WEMIX",
+                  "chain_id": 1111,
+                  "block_number": "115537608",
+                  "transaction_index": 0
+                }
+              ],
+              "depth": 1
+            },
+            {
+              "purchase": {
+                "nft_id": 1358,
+                "buyer": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+                "at": 1794262326,
+                "tx_hash": "0x469e3dea2c63126c0b336a2c9fe233e526626cd8f7523f52e2a2ce2b38f1a325",
+                "price": "58,000",
+                "currency": "0x7d72b22a74a216af4a002a1095c8c707d6ec1c5f"
+              },
+              "funding": {
+                "from": "0x647a24b0281444b747bb0d5372324ed0905be0e5",
+                "to": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+                "amount_wei": "4900000000000000000",
+                "at": 1790427363.0,
+                "tx_hash": "0x6080e04679d3720d926674ae3f89e2670ed7b46b4b73260298a3cfb10c71fbf3",
+                "asset": "WEMIX",
+                "chain_id": 1111,
+                "block_number": "124193608",
+                "transaction_index": 0
+              },
+              "path": [
+                {
+                  "from": "0x647a24b0281444b747bb0d5372324ed0905be0e5",
+                  "to": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+                  "amount_wei": "4900000000000000000",
+                  "at": 1790427363.0,
+                  "tx_hash": "0x6080e04679d3720d926674ae3f89e2670ed7b46b4b73260298a3cfb10c71fbf3",
+                  "asset": "WEMIX",
+                  "chain_id": 1111,
+                  "block_number": "124193608",
+                  "transaction_index": 0
+                }
+              ],
+              "depth": 1
+            }
+          ]
+        }
+      ],
+      "incomplete_wallets": [
+        "0x647a24b0281444b747bb0d5372324ed0905be0e5"
+      ],
+      "search_truncated": false
+    },
+    {
+      "nft_ids": [
+        3433,
+        1358
+      ],
+      "days": 90,
+      "max_depth": 3,
+      "include_buyer_roots": true,
+      "matches": [
+        {
+          "source": "0x647a24b0281444b747bb0d5372324ed0905be0e5",
+          "evidence": [
+            {
+              "purchase": {
+                "nft_id": 3433,
+                "buyer": "0x7c60296f746d1ab31357dc1450023494f077e996",
+                "at": 1784548409,
+                "tx_hash": "0xdd9627355d8ec91e9286199611b29b1d6ac15e43af4407d5977dc79651e36670",
+                "price": "800",
+                "currency": "0x7d72b22a74a216af4a002a1095c8c707d6ec1c5f"
+              },
+              "funding": {
+                "from": "0x647a24b0281444b747bb0d5372324ed0905be0e5",
+                "to": "0x7c60296f746d1ab31357dc1450023494f077e996",
+                "amount_wei": "262630000000000000000",
+                "at": 1781771463.0,
+                "tx_hash": "0x0b67bccbc0ca1313584267e852c43ba73be59252162ad95bd2234ef7e4f02112",
+                "asset": "WEMIX",
+                "chain_id": 1111,
+                "block_number": "115537608",
+                "transaction_index": 0
+              },
+              "path": [
+                {
+                  "from": "0x647a24b0281444b747bb0d5372324ed0905be0e5",
+                  "to": "0x7c60296f746d1ab31357dc1450023494f077e996",
+                  "amount_wei": "262630000000000000000",
+                  "at": 1781771463.0,
+                  "tx_hash": "0x0b67bccbc0ca1313584267e852c43ba73be59252162ad95bd2234ef7e4f02112",
+                  "asset": "WEMIX",
+                  "chain_id": 1111,
+                  "block_number": "115537608",
+                  "transaction_index": 0
+                }
+              ],
+              "depth": 1
+            },
+            {
+              "purchase": {
+                "nft_id": 1358,
+                "buyer": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+                "at": 1794262326,
+                "tx_hash": "0x469e3dea2c63126c0b336a2c9fe233e526626cd8f7523f52e2a2ce2b38f1a325",
+                "price": "58,000",
+                "currency": "0x7d72b22a74a216af4a002a1095c8c707d6ec1c5f"
+              },
+              "funding": {
+                "from": "0x647a24b0281444b747bb0d5372324ed0905be0e5",
+                "to": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+                "amount_wei": "4900000000000000000",
+                "at": 1790427363.0,
+                "tx_hash": "0x6080e04679d3720d926674ae3f89e2670ed7b46b4b73260298a3cfb10c71fbf3",
+                "asset": "WEMIX",
+                "chain_id": 1111,
+                "block_number": "124193608",
+                "transaction_index": 0
+              },
+              "path": [
+                {
+                  "from": "0x647a24b0281444b747bb0d5372324ed0905be0e5",
+                  "to": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+                  "amount_wei": "4900000000000000000",
+                  "at": 1790427363.0,
+                  "tx_hash": "0x6080e04679d3720d926674ae3f89e2670ed7b46b4b73260298a3cfb10c71fbf3",
+                  "asset": "WEMIX",
+                  "chain_id": 1111,
+                  "block_number": "124193608",
+                  "transaction_index": 0
+                }
+              ],
+              "depth": 1
+            }
+          ]
+        },
+        {
+          "source": "0x0d0707963952f2fba59dd06f2b425ace40b492fe",
+          "evidence": [
+            {
+              "purchase": {
+                "nft_id": 3433,
+                "buyer": "0x7c60296f746d1ab31357dc1450023494f077e996",
+                "at": 1784548409,
+                "tx_hash": "0xdd9627355d8ec91e9286199611b29b1d6ac15e43af4407d5977dc79651e36670",
+                "price": "800",
+                "currency": "0x7d72b22a74a216af4a002a1095c8c707d6ec1c5f"
+              },
+              "funding": {
+                "from": "0x49653f38585862d312847cab5aef5c644f6ce120",
+                "to": "0x7c60296f746d1ab31357dc1450023494f077e996",
+                "amount_wei": "100000000000000000000",
+                "at": 1776964527.0,
+                "tx_hash": "0x130174e6fcf4fde18c9cc6a6fca196fa9e5bc1f33372c0bbc96cd04331ade9ba",
+                "asset": "WEMIX",
+                "chain_id": 1111,
+                "block_number": "110730616",
+                "transaction_index": 1
+              },
+              "path": [
+                {
+                  "from": "0x0d0707963952f2fba59dd06f2b425ace40b492fe",
+                  "to": "0x49653f38585862d312847cab5aef5c644f6ce120",
+                  "amount_wei": "102476220000000000000",
+                  "at": 1776964266.0,
+                  "tx_hash": "0x55c38da39bf6cf92987edf8726a6771a892b0e2ed8aa1325c15b32596f9e1f92",
+                  "asset": "WEMIX",
+                  "chain_id": 1111,
+                  "block_number": "110730355",
+                  "transaction_index": 0
+                },
+                {
+                  "from": "0x49653f38585862d312847cab5aef5c644f6ce120",
+                  "to": "0x7c60296f746d1ab31357dc1450023494f077e996",
+                  "amount_wei": "100000000000000000000",
+                  "at": 1776964527.0,
+                  "tx_hash": "0x130174e6fcf4fde18c9cc6a6fca196fa9e5bc1f33372c0bbc96cd04331ade9ba",
+                  "asset": "WEMIX",
+                  "chain_id": 1111,
+                  "block_number": "110730616",
+                  "transaction_index": 1
+                }
+              ],
+              "depth": 2
+            },
+            {
+              "purchase": {
+                "nft_id": 1358,
+                "buyer": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+                "at": 1794262326,
+                "tx_hash": "0x469e3dea2c63126c0b336a2c9fe233e526626cd8f7523f52e2a2ce2b38f1a325",
+                "price": "58,000",
+                "currency": "0x7d72b22a74a216af4a002a1095c8c707d6ec1c5f"
+              },
+              "funding": {
+                "from": "0x93c0c224cbc91a16caacf9443431f743fd5d4719",
+                "to": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+                "amount_wei": "60025000000000000000000",
+                "at": 1794244800.0,
+                "tx_hash": "0xa87c6a96569d836496757cae73c32d77d9d866df218b8f493e890e4952e38e62",
+                "asset": "WEMIX",
+                "chain_id": 1111,
+                "block_number": "128011089",
+                "transaction_index": 0
+              },
+              "path": [
+                {
+                  "from": "0x0d0707963952f2fba59dd06f2b425ace40b492fe",
+                  "to": "0xdb3ded7731c781224ec292e2163d9554c094fd7c",
+                  "amount_wei": "19731013773100000000000",
+                  "at": 1791373535.0,
+                  "tx_hash": "0xd3ffc2a7a767ea7a60a4e66248b28d055bcf71ce265bbcf86d6e11fea1b6fe2a",
+                  "asset": "WEMIX",
+                  "chain_id": 1111,
+                  "block_number": "125139791",
+                  "transaction_index": 0
+                },
+                {
+                  "from": "0xdb3ded7731c781224ec292e2163d9554c094fd7c",
+                  "to": "0x93c0c224cbc91a16caacf9443431f743fd5d4719",
+                  "amount_wei": "2440593200000000000000",
+                  "at": 1794044733.0,
+                  "tx_hash": "0x77a0f54626ad7db72e0ea9409fbaabd83b727d6a33292866b331f36bbad5354e",
+                  "asset": "WEMIX",
+                  "chain_id": 1111,
+                  "block_number": "127811020",
+                  "transaction_index": 0
+                },
+                {
+                  "from": "0x93c0c224cbc91a16caacf9443431f743fd5d4719",
+                  "to": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+                  "amount_wei": "60025000000000000000000",
+                  "at": 1794244800.0,
+                  "tx_hash": "0xa87c6a96569d836496757cae73c32d77d9d866df218b8f493e890e4952e38e62",
+                  "asset": "WEMIX",
+                  "chain_id": 1111,
+                  "block_number": "128011089",
+                  "transaction_index": 0
+                }
+              ],
+              "depth": 3
+            }
+          ]
+        }
+      ],
+      "incomplete_wallets": [
+        "0x0d0707963952f2fba59dd06f2b425ace40b492fe",
+        "0x647a24b0281444b747bb0d5372324ed0905be0e5"
+      ],
+      "search_truncated": false
+    },
+    {
+      "nft_ids": [
+        1154,
+        1358
+      ],
+      "days": 7,
+      "max_depth": 1,
+      "include_buyer_roots": true,
+      "matches": [],
+      "incomplete_wallets": [],
+      "search_truncated": false
+    },
+    {
+      "nft_ids": [
+        1154,
+        1358
+      ],
+      "days": 7,
+      "max_depth": 2,
+      "include_buyer_roots": true,
+      "matches": [
+        {
+          "source": "0x647a24b0281444b747bb0d5372324ed0905be0e5",
+          "evidence": [
+            {
+              "purchase": {
+                "nft_id": 1154,
+                "buyer": "0xb61a190f2b87a244460a080eaf3cd1490d01043a",
+                "at": 1789933190,
+                "tx_hash": "0x054c8bb5caf2655dbf46b2561e7fed283888a1a47f7a6cd79c9ecd95910d1761",
+                "price": "20,000",
+                "currency": "0x7d72b22a74a216af4a002a1095c8c707d6ec1c5f"
+              },
+              "funding": {
+                "from": "0x647a24b0281444b747bb0d5372324ed0905be0e5",
+                "to": "0xb61a190f2b87a244460a080eaf3cd1490d01043a",
+                "amount_wei": "3511860000000000000000",
+                "at": 1789351921.0,
+                "tx_hash": "0x2b62bc93fbc979453493aefd9222e43785036771bda85cf8f796dbc51ec6eb5b",
+                "asset": "WEMIX",
+                "chain_id": 1111,
+                "block_number": "123118153",
+                "transaction_index": 0
+              },
+              "path": [
+                {
+                  "from": "0x647a24b0281444b747bb0d5372324ed0905be0e5",
+                  "to": "0xb61a190f2b87a244460a080eaf3cd1490d01043a",
+                  "amount_wei": "3511860000000000000000",
+                  "at": 1789351921.0,
+                  "tx_hash": "0x2b62bc93fbc979453493aefd9222e43785036771bda85cf8f796dbc51ec6eb5b",
+                  "asset": "WEMIX",
+                  "chain_id": 1111,
+                  "block_number": "123118153",
+                  "transaction_index": 0
+                }
+              ],
+              "depth": 1
+            },
+            {
+              "purchase": {
+                "nft_id": 1358,
+                "buyer": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+                "at": 1794262326,
+                "tx_hash": "0x469e3dea2c63126c0b336a2c9fe233e526626cd8f7523f52e2a2ce2b38f1a325",
+                "price": "58,000",
+                "currency": "0x7d72b22a74a216af4a002a1095c8c707d6ec1c5f"
+              },
+              "funding": {
+                "from": "0x93c0c224cbc91a16caacf9443431f743fd5d4719",
+                "to": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+                "amount_wei": "60025000000000000000000",
+                "at": 1794244800.0,
+                "tx_hash": "0xa87c6a96569d836496757cae73c32d77d9d866df218b8f493e890e4952e38e62",
+                "asset": "WEMIX",
+                "chain_id": 1111,
+                "block_number": "128011089",
+                "transaction_index": 0
+              },
+              "path": [
+                {
+                  "from": "0x647a24b0281444b747bb0d5372324ed0905be0e5",
+                  "to": "0x93c0c224cbc91a16caacf9443431f743fd5d4719",
+                  "amount_wei": "4590280000000000000000",
+                  "at": 1793665623.0,
+                  "tx_hash": "0xe64e15e3958a245ea66ebff259e19e03e6066c662e6b2998acddbe4a41769493",
+                  "asset": "WEMIX",
+                  "chain_id": 1111,
+                  "block_number": "127431905",
+                  "transaction_index": 0
+                },
+                {
+                  "from": "0x93c0c224cbc91a16caacf9443431f743fd5d4719",
+                  "to": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+                  "amount_wei": "60025000000000000000000",
+                  "at": 1794244800.0,
+                  "tx_hash": "0xa87c6a96569d836496757cae73c32d77d9d866df218b8f493e890e4952e38e62",
+                  "asset": "WEMIX",
+                  "chain_id": 1111,
+                  "block_number": "128011089",
+                  "transaction_index": 0
+                }
+              ],
+              "depth": 2
+            }
+          ]
+        }
+      ],
+      "incomplete_wallets": [
+        "0x0d0707963952f2fba59dd06f2b425ace40b492fe",
+        "0x647a24b0281444b747bb0d5372324ed0905be0e5"
+      ],
+      "search_truncated": false
+    },
+    {
+      "nft_ids": [
+        1154,
+        1358
+      ],
+      "days": 7,
+      "max_depth": 3,
+      "include_buyer_roots": true,
+      "matches": [
+        {
+          "source": "0x647a24b0281444b747bb0d5372324ed0905be0e5",
+          "evidence": [
+            {
+              "purchase": {
+                "nft_id": 1154,
+                "buyer": "0xb61a190f2b87a244460a080eaf3cd1490d01043a",
+                "at": 1789933190,
+                "tx_hash": "0x054c8bb5caf2655dbf46b2561e7fed283888a1a47f7a6cd79c9ecd95910d1761",
+                "price": "20,000",
+                "currency": "0x7d72b22a74a216af4a002a1095c8c707d6ec1c5f"
+              },
+              "funding": {
+                "from": "0x647a24b0281444b747bb0d5372324ed0905be0e5",
+                "to": "0xb61a190f2b87a244460a080eaf3cd1490d01043a",
+                "amount_wei": "3511860000000000000000",
+                "at": 1789351921.0,
+                "tx_hash": "0x2b62bc93fbc979453493aefd9222e43785036771bda85cf8f796dbc51ec6eb5b",
+                "asset": "WEMIX",
+                "chain_id": 1111,
+                "block_number": "123118153",
+                "transaction_index": 0
+              },
+              "path": [
+                {
+                  "from": "0x647a24b0281444b747bb0d5372324ed0905be0e5",
+                  "to": "0xb61a190f2b87a244460a080eaf3cd1490d01043a",
+                  "amount_wei": "3511860000000000000000",
+                  "at": 1789351921.0,
+                  "tx_hash": "0x2b62bc93fbc979453493aefd9222e43785036771bda85cf8f796dbc51ec6eb5b",
+                  "asset": "WEMIX",
+                  "chain_id": 1111,
+                  "block_number": "123118153",
+                  "transaction_index": 0
+                }
+              ],
+              "depth": 1
+            },
+            {
+              "purchase": {
+                "nft_id": 1358,
+                "buyer": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+                "at": 1794262326,
+                "tx_hash": "0x469e3dea2c63126c0b336a2c9fe233e526626cd8f7523f52e2a2ce2b38f1a325",
+                "price": "58,000",
+                "currency": "0x7d72b22a74a216af4a002a1095c8c707d6ec1c5f"
+              },
+              "funding": {
+                "from": "0x93c0c224cbc91a16caacf9443431f743fd5d4719",
+                "to": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+                "amount_wei": "60025000000000000000000",
+                "at": 1794244800.0,
+                "tx_hash": "0xa87c6a96569d836496757cae73c32d77d9d866df218b8f493e890e4952e38e62",
+                "asset": "WEMIX",
+                "chain_id": 1111,
+                "block_number": "128011089",
+                "transaction_index": 0
+              },
+              "path": [
+                {
+                  "from": "0x647a24b0281444b747bb0d5372324ed0905be0e5",
+                  "to": "0x93c0c224cbc91a16caacf9443431f743fd5d4719",
+                  "amount_wei": "4590280000000000000000",
+                  "at": 1793665623.0,
+                  "tx_hash": "0xe64e15e3958a245ea66ebff259e19e03e6066c662e6b2998acddbe4a41769493",
+                  "asset": "WEMIX",
+                  "chain_id": 1111,
+                  "block_number": "127431905",
+                  "transaction_index": 0
+                },
+                {
+                  "from": "0x93c0c224cbc91a16caacf9443431f743fd5d4719",
+                  "to": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+                  "amount_wei": "60025000000000000000000",
+                  "at": 1794244800.0,
+                  "tx_hash": "0xa87c6a96569d836496757cae73c32d77d9d866df218b8f493e890e4952e38e62",
+                  "asset": "WEMIX",
+                  "chain_id": 1111,
+                  "block_number": "128011089",
+                  "transaction_index": 0
+                }
+              ],
+              "depth": 2
+            }
+          ]
+        }
+      ],
+      "incomplete_wallets": [
+        "0x08c3da16fc7ad184ccbc311b1ed147f536d49632",
+        "0x08ce6a716326adef9ccb77d53b334d895534f9de",
+        "0x0a83313b5e12b0e7561c6f60848f327d8a0be915",
+        "0x0bbd1480f950a3e88865c815301bf9fd492a8609",
+        "0x0d0707963952f2fba59dd06f2b425ace40b492fe",
+        "0x11220b6ae4228d608c01b0c6ecd7f29dd219f6d7",
+        "0x15ec663651579dab93ccdecab614b45db2428e6f",
+        "0x174b90ce466e5eb9e59e83fd883cb6e196e6a6b1",
+        "0x1936ac0487a11c4deb8ff098fa82b47fe9ea2769",
+        "0x1a0774e49a510688fb5fdecab842147a760f3132",
+        "0x22265e4f440ff926ebf0fe052fdc18356698687e",
+        "0x26a157c5e70989ddbd64a01869c0c29843f597b8",
+        "0x32dd1bcbb41cd05fcecc3307a3e13f07fe8595f5",
+        "0x3376b5998b90c2d6c910c2d9ccb1f253c3a7ecb3",
+        "0x39d2c53ee92223e35122803de1f21aefd732eb8d",
+        "0x3a859add2e16104e248f86db6b9abeaa1b41d88b",
+        "0x3b316e72483e057351d8cf109b592ae3a493725e",
+        "0x4563e4b0de021824d626d8524313fc8882fc3ffa",
+        "0x4575cd62f326fd898a1cabedb7f740c5ffdb11e4",
+        "0x485f4e9941968c2b2f995fdf1e57931bb5f4c4fb",
+        "0x4bbbb8ba440726a8f9de9517166980ff7b674e05",
+        "0x5de766fda53411dc01a11b2a40f2826feb63f4fe",
+        "0x647a24b0281444b747bb0d5372324ed0905be0e5",
+        "0x659a1c67730865f0874010c2f90351437192dd40",
+        "0x704ca1768ba33199dc71fbfb362023a6b9b2e0bf",
+        "0x712bfe0f4f28b430fe67fa45ed5850824a4ccb93",
+        "0x731ceba221f2725b3924010fa027e48e4497ba78",
+        "0x770f3f8c217dde6688279efa5d3f7f42172636d3",
+        "0x7a6ae4c98b212803ac6fc0266c3ef2f5e3fd3e3b",
+        "0x7d5e77743edcb9ed5013e15493c3aff828577bf5",
+        "0x7e6fcce642592ba0c9f8745f36bcdbbbd22e7011",
+        "0x84868c9285aec50d0b7c10812723594f04ed786f",
+        "0x85fd04557d9351c3a29a3f510edbede82fba7491",
+        "0x8debd18702d8321c4901f0124bdc202102ba53d1",
+        "0x9ec78a81e0969753c42e0ce4fb667e1b65fdce0f",
+        "0xa329b2e4af13578fc1814328916cba031b2f8139",
+        "0xad7455e483c85b925a1bc81df5f968cb2a26f904",
+        "0xae411287feaa7b63b32de3673411723c12b23e50",
+        "0xaebb55b5e9c7889c3eb8b310058bda6e15439e99",
+        "0xb0b5278b5c11068a8ce24977ef0baf737f54a7dd",
+        "0xc4690188bdad31662232efffc5b18c734cc2213a",
+        "0xc7bcde897bdee1510c8ec4357b408db528a13914",
+        "0xd0188151cf0a4b1799504d40ef0263a4c5bc2b79",
+        "0xd0500c1c89f4d7bc556097bb67d4e93b818420b2",
+        "0xd1a6fb647d38aa176c30bd43f55890d847a16344",
+        "0xd575e049b2e729d079fbf982837d93d964cba1d4"
+      ],
+      "search_truncated": false
+    },
+    {
+      "nft_ids": [
+        1154,
+        1358
+      ],
+      "days": 90,
+      "max_depth": 1,
+      "include_buyer_roots": true,
+      "matches": [
+        {
+          "source": "0x647a24b0281444b747bb0d5372324ed0905be0e5",
+          "evidence": [
+            {
+              "purchase": {
+                "nft_id": 1154,
+                "buyer": "0xb61a190f2b87a244460a080eaf3cd1490d01043a",
+                "at": 1789933190,
+                "tx_hash": "0x054c8bb5caf2655dbf46b2561e7fed283888a1a47f7a6cd79c9ecd95910d1761",
+                "price": "20,000",
+                "currency": "0x7d72b22a74a216af4a002a1095c8c707d6ec1c5f"
+              },
+              "funding": {
+                "from": "0x647a24b0281444b747bb0d5372324ed0905be0e5",
+                "to": "0xb61a190f2b87a244460a080eaf3cd1490d01043a",
+                "amount_wei": "100000000000000000000",
+                "at": 1789138984.0,
+                "tx_hash": "0x7a8140c3911039792767378053c447cec431e1c8054b836ea737ef268f012917",
+                "asset": "WEMIX",
+                "chain_id": 1111,
+                "block_number": "122905214",
+                "transaction_index": 0
+              },
+              "path": [
+                {
+                  "from": "0x647a24b0281444b747bb0d5372324ed0905be0e5",
+                  "to": "0xb61a190f2b87a244460a080eaf3cd1490d01043a",
+                  "amount_wei": "100000000000000000000",
+                  "at": 1789138984.0,
+                  "tx_hash": "0x7a8140c3911039792767378053c447cec431e1c8054b836ea737ef268f012917",
+                  "asset": "WEMIX",
+                  "chain_id": 1111,
+                  "block_number": "122905214",
+                  "transaction_index": 0
+                }
+              ],
+              "depth": 1
+            },
+            {
+              "purchase": {
+                "nft_id": 1358,
+                "buyer": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+                "at": 1794262326,
+                "tx_hash": "0x469e3dea2c63126c0b336a2c9fe233e526626cd8f7523f52e2a2ce2b38f1a325",
+                "price": "58,000",
+                "currency": "0x7d72b22a74a216af4a002a1095c8c707d6ec1c5f"
+              },
+              "funding": {
+                "from": "0x647a24b0281444b747bb0d5372324ed0905be0e5",
+                "to": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+                "amount_wei": "4900000000000000000",
+                "at": 1790427363.0,
+                "tx_hash": "0x6080e04679d3720d926674ae3f89e2670ed7b46b4b73260298a3cfb10c71fbf3",
+                "asset": "WEMIX",
+                "chain_id": 1111,
+                "block_number": "124193608",
+                "transaction_index": 0
+              },
+              "path": [
+                {
+                  "from": "0x647a24b0281444b747bb0d5372324ed0905be0e5",
+                  "to": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+                  "amount_wei": "4900000000000000000",
+                  "at": 1790427363.0,
+                  "tx_hash": "0x6080e04679d3720d926674ae3f89e2670ed7b46b4b73260298a3cfb10c71fbf3",
+                  "asset": "WEMIX",
+                  "chain_id": 1111,
+                  "block_number": "124193608",
+                  "transaction_index": 0
+                }
+              ],
+              "depth": 1
+            }
+          ]
+        }
+      ],
+      "incomplete_wallets": [],
+      "search_truncated": false
+    },
+    {
+      "nft_ids": [
+        1154,
+        1358
+      ],
+      "days": 90,
+      "max_depth": 2,
+      "include_buyer_roots": true,
+      "matches": [
+        {
+          "source": "0xb61a190f2b87a244460a080eaf3cd1490d01043a",
+          "evidence": [
+            {
+              "purchase": {
+                "nft_id": 1154,
+                "buyer": "0xb61a190f2b87a244460a080eaf3cd1490d01043a",
+                "at": 1789933190,
+                "tx_hash": "0x054c8bb5caf2655dbf46b2561e7fed283888a1a47f7a6cd79c9ecd95910d1761",
+                "price": "20,000",
+                "currency": "0x7d72b22a74a216af4a002a1095c8c707d6ec1c5f"
+              },
+              "funding": null,
+              "path": [],
+              "depth": 0
+            },
+            {
+              "purchase": {
+                "nft_id": 1358,
+                "buyer": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+                "at": 1794262326,
+                "tx_hash": "0x469e3dea2c63126c0b336a2c9fe233e526626cd8f7523f52e2a2ce2b38f1a325",
+                "price": "58,000",
+                "currency": "0x7d72b22a74a216af4a002a1095c8c707d6ec1c5f"
+              },
+              "funding": {
+                "from": "0x93c0c224cbc91a16caacf9443431f743fd5d4719",
+                "to": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+                "amount_wei": "60025000000000000000000",
+                "at": 1794244800.0,
+                "tx_hash": "0xa87c6a96569d836496757cae73c32d77d9d866df218b8f493e890e4952e38e62",
+                "asset": "WEMIX",
+                "chain_id": 1111,
+                "block_number": "128011089",
+                "transaction_index": 0
+              },
+              "path": [
+                {
+                  "from": "0xb61a190f2b87a244460a080eaf3cd1490d01043a",
+                  "to": "0x93c0c224cbc91a16caacf9443431f743fd5d4719",
+                  "amount_wei": "420000000000000000000",
+                  "at": 1791052120.0,
+                  "tx_hash": "0xb9bf4a362d1fdd9e306a540083ad22c50d6968aecdf3148e4bcd37158dbd0cca",
+                  "asset": "WEMIX",
+                  "chain_id": 1111,
+                  "block_number": "124818372",
+                  "transaction_index": 0
+                },
+                {
+                  "from": "0x93c0c224cbc91a16caacf9443431f743fd5d4719",
+                  "to": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+                  "amount_wei": "60025000000000000000000",
+                  "at": 1794244800.0,
+                  "tx_hash": "0xa87c6a96569d836496757cae73c32d77d9d866df218b8f493e890e4952e38e62",
+                  "asset": "WEMIX",
+                  "chain_id": 1111,
+                  "block_number": "128011089",
+                  "transaction_index": 0
+                }
+              ],
+              "depth": 2
+            }
+          ]
+        },
+        {
+          "source": "0x647a24b0281444b747bb0d5372324ed0905be0e5",
+          "evidence": [
+            {
+              "purchase": {
+                "nft_id": 1154,
+                "buyer": "0xb61a190f2b87a244460a080eaf3cd1490d01043a",
+                "at": 1789933190,
+                "tx_hash": "0x054c8bb5caf2655dbf46b2561e7fed283888a1a47f7a6cd79c9ecd95910d1761",
+                "price": "20,000",
+                "currency": "0x7d72b22a74a216af4a002a1095c8c707d6ec1c5f"
+              },
+              "funding": {
+                "from": "0x647a24b0281444b747bb0d5372324ed0905be0e5",
+                "to": "0xb61a190f2b87a244460a080eaf3cd1490d01043a",
+                "amount_wei": "100000000000000000000",
+                "at": 1789138984.0,
+                "tx_hash": "0x7a8140c3911039792767378053c447cec431e1c8054b836ea737ef268f012917",
+                "asset": "WEMIX",
+                "chain_id": 1111,
+                "block_number": "122905214",
+                "transaction_index": 0
+              },
+              "path": [
+                {
+                  "from": "0x647a24b0281444b747bb0d5372324ed0905be0e5",
+                  "to": "0xb61a190f2b87a244460a080eaf3cd1490d01043a",
+                  "amount_wei": "100000000000000000000",
+                  "at": 1789138984.0,
+                  "tx_hash": "0x7a8140c3911039792767378053c447cec431e1c8054b836ea737ef268f012917",
+                  "asset": "WEMIX",
+                  "chain_id": 1111,
+                  "block_number": "122905214",
+                  "transaction_index": 0
+                }
+              ],
+              "depth": 1
+            },
+            {
+              "purchase": {
+                "nft_id": 1358,
+                "buyer": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+                "at": 1794262326,
+                "tx_hash": "0x469e3dea2c63126c0b336a2c9fe233e526626cd8f7523f52e2a2ce2b38f1a325",
+                "price": "58,000",
+                "currency": "0x7d72b22a74a216af4a002a1095c8c707d6ec1c5f"
+              },
+              "funding": {
+                "from": "0x647a24b0281444b747bb0d5372324ed0905be0e5",
+                "to": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+                "amount_wei": "4900000000000000000",
+                "at": 1790427363.0,
+                "tx_hash": "0x6080e04679d3720d926674ae3f89e2670ed7b46b4b73260298a3cfb10c71fbf3",
+                "asset": "WEMIX",
+                "chain_id": 1111,
+                "block_number": "124193608",
+                "transaction_index": 0
+              },
+              "path": [
+                {
+                  "from": "0x647a24b0281444b747bb0d5372324ed0905be0e5",
+                  "to": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+                  "amount_wei": "4900000000000000000",
+                  "at": 1790427363.0,
+                  "tx_hash": "0x6080e04679d3720d926674ae3f89e2670ed7b46b4b73260298a3cfb10c71fbf3",
+                  "asset": "WEMIX",
+                  "chain_id": 1111,
+                  "block_number": "124193608",
+                  "transaction_index": 0
+                }
+              ],
+              "depth": 1
+            }
+          ]
+        }
+      ],
+      "incomplete_wallets": [
+        "0x0d0707963952f2fba59dd06f2b425ace40b492fe",
+        "0x647a24b0281444b747bb0d5372324ed0905be0e5"
+      ],
+      "search_truncated": false
+    },
+    {
+      "nft_ids": [
+        1154,
+        1358
+      ],
+      "days": 90,
+      "max_depth": 3,
+      "include_buyer_roots": true,
+      "matches": [
+        {
+          "source": "0x0d0707963952f2fba59dd06f2b425ace40b492fe",
+          "evidence": [
+            {
+              "purchase": {
+                "nft_id": 1154,
+                "buyer": "0x7dda6bdce0a579a5470ba0cd7f341c9bf2d8abb4",
+                "at": 1779531953,
+                "tx_hash": "0xaa5fc41384d135c919c38a4c3549c3a3d2405f961482d5b94d2b9ed9e085a6c1",
+                "price": "13,000",
+                "currency": "0x7d72b22a74a216af4a002a1095c8c707d6ec1c5f"
+              },
+              "funding": {
+                "from": "0x0d0707963952f2fba59dd06f2b425ace40b492fe",
+                "to": "0x7dda6bdce0a579a5470ba0cd7f341c9bf2d8abb4",
+                "amount_wei": "1239839000000000000000",
+                "at": 1771780838.0,
+                "tx_hash": "0x53eafae5aefdf52347a922a8b0c91d3b496aee052938a293dfae04880be6edad",
+                "asset": "WEMIX",
+                "chain_id": 1111,
+                "block_number": "105546867",
+                "transaction_index": 0
+              },
+              "path": [
+                {
+                  "from": "0x0d0707963952f2fba59dd06f2b425ace40b492fe",
+                  "to": "0x7dda6bdce0a579a5470ba0cd7f341c9bf2d8abb4",
+                  "amount_wei": "1239839000000000000000",
+                  "at": 1771780838.0,
+                  "tx_hash": "0x53eafae5aefdf52347a922a8b0c91d3b496aee052938a293dfae04880be6edad",
+                  "asset": "WEMIX",
+                  "chain_id": 1111,
+                  "block_number": "105546867",
+                  "transaction_index": 0
+                }
+              ],
+              "depth": 1
+            },
+            {
+              "purchase": {
+                "nft_id": 1358,
+                "buyer": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+                "at": 1794262326,
+                "tx_hash": "0x469e3dea2c63126c0b336a2c9fe233e526626cd8f7523f52e2a2ce2b38f1a325",
+                "price": "58,000",
+                "currency": "0x7d72b22a74a216af4a002a1095c8c707d6ec1c5f"
+              },
+              "funding": {
+                "from": "0x93c0c224cbc91a16caacf9443431f743fd5d4719",
+                "to": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+                "amount_wei": "60025000000000000000000",
+                "at": 1794244800.0,
+                "tx_hash": "0xa87c6a96569d836496757cae73c32d77d9d866df218b8f493e890e4952e38e62",
+                "asset": "WEMIX",
+                "chain_id": 1111,
+                "block_number": "128011089",
+                "transaction_index": 0
+              },
+              "path": [
+                {
+                  "from": "0x0d0707963952f2fba59dd06f2b425ace40b492fe",
+                  "to": "0xdb3ded7731c781224ec292e2163d9554c094fd7c",
+                  "amount_wei": "19731013773100000000000",
+                  "at": 1791373535.0,
+                  "tx_hash": "0xd3ffc2a7a767ea7a60a4e66248b28d055bcf71ce265bbcf86d6e11fea1b6fe2a",
+                  "asset": "WEMIX",
+                  "chain_id": 1111,
+                  "block_number": "125139791",
+                  "transaction_index": 0
+                },
+                {
+                  "from": "0xdb3ded7731c781224ec292e2163d9554c094fd7c",
+                  "to": "0x93c0c224cbc91a16caacf9443431f743fd5d4719",
+                  "amount_wei": "2440593200000000000000",
+                  "at": 1794044733.0,
+                  "tx_hash": "0x77a0f54626ad7db72e0ea9409fbaabd83b727d6a33292866b331f36bbad5354e",
+                  "asset": "WEMIX",
+                  "chain_id": 1111,
+                  "block_number": "127811020",
+                  "transaction_index": 0
+                },
+                {
+                  "from": "0x93c0c224cbc91a16caacf9443431f743fd5d4719",
+                  "to": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+                  "amount_wei": "60025000000000000000000",
+                  "at": 1794244800.0,
+                  "tx_hash": "0xa87c6a96569d836496757cae73c32d77d9d866df218b8f493e890e4952e38e62",
+                  "asset": "WEMIX",
+                  "chain_id": 1111,
+                  "block_number": "128011089",
+                  "transaction_index": 0
+                }
+              ],
+              "depth": 3
+            }
+          ]
+        },
+        {
+          "source": "0xb61a190f2b87a244460a080eaf3cd1490d01043a",
+          "evidence": [
+            {
+              "purchase": {
+                "nft_id": 1154,
+                "buyer": "0xb61a190f2b87a244460a080eaf3cd1490d01043a",
+                "at": 1789933190,
+                "tx_hash": "0x054c8bb5caf2655dbf46b2561e7fed283888a1a47f7a6cd79c9ecd95910d1761",
+                "price": "20,000",
+                "currency": "0x7d72b22a74a216af4a002a1095c8c707d6ec1c5f"
+              },
+              "funding": null,
+              "path": [],
+              "depth": 0
+            },
+            {
+              "purchase": {
+                "nft_id": 1358,
+                "buyer": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+                "at": 1794262326,
+                "tx_hash": "0x469e3dea2c63126c0b336a2c9fe233e526626cd8f7523f52e2a2ce2b38f1a325",
+                "price": "58,000",
+                "currency": "0x7d72b22a74a216af4a002a1095c8c707d6ec1c5f"
+              },
+              "funding": {
+                "from": "0x93c0c224cbc91a16caacf9443431f743fd5d4719",
+                "to": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+                "amount_wei": "60025000000000000000000",
+                "at": 1794244800.0,
+                "tx_hash": "0xa87c6a96569d836496757cae73c32d77d9d866df218b8f493e890e4952e38e62",
+                "asset": "WEMIX",
+                "chain_id": 1111,
+                "block_number": "128011089",
+                "transaction_index": 0
+              },
+              "path": [
+                {
+                  "from": "0xb61a190f2b87a244460a080eaf3cd1490d01043a",
+                  "to": "0x93c0c224cbc91a16caacf9443431f743fd5d4719",
+                  "amount_wei": "420000000000000000000",
+                  "at": 1791052120.0,
+                  "tx_hash": "0xb9bf4a362d1fdd9e306a540083ad22c50d6968aecdf3148e4bcd37158dbd0cca",
+                  "asset": "WEMIX",
+                  "chain_id": 1111,
+                  "block_number": "124818372",
+                  "transaction_index": 0
+                },
+                {
+                  "from": "0x93c0c224cbc91a16caacf9443431f743fd5d4719",
+                  "to": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+                  "amount_wei": "60025000000000000000000",
+                  "at": 1794244800.0,
+                  "tx_hash": "0xa87c6a96569d836496757cae73c32d77d9d866df218b8f493e890e4952e38e62",
+                  "asset": "WEMIX",
+                  "chain_id": 1111,
+                  "block_number": "128011089",
+                  "transaction_index": 0
+                }
+              ],
+              "depth": 2
+            }
+          ]
+        },
+        {
+          "source": "0x647a24b0281444b747bb0d5372324ed0905be0e5",
+          "evidence": [
+            {
+              "purchase": {
+                "nft_id": 1154,
+                "buyer": "0xb61a190f2b87a244460a080eaf3cd1490d01043a",
+                "at": 1789933190,
+                "tx_hash": "0x054c8bb5caf2655dbf46b2561e7fed283888a1a47f7a6cd79c9ecd95910d1761",
+                "price": "20,000",
+                "currency": "0x7d72b22a74a216af4a002a1095c8c707d6ec1c5f"
+              },
+              "funding": {
+                "from": "0x647a24b0281444b747bb0d5372324ed0905be0e5",
+                "to": "0xb61a190f2b87a244460a080eaf3cd1490d01043a",
+                "amount_wei": "100000000000000000000",
+                "at": 1789138984.0,
+                "tx_hash": "0x7a8140c3911039792767378053c447cec431e1c8054b836ea737ef268f012917",
+                "asset": "WEMIX",
+                "chain_id": 1111,
+                "block_number": "122905214",
+                "transaction_index": 0
+              },
+              "path": [
+                {
+                  "from": "0x647a24b0281444b747bb0d5372324ed0905be0e5",
+                  "to": "0xb61a190f2b87a244460a080eaf3cd1490d01043a",
+                  "amount_wei": "100000000000000000000",
+                  "at": 1789138984.0,
+                  "tx_hash": "0x7a8140c3911039792767378053c447cec431e1c8054b836ea737ef268f012917",
+                  "asset": "WEMIX",
+                  "chain_id": 1111,
+                  "block_number": "122905214",
+                  "transaction_index": 0
+                }
+              ],
+              "depth": 1
+            },
+            {
+              "purchase": {
+                "nft_id": 1358,
+                "buyer": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+                "at": 1794262326,
+                "tx_hash": "0x469e3dea2c63126c0b336a2c9fe233e526626cd8f7523f52e2a2ce2b38f1a325",
+                "price": "58,000",
+                "currency": "0x7d72b22a74a216af4a002a1095c8c707d6ec1c5f"
+              },
+              "funding": {
+                "from": "0x647a24b0281444b747bb0d5372324ed0905be0e5",
+                "to": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+                "amount_wei": "4900000000000000000",
+                "at": 1790427363.0,
+                "tx_hash": "0x6080e04679d3720d926674ae3f89e2670ed7b46b4b73260298a3cfb10c71fbf3",
+                "asset": "WEMIX",
+                "chain_id": 1111,
+                "block_number": "124193608",
+                "transaction_index": 0
+              },
+              "path": [
+                {
+                  "from": "0x647a24b0281444b747bb0d5372324ed0905be0e5",
+                  "to": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+                  "amount_wei": "4900000000000000000",
+                  "at": 1790427363.0,
+                  "tx_hash": "0x6080e04679d3720d926674ae3f89e2670ed7b46b4b73260298a3cfb10c71fbf3",
+                  "asset": "WEMIX",
+                  "chain_id": 1111,
+                  "block_number": "124193608",
+                  "transaction_index": 0
+                }
+              ],
+              "depth": 1
+            }
+          ]
+        }
+      ],
+      "incomplete_wallets": [
+        "0x020882195a41343fafb8d65f6dcdfc6478d00fea",
+        "0x02138384602ded5059d096d8b298d0a3332ac1e8",
+        "0x03ac2718b64a944b744fd88a59dc019d456ddfad",
+        "0x06c97fe8398ccd12ce4c6c8895c10d1f82190de7",
+        "0x08c3da16fc7ad184ccbc311b1ed147f536d49632",
+        "0x08ce6a716326adef9ccb77d53b334d895534f9de",
+        "0x09336add911d2e11c5fa18552b61407c865bbe52",
+        "0x09573a65047f517a8cd7a3f02362c1d9dc60000c",
+        "0x0a83313b5e12b0e7561c6f60848f327d8a0be915",
+        "0x0bbd1480f950a3e88865c815301bf9fd492a8609",
+        "0x0caa6de04d6dd5db87dfaabfd4e597dc00107b4a",
+        "0x0d0707963952f2fba59dd06f2b425ace40b492fe",
+        "0x0d6d71e86eff6091722657ea9449802d7f9f25f6",
+        "0x11220b6ae4228d608c01b0c6ecd7f29dd219f6d7",
+        "0x128fb008ab1ae052ddf8793a0aae977088cf59ba",
+        "0x140d36090776326cf8c029918f7934e87de8b01e",
+        "0x14a4d28d0846348de4a4df62ad7280043bb23506",
+        "0x15ec663651579dab93ccdecab614b45db2428e6f",
+        "0x1637bd32c78dbffbddbc2c35c0c49eb5d63a9afa",
+        "0x174b90ce466e5eb9e59e83fd883cb6e196e6a6b1",
+        "0x18a4a4e19558f8c461af890471d6fd891aa5c58f",
+        "0x1936ac0487a11c4deb8ff098fa82b47fe9ea2769",
+        "0x1a040e380f88b5867e190b208f25153492343efd",
+        "0x1a0774e49a510688fb5fdecab842147a760f3132",
+        "0x1a0b91ae59b5261293afd4d7a280368d66a39bb5",
+        "0x1a9f7fbf91311902d0c99ebfd6ee08790c7ed7d0",
+        "0x1aee9d417395ddcc3cb77349466ffbd482bc4381",
+        "0x1c97af3f806bd15be08c13eee1921a39e7abab81",
+        "0x1cb64daa1bb6582c2b02d10ff432a53364c3ebe9",
+        "0x1d7666dab07ce7f716adacd4e1bc5b3857c016f5",
+        "0x1e2603f2e7e9de9085074f8a45c7548109f7923e",
+        "0x1f72026a223aa0bfcb7813e9fedbb8869d2ede9e",
+        "0x21f3c70e42029d331ed0e975cbb6829bf6c2da22",
+        "0x22265e4f440ff926ebf0fe052fdc18356698687e",
+        "0x24148f6e2e97f4dd0d6c1be3827bde79afb46b46",
+        "0x248e9c7580ca5cd54ea249c787816331911be4a2",
+        "0x25538205bc381b2ae1c6b7027c1677640889d1be",
+        "0x26a157c5e70989ddbd64a01869c0c29843f597b8",
+        "0x273e807d302d99d41046357481b583af52a45e5b",
+        "0x27f4b1c1008e03b9d778353b0fa8e7383911f1b9",
+        "0x28f583f433b13a56c169bf603ec1effd14cd8839",
+        "0x2a87f25bb9345f1761f09565ed5feaf0db576607",
+        "0x2ae526c923806c8074b84c469d5c09d058fb17e3",
+        "0x2c9c2b1d59fc18f37cb70f66367138fc132dfae4",
+        "0x2caf9fc9a105059a7ed91665e7598a4822a5b4a3",
+        "0x2dc56d1df6d1d63912cb547329766e451aa19861",
+        "0x2dd33e6d4c1ffa44c9f3d4637a0ee8f6632a4065",
+        "0x2e310f05bd3ef0be22dc8aac0a87ac23af6bea5a",
+        "0x2e3d6eaa14d3e295d15a9cf122326c48ed434097",
+        "0x2e79cbdc338d458dd988fa3b6cb84ee808e09930",
+        "0x2f79c3af248b520c378fc731119432edd8a498ba",
+        "0x304956f11b74485af14b7efd06ed70421c4f6856",
+        "0x310c2be96abb8cda88b6ab2160d829c83c78de77",
+        "0x32dd1bcbb41cd05fcecc3307a3e13f07fe8595f5",
+        "0x3376b5998b90c2d6c910c2d9ccb1f253c3a7ecb3",
+        "0x375d9c5b48d036b303f25b418ad4c75c66fe6caf",
+        "0x397a1ae40e9b2a19ef9ea174fbf3851b022ea5ff",
+        "0x39d2c53ee92223e35122803de1f21aefd732eb8d",
+        "0x3a859add2e16104e248f86db6b9abeaa1b41d88b",
+        "0x3b316e72483e057351d8cf109b592ae3a493725e",
+        "0x3b7bb46c3187db4f06beda51d12af545e361de23",
+        "0x3ce1c6f595be18295ec6e78dcf70d8c37a0f88e1",
+        "0x3ced50e0b1abd973be1bab777b303fd3671e332b",
+        "0x3cf6f016c55201c46eab8b54c860edfcbf1e1850",
+        "0x3deedf2868ca0208f7cd881b28718764736e57be",
+        "0x3e315e88f66fa796ea10ee048b31647f797b0d46",
+        "0x3ff39a18109e533c7d81c05deaf82d6a33dfc18d",
+        "0x400bf5c8b1621a4136e75ba753cd7809aa19d68d",
+        "0x41826678f49d0a58a12ef02e8321a8546d2f27de",
+        "0x4563e4b0de021824d626d8524313fc8882fc3ffa",
+        "0x4575cd62f326fd898a1cabedb7f740c5ffdb11e4",
+        "0x46ba2a6b6bf10739ae01fcac0d2c7701ec417729",
+        "0x482129db3585cd2a13aa8e07cf62a67c75d278f3",
+        "0x485f4e9941968c2b2f995fdf1e57931bb5f4c4fb",
+        "0x48d67aa5ca77a17be970c4e2d2ef8cef5a44e06b",
+        "0x498607117ff7b7f1f10ba92ab6a7acd10fee46c0",
+        "0x4bbbb8ba440726a8f9de9517166980ff7b674e05",
+        "0x4e0f790ea25025d6367a0aa48920a6490cdd4d70",
+        "0x4f3409e90b25cf33c2307d529c8c596151de9a24",
+        "0x4faeccef6b9fedc8b19ae4b1aa5e3973a3694477",
+        "0x4fb5262132948809d0603a175bb0787f3c58d833",
+        "0x51bce9e2afabfb778233fc9698bce6f2b9aae33d",
+        "0x51bf84bd1fc96164494adf7cedb6265c1e27e561",
+        "0x527fa71adc6bdc8f2280d8ec4e7c7854ac15262d",
+        "0x541d218c2ef0409fbdaab3e6995304a70263de9f",
+        "0x544a6b11c6a3921150e54f05409b24c1737588d7",
+        "0x5486d65d710ee0825f490e00215979d1e9150d5f",
+        "0x54cca0b36d54979126c8814eed2d3b873e5aaf15",
+        "0x55fddd9930eb29184bc4729debb68ceb7f4ed0d1",
+        "0x562a1d3b795cc19de0e3480dfb0a04ad7078888c",
+        "0x56cc1cf524c63f2c94d8c9272e04cb3104969343",
+        "0x58ba38dc2bc584fe8e423370435c543293fda0cc",
+        "0x59f04fe1a8eed45cf59594caae8f9a3bfdbc7a65",
+        "0x5af76442da09990a0ab2be51f2479af5325bcbf2",
+        "0x5af96db9b9d41bda2510f807c83e5fe23d73ced7",
+        "0x5b1e63f4b63cf100344dd270b0fec946bb09f9ba",
+        "0x5b3d68601cdafa9b3261997bc0305c0d6832ed14",
+        "0x5bca2a5143409431cef447036e9c6ea2d4e0da95",
+        "0x5de766fda53411dc01a11b2a40f2826feb63f4fe",
+        "0x5fa5be0e92271d13e87801dc2389dc83f26c528c",
+        "0x6267d879399a434d15f87d5a07c15b32b4591166",
+        "0x647a24b0281444b747bb0d5372324ed0905be0e5",
+        "0x64aa84f61dc63e5b42b47db0f3ecc6035b09f651",
+        "0x652dd8243175d0f59fc1f1254d1b86494be94010",
+        "0x659a1c67730865f0874010c2f90351437192dd40",
+        "0x67fc0feace55e4fc1556754340e2863d1d9de90e",
+        "0x69429c04ba93b38b715600af51e2b345ed9c7bae",
+        "0x6aa436f152071ad9b33d813b0bebfd35e212276a",
+        "0x6af992f060f641d27daa2b045d4caad58df55cb8",
+        "0x6ecca8977cb6b3bda1f1bb0f63b091d6dacbd637",
+        "0x6f8a816349f99343cdaeb8982093ae8fbf56bac2",
+        "0x6fd5d58dcc68c5ab0c43dd8e553b122e0e6d631a",
+        "0x704ca1768ba33199dc71fbfb362023a6b9b2e0bf",
+        "0x712bfe0f4f28b430fe67fa45ed5850824a4ccb93",
+        "0x725ad4eca3da19cee7d66d336e0d8b86e4f127dd",
+        "0x72a6a4a93fbbc1bbd2112c33de89c04525fa786b",
+        "0x731ceba221f2725b3924010fa027e48e4497ba78",
+        "0x7369b323b450b2578daf4dc702b7472e72b1da90",
+        "0x74a76250275839117998a43c8300326dea211611",
+        "0x754a46209b54c4c8c834c7239e8e69dce91a0230",
+        "0x756c576ec89993c4b26189b1aad402bf3b4e84fb",
+        "0x770f3f8c217dde6688279efa5d3f7f42172636d3",
+        "0x772204c45f0a167eaaf92e90857d66d73f983c3c",
+        "0x77e7356810e8e4ae4e56df847869a33e1a6d8a6a",
+        "0x77fdf8cd0525ebe9943167b02dccf72c560049d0",
+        "0x78c6b6f901fb0a2e3aabab9fd67efbed7f11dfcd",
+        "0x78cc48eed21080f3c029dcdb413d2e46504757b0",
+        "0x7a6ae4c98b212803ac6fc0266c3ef2f5e3fd3e3b",
+        "0x7aab5c75c3ffee5e948cafa3c9fce323b016e05a",
+        "0x7b3852d3b6b5b9b858e82625cf7ed66275f7b698",
+        "0x7b7a2abc91d105cc09fb4a748232cc2ea2db925d",
+        "0x7ca3966041d35eecc363a2c56bd98882feb01232",
+        "0x7d5e77743edcb9ed5013e15493c3aff828577bf5",
+        "0x7e3e6241d720a973c5d1f7c21875080c81cbfd7c",
+        "0x7e6fcce642592ba0c9f8745f36bcdbbbd22e7011",
+        "0x7f96dc49d992ea681226f1ee1f98aef8634ae7d6",
+        "0x7fd0ba62ffdd123319381714c475609eaf17c54b",
+        "0x7fed04e30007f046f94e923dce5b7d3472c4fdf8",
+        "0x7ffb033d7bac1cbbdfcac2cf487824c226e966cf",
+        "0x84868c9285aec50d0b7c10812723594f04ed786f",
+        "0x85fd04557d9351c3a29a3f510edbede82fba7491",
+        "0x8766a6ce4a6b88b4453f8565b416e49616ee6a14",
+        "0x8845c4bd87f7687fded869f7cb24ef99cc13b52d",
+        "0x8b7867d47ae49f23abab0f32bcd6def7f4deb28d",
+        "0x8d4714efb7a18af56d7a041db86236946de53fbd",
+        "0x8debd18702d8321c4901f0124bdc202102ba53d1",
+        "0x8e5adfb6d38861be4e3670d6bf1f785551ea3022",
+        "0x8ef4d6eaeae154287f5ee0b25a924fdf31ac1074",
+        "0x8fbd5d0aab3e57026cb3008067e46b2a6f0b6751",
+        "0x9187771dc0e64e98d51487b433596f7e24804977",
+        "0x935c84024315a7df52ee2465321b2d94140144d1",
+        "0x95ce0a0dac962e3a631ecb5845cdf4715a296903",
+        "0x96484c0a46c9542872687b250441403f2fb7e241",
+        "0x974bb6428aec9252a89959233b54fb693447dadd",
+        "0x989380aedf367b9e23b3b45b3b32c02c384d50af",
+        "0x9a24ec9ed80f9ffc75379d3fb05c35f057e01d62",
+        "0x9b89f8921cc5f739f873e1c8ac25c7e22560a057",
+        "0x9c6eca2a16f09d14e06c767814fd74e33a259884",
+        "0x9cc43d3844ad7939a847f8a19485aaefa2404974",
+        "0x9db9a21620121058693202e39dbd93b9f86db04f",
+        "0x9ea1eaf6fdf9aac463a186961446f17c7c58eccf",
+        "0x9ec78a81e0969753c42e0ce4fb667e1b65fdce0f",
+        "0x9f4efdaa9835dd7d0613b79321ff127a7b453a21",
+        "0xa055a599093198a529f7d33a878f96812b68aeed",
+        "0xa10dc765b16dfbb99a4d283e23dc0bf0880af6d9",
+        "0xa1928c5d91c8faa39797cff9e422a1c66e064606",
+        "0xa21eb7ec02f897a3e384c31f0802fffd383ceb2b",
+        "0xa2297b399f55675df7d1567a1c350955de65f89c",
+        "0xa329b2e4af13578fc1814328916cba031b2f8139",
+        "0xa39b62bfe4b851702d27534fcd8804eb09bf2332",
+        "0xa480e553049504dcf3bf2b0b18fea946144c4088",
+        "0xa5a53ddde155f8073be8171f12926d2850dcadc8",
+        "0xa768cb74420c51cc6f452fa245dc3d8355215c1f",
+        "0xa7d929b086c37c2ebf7be1ee85978edf871c2cb4",
+        "0xa83f91c60535cf1cd9658189bf8cc100ab8ba4a4",
+        "0xa8513661a9975467cd4ba53c834e59d9da7d3979",
+        "0xa8631d8d7fabf8d36a36515ab9b83bf3a53d26ba",
+        "0xa8bfd72d9403a899dccf64ec30e0c3848d4e31bc",
+        "0xa97b15186b4dea1afe602d40c2457591fe8f9558",
+        "0xad7455e483c85b925a1bc81df5f968cb2a26f904",
+        "0xae411287feaa7b63b32de3673411723c12b23e50",
+        "0xaebb55b5e9c7889c3eb8b310058bda6e15439e99",
+        "0xb0b5278b5c11068a8ce24977ef0baf737f54a7dd",
+        "0xb3256bd6182a61e37bea57f5f1f881091212b650",
+        "0xb34684ff7c85e63d76c5807d3ddaea5b1050e556",
+        "0xb47b9ab005c1e456437af6398c44c64498e840cd",
+        "0xb59a203fc209e8dde6ca1d2ca3336ec157d4a74a",
+        "0xb6a8f2d0a50d6725c62fe62783185fd8deedf18f",
+        "0xb6ec8db6fc1020a07ab2e30227bcaccda9cb7798",
+        "0xb6fb2325a4b84176c00b17851b51ecb422f82cb3",
+        "0xb71d62475ddfcf509ee2bdded4c7bbc1d2dcaf7a",
+        "0xb876670a709f6ba426a91f7a46e11b15706160a0",
+        "0xb980b449e59465b676669ca578ba7ab8a223ea59",
+        "0xbaaa413677ddf48e6e4ca81aece292f8f4e76385",
+        "0xbb7b702a3ce40cdc07a2c7f1fb9f4894c31a8b3f",
+        "0xbd24b6daa7f3b2986a586791f091a726161e99c1",
+        "0xbe58462deff022685718d1ba844eb53b4bc5093e",
+        "0xc0b19ee0332977ca25158a087898dfc8d04ecbc1",
+        "0xc0efe0f6edb0c40d8367c8bb87e3c5cf27ba0d34",
+        "0xc209001c6c46d9c96d3ba33820ab4cf8f9ea873f",
+        "0xc3ccdc9f8061b36e2f66f7afc0e8b3a8be5b6075",
+        "0xc4690188bdad31662232efffc5b18c734cc2213a",
+        "0xc51f30359a155cf2e87987d29ee4b441b530aef1",
+        "0xc5f7d770200266bb48c9ccc374480a107531e54c",
+        "0xc7bcde897bdee1510c8ec4357b408db528a13914",
+        "0xc976a6bfae6c73b4ea48fffb205c245e84a44f14",
+        "0xca064f9acbf07b501bd34cb8b9e81a08cf8c84c8",
+        "0xcacae40e1744595ae3f316d893d4db6497cd6529",
+        "0xcb19e694954a807e983c539dba49e265cc44cd3c",
+        "0xcd23c2d2382c8618449bb41ace151c6aa02490f3",
+        "0xcfb5a1da0549e85e2192616ed4d4899b5d7f139a",
+        "0xcff221d7c76b6c2be8eea5195973cca1f24e78de",
+        "0xd0188151cf0a4b1799504d40ef0263a4c5bc2b79",
+        "0xd0500c1c89f4d7bc556097bb67d4e93b818420b2",
+        "0xd0e9a83661948654c91baf24f50f548cfe9c4d0d",
+        "0xd1a6fb647d38aa176c30bd43f55890d847a16344",
+        "0xd2db030359ed6af83f94d25220b336c7e57ee8cb",
+        "0xd31ed5d7443fe4cfc8aa330a696006c1b65f18d8",
+        "0xd3329cb0a43ca4fc5e73a7d45f9c6abfac877505",
+        "0xd3752c9eb921344f41fa6656787e4a37a2530b3a",
+        "0xd3b18385bdae77dc9a0f7aba50f4f1a17a69970e",
+        "0xd3d625bcc4bf07daae59470466fd2dd16c70c13f",
+        "0xd4aaac9bffc5a79c48042b42c48031bcb8a58abb",
+        "0xd575e049b2e729d079fbf982837d93d964cba1d4",
+        "0xd6125a7140008bbc6afba5c5d4a77e25945e9c6b",
+        "0xd6ded72a97ea6422cdebb43224700fc2209f676a",
+        "0xd818142ab98568afe858a9eefac5e46a3a7c2287",
+        "0xd9a36c67e24ed7bafba2ec21d2780951b282595b",
+        "0xd9aafb8e78f88f3c6bc8601f35f3c1574ea6eeb8",
+        "0xda8fa691f053dfe0c8bb1176bd2ef000797641c6",
+        "0xdae5c1866749cbf0341d31c7dada48f2ef9ddaf4",
+        "0xdb60085b003017520ef024ae3acb855fe7230aa4",
+        "0xdd1118788d25ca6eceee281010042bd5bb5d50a0",
+        "0xdda87a3ef9120665da45691f4e6742fad4a03842",
+        "0xdefa17fc640a427311f26742532c27c0d74839e8",
+        "0xe077262144c90b5374955ab4e733c57ccfd85b47",
+        "0xe08fec704eeb9ce18c3379344bd8090e2cf836a0",
+        "0xe20ec2d143d9634c7b9367b9236e357441c8132b",
+        "0xe27952d3943c81962ac4fb211ca529995a111cca",
+        "0xe429914c6cc059cb83c2eeab1c1521d3af406f2b",
+        "0xe4d3890232a87fccd0cf46d0573c22f25b1c5d17",
+        "0xe593c2d296641996de454d30fdeafa9247516c17",
+        "0xe6a18ef05fc9e33e23c46f05f707daa2847e5db6",
+        "0xe93393483888c53f3a47eba3d31502bb68090fc9",
+        "0xeb47d55ab02dd15e5f233f7201717e86691af040",
+        "0xeb67f4d90fab95f2c2541ec3fd795d25dc62a3f2",
+        "0xec1c9adccd4b51f606a046b177ac22b3c05b01f7",
+        "0xece9174c46c613792c3a6be3e09417a4231e2199",
+        "0xef6280d6ee8c2a6ffc813cf1d670125c6f7c96a3",
+        "0xf0398af618fd599847d74608db2ac75bab4b1fd3",
+        "0xf08abfd630c6fdc28615776797d49c9c15bc6c3d",
+        "0xf1ceff02d27d996b5262c365c5031aa03d35a8e7",
+        "0xf3e936f4a947029c10de6ed11ac7ff3b71727a24",
+        "0xf498597c79d711ba5e0a904a498c6817e512b612",
+        "0xf49a6a2d60bd4d35d688dccc797aec186d8b083f",
+        "0xf6759576088cd9e865a6258ab4fec497d1dafe84",
+        "0xf6d6112e8656ad619b76f33e187a6a63f102ec91",
+        "0xf74928280e8fcfc798639ad17900ec0d5daca921",
+        "0xf78735f99af40ccf23e48bf3784e0d2879fe570b",
+        "0xf7b7e0eed1a96ee5c44a19cfd75f4b3f1c6dc28e",
+        "0xf8749eb40ffdeda3791ae9663d0dc529a2b993df",
+        "0xf87e929866a00b630bb169222bfee745c056b719",
+        "0xf89d7b9c864f589bbf53a82105107622b35eaa40",
+        "0xf8c5658304eacf7db9f6319caf9e65a15e73a0cd",
+        "0xf95450740c4c8a8b61bb8598e1a10a254e3bab11",
+        "0xfbc56eb1f4ff072f88944dedc7429b673e8e309a"
+      ],
+      "search_truncated": false
+    },
+    {
+      "nft_ids": [
+        3871,
+        1358
+      ],
+      "days": 7,
+      "max_depth": 1,
+      "include_buyer_roots": true,
+      "matches": [
+        {
+          "source": "0x93c0c224cbc91a16caacf9443431f743fd5d4719",
+          "evidence": [
+            {
+              "purchase": {
+                "nft_id": 3871,
+                "buyer": "0x93c0c224cbc91a16caacf9443431f743fd5d4719",
+                "at": 1790557042,
+                "tx_hash": "0xbbeec83078e83707c2afeb3cdc5c25460f9e49db3e23549eeaa1c1061b1576da",
+                "price": "57,000",
+                "currency": "0x7d72b22a74a216af4a002a1095c8c707d6ec1c5f"
+              },
+              "funding": null,
+              "path": [],
+              "depth": 0
+            },
+            {
+              "purchase": {
+                "nft_id": 1358,
+                "buyer": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+                "at": 1794262326,
+                "tx_hash": "0x469e3dea2c63126c0b336a2c9fe233e526626cd8f7523f52e2a2ce2b38f1a325",
+                "price": "58,000",
+                "currency": "0x7d72b22a74a216af4a002a1095c8c707d6ec1c5f"
+              },
+              "funding": {
+                "from": "0x93c0c224cbc91a16caacf9443431f743fd5d4719",
+                "to": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+                "amount_wei": "60025000000000000000000",
+                "at": 1794244800.0,
+                "tx_hash": "0xa87c6a96569d836496757cae73c32d77d9d866df218b8f493e890e4952e38e62",
+                "asset": "WEMIX",
+                "chain_id": 1111,
+                "block_number": "128011089",
+                "transaction_index": 0
+              },
+              "path": [
+                {
+                  "from": "0x93c0c224cbc91a16caacf9443431f743fd5d4719",
+                  "to": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+                  "amount_wei": "60025000000000000000000",
+                  "at": 1794244800.0,
+                  "tx_hash": "0xa87c6a96569d836496757cae73c32d77d9d866df218b8f493e890e4952e38e62",
+                  "asset": "WEMIX",
+                  "chain_id": 1111,
+                  "block_number": "128011089",
+                  "transaction_index": 0
+                }
+              ],
+              "depth": 1
+            }
+          ]
+        }
+      ],
+      "incomplete_wallets": [],
+      "search_truncated": false
+    },
+    {
+      "nft_ids": [
+        3871,
+        1358
+      ],
+      "days": 7,
+      "max_depth": 2,
+      "include_buyer_roots": true,
+      "matches": [
+        {
+          "source": "0x93c0c224cbc91a16caacf9443431f743fd5d4719",
+          "evidence": [
+            {
+              "purchase": {
+                "nft_id": 3871,
+                "buyer": "0x93c0c224cbc91a16caacf9443431f743fd5d4719",
+                "at": 1790557042,
+                "tx_hash": "0xbbeec83078e83707c2afeb3cdc5c25460f9e49db3e23549eeaa1c1061b1576da",
+                "price": "57,000",
+                "currency": "0x7d72b22a74a216af4a002a1095c8c707d6ec1c5f"
+              },
+              "funding": null,
+              "path": [],
+              "depth": 0
+            },
+            {
+              "purchase": {
+                "nft_id": 1358,
+                "buyer": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+                "at": 1794262326,
+                "tx_hash": "0x469e3dea2c63126c0b336a2c9fe233e526626cd8f7523f52e2a2ce2b38f1a325",
+                "price": "58,000",
+                "currency": "0x7d72b22a74a216af4a002a1095c8c707d6ec1c5f"
+              },
+              "funding": {
+                "from": "0x93c0c224cbc91a16caacf9443431f743fd5d4719",
+                "to": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+                "amount_wei": "60025000000000000000000",
+                "at": 1794244800.0,
+                "tx_hash": "0xa87c6a96569d836496757cae73c32d77d9d866df218b8f493e890e4952e38e62",
+                "asset": "WEMIX",
+                "chain_id": 1111,
+                "block_number": "128011089",
+                "transaction_index": 0
+              },
+              "path": [
+                {
+                  "from": "0x93c0c224cbc91a16caacf9443431f743fd5d4719",
+                  "to": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+                  "amount_wei": "60025000000000000000000",
+                  "at": 1794244800.0,
+                  "tx_hash": "0xa87c6a96569d836496757cae73c32d77d9d866df218b8f493e890e4952e38e62",
+                  "asset": "WEMIX",
+                  "chain_id": 1111,
+                  "block_number": "128011089",
+                  "transaction_index": 0
+                }
+              ],
+              "depth": 1
+            }
+          ]
+        },
+        {
+          "source": "0x647a24b0281444b747bb0d5372324ed0905be0e5",
+          "evidence": [
+            {
+              "purchase": {
+                "nft_id": 3871,
+                "buyer": "0x93c0c224cbc91a16caacf9443431f743fd5d4719",
+                "at": 1790557042,
+                "tx_hash": "0xbbeec83078e83707c2afeb3cdc5c25460f9e49db3e23549eeaa1c1061b1576da",
+                "price": "57,000",
+                "currency": "0x7d72b22a74a216af4a002a1095c8c707d6ec1c5f"
+              },
+              "funding": {
+                "from": "0x647a24b0281444b747bb0d5372324ed0905be0e5",
+                "to": "0x93c0c224cbc91a16caacf9443431f743fd5d4719",
+                "amount_wei": "50585460000000000000000",
+                "at": 1790208662.0,
+                "tx_hash": "0x3870c0074eed7cb237d6ee14826e8e13166dcd7fbe4af07dddf42513435d2742",
+                "asset": "WEMIX",
+                "chain_id": 1111,
+                "block_number": "123974904",
+                "transaction_index": 0
+              },
+              "path": [
+                {
+                  "from": "0x647a24b0281444b747bb0d5372324ed0905be0e5",
+                  "to": "0x93c0c224cbc91a16caacf9443431f743fd5d4719",
+                  "amount_wei": "50585460000000000000000",
+                  "at": 1790208662.0,
+                  "tx_hash": "0x3870c0074eed7cb237d6ee14826e8e13166dcd7fbe4af07dddf42513435d2742",
+                  "asset": "WEMIX",
+                  "chain_id": 1111,
+                  "block_number": "123974904",
+                  "transaction_index": 0
+                }
+              ],
+              "depth": 1
+            },
+            {
+              "purchase": {
+                "nft_id": 1358,
+                "buyer": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+                "at": 1794262326,
+                "tx_hash": "0x469e3dea2c63126c0b336a2c9fe233e526626cd8f7523f52e2a2ce2b38f1a325",
+                "price": "58,000",
+                "currency": "0x7d72b22a74a216af4a002a1095c8c707d6ec1c5f"
+              },
+              "funding": {
+                "from": "0x93c0c224cbc91a16caacf9443431f743fd5d4719",
+                "to": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+                "amount_wei": "60025000000000000000000",
+                "at": 1794244800.0,
+                "tx_hash": "0xa87c6a96569d836496757cae73c32d77d9d866df218b8f493e890e4952e38e62",
+                "asset": "WEMIX",
+                "chain_id": 1111,
+                "block_number": "128011089",
+                "transaction_index": 0
+              },
+              "path": [
+                {
+                  "from": "0x647a24b0281444b747bb0d5372324ed0905be0e5",
+                  "to": "0x93c0c224cbc91a16caacf9443431f743fd5d4719",
+                  "amount_wei": "4590280000000000000000",
+                  "at": 1793665623.0,
+                  "tx_hash": "0xe64e15e3958a245ea66ebff259e19e03e6066c662e6b2998acddbe4a41769493",
+                  "asset": "WEMIX",
+                  "chain_id": 1111,
+                  "block_number": "127431905",
+                  "transaction_index": 0
+                },
+                {
+                  "from": "0x93c0c224cbc91a16caacf9443431f743fd5d4719",
+                  "to": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+                  "amount_wei": "60025000000000000000000",
+                  "at": 1794244800.0,
+                  "tx_hash": "0xa87c6a96569d836496757cae73c32d77d9d866df218b8f493e890e4952e38e62",
+                  "asset": "WEMIX",
+                  "chain_id": 1111,
+                  "block_number": "128011089",
+                  "transaction_index": 0
+                }
+              ],
+              "depth": 2
+            }
+          ]
+        }
+      ],
+      "incomplete_wallets": [
+        "0x647a24b0281444b747bb0d5372324ed0905be0e5"
+      ],
+      "search_truncated": false
+    },
+    {
+      "nft_ids": [
+        3871,
+        1358
+      ],
+      "days": 7,
+      "max_depth": 3,
+      "include_buyer_roots": true,
+      "matches": [
+        {
+          "source": "0x93c0c224cbc91a16caacf9443431f743fd5d4719",
+          "evidence": [
+            {
+              "purchase": {
+                "nft_id": 3871,
+                "buyer": "0x93c0c224cbc91a16caacf9443431f743fd5d4719",
+                "at": 1790557042,
+                "tx_hash": "0xbbeec83078e83707c2afeb3cdc5c25460f9e49db3e23549eeaa1c1061b1576da",
+                "price": "57,000",
+                "currency": "0x7d72b22a74a216af4a002a1095c8c707d6ec1c5f"
+              },
+              "funding": null,
+              "path": [],
+              "depth": 0
+            },
+            {
+              "purchase": {
+                "nft_id": 1358,
+                "buyer": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+                "at": 1794262326,
+                "tx_hash": "0x469e3dea2c63126c0b336a2c9fe233e526626cd8f7523f52e2a2ce2b38f1a325",
+                "price": "58,000",
+                "currency": "0x7d72b22a74a216af4a002a1095c8c707d6ec1c5f"
+              },
+              "funding": {
+                "from": "0x93c0c224cbc91a16caacf9443431f743fd5d4719",
+                "to": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+                "amount_wei": "60025000000000000000000",
+                "at": 1794244800.0,
+                "tx_hash": "0xa87c6a96569d836496757cae73c32d77d9d866df218b8f493e890e4952e38e62",
+                "asset": "WEMIX",
+                "chain_id": 1111,
+                "block_number": "128011089",
+                "transaction_index": 0
+              },
+              "path": [
+                {
+                  "from": "0x93c0c224cbc91a16caacf9443431f743fd5d4719",
+                  "to": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+                  "amount_wei": "60025000000000000000000",
+                  "at": 1794244800.0,
+                  "tx_hash": "0xa87c6a96569d836496757cae73c32d77d9d866df218b8f493e890e4952e38e62",
+                  "asset": "WEMIX",
+                  "chain_id": 1111,
+                  "block_number": "128011089",
+                  "transaction_index": 0
+                }
+              ],
+              "depth": 1
+            }
+          ]
+        },
+        {
+          "source": "0x647a24b0281444b747bb0d5372324ed0905be0e5",
+          "evidence": [
+            {
+              "purchase": {
+                "nft_id": 3871,
+                "buyer": "0x93c0c224cbc91a16caacf9443431f743fd5d4719",
+                "at": 1790557042,
+                "tx_hash": "0xbbeec83078e83707c2afeb3cdc5c25460f9e49db3e23549eeaa1c1061b1576da",
+                "price": "57,000",
+                "currency": "0x7d72b22a74a216af4a002a1095c8c707d6ec1c5f"
+              },
+              "funding": {
+                "from": "0x647a24b0281444b747bb0d5372324ed0905be0e5",
+                "to": "0x93c0c224cbc91a16caacf9443431f743fd5d4719",
+                "amount_wei": "50585460000000000000000",
+                "at": 1790208662.0,
+                "tx_hash": "0x3870c0074eed7cb237d6ee14826e8e13166dcd7fbe4af07dddf42513435d2742",
+                "asset": "WEMIX",
+                "chain_id": 1111,
+                "block_number": "123974904",
+                "transaction_index": 0
+              },
+              "path": [
+                {
+                  "from": "0x647a24b0281444b747bb0d5372324ed0905be0e5",
+                  "to": "0x93c0c224cbc91a16caacf9443431f743fd5d4719",
+                  "amount_wei": "50585460000000000000000",
+                  "at": 1790208662.0,
+                  "tx_hash": "0x3870c0074eed7cb237d6ee14826e8e13166dcd7fbe4af07dddf42513435d2742",
+                  "asset": "WEMIX",
+                  "chain_id": 1111,
+                  "block_number": "123974904",
+                  "transaction_index": 0
+                }
+              ],
+              "depth": 1
+            },
+            {
+              "purchase": {
+                "nft_id": 1358,
+                "buyer": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+                "at": 1794262326,
+                "tx_hash": "0x469e3dea2c63126c0b336a2c9fe233e526626cd8f7523f52e2a2ce2b38f1a325",
+                "price": "58,000",
+                "currency": "0x7d72b22a74a216af4a002a1095c8c707d6ec1c5f"
+              },
+              "funding": {
+                "from": "0x93c0c224cbc91a16caacf9443431f743fd5d4719",
+                "to": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+                "amount_wei": "60025000000000000000000",
+                "at": 1794244800.0,
+                "tx_hash": "0xa87c6a96569d836496757cae73c32d77d9d866df218b8f493e890e4952e38e62",
+                "asset": "WEMIX",
+                "chain_id": 1111,
+                "block_number": "128011089",
+                "transaction_index": 0
+              },
+              "path": [
+                {
+                  "from": "0x647a24b0281444b747bb0d5372324ed0905be0e5",
+                  "to": "0x93c0c224cbc91a16caacf9443431f743fd5d4719",
+                  "amount_wei": "4590280000000000000000",
+                  "at": 1793665623.0,
+                  "tx_hash": "0xe64e15e3958a245ea66ebff259e19e03e6066c662e6b2998acddbe4a41769493",
+                  "asset": "WEMIX",
+                  "chain_id": 1111,
+                  "block_number": "127431905",
+                  "transaction_index": 0
+                },
+                {
+                  "from": "0x93c0c224cbc91a16caacf9443431f743fd5d4719",
+                  "to": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+                  "amount_wei": "60025000000000000000000",
+                  "at": 1794244800.0,
+                  "tx_hash": "0xa87c6a96569d836496757cae73c32d77d9d866df218b8f493e890e4952e38e62",
+                  "asset": "WEMIX",
+                  "chain_id": 1111,
+                  "block_number": "128011089",
+                  "transaction_index": 0
+                }
+              ],
+              "depth": 2
+            }
+          ]
+        }
+      ],
+      "incomplete_wallets": [
+        "0x647a24b0281444b747bb0d5372324ed0905be0e5"
+      ],
+      "search_truncated": false
+    },
+    {
+      "nft_ids": [
+        3871,
+        1358
+      ],
+      "days": 90,
+      "max_depth": 1,
+      "include_buyer_roots": true,
+      "matches": [
+        {
+          "source": "0x93c0c224cbc91a16caacf9443431f743fd5d4719",
+          "evidence": [
+            {
+              "purchase": {
+                "nft_id": 3871,
+                "buyer": "0x93c0c224cbc91a16caacf9443431f743fd5d4719",
+                "at": 1790557042,
+                "tx_hash": "0xbbeec83078e83707c2afeb3cdc5c25460f9e49db3e23549eeaa1c1061b1576da",
+                "price": "57,000",
+                "currency": "0x7d72b22a74a216af4a002a1095c8c707d6ec1c5f"
+              },
+              "funding": null,
+              "path": [],
+              "depth": 0
+            },
+            {
+              "purchase": {
+                "nft_id": 1358,
+                "buyer": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+                "at": 1794262326,
+                "tx_hash": "0x469e3dea2c63126c0b336a2c9fe233e526626cd8f7523f52e2a2ce2b38f1a325",
+                "price": "58,000",
+                "currency": "0x7d72b22a74a216af4a002a1095c8c707d6ec1c5f"
+              },
+              "funding": {
+                "from": "0x93c0c224cbc91a16caacf9443431f743fd5d4719",
+                "to": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+                "amount_wei": "60025000000000000000000",
+                "at": 1794244800.0,
+                "tx_hash": "0xa87c6a96569d836496757cae73c32d77d9d866df218b8f493e890e4952e38e62",
+                "asset": "WEMIX",
+                "chain_id": 1111,
+                "block_number": "128011089",
+                "transaction_index": 0
+              },
+              "path": [
+                {
+                  "from": "0x93c0c224cbc91a16caacf9443431f743fd5d4719",
+                  "to": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+                  "amount_wei": "60025000000000000000000",
+                  "at": 1794244800.0,
+                  "tx_hash": "0xa87c6a96569d836496757cae73c32d77d9d866df218b8f493e890e4952e38e62",
+                  "asset": "WEMIX",
+                  "chain_id": 1111,
+                  "block_number": "128011089",
+                  "transaction_index": 0
+                }
+              ],
+              "depth": 1
+            }
+          ]
+        },
+        {
+          "source": "0x647a24b0281444b747bb0d5372324ed0905be0e5",
+          "evidence": [
+            {
+              "purchase": {
+                "nft_id": 3871,
+                "buyer": "0x93c0c224cbc91a16caacf9443431f743fd5d4719",
+                "at": 1790557042,
+                "tx_hash": "0xbbeec83078e83707c2afeb3cdc5c25460f9e49db3e23549eeaa1c1061b1576da",
+                "price": "57,000",
+                "currency": "0x7d72b22a74a216af4a002a1095c8c707d6ec1c5f"
+              },
+              "funding": {
+                "from": "0x647a24b0281444b747bb0d5372324ed0905be0e5",
+                "to": "0x93c0c224cbc91a16caacf9443431f743fd5d4719",
+                "amount_wei": "50585460000000000000000",
+                "at": 1790208662.0,
+                "tx_hash": "0x3870c0074eed7cb237d6ee14826e8e13166dcd7fbe4af07dddf42513435d2742",
+                "asset": "WEMIX",
+                "chain_id": 1111,
+                "block_number": "123974904",
+                "transaction_index": 0
+              },
+              "path": [
+                {
+                  "from": "0x647a24b0281444b747bb0d5372324ed0905be0e5",
+                  "to": "0x93c0c224cbc91a16caacf9443431f743fd5d4719",
+                  "amount_wei": "50585460000000000000000",
+                  "at": 1790208662.0,
+                  "tx_hash": "0x3870c0074eed7cb237d6ee14826e8e13166dcd7fbe4af07dddf42513435d2742",
+                  "asset": "WEMIX",
+                  "chain_id": 1111,
+                  "block_number": "123974904",
+                  "transaction_index": 0
+                }
+              ],
+              "depth": 1
+            },
+            {
+              "purchase": {
+                "nft_id": 1358,
+                "buyer": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+                "at": 1794262326,
+                "tx_hash": "0x469e3dea2c63126c0b336a2c9fe233e526626cd8f7523f52e2a2ce2b38f1a325",
+                "price": "58,000",
+                "currency": "0x7d72b22a74a216af4a002a1095c8c707d6ec1c5f"
+              },
+              "funding": {
+                "from": "0x647a24b0281444b747bb0d5372324ed0905be0e5",
+                "to": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+                "amount_wei": "4900000000000000000",
+                "at": 1790427363.0,
+                "tx_hash": "0x6080e04679d3720d926674ae3f89e2670ed7b46b4b73260298a3cfb10c71fbf3",
+                "asset": "WEMIX",
+                "chain_id": 1111,
+                "block_number": "124193608",
+                "transaction_index": 0
+              },
+              "path": [
+                {
+                  "from": "0x647a24b0281444b747bb0d5372324ed0905be0e5",
+                  "to": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+                  "amount_wei": "4900000000000000000",
+                  "at": 1790427363.0,
+                  "tx_hash": "0x6080e04679d3720d926674ae3f89e2670ed7b46b4b73260298a3cfb10c71fbf3",
+                  "asset": "WEMIX",
+                  "chain_id": 1111,
+                  "block_number": "124193608",
+                  "transaction_index": 0
+                }
+              ],
+              "depth": 1
+            }
+          ]
+        }
+      ],
+      "incomplete_wallets": [],
+      "search_truncated": false
+    },
+    {
+      "nft_ids": [
+        3871,
+        1358
+      ],
+      "days": 90,
+      "max_depth": 2,
+      "include_buyer_roots": true,
+      "matches": [
+        {
+          "source": "0x93c0c224cbc91a16caacf9443431f743fd5d4719",
+          "evidence": [
+            {
+              "purchase": {
+                "nft_id": 3871,
+                "buyer": "0x93c0c224cbc91a16caacf9443431f743fd5d4719",
+                "at": 1790557042,
+                "tx_hash": "0xbbeec83078e83707c2afeb3cdc5c25460f9e49db3e23549eeaa1c1061b1576da",
+                "price": "57,000",
+                "currency": "0x7d72b22a74a216af4a002a1095c8c707d6ec1c5f"
+              },
+              "funding": null,
+              "path": [],
+              "depth": 0
+            },
+            {
+              "purchase": {
+                "nft_id": 1358,
+                "buyer": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+                "at": 1794262326,
+                "tx_hash": "0x469e3dea2c63126c0b336a2c9fe233e526626cd8f7523f52e2a2ce2b38f1a325",
+                "price": "58,000",
+                "currency": "0x7d72b22a74a216af4a002a1095c8c707d6ec1c5f"
+              },
+              "funding": {
+                "from": "0x93c0c224cbc91a16caacf9443431f743fd5d4719",
+                "to": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+                "amount_wei": "60025000000000000000000",
+                "at": 1794244800.0,
+                "tx_hash": "0xa87c6a96569d836496757cae73c32d77d9d866df218b8f493e890e4952e38e62",
+                "asset": "WEMIX",
+                "chain_id": 1111,
+                "block_number": "128011089",
+                "transaction_index": 0
+              },
+              "path": [
+                {
+                  "from": "0x93c0c224cbc91a16caacf9443431f743fd5d4719",
+                  "to": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+                  "amount_wei": "60025000000000000000000",
+                  "at": 1794244800.0,
+                  "tx_hash": "0xa87c6a96569d836496757cae73c32d77d9d866df218b8f493e890e4952e38e62",
+                  "asset": "WEMIX",
+                  "chain_id": 1111,
+                  "block_number": "128011089",
+                  "transaction_index": 0
+                }
+              ],
+              "depth": 1
+            }
+          ]
+        },
+        {
+          "source": "0x647a24b0281444b747bb0d5372324ed0905be0e5",
+          "evidence": [
+            {
+              "purchase": {
+                "nft_id": 3871,
+                "buyer": "0x93c0c224cbc91a16caacf9443431f743fd5d4719",
+                "at": 1790557042,
+                "tx_hash": "0xbbeec83078e83707c2afeb3cdc5c25460f9e49db3e23549eeaa1c1061b1576da",
+                "price": "57,000",
+                "currency": "0x7d72b22a74a216af4a002a1095c8c707d6ec1c5f"
+              },
+              "funding": {
+                "from": "0x647a24b0281444b747bb0d5372324ed0905be0e5",
+                "to": "0x93c0c224cbc91a16caacf9443431f743fd5d4719",
+                "amount_wei": "50585460000000000000000",
+                "at": 1790208662.0,
+                "tx_hash": "0x3870c0074eed7cb237d6ee14826e8e13166dcd7fbe4af07dddf42513435d2742",
+                "asset": "WEMIX",
+                "chain_id": 1111,
+                "block_number": "123974904",
+                "transaction_index": 0
+              },
+              "path": [
+                {
+                  "from": "0x647a24b0281444b747bb0d5372324ed0905be0e5",
+                  "to": "0x93c0c224cbc91a16caacf9443431f743fd5d4719",
+                  "amount_wei": "50585460000000000000000",
+                  "at": 1790208662.0,
+                  "tx_hash": "0x3870c0074eed7cb237d6ee14826e8e13166dcd7fbe4af07dddf42513435d2742",
+                  "asset": "WEMIX",
+                  "chain_id": 1111,
+                  "block_number": "123974904",
+                  "transaction_index": 0
+                }
+              ],
+              "depth": 1
+            },
+            {
+              "purchase": {
+                "nft_id": 1358,
+                "buyer": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+                "at": 1794262326,
+                "tx_hash": "0x469e3dea2c63126c0b336a2c9fe233e526626cd8f7523f52e2a2ce2b38f1a325",
+                "price": "58,000",
+                "currency": "0x7d72b22a74a216af4a002a1095c8c707d6ec1c5f"
+              },
+              "funding": {
+                "from": "0x647a24b0281444b747bb0d5372324ed0905be0e5",
+                "to": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+                "amount_wei": "4900000000000000000",
+                "at": 1790427363.0,
+                "tx_hash": "0x6080e04679d3720d926674ae3f89e2670ed7b46b4b73260298a3cfb10c71fbf3",
+                "asset": "WEMIX",
+                "chain_id": 1111,
+                "block_number": "124193608",
+                "transaction_index": 0
+              },
+              "path": [
+                {
+                  "from": "0x647a24b0281444b747bb0d5372324ed0905be0e5",
+                  "to": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+                  "amount_wei": "4900000000000000000",
+                  "at": 1790427363.0,
+                  "tx_hash": "0x6080e04679d3720d926674ae3f89e2670ed7b46b4b73260298a3cfb10c71fbf3",
+                  "asset": "WEMIX",
+                  "chain_id": 1111,
+                  "block_number": "124193608",
+                  "transaction_index": 0
+                }
+              ],
+              "depth": 1
+            }
+          ]
+        }
+      ],
+      "incomplete_wallets": [
+        "0x647a24b0281444b747bb0d5372324ed0905be0e5"
+      ],
+      "search_truncated": false
+    },
+    {
+      "nft_ids": [
+        3871,
+        1358
+      ],
+      "days": 90,
+      "max_depth": 3,
+      "include_buyer_roots": true,
+      "matches": [
+        {
+          "source": "0x93c0c224cbc91a16caacf9443431f743fd5d4719",
+          "evidence": [
+            {
+              "purchase": {
+                "nft_id": 3871,
+                "buyer": "0x93c0c224cbc91a16caacf9443431f743fd5d4719",
+                "at": 1790557042,
+                "tx_hash": "0xbbeec83078e83707c2afeb3cdc5c25460f9e49db3e23549eeaa1c1061b1576da",
+                "price": "57,000",
+                "currency": "0x7d72b22a74a216af4a002a1095c8c707d6ec1c5f"
+              },
+              "funding": null,
+              "path": [],
+              "depth": 0
+            },
+            {
+              "purchase": {
+                "nft_id": 1358,
+                "buyer": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+                "at": 1794262326,
+                "tx_hash": "0x469e3dea2c63126c0b336a2c9fe233e526626cd8f7523f52e2a2ce2b38f1a325",
+                "price": "58,000",
+                "currency": "0x7d72b22a74a216af4a002a1095c8c707d6ec1c5f"
+              },
+              "funding": {
+                "from": "0x93c0c224cbc91a16caacf9443431f743fd5d4719",
+                "to": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+                "amount_wei": "60025000000000000000000",
+                "at": 1794244800.0,
+                "tx_hash": "0xa87c6a96569d836496757cae73c32d77d9d866df218b8f493e890e4952e38e62",
+                "asset": "WEMIX",
+                "chain_id": 1111,
+                "block_number": "128011089",
+                "transaction_index": 0
+              },
+              "path": [
+                {
+                  "from": "0x93c0c224cbc91a16caacf9443431f743fd5d4719",
+                  "to": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+                  "amount_wei": "60025000000000000000000",
+                  "at": 1794244800.0,
+                  "tx_hash": "0xa87c6a96569d836496757cae73c32d77d9d866df218b8f493e890e4952e38e62",
+                  "asset": "WEMIX",
+                  "chain_id": 1111,
+                  "block_number": "128011089",
+                  "transaction_index": 0
+                }
+              ],
+              "depth": 1
+            }
+          ]
+        },
+        {
+          "source": "0x647a24b0281444b747bb0d5372324ed0905be0e5",
+          "evidence": [
+            {
+              "purchase": {
+                "nft_id": 3871,
+                "buyer": "0x93c0c224cbc91a16caacf9443431f743fd5d4719",
+                "at": 1790557042,
+                "tx_hash": "0xbbeec83078e83707c2afeb3cdc5c25460f9e49db3e23549eeaa1c1061b1576da",
+                "price": "57,000",
+                "currency": "0x7d72b22a74a216af4a002a1095c8c707d6ec1c5f"
+              },
+              "funding": {
+                "from": "0x647a24b0281444b747bb0d5372324ed0905be0e5",
+                "to": "0x93c0c224cbc91a16caacf9443431f743fd5d4719",
+                "amount_wei": "50585460000000000000000",
+                "at": 1790208662.0,
+                "tx_hash": "0x3870c0074eed7cb237d6ee14826e8e13166dcd7fbe4af07dddf42513435d2742",
+                "asset": "WEMIX",
+                "chain_id": 1111,
+                "block_number": "123974904",
+                "transaction_index": 0
+              },
+              "path": [
+                {
+                  "from": "0x647a24b0281444b747bb0d5372324ed0905be0e5",
+                  "to": "0x93c0c224cbc91a16caacf9443431f743fd5d4719",
+                  "amount_wei": "50585460000000000000000",
+                  "at": 1790208662.0,
+                  "tx_hash": "0x3870c0074eed7cb237d6ee14826e8e13166dcd7fbe4af07dddf42513435d2742",
+                  "asset": "WEMIX",
+                  "chain_id": 1111,
+                  "block_number": "123974904",
+                  "transaction_index": 0
+                }
+              ],
+              "depth": 1
+            },
+            {
+              "purchase": {
+                "nft_id": 1358,
+                "buyer": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+                "at": 1794262326,
+                "tx_hash": "0x469e3dea2c63126c0b336a2c9fe233e526626cd8f7523f52e2a2ce2b38f1a325",
+                "price": "58,000",
+                "currency": "0x7d72b22a74a216af4a002a1095c8c707d6ec1c5f"
+              },
+              "funding": {
+                "from": "0x647a24b0281444b747bb0d5372324ed0905be0e5",
+                "to": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+                "amount_wei": "4900000000000000000",
+                "at": 1790427363.0,
+                "tx_hash": "0x6080e04679d3720d926674ae3f89e2670ed7b46b4b73260298a3cfb10c71fbf3",
+                "asset": "WEMIX",
+                "chain_id": 1111,
+                "block_number": "124193608",
+                "transaction_index": 0
+              },
+              "path": [
+                {
+                  "from": "0x647a24b0281444b747bb0d5372324ed0905be0e5",
+                  "to": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
+                  "amount_wei": "4900000000000000000",
+                  "at": 1790427363.0,
+                  "tx_hash": "0x6080e04679d3720d926674ae3f89e2670ed7b46b4b73260298a3cfb10c71fbf3",
+                  "asset": "WEMIX",
+                  "chain_id": 1111,
+                  "block_number": "124193608",
+                  "transaction_index": 0
+                }
+              ],
+              "depth": 1
+            }
+          ]
+        }
+      ],
+      "incomplete_wallets": [
+        "0x647a24b0281444b747bb0d5372324ed0905be0e5"
+      ],
+      "search_truncated": false
+    }
+  ],
+  "limitations": [
+    "Some upstream wallets exceed the API page limit or have not been collected.",
+    "These are chronological native WEMIX paths before recorded purchases, not proof of ownership identity or of the exact coins used.",
+    "A zero-hop branch identifies the purchase buyer itself, not an incoming funding transfer.",
+    "A small common transfer may be gas funding; amount conservation across hops is not asserted."
+  ]
+}
