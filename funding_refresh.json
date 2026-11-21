@@ -1,0 +1,10 @@
+{
+  "provider": "scan",
+  "max_depth": 3,
+  "lookback_days": 90,
+  "wallet_limit": 100,
+  "page_limit": 3,
+  "max_seconds": 600,
+  "priority_ids": [1358, 3433, 1154, 3871],
+  "priority_wallet_limit": 20
+}

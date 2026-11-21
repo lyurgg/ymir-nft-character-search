@@ -8,7 +8,7 @@ from json_store import load_json, save_json, PART_BYTES
 SOURCE_FILES = (
     ".gitignore", "README.md", "requirements.txt", "characters.csv", "scan_report.json",
     "app.js", "build_site.py", "character_history.py", "collect_funding.py",
-    "dashboard.css", "extract_name.py", "extract_name_parallel.py", "funding_case_report.json",
+    "dashboard.css", "extract_name.py", "extract_name_parallel.py", "funding_case_report.json", "funding_refresh.json",
     "funding-core.js", "funding-ui.js", "funding.py", "generate_graph.py", "generate_html.py",
     "graph-core.js", "graph-template.html", "graph.css", "graph.js", "json_store.py", "marketplace.py",
     "prepare_upload.py", "test_build_site.py", "test_character_data.py", "test_frontend.cjs",
@@ -19,9 +19,17 @@ PACKAGE = "ymir-browser-upload-v1"
 REPORT = "UPLOAD_MANIFEST.json"
 INSTRUCTIONS = """UPLOAD THESE FILES, NOT THE FOLDER
 
+FIRST-TIME PAGES SETUP (also fixes missing shared-funder features):
+Open repository Settings > Pages > Build and deployment > Source.
+Select GitHub Actions, NOT Deploy from a branch. Keep the existing custom workflow;
+do not create another template. Branch publishing can overwrite the newly built
+site with old index.html/graph.html files still stored in the repository.
+If files are already uploaded, this setting and re-running the custom workflow
+are sufficient; no data re-upload is needed.
+
 1. On GitHub, open .github/workflows/deploy.yml and choose Edit.
    Replace its contents with the updated local .github/workflows/deploy.yml.
-   Commit the edit. The workflow now saves the JSON parts after each scan.
+   Commit the edit. The workflow now saves both databases' JSON parts after refresh.
 
 2. At the repository ROOT, choose Add file > Upload files > choose your files.
    Open this local github-upload folder, select ALL FILES inside it, and upload.

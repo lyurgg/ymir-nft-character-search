@@ -45,6 +45,10 @@ function exploreFunding(page=1) {
     const incomplete=missing.length||matches.searchTruncated;
     const coverageText=incomplete?`Buyer/intermediate history or search coverage is incomplete (${missing.length} wallets without complete histories${matches.searchTruncated?'; search limit reached':''}); absence of a match does not establish no connection.`:'All external native-transfer histories for the searched buyer and intermediate wallets were reported complete by the source. Internal transfers and WWEMIX are outside this dataset.';
     status.textContent=`${matches.length} shared funding sources found within ${days} days before the purchases, up to ${maxDepth} hop${maxDepth===1?'':'s'} per buyer branch (minimum 1 WEMIX per hop). ${includeBuyerRoots?'Buyer wallets included as 0-hop sources. ':''}${coverageText} Source: ${fundingData.source||'Imported records'}.`;
+    if(fundingData.refresh) {
+        const refresh=fundingData.refresh;
+        status.textContent+=` Last funding refresh attempt: ${graphDate(refresh.finished_at||fundingData.checked_at)}. ${Number(refresh.wallets_checked)||0} wallets checked${refresh.wallets_remaining?`; ${Number(refresh.wallets_remaining)} await another refresh`:''}${refresh.wallets_failed?`; ${Number(refresh.wallets_failed)} queries failed`:''}. Existing evidence is retained between refreshes.`;
+    }else if(fundingData.checked_at)status.textContent+=` Funding history snapshot: ${graphDate(fundingData.checked_at)}.`;
     if(discover) {
         const related=fundingDiscoveries(matches,Number(a.nft_id));
         const {html,shown}=fundingDiscoveryHtml(related,a,page);results.innerHTML=html;

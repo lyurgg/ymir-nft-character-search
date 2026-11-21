@@ -10,6 +10,123 @@ A, B, C = ["0x" + letter * 40 for letter in "abc"]
 
 
 class FundingTests(unittest.TestCase):
+    def test_nightly_rotation_prioritizes_watchlist_and_then_unchecked_buyers(self):
+        import collect_funding
+        from json_store import load_json, save_json
+        wallets = ["0x" + format(i, "040x") for i in range(1, 7)]
+        history = {str(i): {"transfers": [dict(event="Auction-Buy", chain="mainnet", to=wallet, at=2000, tx_hash=str(i))]}
+                   for i, wallet in enumerate(wallets, 1)}
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "character_history.json").write_text(json.dumps(history))
+            session = MagicMock()
+            fetched = []
+            def get(url, **kwargs):
+                fetched.append(url.split("/account/")[1].split("/")[0])
+                response = MagicMock()
+                response.json.return_value = dict(transactions=[])
+                return response
+            session.get.side_effect = get
+            with patch.object(collect_funding, "Path", side_effect=lambda name: root / name), \
+                 patch.object(collect_funding.requests, "Session", return_value=session), \
+                 patch.object(collect_funding.time, "sleep"):
+                first = collect_funding.collect(None, rotate=True, max_depth=1, wallet_limit=3, priority_ids=[6], priority_wallet_limit=1)
+                self.assertEqual(fetched, [wallets[5], wallets[0], wallets[1]])
+                fetched.clear()
+                second = collect_funding.collect(None, rotate=True, max_depth=1, wallet_limit=3, priority_ids=[6], priority_wallet_limit=1)
+                self.assertEqual(fetched, [wallets[5], wallets[2], wallets[3]])
+                self.assertEqual(second["refresh"]["wallets_checked"], 3)
+                self.assertTrue(second["wallet_limit_reached"])
+                self.assertEqual(second["status"], "partial")
+                self.assertEqual(load_json(root / "funding_history.json"), second)
+
+    def test_nightly_leaves_wallet_budget_for_new_upstream_layers(self):
+        import collect_funding
+        via = "0x" + "e" * 40
+        history = {"1": {"transfers": [dict(event="Auction-Buy", chain="mainnet", to=B, at=2000, tx_hash="purchase")]}}
+        records = {B: [dict(transactionStatus="0x1", **{"from": via, "to": B}, timestamp="1900", value=str(10**18), hash="0x"+"1"*64)],
+                   via: [dict(transactionStatus="0x1", **{"from": A, "to": via}, timestamp="1800", value=str(10**18), hash="0x"+"2"*64)]}
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "character_history.json").write_text(json.dumps(history))
+            session, fetched = MagicMock(), []
+            def get(url, **kwargs):
+                wallet = url.split("/account/")[1].split("/")[0]
+                fetched.append(wallet)
+                response = MagicMock()
+                response.json.return_value = dict(transactions=records.get(wallet, []))
+                return response
+            session.get.side_effect = get
+            with patch.object(collect_funding, "Path", side_effect=lambda name: root / name), \
+                 patch.object(collect_funding.requests, "Session", return_value=session), \
+                 patch.object(collect_funding.time, "sleep"):
+                result = collect_funding.collect(None, rotate=True, max_depth=3, wallet_limit=3, priority_ids=[1])
+            self.assertEqual(fetched, [B, via, A])
+            self.assertEqual(len(result["transfers"]), 2)
+            self.assertEqual(result["status"], "collected")
+
+    def test_nightly_time_limit_preserves_evidence_and_failure_is_partial(self):
+        import collect_funding
+        from json_store import load_json, save_json
+        history = {"1": {"transfers": [dict(event="Auction-Buy", chain="mainnet", to=B, at=2000, tx_hash="purchase")]}}
+        transfer = dict(asset="WEMIX", chain_id=1111, **{"from": A, "to": B}, at=1900,
+                        amount_wei=str(2 * 10**18), tx_hash="0x" + "1" * 64)
+        original = dict(schema_version=1, asset="WEMIX", chain_id=1111, transfers=[transfer],
+                        coverage=[dict(wallet=B, complete=True, checked_at="2026-11-01T00:00:00Z")])
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "character_history.json").write_text(json.dumps(history))
+            save_json(root / "funding_history.json", original, list_field="transfers")
+            session = MagicMock()
+            session.get.side_effect = collect_funding.requests.Timeout("API unavailable")
+            with patch.object(collect_funding, "Path", side_effect=lambda name: root / name), \
+                 patch.object(collect_funding.requests, "Session", return_value=session), \
+                 patch.object(collect_funding.time, "sleep"):
+                with patch.object(collect_funding.time, "monotonic", side_effect=[0, 2]):
+                    limited = collect_funding.collect([1], max_seconds=1)
+                self.assertTrue(limited["time_limit_reached"])
+                session.get.assert_not_called()
+                self.assertEqual(limited["transfers"], [transfer])
+                failed = collect_funding.collect([1])
+                self.assertEqual(failed["refresh"]["wallets_failed"], 1)
+                self.assertEqual(failed["transfers"], [transfer])
+                self.assertEqual(failed["coverage"][0]["checked_at"], "2026-11-01T00:00:00Z")
+                self.assertIn("API unavailable", failed["coverage"][0]["error"])
+                self.assertEqual(load_json(root / "funding_history.json"), failed)
+
+    def test_complete_snapshot_can_refresh_incrementally_without_losing_older_transfers(self):
+        import collect_funding
+        from json_store import save_json
+        history = {"1": {"transfers": [dict(event="Auction-Buy", chain="mainnet", to=B, at=2000, tx_hash="purchase")]}}
+        tx_hash = "0x" + "1" * 64
+        original = dict(asset="WEMIX", chain_id=1111,
+                        transfers=[dict(asset="WEMIX", chain_id=1111, **{"from": A, "to": B}, at=1800, amount_wei=str(10**18), tx_hash=tx_hash)],
+                        coverage=[dict(wallet=B, complete=True)])
+        old_row = dict(transactionStatus="0x1", **{"from": A, "to": B}, timestamp="1800", value=str(10**18), hash=tx_hash)
+        new_row = {**old_row, "timestamp": "1900", "hash": "0x" + "2" * 64}
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "character_history.json").write_text(json.dumps(history))
+            save_json(root / "funding_history.json", original, list_field="transfers")
+            session = MagicMock()
+            session.get.return_value.json.return_value = dict(transactions=[new_row, old_row] + [dict(transactionStatus="0x0")] * 998)
+            with patch.object(collect_funding, "Path", side_effect=lambda name: root / name), \
+                 patch.object(collect_funding.requests, "Session", return_value=session), \
+                 patch.object(collect_funding.time, "sleep"):
+                result = collect_funding.collect([1], page_limit=3)
+            self.assertEqual(session.get.call_count, 1)
+            self.assertEqual(len(result["transfers"]), 2)
+            self.assertTrue(result["coverage"][0]["complete"])
+            self.assertTrue(result["coverage"][0]["incremental"])
+            original["coverage"][0]["complete"] = False
+            save_json(root / "funding_history.json", original, list_field="transfers")
+            with patch.object(collect_funding, "Path", side_effect=lambda name: root / name), \
+                 patch.object(collect_funding.requests, "Session", return_value=session), \
+                 patch.object(collect_funding.time, "sleep"):
+                partial = collect_funding.collect([1], page_limit=1)
+            self.assertFalse(partial["coverage"][0]["complete"])
+            self.assertEqual(partial["status"], "partial")
+
     def test_buyer_as_zero_hop_source_is_optional_and_not_a_transfer(self):
         purchases = [dict(nft_id=1, buyer=B, at=1000), dict(nft_id=2, buyer=C, at=2000)]
         transfer = dict(asset="WEMIX", chain_id=1111, **{"from": B, "to": C}, at=1900, amount_wei=str(60025 * 10**18))

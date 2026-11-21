@@ -6,6 +6,24 @@ Open `index.html` or serve it with `python -m http.server`.
 
 ## Uploading through GitHub without Git or folder uploads
 
+**Required Pages setting:** open repository **Settings → Pages → Build and
+deployment → Source → GitHub Actions**. Keep the existing custom workflow; do not
+create a new template. **Deploy from a branch** publishes the older HTML files
+stored at the repository root and can overwrite the freshly generated site,
+making shared funders disappear even when the custom workflow succeeds.
+If the source/data files are already uploaded, change this setting and re-run
+**Update character data and deploy GitHub Pages**; no data re-upload is needed.
+
+The workflow uses separate **Build and upload website** and **Deploy website**
+jobs, with deployment depending on the completed build. This avoids the reported
+[Pages artifact lookup race](https://github.com/actions/deploy-pages/issues/451)
+when upload and deployment run immediately next to one another in the same job.
+If only the deployment job fails, retry that job without repeating the scrape or
+upload. With the older single-job workflow, start a new workflow run instead of
+re-running the failed job: another upload in the same run can create duplicate
+`github-pages` artifacts. Switching to this workflow only requires replacing
+`.github/workflows/deploy.yml`; the source and history parts need no re-upload.
+
 Run `python prepare_upload.py` after making local changes. A clean `github-upload`
 folder is already prepared in this workspace. It contains only small, flat files:
 source code, tests, CSV, and split history data. Every file is under 1,000,000 bytes.
@@ -43,6 +61,48 @@ Older unreferenced parts left on GitHub are ignored safely.
 These split files are source/build inputs. The site's optional single-file import
 still accepts normalized, unsplit native-transfer JSON; importing an index file
 alone cannot provide its transfer parts.
+
+## Nightly character and funding refresh
+
+The existing workflow is scheduled for **00:00 Philippine time** (`0 16 * * *`
+in UTC). It refreshes character profiles/marketplace observations and runs a
+bounded native-WEMIX refresh before generating the site. GitHub may start scheduled
+runs later during high load; this is a scheduled start, not a guarantee that the
+published databases change at exactly midnight. See
+[GitHub's scheduling notes](https://docs.github.com/en/actions/how-tos/troubleshoot-workflows).
+
+The funding step runs on **schedule** and manual **Run workflow** events. Ordinary
+source-code pushes rebuild the site without repeating the funding refresh.
+`funding_refresh.json` controls the nightly limits:
+
+- At most **100 wallets**, **3 pages of 1,000 transactions per wallet**, and an
+  approximately **600-second collection budget** (15-minute step timeout).
+- Upstream search depth **3** and a **90-day** window before recorded purchases.
+- Purchase buyers for **1358, 3433, 1154, and 3871** are prioritized. Up to 20
+  wallet slots are reserved for those buyers and their upstream branches.
+- The remaining work rotates across indexed purchase buyers and previously
+  tracked wallets, using the oldest attempt first. New/unchecked wallets enter
+  the rotation. A single nightly run does **not** refresh every wallet's complete
+  history; unfinished coverage remains visible and is extended over later runs.
+
+Every query merges transfers by transaction hash and retains prior evidence.
+Previously complete histories can stop after their newest transactions overlap
+known evidence; previously partial histories remain partial unless the full
+transaction list is reached. Busy wallets keep the page-limit warning. Per-wallet
+attempt and successful-check times distinguish stale data from a new attempt.
+The collector checkpoints every ten wallets and saves when its time budget ends.
+
+Both databases' indexes and part files are committed back to `main`. Network
+failures or a funding-step timeout do not block character updates or publishing;
+the latest retained funding evidence remains available. The funding view reports
+its last refresh attempt, wallet count, remaining work, and failed queries.
+Native WEMIX collection excludes WWEMIX and internal calls.
+
+Run the same bounded refresh locally with `python collect_funding.py --nightly`.
+The existing `--nft-ids` command remains available for a specific investigation.
+To deploy this change, update `collect_funding.py`, `funding_refresh.json`,
+`funding-ui.js`, `prepare_upload.py`, the changed tests, and the workflow. Existing
+database parts on GitHub do not need to be replaced by an older local snapshot.
 
 ## Prices and availability
 
@@ -283,7 +343,8 @@ addresses, exact value, and block timestamp. Automated tests replay this evidenc
 offline. Some upstream histories remain partial due to busy-wallet API limits;
 a missing match is not proof of no connection.
 
-`collect_funding.py` is an optional bounded collector for the current documented
+`collect_funding.py` is the bounded collector used by the nightly refresh and
+manual investigations, for the current documented
 [WEMIX Scan account API](https://certik.gitbook.io/wemix-explorer-docs/reference/api-reference/accounts).
 The default Scan provider requires no API key:
 
@@ -294,8 +355,10 @@ python build_site.py
 
 The API must be reachable and compatible with the documented schema. The older
 Explorer API is available with `--provider legacy` and `WEMIX_EXPLORER_API_KEY`
-in the environment; credentials are never embedded in the site. This collection is separate from the daily NFT scrape
-to prevent an unavailable transaction indexer from delaying deployment. Successful
+in the environment; credentials are never embedded in the site. Collection stays
+separate from the NFT scraping loop. The scheduled funding step has its own wallet,
+page and time limits so an unavailable indexer preserves existing evidence and
+allows the character update and site build to continue. Successful
 records persist in `funding_history.json` and its `funding_history.part-*.json` files; incomplete/failed wallet queries retain
 existing evidence and report their coverage. This file is embedded by the graph
 generator when present. The collector queries at most three pages of 1,000 records

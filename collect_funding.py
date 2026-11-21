@@ -1,4 +1,4 @@
-"""Optional bounded native-WEMIX collector. Never part of the NFT scrape loop."""
+"""Bounded native-WEMIX collection, including a rotating nightly refresh."""
 import argparse
 import os
 import time
@@ -9,11 +9,18 @@ from funding import native_transfer, scan_native_transfer, purchase_records, fun
 from json_store import load_json, save_json
 
 
-def collect(nft_ids, page_limit=3, max_depth=1, lookback_days=7, wallet_limit=100, provider="scan"):
-    if max_depth not in (1, 2, 3) or wallet_limit < 1 or lookback_days < 1 or page_limit < 1 or provider not in ("scan", "legacy"):
+def collect(nft_ids, page_limit=3, max_depth=1, lookback_days=7, wallet_limit=100, provider="scan",
+            *, rotate=False, priority_ids=(), priority_wallet_limit=20, max_seconds=None):
+    if max_depth not in (1, 2, 3) or wallet_limit < 1 or lookback_days < 1 or page_limit < 1 or provider not in ("scan", "legacy") or priority_wallet_limit < 0 or max_seconds is not None and max_seconds <= 0:
         raise ValueError("Depth must be 1–3; wallet limit and lookback must be positive")
+    started = time.monotonic()
+    deadline = started + max_seconds if max_seconds is not None else float("inf")
     history = load_json(Path("character_history.json"))
+    if nft_ids is None:
+        nft_ids = sorted(int(key) for key in history if key.isdigit() and 1 <= int(key) <= 5000)
     purchases = purchase_records(history, nft_ids)
+    priority_purchases = [p for p in purchases if p["nft_id"] in priority_ids]
+    purchases = priority_purchases + [p for p in purchases if p["nft_id"] not in priority_ids]
     result = {"schema_version": 1, "chain_id": 1111, "asset": "WEMIX",
               "checked_at": datetime.now(timezone.utc).isoformat(), "transfers": [], "coverage": [],
               "source": "WEMIX Scan API (CertiK)" if provider == "scan" else "WEMIX Explorer API", "scope": "external native WEMIX transfers only"}
@@ -30,26 +37,74 @@ def collect(nft_ids, page_limit=3, max_depth=1, lookback_days=7, wallet_limit=10
     all_transfers = {row["tx_hash"]: row for row in old.get("transfers", [])}
     saved_coverage = {row["wallet"]: row for row in old.get("coverage", [])}
     fetched = set()
-    result.update(max_depth=max_depth, lookback_days=lookback_days, wallet_limit_reached=False, search_limit_reached=False)
+    required = {purchase["buyer"] for purchase in purchases}
+    if rotate:
+        required.update(saved_coverage)
+    result.update(max_depth=max_depth, lookback_days=lookback_days, wallet_limit_reached=False, search_limit_reached=False, time_limit_reached=False)
+    result["refresh"] = dict(mode="nightly rotation" if rotate else "selected NFTs", nft_count=len(set(nft_ids)),
+                             priority_ids=list(priority_ids), wallets_checked=0, wallets_failed=0,
+                             page_limit=page_limit, wallet_limit=wallet_limit, max_seconds=max_seconds)
+    priority_fetched = set()
+
+    def save_progress():
+        result["transfers"] = list(all_transfers.values())
+        result["coverage"] = list(saved_coverage.values())
+        result["refresh"].update(wallets_checked=len(fetched), wallets_remaining=len(required - fetched),
+                                 finished_at=datetime.now(timezone.utc).isoformat())
+        result["status"] = "partial" if required - fetched or result["time_limit_reached"] or result["wallet_limit_reached"] or result["search_limit_reached"] or any(not row["complete"] for row in result["coverage"]) else "collected"
+        save_json(path, result, list_field="transfers")
+
+    def last_attempt(wallet):
+        row = saved_coverage.get(wallet, {})
+        return row.get("attempted_at") or row.get("checked_at") or ""
+
     for layer in range(max_depth):
-        _, required, truncated = funding_branches(purchases, list(all_transfers.values()), lookback_days=lookback_days, max_depth=max_depth)
+        if time.monotonic() >= deadline:
+            result["time_limit_reached"] = True
+            break
+        _, upstream, truncated = funding_branches(purchases, list(all_transfers.values()), lookback_days=lookback_days, max_depth=max_depth,
+                                                  max_search_steps=500000 if rotate else 20000)
+        required.update(upstream)
         result["search_limit_reached"] |= truncated
-        pending = sorted(required - fetched)
+        priority = {p["buyer"] for p in priority_purchases}
+        if priority_purchases:
+            _, intermediates, _ = funding_branches(priority_purchases, list(all_transfers.values()), lookback_days=lookback_days, max_depth=max_depth)
+            priority.update(intermediates)
+        pending_priority = sorted((required - fetched) & priority, key=lambda wallet: (wallet not in {p["buyer"] for p in priority_purchases}, last_attempt(wallet), wallet))
+        reserved = pending_priority[:max(0, priority_wallet_limit - len(priority_fetched))]
+        pending = reserved + sorted(required - fetched - set(reserved), key=lambda wallet: (last_attempt(wallet), wallet)) if rotate else sorted(required - fetched)
         if not pending:
             break
         remaining = wallet_limit - len(fetched)
         if len(pending) > remaining:
             result["wallet_limit_reached"] = True
-        for wallet in pending[:remaining]:
+        # Leave room for newly discovered upstream wallets in subsequent layers.
+        layer_limit = (remaining + max_depth - layer - 1) // (max_depth - layer) if rotate else remaining
+        for wallet in pending[:layer_limit]:
+            if deadline - time.monotonic() <= 1:
+                result["time_limit_reached"] = True
+                break
             seen = 0
-            coverage = {"wallet": wallet, "complete": False, "records_checked": 0}
+            prior = saved_coverage.get(wallet, {})
+            coverage = {"wallet": wallet, "complete": False, "records_checked": 0,
+                        "attempted_at": datetime.now(timezone.utc).isoformat(),
+                        "checked_at": prior.get("checked_at")}
+            known_hashes = {tx["tx_hash"] for tx in all_transfers.values() if tx["from"] == wallet or tx["to"] == wallet}
             try:
                 for page in range(min(page_limit, 10) if provider == "scan" else page_limit):
+                    if deadline - time.monotonic() <= 1:
+                        result["time_limit_reached"] = True
+                        break
                     # The documented API permits 120 requests/minute.
                     time.sleep(.55)
+                    remaining_time = deadline - time.monotonic()
+                    if remaining_time <= 0:
+                        result["time_limit_reached"] = True
+                        break
+                    timeout = (min(5, remaining_time / 3), min(20, remaining_time * 2 / 3))
                     if provider == "scan":
                         response = session.get(f"https://scan.wemix.com/api/account/{wallet}/tx-list",
-                                               params={"chain": "wemix", "page": page + 1, "offset": 1000, "sort": "desc"}, timeout=(5, 20))
+                                               params={"chain": "wemix", "page": page + 1, "offset": 1000, "sort": "desc"}, timeout=timeout)
                         response.raise_for_status()
                         data = response.json()
                         rows = data.get("transactions")
@@ -61,7 +116,7 @@ def collect(nft_ids, page_limit=3, max_depth=1, lookback_days=7, wallet_limit=10
                         normalizer = scan_native_transfer
                     else:
                         response = session.get(f"https://explorerapi.wemix.com/v1/accounts/{wallet}/transactions",
-                                               params={"limit": 1000, "offset": page * 1000}, timeout=(5, 20))
+                                               params={"limit": 1000, "offset": page * 1000}, timeout=timeout)
                         response.raise_for_status()
                         payload = response.json()
                         if str(payload.get("status")) != "200":
@@ -74,10 +129,16 @@ def collect(nft_ids, page_limit=3, max_depth=1, lookback_days=7, wallet_limit=10
                         coverage.update(records_checked=seen, reported_total=int(data["count"]))
                         complete = seen >= int(data["count"])
                         normalizer = native_transfer
+                    overlap = False
                     for row in rows:
                         transfer = normalizer(row)
                         if transfer:
+                            overlap |= transfer["tx_hash"] in known_hashes
                             all_transfers[transfer["tx_hash"]] = transfer
+                    coverage["checked_at"] = datetime.now(timezone.utc).isoformat()
+                    if provider == "scan" and prior.get("complete") and not prior.get("error") and overlap:
+                        complete = True
+                        coverage["incremental"] = True
                     if complete:
                         coverage["complete"] = True
                         break
@@ -85,18 +146,33 @@ def collect(nft_ids, page_limit=3, max_depth=1, lookback_days=7, wallet_limit=10
                         break
             except (requests.RequestException, KeyError, ValueError, TypeError) as error:
                 coverage["error"] = str(error)
+                result["refresh"]["wallets_failed"] += 1
             saved_coverage[wallet] = coverage
             fetched.add(wallet)
-    result["transfers"] = list(all_transfers.values())
-    result["coverage"] = list(saved_coverage.values())
-    result["status"] = "partial" if result["wallet_limit_reached"] or result["search_limit_reached"] or any(not row["complete"] for row in result["coverage"]) else "collected"
-    save_json(path, result, list_field="transfers")
+            if wallet in reserved:
+                priority_fetched.add(wallet)
+            if rotate:
+                print(f"Funding: {len(fetched)}/{wallet_limit} wallets; {len(all_transfers)} transfers retained; {wallet} {'error' if coverage.get('error') else 'complete' if coverage['complete'] else 'partial'}", flush=True)
+                if len(fetched) % 10 == 0:
+                    save_progress()
+        if result["time_limit_reached"] or len(fetched) >= wallet_limit:
+            break
+    # Include intermediates found in the last fetched layer in the coverage report.
+    _, discovered, truncated = funding_branches(purchases, list(all_transfers.values()), lookback_days=lookback_days, max_depth=max_depth,
+                                               max_search_steps=500000 if rotate else 20000)
+    required.update(discovered)
+    result["search_limit_reached"] |= truncated
+    result["wallet_limit_reached"] |= len(fetched) >= wallet_limit and bool(required - fetched)
+    save_progress()
     return result
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--nft-ids", type=int, nargs="+", required=True)
+    selection = parser.add_mutually_exclusive_group(required=True)
+    selection.add_argument("--nft-ids", type=int, nargs="+")
+    selection.add_argument("--nightly", action="store_true", help="Rotate across indexed buyers and tracked wallets using the refresh config")
+    parser.add_argument("--config", default="funding_refresh.json")
     parser.add_argument("--max-pages", type=int, default=3)
     parser.add_argument("--provider", choices=["scan", "legacy"], default="scan")
     parser.add_argument("--max-depth", type=int, choices=[1, 2, 3], default=1)
@@ -105,5 +181,8 @@ if __name__ == "__main__":
     args = parser.parse_args()
     if args.max_pages < 1 or args.lookback_days < 1 or args.max_wallets < 1:
         parser.error("--max-pages must be positive")
-    result = collect(args.nft_ids, args.max_pages, args.max_depth, args.lookback_days, args.max_wallets, args.provider)
+    if args.nightly:
+        result = collect(None, rotate=True, **load_json(Path(args.config)))
+    else:
+        result = collect(args.nft_ids, args.max_pages, args.max_depth, args.lookback_days, args.max_wallets, args.provider)
     print(f"Saved {len(result['transfers'])} transfers; coverage: {result['status']}")
