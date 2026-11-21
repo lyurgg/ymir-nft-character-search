@@ -41,14 +41,23 @@ jobs:
       - name: Scrape character data
         run: python -u extract_name_parallel.py --end-id 5000
 
-      - name: Persist price and name observations
+      - name: Refresh native WEMIX transfers
+        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+        continue-on-error: true
+        timeout-minutes: 15
+        run: python -u collect_funding.py --nightly
+
+      - name: Persist character and WEMIX observations
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add characters.csv character_history.json scan_report.json
           git add -A -- ':(glob)character_history.part-*.json'
+          if [ -f funding_history.json ]; then
+            git add -A -- ':(glob)funding_history*.json'
+          fi
           if ! git diff --cached --quiet; then
-            git commit -m "Update character observations [skip ci]"
+            git commit -m "Update character and funding observations [skip ci]"
             git push origin HEAD:main
           fi
 
