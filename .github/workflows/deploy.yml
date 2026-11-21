@@ -38,7 +38,7 @@ jobs:
         run: python -m pip install -r requirements.txt
 
       - name: Check data parsing and persistence
-        run: python -m unittest -v test_character_data test_build_site
+        run: python -m unittest -v test_character_data test_build_site test_funding test_json_store
 
       - name: Scrape character data
         run: python -u extract_name_parallel.py --end-id 5000
@@ -48,6 +48,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add characters.csv character_history.json scan_report.json
+          git add -A -- ':(glob)character_history.part-*.json'
           if ! git diff --cached --quiet; then
             git commit -m "Update character observations [skip ci]"
             git push origin HEAD:main
@@ -66,6 +67,7 @@ jobs:
           node test_frontend.cjs
           node test_graph.cjs
           node test_graph_page.cjs
+          node test_funding.cjs
 
       - name: Set up GitHub Pages
         uses: actions/configure-pages@v5
