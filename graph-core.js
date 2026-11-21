@@ -39,11 +39,12 @@ function ownershipGraph(characters) {
 
 function graphNeighbors(graph, id, currentOnly = false) {
     return (graph.adjacent.get(id) || []).map(key => graph.edges.get(key))
-        .filter(edge => !currentOnly || edge.current)
+        .filter(edge => (!currentOnly || edge.current) && (!graph.directed || edge.source === id))
         .map(edge => ({id:edge.source === id ? edge.target : edge.source,edge}));
 }
 
 function graphPath(graph, from, to, currentOnly = false) {
+    if (graph.directed) return temporalPath(graph, from, to);
     if (!graph.nodes.has(from) || !graph.nodes.has(to)) return null;
     const previous = new Map([[from,null]]), queue = [from];
     for (let i=0;i<queue.length;i++) {
@@ -73,7 +74,8 @@ function graphNeighborhood(graph, root, depth=2, limit=180, currentOnly=false) {
     for(let i=0;i<queue.length;i++) {
         const id=queue[i],level=depths.get(id);
         if(level>=depth) continue;
-        for(const next of graphNeighbors(graph,id,currentOnly)) {
+        const neighbors = graph.directed ? (graph.adjacent.get(id) || []).map(key => graph.edges.get(key)).map(edge => ({id:edge.source===id?edge.target:edge.source,edge})) : graphNeighbors(graph,id,currentOnly);
+        for(const next of neighbors) {
             if(depths.has(next.id)) continue;
             if(depths.size>=limit) { truncated=true; continue; }
             depths.set(next.id,level+1); queue.push(next.id);
@@ -83,4 +85,60 @@ function graphNeighborhood(graph, root, depth=2, limit=180, currentOnly=false) {
     return {nodes:[...depths.keys()].map(id=>({...graph.nodes.get(id),depth:depths.get(id)})),edges,truncated};
 }
 
-if(typeof module !== 'undefined') module.exports={ownershipGraph,graphPath,graphNeighborhood,graphWallet};
+function transferGraph(characters) {
+    const nodes=new Map(),edges=new Map(),adjacent=new Map();
+    for(const character of characters) for(const event of character.transfers || []) {
+        const from=graphWallet(event.from),to=graphWallet(event.to);
+        if(!from || !to || !Number.isFinite(event.at)) continue;
+        for(const wallet of [from,to]) {
+            const id='wallet:'+wallet;
+            if(!nodes.has(id)) { nodes.set(id,{id,type:'wallet',wallet,label:wallet.slice(0,8)+'…'+wallet.slice(-5)});adjacent.set(id,[]); }
+        }
+        const id=[character.nft_id,event.chain,event.tx_hash,event.event,from,to].join('|');
+        if(edges.has(id)) continue;
+        const edge={id,source:'wallet:'+from,target:'wallet:'+to,nft_id:character.nft_id,
+            nft_name:character.character_name,at:event.at,event:event.event,
+            evidence:[{kind:event.event,at:new Date(event.at*1000).toISOString(),tx_hash:event.tx_hash}]};
+        edges.set(id,edge);adjacent.get(edge.source).push(id);if(from!==to) adjacent.get(edge.target).push(id);
+    }
+    return {nodes,edges,adjacent,directed:true};
+}
+
+function filterGraph(graph,{excluded=new Set(),after=-Infinity,before=Infinity}={}) {
+    const nodes=new Map([...graph.nodes].filter(([id,node])=>!excluded.has(node.wallet)));
+    const edges=new Map([...graph.edges].filter(([id,e])=>nodes.has(e.source)&&nodes.has(e.target)&&(!graph.directed || (e.at>=after&&e.at<=before))));
+    const adjacent=new Map([...nodes.keys()].map(id=>[id,[]]));
+    for(const [id,e] of edges) { adjacent.get(e.source).push(id);if(e.source!==e.target)adjacent.get(e.target).push(id); }
+    return {nodes,edges,adjacent,directed:graph.directed};
+}
+
+// Earliest-arrival search: every transfer in a path must be strictly later than
+// its predecessor. Same-second events lack reliable ordering, so are not chained.
+function temporalPath(graph,from,to) {
+    if(!graph.nodes.has(from)||!graph.nodes.has(to))return null;
+    const arrivals=new Map([[from,-Infinity]]),previous=new Map();
+    for(const edge of [...graph.edges.values()].sort((a,b)=>a.at-b.at)) {
+        if(arrivals.has(edge.source)&&arrivals.get(edge.source)<edge.at&&(!arrivals.has(edge.target)||edge.at<arrivals.get(edge.target))) {
+            arrivals.set(edge.target,edge.at);previous.set(edge.target,edge);
+        }
+    }
+    if(!arrivals.has(to))return null;
+    const nodes=[to],edges=[];let cursor=to;
+    while(cursor!==from) { const edge=previous.get(cursor);if(!edge)return null;edges.push(edge);cursor=edge.source;nodes.push(cursor); }
+    return {nodes:nodes.reverse(),edges:edges.reverse(),temporal:true};
+}
+
+function walletActivity(graph,wallet) {
+    const id='wallet:'+graphWallet(wallet),sources=new Set(),destinations=new Set(),nfts=new Set(),forwarded=new Set(),receipts=new Map();
+    for(const edge of [...graph.edges.values()].sort((a,b)=>a.at-b.at)) {
+        if(edge.target===id&&edge.source!==id) { sources.add(edge.source);nfts.add(edge.nft_id);receipts.set(edge.nft_id,{from:edge.source,at:edge.at}); }
+        if(edge.source===id&&edge.target!==id) {
+            destinations.add(edge.target);nfts.add(edge.nft_id);const receipt=receipts.get(edge.nft_id);
+            if(receipt&&receipt.at<edge.at&&receipt.from!==edge.target)forwarded.add(edge.nft_id);
+        }
+    }
+    return {nfts:nfts.size,sources:sources.size,destinations:destinations.size,forwarded:forwarded.size,
+        possibleIntermediary:forwarded.size>=3&&sources.size>=2&&destinations.size>=2};
+}
+
+if(typeof module !== 'undefined') module.exports={ownershipGraph,transferGraph,filterGraph,graphPath,graphNeighborhood,graphWallet,walletActivity};

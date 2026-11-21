@@ -24,3 +24,28 @@ dialog .muted { color: var(--muted); font-size: 14px; }
 dialog .related-list { padding-left: 20px; }
 dialog .related-list li { margin-bottom: 12px; }
 @media (max-width: 700px) { dialog .detail-columns { grid-template-columns: 1fr; } .pagination { flex-wrap: wrap; } }
+
+dialog { width:min(1040px,96vw); padding:28px 32px; border:2px solid var(--ink); border-radius:var(--r-lg); }
+dialog .close-details { position:sticky; top:0; z-index:2; background:var(--bg-raised); }
+dialog h2 { font-family:var(--serif); font-size:42px; font-weight:400; margin:8px 0 18px; }
+.detail-hero { border-bottom:2px dashed var(--line-soft); padding-bottom:20px; }
+.detail-stat-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+.detail-stat-grid div { background:var(--bg-muted); padding:12px 16px; border-radius:var(--r-sm); }
+.detail-stat-grid span { display:block; font-size:13px; color:var(--muted); }
+.detail-stat-grid strong { font-size:18px; }
+.detail-market { margin:20px 0; background:var(--bg-muted); border:1px solid var(--line-soft); padding:18px; border-radius:var(--r-md); }
+.detail-market .market-details { display:grid; grid-template-columns:1fr 1fr; gap:8px 24px; font-family:var(--sans); font-size:16px; }
+.detail-market .market-details > br { display:none; }
+.detail-market .market-details > strong { font-family:var(--serif); font-size:25px; }
+.detail-actions { display:flex; flex-wrap:wrap; gap:8px; }
+.detail-owner { margin:24px 0; }
+.detail-section { margin:16px 0; border:1px solid var(--line-soft); border-radius:var(--r-md); overflow:hidden; }
+.detail-section > summary { padding:15px 18px; font-family:var(--serif); font-size:24px; cursor:pointer; background:var(--bg-muted); }
+.detail-section > summary span { font-family:var(--sans); font-size:14px; color:var(--muted); margin-left:10px; }
+.detail-section > section { padding:20px; }
+dialog .timeline { list-style:none; padding:0; margin:0; }
+dialog .timeline > li { padding:18px; margin:12px 0; border-left:3px solid var(--gold); background:var(--bg-muted); border-radius:0 8px 8px 0; }
+.transaction-details { margin-top:12px; font-size:14px; }
+.transaction-details summary { color:var(--gold-dim); cursor:pointer; }
+.wallet-related { font-size:13px; margin-left:5px; padding:3px 7px; box-shadow:none; }
+@media(max-width:650px) { dialog { padding:18px; } .detail-stat-grid { grid-template-columns:1fr; gap:8px; } .detail-market .market-details { grid-template-columns:1fr; } }

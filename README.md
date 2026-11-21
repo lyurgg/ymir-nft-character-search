@@ -131,3 +131,44 @@ repository is not sufficient if it is absent from the deployed Pages artifact.
 The local build serves both pages and their links correctly under a project path;
 a specific deployed 404 still needs the live URL and active Pages configuration
 to diagnose. Both pages use the same yellow paper palette and shared typography.
+
+## Reference theme and directed graph exploration
+
+The shared theme includes the exact original stylesheet from revision
+`6125eb2823bf541c3a605c34e3b7f0dd72929dc0`, with extensions for the newer controls,
+graph and character dossier. Both pages load the reference's Nunito, Patrick Hand
+and Press Start 2P fonts with local fallbacks.
+
+The graph defaults to **Directed transfers**, with arrows from sender wallet to
+recipient wallet, labeled by NFT and date when at most 45 edges are visible.
+Click a wallet node to open its WEMIX Scan address. Click an NFT node in the
+ownership view, or an NFT label on a transfer, to open character information.
+Use the separate Inspect actions to see records, center a node, exclude a wallet,
+or save a nickname and review tag. Dragging never opens another page.
+
+Exclusions and wallet notes are stored in this browser's local storage. Excluded
+wallets are removed from display and path finding; restore them in Excluded wallets.
+Date filters use UTC and apply to the transfer view. Ownership connections remain
+available as a separate association view. Starting from an NFT in the transfer
+view centers its available owner wallet, as explained above the graph.
+
+Wallet transfer networks can contain cycles, including transfers back to a former
+owner. They are not inherently DAGs. Chronological path finding follows arrows and
+strictly increasing event times, returning an earliest-arrival path, not necessarily
+the fewest steps. Same-second transfers are not chained without reliable ordering.
+These paths can span different NFTs and do not assert that one NFT traveled the
+entire route. The display caps the neighborhood at 40 nodes; paths use the full
+filtered index. Layered layout, scrollable canvas and curved parallel arrows reduce
+overlap. Edge direction is never inferred from an owner snapshot.
+
+A **Possible intermediary pattern** hint requires at least 3 distinct NFTs received
+and later sent to a different destination than their sender, and at least 2 source
+and 2 destination wallets. Counts and the rule are shown in Inspect. A return to the
+sender does not count as pass-through. The hint is a review aid, not proof of
+middleman activity, account ownership or identity. Exchanges and custody wallets
+can exhibit the same pattern. Manual tags are labeled as your local notes.
+
+Character dossiers now use a summary, current-wallet section, collapsible ownership,
+price, name and related-character histories, with transaction hashes behind a
+Transaction details disclosure. Wallet addresses open Scan; Related searches the
+local index for wallet associations.

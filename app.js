@@ -146,7 +146,7 @@ function relatedCharacters(character, index = walletIndex) {
 
 function walletButton(wallet) {
     if (!validWallet(wallet)) return 'Mint / burn / unknown';
-    return `<button class="wallet-link wallet" data-wallet="${escapeHtml(wallet.toLowerCase())}">${escapeHtml(wallet.toLowerCase())}</button>`;
+    return `<a class="wallet-link wallet" href="https://scan.wemix.com/address/${escapeHtml(wallet.toLowerCase())}" target="_blank" rel="noopener noreferrer">${escapeHtml(wallet.toLowerCase())}</a> <button class="wallet-related" data-wallet="${escapeHtml(wallet.toLowerCase())}">Related</button>`;
 }
 
 function toggleFavorite(nftId) {
@@ -172,25 +172,24 @@ function showDetails(nftId) {
     const groups = relatedCharacters(character);
     const relatedHtml = Object.entries(groupTitles).map(([key, title]) => `<h4>${title}</h4>${groups[key].length ? `<ul class="related-list">${groups[key].map(item => `<li><button class="detail-trigger" data-nft-id="${item.character.nft_id}">#${item.character.nft_id} ${escapeHtml(item.character.character_name)}</button> ${freshnessLabel(item.character)}<br>Shared wallet: ${walletButton(item.wallet)}<br><span class="muted">${item.current ? 'Last observed owner' : 'Historical wallet association'} · ${escapeHtml(observedDate((item.character.market || {}).checked_at))}</span></li>`).join('')}</ul>` : '<p class="muted">No matching indexed characters recorded.</p>'}`).join('');
     document.getElementById('detailsContent').innerHTML = `
-        <h2 id="detailsTitle">#${character.nft_id} ${escapeHtml(character.character_name)}</h2>
-        <p>${escapeHtml(character.character_class || 'Unknown class')} · ${escapeHtml(character.server || 'Unknown server')} · Power ${escapeHtml(character.gp || '—')}</p>
-        ${marketDetails(character)}
-        <p><a href="__MARKET_URL__${character.nft_id}" target="_blank" rel="noopener noreferrer">Open WEMIX record</a> · <a href="graph.html?root=${character.nft_id}">Explore ownership graph</a></p>
-        <h3>Current wallet</h3><p>${walletButton(market.owner)}</p>
-        <p class="muted">Last observed: ${escapeHtml(observedDate(market.checked_at))}. A wallet association does not identify the player or prove that characters share a player.</p>
-        <div class="detail-columns"><section><h3>Ownership and transfers</h3>
+        <div class="detail-hero"><span class="surface-eyebrow">Character dossier · NFT #${character.nft_id}</span><h2 id="detailsTitle">${escapeHtml(character.character_name)}</h2>
+        <div class="detail-stat-grid"><div><span>Class</span><strong>${escapeHtml(character.character_class || "Unknown")}</strong></div><div><span>Server</span><strong>${escapeHtml(character.server || "Unknown")}</strong></div><div><span>Growth power</span><strong>${escapeHtml(character.gp || "—")}</strong></div></div></div>
+        <section class="detail-market">${marketDetails(character)}</section>
+        <p class="detail-actions"><a href="__MARKET_URL__${character.nft_id}" target="_blank" rel="noopener noreferrer">Open WEMIX record</a> · <a href="graph.html?root=${character.nft_id}">Explore ownership graph</a></p>
+        <section class="detail-owner"><h3>Current wallet</h3><p>${walletButton(market.owner)}</p>
+        <p class="muted">Last observed: ${escapeHtml(observedDate(market.checked_at))}. A wallet association does not identify the player or prove that characters share a player.</p></section>
+        <div class="detail-sections"><details class="detail-section" open><summary>Ownership and transfers <span>${transfers.length} records</span></summary><section>
         <p class="muted">${escapeHtml(historyWarning)} Checked: ${escapeHtml(observedDate(check.checked_at))}</p>
-        ${transfers.length ? `<ol class="timeline">${transfers.map(event => `<li><strong>${escapeHtml(event.event)}</strong> · ${escapeHtml(observedDate(event.at * 1000))}<br>From ${walletButton(event.from)}<br>To ${walletButton(event.to)}${event.price ? `<br>Transaction price: ${escapeHtml(event.price)} <span class="muted">${escapeHtml(event.currency)}</span>` : ''}<br><span class="wallet">${escapeHtml(event.tx_hash)}</span><br><span class="muted">WEMIX history · ${escapeHtml(event.chain)}</span></li>`).join('')}</ol>` : '<p>No transfer records available. This does not mean there were no previous owners.</p>'}
+        ${transfers.length ? `<ol class="timeline">${transfers.map(event => `<li><strong>${escapeHtml(event.event)}</strong> · ${escapeHtml(observedDate(event.at * 1000))}<br>From ${walletButton(event.from)}<br>To ${walletButton(event.to)}${event.price ? `<br>Transaction price: ${escapeHtml(event.price)} <span class="muted">${escapeHtml(event.currency)}</span>` : ''}<details class="transaction-details"><summary>Transaction details</summary><span class="wallet">${escapeHtml(event.tx_hash)}</span><br><span class="muted">WEMIX history · ${escapeHtml(event.chain)}</span></details></li>`).join('')}</ol>` : '<p>No transfer records available. This does not mean there were no previous owners.</p>'}
         <h4>Owners observed by this archive</h4>
         ${(character.owner_history || []).length ? `<ol class="timeline">${[...character.owner_history].reverse().map(item => `<li>${walletButton(item.wallet)}<br>First seen ${escapeHtml(observedDate(item.first_seen))}<br>Last seen ${escapeHtml(observedDate(item.last_seen))}</li>`).join('')}</ol>` : '<p class="muted">No owner observations recorded.</p>'}
-        </section><section><h3>Price history</h3>
+        </section></details><details class="detail-section"><summary>Price history <span>${prices.length} observations</span></summary><section>
         <p class="muted">Listing and previous-price observations use scan times. Transaction prices are shown with their transfer records.</p>
         ${prices.length ? `<ol class="timeline">${prices.map(item => `<li><strong>${escapeHtml(item.price || 'No active listing')}</strong> · ${escapeHtml(item.kind)}${item.status ? ' · ' + escapeHtml(item.status) : ''}<br>First seen ${escapeHtml(observedDate(item.first_seen))}<br>Last seen ${escapeHtml(observedDate(item.last_seen))}${item.currency ? `<br><span class="wallet muted">${escapeHtml(item.currency)}</span>` : ''}</li>`).join('')}</ol>` : '<p>No price changes recorded yet.</p>'}
-        <h3>Name history</h3>${nameHistory(character)}
-        </section></div>
-        <h3>Related characters through wallets</h3>
+        </section></details><details class="detail-section"><summary>Name history <span>${(character.name_history || []).length} observations</span></summary><section><ol class="timeline">${(character.name_history || []).map(item => `<li><strong>${escapeHtml(item.name)}</strong><br><span class="muted">First seen ${escapeHtml(observedDate(item.first_seen))} · Last seen ${escapeHtml(observedDate(item.last_seen))}</span></li>`).join("")}</ol></section></details></div>
+        <details class="detail-section"><summary>Related characters through wallets</summary><section>
         <p class="muted">Only indexed YMIR characters with recorded wallets are included. Holdings can be outdated. Click a wallet to search all its recorded associations.</p>
-        ${relatedHtml}`;
+        ${relatedHtml}</section></details>`;
     const dialog = document.getElementById('characterDetails');
     if (!dialog.open) dialog.showModal();
     dialog.scrollTop = 0;

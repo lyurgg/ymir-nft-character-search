@@ -1,5 +1,5 @@
 const assert = require('node:assert/strict');
-const {ownershipGraph,graphPath,graphNeighborhood} = require('./graph-core.js');
+const {ownershipGraph,transferGraph,filterGraph,graphPath,graphNeighborhood,walletActivity} = require('./graph-core.js');
 const wallet = n => '0x' + String(n).repeat(40);
 // User's example: W1 -- NFT78 -- W2 -- NFT313 -- W7 / W8.
 const characters = [
@@ -27,3 +27,23 @@ assert.equal(ownershipGraph([{...characters[0],owner_history:[{wallet:wallet(1)}
 const duplicate=ownershipGraph([{nft_id:1,market:{owner:wallet(1)},transfers:[{from:wallet(1).toUpperCase(),to:wallet(1),event:'Transfer',at:0}]}]);
 assert.equal(duplicate.edges.size,1);
 console.log('Graph checks passed: exact requested ownership path, W8 branch, current-only mode, disconnected nodes, self path, display cap, wallet normalization and duplicate edges.');
+function event(from,to,at,nft) {return {from:wallet(from),to:wallet(to),at,event:'User-Transfer',tx_hash:'tx'+nft+at,chain:'mainnet'};}
+const directed=transferGraph([
+ {nft_id:1,transfers:[event(1,2,10,1),event(2,3,20,1),event(3,1,30,1)]},
+ {nft_id:2,transfers:[event(4,2,11,2),event(2,5,21,2)]},
+ {nft_id:3,transfers:[event(6,2,12,3),event(2,7,22,3)]},
+]);
+assert.equal(graphPath(directed,'wallet:'+wallet(1),'wallet:'+wallet(3)).edges.length,2);
+assert.equal(graphPath(directed,'wallet:'+wallet(7),'wallet:'+wallet(2)),null,'Arrows cannot be traversed backward');
+assert.equal(graphPath(filterGraph(directed,{excluded:new Set([wallet(2)])}),'wallet:'+wallet(1),'wallet:'+wallet(3)),null);
+assert.equal(graphPath(filterGraph(directed,{before:15}),'wallet:'+wallet(1),'wallet:'+wallet(3)),null);
+assert.equal(walletActivity(directed,wallet(2)).possibleIntermediary,true);
+assert.equal(walletActivity(directed,wallet(2)).forwarded,3);
+assert.equal(walletActivity(directed,wallet(1)).possibleIntermediary,false);
+const outOfOrder=transferGraph([{nft_id:4,transfers:[event(2,3,5,4),event(1,2,10,4)]}]);
+assert.equal(graphPath(outOfOrder,'wallet:'+wallet(1),'wallet:'+wallet(3)),null,'Cannot follow a transfer before arrival');
+const sameTime=transferGraph([{nft_id:4,transfers:[event(1,2,10,4),event(2,3,10,4)]}]);
+assert.equal(graphPath(sameTime,'wallet:'+wallet(1),'wallet:'+wallet(3)),null);
+const returning=transferGraph([{nft_id:1,transfers:[event(1,2,1,1),event(2,1,2,1)]}]);
+assert.equal(walletActivity(returning,wallet(2)).forwarded,0,'Return to sender is not intermediary pass-through');
+console.log('Directed graph checks passed: forward time, reverse direction rejection, exclusions, dates, cycles, same-second ambiguity and evidence-based intermediary hints.');

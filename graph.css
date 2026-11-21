@@ -26,3 +26,17 @@ aside h2 { font-size:20px; margin-top:0; } aside p,aside li { line-height:1.6; f
 .path-panel { margin:20px 0; padding:20px; border:1px solid #d1c2a2; border-radius:12px; background:#fffaf0; }.path-panel:empty { display:none; }
 .path-panel li { line-height:1.8; margin-bottom:12px; }.muted { color:#796a55; } footer { margin:25px 0 0; color:#796a55; font-size:14px; line-height:1.7; }
 @media(max-width:850px) { main { padding:18px; }.workspace { grid-template-columns:1fr; } #network { height:500px; } aside { max-height:350px; } .controls input { width:100%; } }
+.graph-edge { fill:none; }
+.edge-label { font-family:var(--sans); font-size:12px; fill:var(--ink); paint-order:stroke; stroke:var(--bg-raised); stroke-width:5px; cursor:pointer; }
+.graph-settings { padding:16px 20px; margin:16px 0; font-size:14px; }
+.graph-settings summary { cursor:pointer; font-weight:800; }
+.graph-settings p { margin:10px 0; }
+.graph-settings label { display:inline-flex; margin-right:12px; }
+.graph-settings input { min-width:300px; }
+#nodeInfo label { margin-top:12px; }
+#nodeInfo input, #nodeInfo select { min-width:0; width:100%; }
+.wallet-stats { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin:18px 0; }
+.wallet-stats span { font-size:12px; background:var(--bg-muted); padding:8px; border-radius:6px; }
+.wallet-stats b { display:block; font-size:21px; }
+@media(max-width:600px) { .graph-settings input { min-width:0; width:100%; } }
+.graph-panel { max-height:760px; overflow:auto; }

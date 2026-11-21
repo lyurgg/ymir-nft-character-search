@@ -82,6 +82,7 @@ def generate_html(characters):
     <title>Legend of YMIR NFT Character Search</title>
 
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&amp;family=Patrick+Hand&amp;family=Press+Start+2P&amp;display=swap">
 <style>__THEME_CSS__
 __DASHBOARD_CSS__</style>
 

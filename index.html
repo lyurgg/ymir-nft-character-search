@@ -12,6 +12,7 @@
     <title>Legend of YMIR NFT Character Search</title>
 
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&amp;family=Patrick+Hand&amp;family=Press+Start+2P&amp;display=swap">
 <style>:root {
     color-scheme: light;
     --bg: #f3e6bd; --bg-raised: #fff7dc; --surface: #fff7dc;
@@ -93,6 +94,948 @@ dialog { box-shadow: 0 18px 70px #49330f33; }
 .graph-panel, aside, .path-panel { box-shadow: var(--paper-shadow); }
 .graph-node text { stroke: var(--surface); }
 
+/* Exact stylesheet from revision 6125eb2, supplied as the visual reference. */
+/* ==================================================
+           Variables
+        ================================================== */
+
+        :root {
+            --bg: #0d0f13;
+            --surface: #15181e;
+            --surface-light: #1b1f27;
+            --surface-hover: #20252e;
+
+            --border: #292e38;
+
+            --text: #f1f3f5;
+            --text-muted: #969da9;
+
+            --gold: #d8b664;
+            --gold-hover: #e6c875;
+            --gold-dark: #9f8140;
+
+            --radius: 10px;
+        }
+
+
+        /* ==================================================
+           Base
+        ================================================== */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            color-scheme: dark;
+        }
+
+        body {
+            margin: 0;
+
+            font-family:
+                Inter,
+                "Segoe UI",
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background:
+                radial-gradient(
+                    circle at top,
+                    #171b23 0,
+                    #0d0f13 420px
+                );
+
+            color: var(--text);
+
+            min-height: 100vh;
+        }
+
+
+        /* ==================================================
+           Layout
+        ================================================== */
+
+        .container {
+            max-width: 1280px;
+
+            margin: 0 auto;
+
+            padding:
+                48px
+                28px
+                80px;
+        }
+
+
+        /* ==================================================
+           Header
+        ================================================== */
+
+        .header {
+            margin-bottom: 32px;
+        }
+
+        h1 {
+            margin: 0;
+
+            font-size: 34px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .accent {
+            color: var(--gold);
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+
+            margin-top: 8px;
+
+            font-size: 16px;
+        }
+
+
+        /* ==================================================
+           Search Card
+        ================================================== */
+
+        .search-card {
+            padding: 20px;
+
+            background: rgba(21, 24, 30, 0.9);
+
+            border: 1px solid var(--border);
+
+            border-radius: var(--radius);
+
+            margin-bottom: 22px;
+        }
+
+
+        .search-container {
+            display: flex;
+
+            gap: 12px;
+        }
+
+
+        #searchInput {
+            flex: 1;
+
+            padding: 14px 16px;
+
+            font-size: 16px;
+
+            background: var(--surface-light);
+            color: var(--text);
+
+            border: 1px solid #303640;
+
+            border-radius: 8px;
+
+            outline: none;
+
+            transition:
+                border-color 0.15s ease,
+                box-shadow 0.15s ease;
+        }
+
+
+        #searchInput::placeholder {
+            color: #777e89;
+        }
+
+
+        #searchInput:focus {
+            border-color: var(--gold);
+
+            box-shadow:
+                0 0 0 3px
+                rgba(216, 182, 100, 0.10);
+        }
+
+
+        /* ==================================================
+           Buttons
+        ================================================== */
+
+        button {
+            border: 0;
+
+            border-radius: 8px;
+
+            padding: 13px 20px;
+
+            font-size: 14px;
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition:
+                background 0.15s ease,
+                transform 0.08s ease;
+        }
+
+
+        button:active {
+            transform: translateY(1px);
+        }
+
+
+        .primary-button {
+            background: var(--gold);
+            color: #151515;
+        }
+
+
+        .primary-button:hover {
+            background: var(--gold-hover);
+        }
+
+
+        .secondary-button {
+            background: #262b34;
+            color: #d7dbe1;
+
+            border: 1px solid #343a45;
+        }
+
+
+        .secondary-button:hover {
+            background: #303640;
+        }
+
+
+        /* ==================================================
+           Toolbar
+        ================================================== */
+
+        .toolbar {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 16px;
+
+            margin-bottom: 14px;
+        }
+
+
+        .toolbar-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+
+        #resultCount {
+            color: var(--text-muted);
+
+            font-size: 14px;
+        }
+
+
+        .result-number {
+            color: var(--text);
+            font-weight: 600;
+        }
+
+
+        /* ==================================================
+           Table Card
+        ================================================== */
+
+        .table-card {
+            overflow: hidden;
+
+            background: var(--surface);
+
+            border: 1px solid var(--border);
+
+            border-radius: var(--radius);
+
+            box-shadow:
+                0 12px 36px
+                rgba(0, 0, 0, 0.18);
+        }
+
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+
+        table {
+            width: 100%;
+
+            border-collapse: collapse;
+
+            table-layout: fixed;
+        }
+
+
+        /* ==================================================
+           Table Header
+        ================================================== */
+
+        th {
+            padding: 15px 18px;
+
+            background: #20242c;
+
+            color: #f5f5f5;
+
+            font-size: 13px;
+            font-weight: 600;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.04em;
+
+            text-align: left;
+
+            border-bottom: 1px solid #303640;
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 5;
+        }
+
+
+        /* ==================================================
+           Table Rows
+        ================================================== */
+
+        td {
+            padding: 15px 18px;
+
+            font-size: 15px;
+
+            border-bottom: 1px solid #252a32;
+
+            vertical-align: middle;
+        }
+
+
+        tbody tr {
+            transition: background 0.12s ease;
+        }
+
+
+        tbody tr:hover {
+            background: var(--surface-hover);
+        }
+
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+
+        /* ==================================================
+           Individual Columns
+        ================================================== */
+
+        .col-id {
+            width: 100px;
+        }
+
+        .col-name {
+            width: auto;
+        }
+
+        .col-class {
+            width: 170px;
+        }
+
+        .col-server {
+            width: 180px;
+        }
+
+        .col-gp {
+            width: 145px;
+
+            /*
+             * IMPORTANT:
+             * Header and body are both right aligned.
+             */
+            text-align: right;
+        }
+
+        .col-price {
+            width: 155px;
+            text-align: right;
+        }
+
+        .col-link {
+            width: 130px;
+        }
+
+
+        .id {
+            color: var(--text-muted);
+
+            font-variant-numeric:
+                tabular-nums;
+        }
+
+
+        .character-name {
+            font-weight: 500;
+        }
+
+
+        /* ==================================================
+           GP
+        ================================================== */
+
+        .gp {
+            text-align: right;
+
+            font-variant-numeric:
+                tabular-nums;
+
+            font-weight: 600;
+
+            color: #f2f2f2;
+
+            white-space: nowrap;
+        }
+
+
+        /* ==================================================
+           Server Badge
+        ================================================== */
+
+        .server-badge {
+            display: inline-block;
+
+            padding: 5px 10px;
+
+            background: #242932;
+
+            border: 1px solid #353b46;
+
+            border-radius: 999px;
+
+            font-size: 13px;
+
+            color: #d9dde3;
+
+            white-space: nowrap;
+        }
+
+
+        .class-badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 999px;
+            white-space: nowrap;
+        }
+
+
+        .price {
+            text-align: right;
+            white-space: nowrap;
+        }
+
+
+        /* ==================================================
+           NFT Links
+        ================================================== */
+
+        .nft-link {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 5px;
+
+            color: var(--gold);
+
+            text-decoration: none;
+
+            font-size: 14px;
+            font-weight: 500;
+
+            white-space: nowrap;
+        }
+
+
+        .nft-link:hover {
+            color: var(--gold-hover);
+        }
+
+
+        .arrow {
+            font-size: 12px;
+
+            opacity: 0.7;
+        }
+
+
+        /* ==================================================
+           Empty State
+        ================================================== */
+
+        .empty {
+            padding: 60px 20px;
+
+            text-align: center;
+
+            color: var(--text-muted);
+        }
+
+
+        .empty-title {
+            font-size: 18px;
+
+            color: var(--text);
+
+            margin-bottom: 6px;
+        }
+
+
+        /* ==================================================
+           Footer
+        ================================================== */
+
+        .footer {
+            margin-top: 22px;
+
+            text-align: center;
+
+            color: #666d78;
+
+            font-size: 12px;
+        }
+
+
+        /* ==================================================
+           Mobile
+        ================================================== */
+
+        @media (max-width: 700px) {
+
+            .container {
+                padding:
+                    28px
+                    14px
+                    60px;
+            }
+
+
+            h1 {
+                font-size: 28px;
+            }
+
+
+            .search-container {
+                flex-direction: column;
+            }
+
+
+            .search-container button {
+                width: 100%;
+            }
+
+
+            .toolbar {
+                flex-direction: column;
+
+                align-items: stretch;
+            }
+
+
+            .toolbar-buttons {
+                width: 100%;
+            }
+
+
+            .toolbar-buttons button {
+                flex: 1;
+            }
+
+
+            .col-id {
+                width: 80px;
+            }
+
+            .col-name {
+                width: 210px;
+            }
+
+            .col-class {
+                width: 150px;
+            }
+
+            .col-server {
+                width: 150px;
+            }
+
+            .col-gp {
+                width: 125px;
+            }
+
+            .col-price {
+                width: 140px;
+            }
+
+            .col-link {
+                width: 110px;
+            }
+
+
+            th,
+            td {
+                padding: 13px 12px;
+            }
+
+        }
+
+        /* ==================================================
+           Kings Asgard Raffle sketch / arcade theme
+        ================================================== */
+
+        :root {
+            --bg: #faf4e6;
+            --bg-deep: #f0e6d1;
+            --bg-raised: #fffdf6;
+            --bg-muted: #f4ecd9;
+            --bg-well: #ede2ca;
+            --ink: #2f2a24;
+            --ink-soft: #574d40;
+            --muted: #7c7263;
+            --line: #2f2a24;
+            --line-soft: #d8cbaf;
+            --gold: #e08a1e;
+            --gold-bright: #ffb445;
+            --gold-dim: #a6621a;
+            --sky: #2b7fd4;
+            --grape: #8455c9;
+            --serif: "Patrick Hand", "Bradley Hand", "Segoe Print", cursive;
+            --sans: "Nunito", "Segoe UI", system-ui, sans-serif;
+            --arcade: "Press Start 2P", ui-monospace, monospace;
+            --r-sm: 9px 7px 10px 8px / 7px 10px 8px 9px;
+            --r-md: 14px 11px 16px 12px / 11px 16px 12px 14px;
+            --r-lg: 22px 17px 24px 19px / 17px 24px 19px 22px;
+            --shadow: 3px 3px 0 rgb(47 42 36 / 0.14);
+            --shadow-pop: 4px 4px 0 var(--ink);
+            --shadow-pop-sm: 2px 2px 0 var(--ink);
+        }
+
+        html { color-scheme: light; }
+
+        ::selection { background: var(--gold-bright); color: var(--ink); }
+
+        body {
+            background:
+                radial-gradient(760px 340px at 12% -6%, rgb(224 138 30 / 0.16), transparent 62%),
+                radial-gradient(900px 420px at 88% -10%, rgb(43 127 212 / 0.13), transparent 64%),
+                radial-gradient(700px 500px at 50% 108%, rgb(132 85 201 / 0.09), transparent 68%),
+                repeating-linear-gradient(0deg, rgb(47 42 36 / 0.045) 0 1px, transparent 1px 26px),
+                repeating-linear-gradient(90deg, rgb(47 42 36 / 0.045) 0 1px, transparent 1px 26px),
+                linear-gradient(180deg, var(--bg) 0%, var(--bg-deep) 100%);
+            background-attachment: fixed;
+            color: var(--ink);
+            font-family: var(--sans);
+            font-weight: 600;
+            line-height: 1.55;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        :focus-visible {
+            outline: 2px dashed var(--gold-dim);
+            outline-offset: 3px;
+            border-radius: 4px;
+        }
+
+        .container { max-width: 1420px; padding-top: 32px; }
+
+        .header {
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 28px;
+            padding: clamp(24px, 4vw, 48px);
+            border: 3px solid var(--line);
+            border-radius: 24px;
+            background:
+                radial-gradient(circle at 1px 1px, rgb(47 42 36 / 0.14) 1px, transparent 1.6px) 0 0 / 14px 14px,
+                radial-gradient(680px 320px at 100% 0%, rgb(255 180 69 / 0.55), transparent 66%),
+                radial-gradient(560px 300px at 0% 100%, rgb(43 127 212 / 0.24), transparent 68%),
+                linear-gradient(145deg, #fff8e6, #fdeecd 58%, #f8e2bd);
+            box-shadow: 7px 7px 0 var(--ink);
+        }
+
+        .header::after {
+            content: "";
+            position: absolute;
+            right: -95px;
+            top: -105px;
+            width: 260px;
+            height: 260px;
+            border: 2px dashed rgb(47 42 36 / 0.2);
+            border-radius: 50%;
+            box-shadow: 0 0 0 34px rgb(47 42 36 / 0.05), 0 0 0 76px rgb(47 42 36 / 0.035);
+            pointer-events: none;
+        }
+
+        .surface-eyebrow {
+            position: relative;
+            z-index: 1;
+            display: block;
+            margin-bottom: 8px;
+            color: var(--gold-dim);
+            font-family: var(--arcade);
+            font-size: 0.56rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            position: relative;
+            z-index: 1;
+            margin: 0 0 10px;
+            color: var(--ink);
+            font-family: var(--serif);
+            font-size: clamp(2.5rem, 6.6vw, 4.6rem);
+            font-weight: 400;
+            letter-spacing: 0;
+            line-height: 0.95;
+            text-shadow: 3px 3px 0 rgb(255 180 69 / 0.85);
+            text-wrap: balance;
+        }
+
+        .accent { color: var(--ink); }
+
+        .subtitle {
+            position: relative;
+            z-index: 1;
+            max-width: 62ch;
+            margin: 0;
+            color: var(--ink-soft);
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .search-card,
+        .table-card {
+            background: linear-gradient(180deg, var(--bg-raised), var(--bg-muted));
+            border: 2px solid var(--line);
+            border-radius: var(--r-md);
+            box-shadow: var(--shadow-pop);
+        }
+
+        .search-card { padding: 18px 20px; }
+
+        #searchInput,
+        select {
+            background: #fffdf7;
+            color: var(--ink);
+            border: 2px solid var(--line);
+            border-radius: var(--r-sm);
+            box-shadow: inset 2px 2px 0 rgb(47 42 36 / 0.07);
+            font-family: var(--sans);
+            font-weight: 700;
+        }
+
+        #searchInput:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--gold-dim);
+            box-shadow: inset 2px 2px 0 rgb(47 42 36 / 0.07), 0 0 0 3px rgb(224 138 30 / 0.32);
+        }
+
+        #searchInput::placeholder { color: #a89d89; }
+
+        button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            border: 2px solid var(--line);
+            border-radius: var(--r-sm);
+            background: var(--bg-raised);
+            color: var(--ink);
+            box-shadow: var(--shadow-pop-sm);
+            font-family: var(--sans);
+            font-weight: 800;
+        }
+
+        button:hover {
+            background: var(--gold-bright);
+            color: var(--ink);
+            transform: translate(-1px, -1px);
+            box-shadow: 3px 3px 0 var(--ink);
+        }
+
+        button:active { transform: translate(2px, 2px); box-shadow: 0 0 0 var(--ink); }
+
+        .primary-button {
+            background: linear-gradient(180deg, var(--gold-bright), var(--gold));
+            color: var(--ink);
+            font-weight: 900;
+        }
+
+        .primary-button:hover { background: linear-gradient(180deg, #ffc96a, var(--gold-bright)); }
+        .secondary-button { background: var(--bg-raised); color: var(--ink); border-color: var(--line); }
+
+        .toolbar { margin: 26px 2px 16px; flex-wrap: wrap; }
+        .toolbar-buttons, .sort-controls { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+
+        .surface-heading {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            gap: 16px;
+            margin: 32px 2px 10px;
+        }
+
+        .surface-heading .surface-eyebrow { margin-bottom: 0; }
+
+        .surface-heading h2 {
+            margin: 3px 0 0;
+            color: var(--ink);
+            font-family: var(--serif);
+            font-size: clamp(1.45rem, 3vw, 2rem);
+            font-weight: 400;
+            line-height: 1.15;
+        }
+
+        .sort-label {
+            color: var(--ink-soft);
+            font-family: var(--arcade);
+            font-size: 0.56rem;
+            font-weight: 400;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        select { padding: 10px 36px 10px 12px; font-size: 14px; cursor: pointer; }
+        #sortDirection { min-width: 118px; }
+
+        #resultCount {
+            padding: 5px 11px;
+            border: 2px solid var(--line);
+            border-radius: 999px;
+            background: var(--bg-raised);
+            color: var(--ink-soft);
+            font-size: 0.78rem;
+            font-weight: 800;
+        }
+
+        .result-number { color: var(--ink); font-weight: 900; }
+
+        .table-card { overflow: hidden; }
+        .table-container { padding: 6px 12px 12px; }
+
+        th {
+            padding-top: 14px;
+            padding-bottom: 12px;
+            background: rgb(255 255 255 / 0.025);
+            color: var(--ink-soft);
+            border-bottom: 1px solid var(--line-soft);
+            font-family: var(--arcade);
+            font-size: 0.64rem;
+            font-weight: 400;
+            letter-spacing: 0.04em;
+        }
+
+        td { border-bottom: 1px solid var(--line-soft); color: var(--ink); }
+        tbody tr:hover { background: color-mix(in srgb, var(--gold-bright) 14%, transparent); }
+        .id { color: var(--muted); font-weight: 800; }
+        .character-name { color: var(--ink); font-family: var(--serif); font-size: 1.25rem; font-weight: 400; }
+        .gp { color: var(--gold-dim); font-family: var(--arcade); font-size: 0.76rem; font-weight: 400; }
+
+        .server-badge {
+            background: #e5d7f7;
+            border: 2px solid var(--line);
+            border-radius: 999px;
+            color: var(--ink);
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .class-badge {
+            background: #cfe8f4;
+            border: 2px solid var(--line);
+            color: var(--ink);
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 0.04em;
+        }
+
+        .price {
+            color: var(--gold-dim);
+            font-family: var(--arcade);
+            font-size: 0.72rem;
+            font-weight: 400;
+        }
+
+        .price.not-listed {
+            color: var(--muted);
+            font-family: var(--sans);
+            font-size: 0.82rem;
+            font-style: italic;
+            font-weight: 700;
+        }
+
+        .nft-link {
+            color: var(--gold-dim);
+            font-weight: 700;
+            text-decoration: underline;
+            text-decoration-style: wavy;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 3px;
+        }
+
+        .nft-link:hover { color: var(--gold); }
+        .footer { color: var(--muted); font-family: var(--arcade); font-size: 0.56rem; font-weight: 400; letter-spacing: 0.06em; }
+
+        @media (max-width: 850px) {
+            .container { padding-top: 18px; }
+            .toolbar { align-items: stretch; }
+            .surface-heading { align-items: center; }
+            .sort-controls { width: 100%; }
+            .sort-controls select { flex: 1; }
+        }
+
+/* Extend the reference treatment to the newer pages and readable detail panels. */
+:root { --surface: var(--bg-raised); --border: var(--line-soft); --text: var(--ink); --text-muted: var(--muted); --accent: var(--gold-dim); }
+main, .container { max-width: 1440px; margin: auto; padding: 32px 28px 60px; }
+.site-nav { border-bottom: 2px dashed var(--line-soft); }
+.site-nav .brand { font-family: var(--arcade); font-size: 15px; }
+.site-nav .brand span { font-family: var(--serif); font-size: 20px; }
+.site-nav a[aria-current=page] { background: #ffdf9a; color: var(--ink); border: 2px solid var(--ink); box-shadow: var(--shadow-pop-sm); }
+header h1 { font-family: var(--arcade); font-size: clamp(20px,3vw,32px); line-height: 1.6; letter-spacing: -1px; }
+.graph-panel, aside, .path-panel, .controls, .market-filter, .graph-settings, dialog { background: var(--bg-raised); border: 2px solid var(--ink); border-radius: var(--r-md); box-shadow: var(--shadow); }
+.graph-panel { overflow: hidden; }
+.controls button[type=submit] { background: linear-gradient(180deg,var(--gold-bright),var(--gold)); border-color: var(--ink); color: var(--ink); box-shadow: var(--shadow-pop-sm); }
+.controls label, .market-filter label { font-size: 14px; font-weight: 800; }
+.scan-summary, .notice { background: var(--bg-muted); border: 2px dashed var(--line-soft); }
+#network { background-color: var(--bg-raised); background-image: radial-gradient(#d8cbaf .8px,transparent .8px); }
+.graph-node circle { stroke: var(--bg-raised); }
+.graph-node text { font-family: var(--sans); fill: var(--ink); stroke: var(--bg-raised); }
+.graph-node.nft circle { fill: var(--gold-bright); }
+.graph-node.wallet circle { fill: #a9d4df; }
+.graph-node.tagged circle { stroke: var(--grape); stroke-width: 4px; }
+.graph-node.root circle { stroke: var(--ink); }
+.graph-edge { stroke: #718d92; }
+.graph-edge.former { stroke: #a39174; }
+#nodeInfo button, .detail-trigger, .wallet-link, .favorite-button { transform:none; box-shadow:none; }
+#nodeInfo button { font-size:14px; margin:4px 4px 4px 0; }
+.col-price { width:320px; } table { min-width:1340px; }
+.market-details, .market-details small, .name-history, .graph-help, footer, .footer { font-family:var(--sans); font-size:14px; letter-spacing:0; }
+@media(max-width:700px) { main,.container { padding:20px 14px 40px; } .site-nav .brand { font-size:12px; } .site-nav .brand span { display:block; margin:10px 0 0; } }
+
 .market-filter { flex-wrap: wrap; align-items: end; gap: 12px 16px; }
 .market-filter label { display: flex; flex-direction: column; gap: 5px; font-size: 14px; }
 .market-filter label:has(input[type=checkbox]) { flex-direction: row; align-items: center; padding: 10px 0; }
@@ -119,6 +1062,31 @@ dialog .muted { color: var(--muted); font-size: 14px; }
 dialog .related-list { padding-left: 20px; }
 dialog .related-list li { margin-bottom: 12px; }
 @media (max-width: 700px) { dialog .detail-columns { grid-template-columns: 1fr; } .pagination { flex-wrap: wrap; } }
+
+dialog { width:min(1040px,96vw); padding:28px 32px; border:2px solid var(--ink); border-radius:var(--r-lg); }
+dialog .close-details { position:sticky; top:0; z-index:2; background:var(--bg-raised); }
+dialog h2 { font-family:var(--serif); font-size:42px; font-weight:400; margin:8px 0 18px; }
+.detail-hero { border-bottom:2px dashed var(--line-soft); padding-bottom:20px; }
+.detail-stat-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+.detail-stat-grid div { background:var(--bg-muted); padding:12px 16px; border-radius:var(--r-sm); }
+.detail-stat-grid span { display:block; font-size:13px; color:var(--muted); }
+.detail-stat-grid strong { font-size:18px; }
+.detail-market { margin:20px 0; background:var(--bg-muted); border:1px solid var(--line-soft); padding:18px; border-radius:var(--r-md); }
+.detail-market .market-details { display:grid; grid-template-columns:1fr 1fr; gap:8px 24px; font-family:var(--sans); font-size:16px; }
+.detail-market .market-details > br { display:none; }
+.detail-market .market-details > strong { font-family:var(--serif); font-size:25px; }
+.detail-actions { display:flex; flex-wrap:wrap; gap:8px; }
+.detail-owner { margin:24px 0; }
+.detail-section { margin:16px 0; border:1px solid var(--line-soft); border-radius:var(--r-md); overflow:hidden; }
+.detail-section > summary { padding:15px 18px; font-family:var(--serif); font-size:24px; cursor:pointer; background:var(--bg-muted); }
+.detail-section > summary span { font-family:var(--sans); font-size:14px; color:var(--muted); margin-left:10px; }
+.detail-section > section { padding:20px; }
+dialog .timeline { list-style:none; padding:0; margin:0; }
+dialog .timeline > li { padding:18px; margin:12px 0; border-left:3px solid var(--gold); background:var(--bg-muted); border-radius:0 8px 8px 0; }
+.transaction-details { margin-top:12px; font-size:14px; }
+.transaction-details summary { color:var(--gold-dim); cursor:pointer; }
+.wallet-related { font-size:13px; margin-left:5px; padding:3px 7px; box-shadow:none; }
+@media(max-width:650px) { dialog { padding:18px; } .detail-stat-grid { grid-template-columns:1fr; gap:8px; } .detail-market .market-details { grid-template-columns:1fr; } }
 </style>
 
 </head>
@@ -282,7 +1250,7 @@ dialog .related-list li { margin-bottom: 12px; }
 
 
     <div class="footer">
-        Legend of YMIR NFT Character Index · Refreshed Nov 21, 2026 · 01:49 PM PHT<br>
+        Legend of YMIR NFT Character Index · Refreshed Nov 21, 2026 · 02:23 PM PHT<br>
         Marketplace data is a snapshot, not live. Check WEMIX before bidding or offering.<br>
         Prices are token amounts (currency contract on hover). Last known prices can be previous marketplace prices or archived listings, not confirmed sales.<br>
         Name history records observations by NFT ID; dates are scan times, not exact rename times. Earlier history may be unavailable.
@@ -442,7 +1410,7 @@ function relatedCharacters(character, index = walletIndex) {
 
 function walletButton(wallet) {
     if (!validWallet(wallet)) return 'Mint / burn / unknown';
-    return `<button class="wallet-link wallet" data-wallet="${escapeHtml(wallet.toLowerCase())}">${escapeHtml(wallet.toLowerCase())}</button>`;
+    return `<a class="wallet-link wallet" href="https://scan.wemix.com/address/${escapeHtml(wallet.toLowerCase())}" target="_blank" rel="noopener noreferrer">${escapeHtml(wallet.toLowerCase())}</a> <button class="wallet-related" data-wallet="${escapeHtml(wallet.toLowerCase())}">Related</button>`;
 }
 
 function toggleFavorite(nftId) {
@@ -468,25 +1436,24 @@ function showDetails(nftId) {
     const groups = relatedCharacters(character);
     const relatedHtml = Object.entries(groupTitles).map(([key, title]) => `<h4>${title}</h4>${groups[key].length ? `<ul class="related-list">${groups[key].map(item => `<li><button class="detail-trigger" data-nft-id="${item.character.nft_id}">#${item.character.nft_id} ${escapeHtml(item.character.character_name)}</button> ${freshnessLabel(item.character)}<br>Shared wallet: ${walletButton(item.wallet)}<br><span class="muted">${item.current ? 'Last observed owner' : 'Historical wallet association'} · ${escapeHtml(observedDate((item.character.market || {}).checked_at))}</span></li>`).join('')}</ul>` : '<p class="muted">No matching indexed characters recorded.</p>'}`).join('');
     document.getElementById('detailsContent').innerHTML = `
-        <h2 id="detailsTitle">#${character.nft_id} ${escapeHtml(character.character_name)}</h2>
-        <p>${escapeHtml(character.character_class || 'Unknown class')} · ${escapeHtml(character.server || 'Unknown server')} · Power ${escapeHtml(character.gp || '—')}</p>
-        ${marketDetails(character)}
-        <p><a href="https://wemixplay.com/nft/marketplace/detail/0x58f803dcd53edd804cece0d59166785fdd4735f9/${character.nft_id}" target="_blank" rel="noopener noreferrer">Open WEMIX record</a> · <a href="graph.html?root=${character.nft_id}">Explore ownership graph</a></p>
-        <h3>Current wallet</h3><p>${walletButton(market.owner)}</p>
-        <p class="muted">Last observed: ${escapeHtml(observedDate(market.checked_at))}. A wallet association does not identify the player or prove that characters share a player.</p>
-        <div class="detail-columns"><section><h3>Ownership and transfers</h3>
+        <div class="detail-hero"><span class="surface-eyebrow">Character dossier · NFT #${character.nft_id}</span><h2 id="detailsTitle">${escapeHtml(character.character_name)}</h2>
+        <div class="detail-stat-grid"><div><span>Class</span><strong>${escapeHtml(character.character_class || "Unknown")}</strong></div><div><span>Server</span><strong>${escapeHtml(character.server || "Unknown")}</strong></div><div><span>Growth power</span><strong>${escapeHtml(character.gp || "—")}</strong></div></div></div>
+        <section class="detail-market">${marketDetails(character)}</section>
+        <p class="detail-actions"><a href="https://wemixplay.com/nft/marketplace/detail/0x58f803dcd53edd804cece0d59166785fdd4735f9/${character.nft_id}" target="_blank" rel="noopener noreferrer">Open WEMIX record</a> · <a href="graph.html?root=${character.nft_id}">Explore ownership graph</a></p>
+        <section class="detail-owner"><h3>Current wallet</h3><p>${walletButton(market.owner)}</p>
+        <p class="muted">Last observed: ${escapeHtml(observedDate(market.checked_at))}. A wallet association does not identify the player or prove that characters share a player.</p></section>
+        <div class="detail-sections"><details class="detail-section" open><summary>Ownership and transfers <span>${transfers.length} records</span></summary><section>
         <p class="muted">${escapeHtml(historyWarning)} Checked: ${escapeHtml(observedDate(check.checked_at))}</p>
-        ${transfers.length ? `<ol class="timeline">${transfers.map(event => `<li><strong>${escapeHtml(event.event)}</strong> · ${escapeHtml(observedDate(event.at * 1000))}<br>From ${walletButton(event.from)}<br>To ${walletButton(event.to)}${event.price ? `<br>Transaction price: ${escapeHtml(event.price)} <span class="muted">${escapeHtml(event.currency)}</span>` : ''}<br><span class="wallet">${escapeHtml(event.tx_hash)}</span><br><span class="muted">WEMIX history · ${escapeHtml(event.chain)}</span></li>`).join('')}</ol>` : '<p>No transfer records available. This does not mean there were no previous owners.</p>'}
+        ${transfers.length ? `<ol class="timeline">${transfers.map(event => `<li><strong>${escapeHtml(event.event)}</strong> · ${escapeHtml(observedDate(event.at * 1000))}<br>From ${walletButton(event.from)}<br>To ${walletButton(event.to)}${event.price ? `<br>Transaction price: ${escapeHtml(event.price)} <span class="muted">${escapeHtml(event.currency)}</span>` : ''}<details class="transaction-details"><summary>Transaction details</summary><span class="wallet">${escapeHtml(event.tx_hash)}</span><br><span class="muted">WEMIX history · ${escapeHtml(event.chain)}</span></details></li>`).join('')}</ol>` : '<p>No transfer records available. This does not mean there were no previous owners.</p>'}
         <h4>Owners observed by this archive</h4>
         ${(character.owner_history || []).length ? `<ol class="timeline">${[...character.owner_history].reverse().map(item => `<li>${walletButton(item.wallet)}<br>First seen ${escapeHtml(observedDate(item.first_seen))}<br>Last seen ${escapeHtml(observedDate(item.last_seen))}</li>`).join('')}</ol>` : '<p class="muted">No owner observations recorded.</p>'}
-        </section><section><h3>Price history</h3>
+        </section></details><details class="detail-section"><summary>Price history <span>${prices.length} observations</span></summary><section>
         <p class="muted">Listing and previous-price observations use scan times. Transaction prices are shown with their transfer records.</p>
         ${prices.length ? `<ol class="timeline">${prices.map(item => `<li><strong>${escapeHtml(item.price || 'No active listing')}</strong> · ${escapeHtml(item.kind)}${item.status ? ' · ' + escapeHtml(item.status) : ''}<br>First seen ${escapeHtml(observedDate(item.first_seen))}<br>Last seen ${escapeHtml(observedDate(item.last_seen))}${item.currency ? `<br><span class="wallet muted">${escapeHtml(item.currency)}</span>` : ''}</li>`).join('')}</ol>` : '<p>No price changes recorded yet.</p>'}
-        <h3>Name history</h3>${nameHistory(character)}
-        </section></div>
-        <h3>Related characters through wallets</h3>
+        </section></details><details class="detail-section"><summary>Name history <span>${(character.name_history || []).length} observations</span></summary><section><ol class="timeline">${(character.name_history || []).map(item => `<li><strong>${escapeHtml(item.name)}</strong><br><span class="muted">First seen ${escapeHtml(observedDate(item.first_seen))} · Last seen ${escapeHtml(observedDate(item.last_seen))}</span></li>`).join("")}</ol></section></details></div>
+        <details class="detail-section"><summary>Related characters through wallets</summary><section>
         <p class="muted">Only indexed YMIR characters with recorded wallets are included. Holdings can be outdated. Click a wallet to search all its recorded associations.</p>
-        ${relatedHtml}`;
+        ${relatedHtml}</section></details>`;
     const dialog = document.getElementById('characterDetails');
     if (!dialog.open) dialog.showModal();
     dialog.scrollTop = 0;
