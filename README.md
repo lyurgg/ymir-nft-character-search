@@ -115,3 +115,19 @@ It is persisted with the archive by the daily workflow.
 Both pages now share `theme.css`, embedded by the generators. Upload this source
 file along with the other generator, JavaScript, CSS, and template files. Generated
 HTML files remain self-contained for GitHub Pages.
+
+## Deploying both pages and checking a graph 404
+
+Run `python build_site.py` to generate both pages and stage the complete website
+in `_site/`. The builder checks relative page links and fails if `graph.html` is
+missing, so the Actions workflow cannot publish an index-only artifact. Upload
+`build_site.py`, `test_build_site.py`, and the updated `.github/workflows/deploy.yml`
+along with the other source files. The workflow uploads the complete `_site/` folder.
+
+For branch-based Pages hosting, both generated `index.html` and `graph.html` must
+be in the configured publishing folder. Uploading only `index.html` leaves the
+graph link pointing to a file that was never published. A graph page in the source
+repository is not sufficient if it is absent from the deployed Pages artifact.
+The local build serves both pages and their links correctly under a project path;
+a specific deployed 404 still needs the live URL and active Pages configuration
+to diagnose. Both pages use the same yellow paper palette and shared typography.

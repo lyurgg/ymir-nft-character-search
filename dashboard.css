@@ -5,7 +5,7 @@
 .scan-summary { margin: 16px 0; padding: 14px; font-size: 14px; line-height: 1.6; border: 1px solid var(--line-soft); border-radius: 8px; }
 .freshness { display: inline-block; padding: 2px 7px; border-radius: 4px; background: #e2eedf; color: #315b2b; font-size: 14px; }
 .freshness.stale, .freshness.failed { background: #fff0d7; color: #7c4c13; }
-.freshness.unknown { background: #e9e5de; color: #605a50; }
+.freshness.unknown { background: #ede0bc; color: #706047; }
 .pagination { display: flex; gap: 14px; align-items: center; margin: 14px 0; font-size: 14px; }
 button:disabled { opacity: .45; cursor: default; }
 .detail-trigger, .wallet-link, .favorite-button { background: none; border: 0; color: inherit; font: inherit; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; text-align: left; padding: 3px 0; }
@@ -20,7 +20,7 @@ dialog .detail-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 24p
 dialog .wallet { overflow-wrap: anywhere; font-family: monospace; font-size: 14px; }
 dialog .timeline { padding-left: 22px; }
 dialog .timeline li { padding-bottom: 14px; }
-dialog .muted { color: #6e6254; font-size: 14px; }
+dialog .muted { color: var(--muted); font-size: 14px; }
 dialog .related-list { padding-left: 20px; }
 dialog .related-list li { margin-bottom: 12px; }
 @media (max-width: 700px) { dialog .detail-columns { grid-template-columns: 1fr; } .pagination { flex-wrap: wrap; } }
