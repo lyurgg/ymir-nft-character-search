@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>YMIR Ownership Graph</title><style>__GRAPH_CSS__</style></head>
+<body><main>
+    <header><a href="index.html">Back to character search</a><p class="eyebrow">Legend of YMIR · Wallet connections</p><h1>Ownership graph</h1><p>Follow the NFTs that connect current and previous wallets.</p></header>
+    <p id="coverage" class="notice"></p>
+    <form id="graphForm" class="controls">
+        <label>Start with an NFT or wallet<input id="graphRoot" list="characterSuggestions" placeholder="NFT ID, character name, or 0x wallet" autocomplete="off" required></label>
+        <datalist id="characterSuggestions"></datalist>
+        <label>Find a connection to<input id="graphTarget" placeholder="Optional NFT ID or wallet" autocomplete="off"></label>
+        <label>Explore depth<select id="graphDepth"><option value="2">2 ownership edges</option><option value="4" selected>4 ownership edges</option><option value="6">6 ownership edges</option></select></label>
+        <label class="checkbox"><input type="checkbox" id="currentOnly">Current owners only</label>
+        <button type="submit">Explore connections</button>
+        <button type="button" id="fitGraph">Reset view</button>
+    </form>
+    <p id="graphStatus" role="status" aria-live="polite"></p>
+    <div class="legend"><span><i class="nft-dot"></i>NFT</span><span><i class="wallet-dot"></i>Wallet</span><span><i class="current-line"></i>Current owner snapshot</span><span><i class="former-line"></i>Historical ownership</span><span><i class="path-line"></i>Selected path</span></div>
+    <div class="workspace"><section class="graph-panel" aria-label="Ownership network"><svg id="network" viewBox="0 0 1000 650" role="img" aria-label="Interactive network of NFTs and owning wallets"><g id="graphViewport"></g></svg><p class="graph-help">Drag nodes to arrange them. Drag empty space to pan. Scroll to zoom. Select a node or edge for its records.</p></section><aside id="nodeInfo" aria-live="polite"><h2>Connection records</h2><p>Select a node or edge to inspect the evidence.</p></aside></div>
+    <section id="connectionPath" class="path-panel" aria-live="polite"></section>
+    <footer>Connections cover indexed YMIR NFTs only. Missing history or stale snapshots can leave gaps. A path represents shared NFT ownership history, not a shared player or identity. Custody and marketplace wallets can connect unrelated players.</footer>
+</main><script>__GRAPH_SCRIPT__</script></body></html>

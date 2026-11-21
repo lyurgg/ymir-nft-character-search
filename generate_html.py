@@ -3,6 +3,8 @@ import json
 
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
+from character_history import load_history, clean_price
+from marketplace import BASE_URL as MARKET_URL
 
 
 CSV_PATH = "characters.csv"
@@ -17,18 +19,32 @@ BASE_URL = "https://www.legendofymir.com/en/blockchain/nft/"
 
 def load_characters(csv_path: str):
     characters = []
+    history = load_history(csv_path=csv_path)
 
     with open(csv_path, "r", encoding="utf-8") as f:
         reader = csv.DictReader(f)
 
         for row in reader:
+            entry = history.get(row["nft_id"], {})
+            market = entry.get("character", {}).get("market", {})
             characters.append({
                 "nft_id": int(row["nft_id"]),
                 "character_name": row["character_name"].strip(),
                 "server": row["server"].strip(),
                 "gp": row["gp"].strip(),
                 "character_class": row.get("character_class", "").strip(),
-                "starting_price": row.get("starting_price", "").strip(),
+                "starting_price": clean_price(market.get("listed_price")),
+                "market": market,
+                "last_known_price": entry.get("last_known_price", ""),
+                "last_known_price_at": entry.get("last_known_price_at"),
+                "last_known_price_source": entry.get("last_known_price_source", ""),
+                "last_known_currency": entry.get("last_known_currency", ""),
+                "name_history": entry.get("names", []),
+                "price_history": entry.get("prices", []),
+                "owner_history": entry.get("owners", []),
+                "transfers": entry.get("transfers", []),
+                "transfer_check": entry.get("transfer_check", {}),
+                "last_scan": entry.get("last_scan", {}),
             })
 
     return characters
@@ -52,7 +68,7 @@ def generate_html(characters):
         ensure_ascii=False,
     ).replace("</", "<\\/")
 
-    html = """<!DOCTYPE html>
+    html = r"""<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -987,6 +1003,15 @@ def generate_html(characters):
             .sort-controls select { flex: 1; }
         }
 
+        .col-price { width: 280px; }
+        table { min-width: 1280px; }
+        .market-details { font-family: var(--sans); font-size: 14px; line-height: 1.6; white-space: normal; text-align: left; }
+        .market-details small, .name-history { display: block; font-family: var(--sans); font-size: 14px; line-height: 1.5; color: var(--muted); }
+        .market-details strong { color: var(--gold); }
+        .name-history { margin-top: 8px; max-width: 280px; white-space: normal; }
+        .name-history ol { padding-left: 20px; }
+        .market-filter { display: flex; gap: 8px; align-items: center; margin-bottom: 16px; }
+        __DASHBOARD_CSS__
     </style>
 
 </head>
@@ -1012,7 +1037,7 @@ def generate_html(characters):
         </h1>
 
         <div class="subtitle">
-            Browse the character archive and compare each NFT's class, power, server, and current marketplace listing.
+            Browse character stats, marketplace snapshots, and observed name changes.
         </div>
 
     </div>
@@ -1029,7 +1054,7 @@ def generate_html(characters):
             <input
                 id="searchInput"
                 type="text"
-                placeholder="Search character name, class, or server..."
+                placeholder="Search name, former name, NFT ID, wallet, class, or server..."
                 autocomplete="off"
             >
 
@@ -1090,6 +1115,8 @@ def generate_html(characters):
                 <option value="class">Class</option>
                 <option value="server">Server</option>
                 <option value="price">Listed Price</option>
+                <option value="last_price">Last Known Price</option>
+                <option value="value">Price per 100k Power</option>
                 <option value="nft_id">NFT ID</option>
             </select>
 
@@ -1106,6 +1133,27 @@ def generate_html(characters):
          Results
     ===================================================== -->
 
+    <div id="scanSummary" class="scan-summary" aria-live="polite"></div>
+    <p><a class="nft-link" href="graph.html">Explore the ownership graph</a> · Follow connections between NFTs and current or previous wallets.</p>
+    <div class="market-filter">
+        <label for="marketFilter">Availability</label>
+        <select id="marketFilter" onchange="searchCharacters()">
+            <option value="all">All characters</option>
+            <option value="listed">Listed for sale</option>
+            <option value="bid">Bidding available</option>
+            <option value="offer">Offers available</option>
+            <option value="unknown">Unknown</option>
+        </select>
+        <label>Class <select id="classFilter" onchange="searchCharacters()"><option value="">All classes</option></select></label>
+        <label>Server <select id="serverFilter" onchange="searchCharacters()"><option value="">All servers</option></select></label>
+        <label>Currency <select id="currencyFilter" onchange="searchCharacters()"><option value="">All currencies</option></select></label>
+        <label>Price type <select id="priceType" onchange="searchCharacters()"><option value="listed">Listed</option><option value="last">Last known</option></select></label>
+        <label>Min price <input id="minPrice" type="number" min="0" step="any" oninput="searchCharacters()" placeholder="Any"></label>
+        <label>Max price <input id="maxPrice" type="number" min="0" step="any" oninput="searchCharacters()" placeholder="Any"></label>
+        <label>Freshness <select id="freshnessFilter" onchange="searchCharacters()"><option value="">Any age</option><option value="fresh">Checked within 24h</option><option value="stale">Outdated</option><option value="failed">Check failed</option><option value="unknown">Never checked</option></select></label>
+        <label><input id="favoritesOnly" type="checkbox" onchange="searchCharacters()"> Favorites only</label>
+    </div>
+    <div id="pagination" class="pagination"></div>
     <div class="table-card">
 
         <div
@@ -1119,10 +1167,18 @@ def generate_html(characters):
 
     </div>
 
+    <dialog id="characterDetails" aria-labelledby="detailsTitle">
+        <button class="secondary-button close-details" onclick="document.getElementById('characterDetails').close()">Close</button>
+        <div id="detailsContent"></div>
+    </dialog>
+
 
     <div class="footer">
         Legend of YMIR NFT Character Index · Refreshed __GENERATED_AT__<br>
-        Price is the current marketplace starting price when available.
+        Marketplace data is a snapshot, not live. Check WEMIX before bidding or offering.<br>
+        Prices are token amounts (currency contract on hover). Last known prices can be previous marketplace prices or archived listings, not confirmed sales.<br>
+        Name history records observations by NFT ID; dates are scan times, not exact rename times. Earlier history may be unavailable.
+        <br>Wallet links cover indexed YMIR characters only. Shared wallets do not prove a shared player; marketplaces and custodians may hold NFTs for others.
     </div>
 
 
@@ -1130,490 +1186,7 @@ def generate_html(characters):
 
 
 <script>
-
-
-// ============================================================
-// Data
-// ============================================================
-
-const characters = __CHARACTER_DATA__;
-
-const BASE_URL = "__BASE_URL__";
-
-let visibleCharacters = [...characters];
-let sortAscending = false;
-
-
-// ============================================================
-// Helpers
-// ============================================================
-
-function escapeHtml(value) {
-
-    return String(value)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
-
-}
-
-
-function gpToNumber(gp) {
-
-    if (!gp) {
-        return 0;
-    }
-
-    return Number(
-        String(gp).replaceAll(",", "")
-    ) || 0;
-
-}
-
-
-function priceToNumber(price) {
-
-    if (!price) {
-        return null;
-    }
-
-    const normalized = String(price)
-        .replaceAll(",", "")
-        .replace(/[^0-9.]/g, "");
-
-    if (!normalized) {
-        return null;
-    }
-
-    const value = Number(normalized);
-
-    return Number.isFinite(value) ? value : null;
-
-}
-
-
-function compareText(a, b) {
-
-    return String(a || "").localeCompare(
-        String(b || ""),
-        undefined,
-        {numeric: true, sensitivity: "base"}
-    );
-
-}
-
-
-function sortedCharacters(data) {
-
-    const field = document.getElementById("sortField").value;
-    const direction = sortAscending ? 1 : -1;
-
-    return [...data].sort((a, b) => {
-
-        let comparison = 0;
-
-        if (field === "power") {
-            comparison = gpToNumber(a.gp) - gpToNumber(b.gp);
-        } else if (field === "name") {
-            comparison = compareText(a.character_name, b.character_name);
-        } else if (field === "class") {
-            comparison = compareText(a.character_class, b.character_class);
-        } else if (field === "server") {
-            comparison = compareText(a.server, b.server);
-        } else if (field === "price") {
-
-            const priceA = priceToNumber(a.starting_price);
-            const priceB = priceToNumber(b.starting_price);
-
-            if (priceA === null && priceB === null) {
-                comparison = 0;
-            } else if (priceA === null) {
-                return 1;
-            } else if (priceB === null) {
-                return -1;
-            } else {
-                comparison = priceA - priceB;
-            }
-
-        } else {
-            comparison = Number(a.nft_id) - Number(b.nft_id);
-        }
-
-        return comparison * direction;
-
-    });
-
-}
-
-
-function updateSortDirectionLabel() {
-
-    const field = document.getElementById("sortField").value;
-    const button = document.getElementById("sortDirection");
-    const alphabetical = field === "name" || field === "class" || field === "server";
-
-    button.textContent = alphabetical
-        ? (sortAscending ? "A → Z" : "Z → A")
-        : (sortAscending ? "Low → High" : "High → Low");
-
-}
-
-
-function applySort() {
-
-    updateSortDirectionLabel();
-    createTable(sortedCharacters(visibleCharacters));
-
-}
-
-
-function toggleSortDirection() {
-
-    sortAscending = !sortAscending;
-    applySort();
-
-}
-
-
-// ============================================================
-// Create Table
-// ============================================================
-
-function createTable(data) {
-
-    const results =
-        document.getElementById("results");
-
-    const resultCount =
-        document.getElementById("resultCount");
-
-
-    // --------------------------------------------------------
-    // Empty
-    // --------------------------------------------------------
-
-    if (data.length === 0) {
-
-        results.innerHTML = `
-            <div class="empty">
-
-                <div class="empty-title">
-                    No characters found
-                </div>
-
-                Try another character name or server.
-
-            </div>
-        `;
-
-        resultCount.innerHTML =
-            `<span class="result-number">0</span> characters found`;
-
-        return;
-    }
-
-
-    // --------------------------------------------------------
-    // Count
-    // --------------------------------------------------------
-
-    resultCount.innerHTML =
-        `<span class="result-number">
-            ${data.length.toLocaleString()}
-        </span>
-        characters found`;
-
-
-    // --------------------------------------------------------
-    // Table
-    // --------------------------------------------------------
-
-    let html = `
-
-        <table>
-
-            <thead>
-
-                <tr>
-
-                    <th class="col-id">
-                        NFT ID
-                    </th>
-
-                    <th class="col-name">
-                        Character Name
-                    </th>
-
-                    <th class="col-class">
-                        Class
-                    </th>
-
-                    <th class="col-server">
-                        Server
-                    </th>
-
-                    <th class="col-gp">
-                        Power
-                    </th>
-
-                    <th class="col-price">
-                        Listed Price
-                    </th>
-
-                    <th class="col-link">
-                        Link
-                    </th>
-
-                </tr>
-
-            </thead>
-
-
-            <tbody>
-
-    `;
-
-
-    // --------------------------------------------------------
-    // Rows
-    // --------------------------------------------------------
-
-    for (const character of data) {
-
-        const nftId =
-            character.nft_id;
-
-
-        const characterName =
-            escapeHtml(
-                character.character_name
-            );
-
-
-        const server =
-            escapeHtml(
-                character.server || "Unknown"
-            );
-
-
-        const characterClass =
-            escapeHtml(
-                character.character_class || "Unknown"
-            );
-
-
-        const gp =
-            escapeHtml(
-                character.gp || "-"
-            );
-
-
-        const hasPrice = Boolean(
-            character.starting_price
-        );
-
-
-        const startingPrice =
-            escapeHtml(
-                character.starting_price || "Not listed"
-            );
-
-
-        const url =
-            BASE_URL +
-            encodeURIComponent(nftId);
-
-
-        html += `
-
-            <tr>
-
-                <td class="id">
-                    ${nftId}
-                </td>
-
-
-                <td class="character-name">
-                    ${characterName}
-                </td>
-
-
-                <td>
-
-                    <span class="class-badge">
-                        ${characterClass}
-                    </span>
-
-                </td>
-
-
-                <td>
-
-                    <span class="server-badge">
-                        ${server}
-                    </span>
-
-                </td>
-
-
-                <td class="gp">
-                    ${gp}
-                </td>
-
-
-                <td class="price ${hasPrice ? "" : "not-listed"}">
-                    ${startingPrice}
-                </td>
-
-
-                <td>
-
-                    <a
-                        class="nft-link"
-                        href="${url}"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        View NFT
-                        <span class="arrow">↗</span>
-                    </a>
-
-                </td>
-
-            </tr>
-
-        `;
-
-    }
-
-
-    html += `
-
-            </tbody>
-
-        </table>
-
-    `;
-
-
-    results.innerHTML = html;
-
-}
-
-
-// ============================================================
-// Search
-// ============================================================
-
-function searchCharacters() {
-
-    const query = document
-        .getElementById("searchInput")
-        .value
-        .trim()
-        .toLowerCase();
-
-
-    if (!query) {
-        showAll();
-        return;
-    }
-
-
-    const matches = characters.filter(
-        character =>
-
-            character.character_name
-                .toLowerCase()
-                .includes(query)
-
-            ||
-
-            (character.server || "")
-                .toLowerCase()
-                .includes(query)
-
-            ||
-
-            (character.character_class || "")
-                .toLowerCase()
-                .includes(query)
-
-    );
-
-
-    visibleCharacters = matches;
-    applySort();
-
-}
-
-
-// ============================================================
-// Show All
-// ============================================================
-
-function showAll() {
-
-    visibleCharacters = [...characters];
-    applySort();
-
-}
-
-
-// ============================================================
-// Clear
-// ============================================================
-
-function clearResults() {
-
-    document
-        .getElementById("searchInput")
-        .value = "";
-
-
-    document.getElementById("sortField").value = "power";
-    sortAscending = false;
-    showAll();
-
-}
-
-
-// ============================================================
-// Live Search
-// ============================================================
-
-document
-    .getElementById("searchInput")
-    .addEventListener(
-        "input",
-        searchCharacters
-    );
-
-
-// Show every character immediately instead of starting with hidden rows.
-showAll();
-
-
-// ============================================================
-// Enter
-// ============================================================
-
-document
-    .getElementById("searchInput")
-    .addEventListener(
-        "keydown",
-        event => {
-
-            if (event.key === "Enter") {
-                searchCharacters();
-            }
-
-        }
-    );
-
-
+__APP_SCRIPT__
 </script>
 
 </body>
@@ -1626,6 +1199,12 @@ document
     # Embed data
     # ========================================================
 
+    html = html.replace("__APP_SCRIPT__", Path(__file__).with_name("app.js").read_text(encoding="utf-8"))
+    html = html.replace("__DASHBOARD_CSS__", Path(__file__).with_name("dashboard.css").read_text(encoding="utf-8"))
+    report_path = Path("scan_report.json")
+    report = json.loads(report_path.read_text(encoding="utf-8")) if report_path.exists() else {}
+    html = html.replace("__SCAN_REPORT__", json.dumps(report, ensure_ascii=False).replace("</", "<\\/"))
+
     html = html.replace(
         "__CHARACTER_DATA__",
         character_json,
@@ -1636,6 +1215,7 @@ document
         "__BASE_URL__",
         BASE_URL,
     )
+    html = html.replace("__MARKET_URL__", MARKET_URL)
 
 
     html = html.replace(
@@ -1679,6 +1259,9 @@ def main():
         html,
         encoding="utf-8",
     )
+
+    from generate_graph import generate_graph
+    Path("graph.html").write_text(generate_graph(characters), encoding="utf-8")
 
 
     print(

@@ -1,0 +1,101 @@
+"""Read the public WEMIX detail page's server-rendered NFT state."""
+import json
+import time
+import re
+from decimal import Decimal, InvalidOperation, localcontext
+from bs4 import BeautifulSoup
+
+COLLECTION = "0x58f803dcd53edd804cece0d59166785fdd4735f9"
+BASE_URL = f"https://wemixplay.com/nft/marketplace/detail/{COLLECTION}/"
+# Verified against the rendered 1,200 price and raw 1200 * 10**18 amount.
+TOKEN_DECIMALS = {"0x7d72b22a74a216af4a002a1095c8c707d6ec1c5f": 18}
+API_URL = "https://api.wemixplay.com"
+
+
+def wallet_address(value):
+    value = str(value or "").lower()
+    return value if re.fullmatch(r"0x[0-9a-f]{40}", value) and value != "0x" + "0" * 40 else ""
+
+
+def parse_transfers(payload, nft_id):
+    if not isinstance(payload, dict) or payload.get("result") != 0:
+        raise ValueError("Marketplace ownership history request was unsuccessful")
+    data = payload.get("data", {})
+    rows = data.get("history")
+    if not isinstance(rows, list) or not isinstance(data.get("totalCount"), int):
+        raise ValueError("Marketplace ownership history schema changed")
+    events = []
+    for row in rows:
+        if str(row.get("tid")) != str(nft_id):
+            raise ValueError("Ownership history contains a different NFT")
+        tx = str(row.get("txHash", "")).lower()
+        if not re.fullmatch(r"0x[0-9a-f]{64}", tx) or not isinstance(row.get("date"), (int, float)):
+            raise ValueError("Ownership history contains an invalid transaction")
+        events.append({"tx_hash": tx, "event": str(row.get("event", "Unknown")),
+                       "from": wallet_address(row.get("from")), "to": wallet_address(row.get("to")),
+                       "at": row["date"], "chain": str(row.get("chainName", "")),
+                       "price": token_price(row.get("value"), row.get("payment")),
+                       "currency": row.get("payment", ""), "source": "WEMIX transfer history"})
+    return {"events": events, "total_count": data["totalCount"],
+            "all_returned": len(rows) == data["totalCount"]}
+
+
+def fetch_transfers(session, nft_id):
+    # Read-only query used by WEMIX's public NFT history table; no wallet login.
+    response = session.post(API_URL + "/market/order/trade-history",
+                            json={"address": COLLECTION, "tid": nft_id}, timeout=(10, 45))
+    response.raise_for_status()
+    return parse_transfers(response.json(), nft_id)
+
+
+def token_price(price, currency):
+    if not isinstance(price, dict) or price.get("valid") is not True:
+        return ""
+    decimals = TOKEN_DECIMALS.get(str(currency).lower())
+    if decimals is None:
+        return ""  # Do not guess the denomination of a new token.
+    try:
+        with localcontext() as ctx:
+            ctx.prec = 100
+            value = Decimal(price["amount"]) / Decimal(10) ** decimals
+            if not value.is_finite() or value < 0:
+                return ""
+            return format(value, ",f").rstrip("0").rstrip(".") if "." in format(value, ",f") else format(value, ",f")
+    except (InvalidOperation, KeyError, TypeError, ValueError):
+        return ""
+
+
+def parse_marketplace(html, nft_id, now=None):
+    soup = BeautifulSoup(html, "html.parser")
+    script = soup.find("script", id="__NEXT_DATA__")
+    data = json.loads(script.string) if script else {}
+    info = data.get("props", {}).get("pageProps", {}).get("nftInfo")
+    if not isinstance(info, dict) or str(info.get("tid")) != str(nft_id) or str(info.get("collectionAddress", "")).lower() != COLLECTION:
+        raise ValueError("Marketplace NFT data missing or mismatched")
+    flags = info.get("currentStatus") or info.get("nftConditionStatus") or {}
+    blocked = any(info.get(key) is True for key in ("isHide", "isBlock", "isBurned"))
+    auction = flags.get("isAuction") is True
+    sale = flags.get("isSales") is True
+    deadline = info.get("auctionEndTime")
+    ended = auction and isinstance(deadline, (int, float)) and deadline > 0 and deadline <= (time.time() if now is None else now)
+    bid = flags.get("isBidOngoing") is True or flags.get("isBidding") is True
+    offer = flags.get("isPossibleOffer")
+    status = ("Unavailable" if blocked else "Auction ended" if ended else "Auction" if auction else "Listed" if sale
+              else "Open to offers" if offer is True else "Not listed" if info.get("onSale") == 0 else "Unknown")
+    return {
+        "owner": wallet_address(info.get("owner")),
+        "status": status,
+        "listed_price": token_price(info.get("orderPrice"), info.get("orderCurrency")) if (auction or sale) and not blocked and not ended else "",
+        "listed_currency": info.get("orderCurrency", ""),
+        "previous_price": token_price(info.get("lastPrice"), info.get("lastCurrency")),
+        "previous_currency": info.get("lastCurrency", ""),
+        "can_bid": False if blocked or ended else bid if "isBidOngoing" in flags or "isBidding" in flags else None,
+        "can_offer": False if blocked else offer if isinstance(offer, bool) else None,
+        "auction_end": info.get("auctionEndTime"),
+    }
+
+
+def fetch_marketplace(session, nft_id):
+    response = session.get(BASE_URL + str(nft_id), timeout=(10, 45))
+    response.raise_for_status()
+    return parse_marketplace(response.text, nft_id)

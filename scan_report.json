@@ -1,0 +1,17 @@
+{
+  "checked_at": "2026-11-21T04:30:39.232047+00:00",
+  "attempted": 4,
+  "successful": 4,
+  "archived": 3761,
+  "new_characters": 0,
+  "failed_ids": [],
+  "missing_archived_ids": [],
+  "market_failed_ids": [],
+  "history_failed_ids": [],
+  "discovery": {
+    "mode": "selected IDs",
+    "start": 5001,
+    "last_probed": 5000,
+    "limit_reached": false
+  }
+}

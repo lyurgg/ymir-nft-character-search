@@ -1,0 +1,26 @@
+.market-filter { flex-wrap: wrap; align-items: end; gap: 12px 16px; }
+.market-filter label { display: flex; flex-direction: column; gap: 5px; font-size: 14px; }
+.market-filter label:has(input[type=checkbox]) { flex-direction: row; align-items: center; padding: 10px 0; }
+.market-filter input[type=number] { width: 110px; padding: 10px; border: 1px solid var(--line-soft); border-radius: 6px; background: var(--bg-raised); color: var(--ink); }
+.scan-summary { margin: 16px 0; padding: 14px; font-size: 14px; line-height: 1.6; border: 1px solid var(--line-soft); border-radius: 8px; }
+.freshness { display: inline-block; padding: 2px 7px; border-radius: 4px; background: #e2eedf; color: #315b2b; font-size: 14px; }
+.freshness.stale, .freshness.failed { background: #fff0d7; color: #7c4c13; }
+.freshness.unknown { background: #e9e5de; color: #605a50; }
+.pagination { display: flex; gap: 14px; align-items: center; margin: 14px 0; font-size: 14px; }
+button:disabled { opacity: .45; cursor: default; }
+.detail-trigger, .wallet-link, .favorite-button { background: none; border: 0; color: inherit; font: inherit; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; text-align: left; padding: 3px 0; }
+.favorite-button { margin-right: 8px; text-decoration: none; color: var(--gold-dim); font-size: 20px; }
+dialog { width: min(1000px, 95vw); max-height: 90vh; overflow: auto; padding: 24px; border: 2px solid #8e7b5e; border-radius: 12px; background: #fcf5e6; color: #302b24; font-family: var(--sans); font-size: 16px; }
+dialog::backdrop { background: #0009; }
+dialog h2 { font-size: 24px; padding-right: 90px; }
+dialog h3 { margin-top: 26px; font-size: 19px; }
+dialog .close-details { float: right; }
+dialog p, dialog li { line-height: 1.6; }
+dialog .detail-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+dialog .wallet { overflow-wrap: anywhere; font-family: monospace; font-size: 14px; }
+dialog .timeline { padding-left: 22px; }
+dialog .timeline li { padding-bottom: 14px; }
+dialog .muted { color: #6e6254; font-size: 14px; }
+dialog .related-list { padding-left: 20px; }
+dialog .related-list li { margin-bottom: 12px; }
+@media (max-width: 700px) { dialog .detail-columns { grid-template-columns: 1fr; } .pagination { flex-wrap: wrap; } }

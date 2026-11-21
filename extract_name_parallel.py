@@ -3,6 +3,12 @@ import random
 import threading
 import time
 import requests
+import argparse
+import json
+from pathlib import Path
+from datetime import datetime, timezone
+from character_history import load_history, observe, save_history, record_scan_failure
+from marketplace import fetch_marketplace, fetch_transfers
 
 from bs4 import BeautifulSoup
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -17,8 +23,8 @@ from urllib3.util.retry import Retry
 START_NFT_ID = 1
 END_NFT_ID = 5000
 
-MAX_WORKERS = 25
-MAX_RETRIES = 5
+MAX_WORKERS = 8
+MAX_RETRIES = 2
 
 OUTPUT_CSV = "characters.csv"
 
@@ -120,6 +126,13 @@ def get_streamed_field(soup: BeautifulSoup, field_name: str) -> str | None:
 
     if property_element is None:
         return None
+
+    # New markup renders the complete label/value row inside S:<id>.
+    direct_value = property_element.parent.find(
+        "div", class_=lambda classes: classes and "sectionCharacter_value" in classes,
+    )
+    if direct_value is not None:
+        return direct_value.get_text(strip=True) or None
 
 
     streamed_container = property_element.parent
@@ -315,13 +328,22 @@ def get_character_info(nft_id: int):
 
 
         # ====================================================
-        # Current marketplace starting price
+        # YMIR's Starting Price can be a previous price; WEMIX is authoritative.
         # ====================================================
 
-        starting_price = get_streamed_field(
-            soup,
-            "Starting Price",
-        )
+        checked_at = datetime.now(timezone.utc).isoformat()
+        try:
+            market = fetch_marketplace(session, nft_id)
+            market["checked_at"] = checked_at
+        except (requests.RequestException, ValueError, TypeError, KeyError) as error:
+            market = {"status": "Unknown", "error": str(error), "checked_at": None,
+                      "attempted_at": checked_at}
+        starting_price = market.get("listed_price", "")
+        try:
+            transfers = fetch_transfers(session, nft_id)
+            transfers["checked_at"] = datetime.now(timezone.utc).isoformat()
+        except (requests.RequestException, ValueError, TypeError, KeyError) as error:
+            transfers = {"error": str(error), "attempted_at": checked_at}
 
 
         return {
@@ -332,6 +354,9 @@ def get_character_info(nft_id: int):
             "gp": gp,
             "character_class": character_class,
             "starting_price": starting_price,
+            "market": market,
+            "observed_at": checked_at,
+            "transfers": transfers,
             "error": None,
         }
 
@@ -354,163 +379,103 @@ def get_character_info(nft_id: int):
 # Main
 # ============================================================
 
-def main():
-
+def scan_batch(ids, fetch=get_character_info, workers=MAX_WORKERS):
     results = []
-    failed = []
+    with ThreadPoolExecutor(max_workers=workers) as executor:
+        futures = {executor.submit(fetch, nft_id): nft_id for nft_id in ids}
+        for future in as_completed(futures):
+            try:
+                result = future.result()
+            except Exception as error:
+                result = {"nft_id": futures[future], "status": "failed", "error": str(error)}
+            results.append(result)
+    return results
 
 
-    with ThreadPoolExecutor(
-        max_workers=MAX_WORKERS
-    ) as executor:
+def refresh(ids, history):
+    results = scan_batch(ids)
+    # Retry failed source pages separately, without refetching successful pages.
+    failed_ids = [r["nft_id"] for r in results if r["status"] == "failed"]
+    if failed_ids:
+        retries = {r["nft_id"]: r for r in scan_batch(failed_ids)}
+        results = [retries.get(r["nft_id"], r) for r in results]
+    for result in results:
+        nft_id = result["nft_id"]
+        if result["status"] == "found":
+            # Retry market/history independently so a market outage cannot erase data.
+            for key, fetcher in [("market", fetch_marketplace), ("transfers", fetch_transfers)]:
+                if result.get(key, {}).get("error"):
+                    try:
+                        value = fetcher(get_session(), nft_id)
+                        value["checked_at"] = datetime.now(timezone.utc).isoformat()
+                        result[key] = value
+                    except (requests.RequestException, ValueError, TypeError, KeyError):
+                        pass
+            result["starting_price"] = result["market"].get("listed_price", "")
+            observe(history, result, result["observed_at"])
+        else:
+            record_scan_failure(history, nft_id, result["status"], datetime.now(timezone.utc).isoformat())
+        print(f"{nft_id}: {result['status']}", flush=True)
+    return results
 
 
-        futures = {
-
-            executor.submit(
-                get_character_info,
-                nft_id,
-            ): nft_id
-
-            for nft_id in range(
-                START_NFT_ID,
-                END_NFT_ID + 1,
-            )
-        }
+def discovery_frontier(history, minimum=END_NFT_ID):
+    return max([minimum, *(int(nft_id) for nft_id in history)])
 
 
-        total = len(futures)
-
-
-        for i, future in enumerate(
-            as_completed(futures),
-            start=1,
-        ):
-
-            result = future.result()
-
-            nft_id = result["nft_id"]
-
-
-            # =================================================
-            # Found
-            # =================================================
-
-            if result["status"] == "found":
-
-                results.append({
-                    "nft_id": nft_id,
-                    "character_name": result["character_name"],
-                    "server": result["server"],
-                    "gp": result["gp"],
-                    "character_class": result["character_class"],
-                    "starting_price": result["starting_price"],
-                })
-
-
-                print(
-                    f"[{i:4d}/{total}] "
-                    f"{nft_id:4d} -> "
-                    f"{result['character_name']} | "
-                    f"{result['server']} | "
-                    f"{result['gp']} | "
-                    f"{result['character_class']} | "
-                    f"{result['starting_price'] or 'NOT LISTED'}"
-                )
-
-
-            # =================================================
-            # Real not found
-            # =================================================
-
-            elif result["status"] == "not_found":
-
-                print(
-                    f"[{i:4d}/{total}] "
-                    f"{nft_id:4d} -> "
-                    f"NOT FOUND"
-                )
-
-
-            # =================================================
-            # Network failure
-            # =================================================
-
-            else:
-
-                failed.append(
-                    nft_id
-                )
-
-                print(
-                    f"[{i:4d}/{total}] "
-                    f"{nft_id:4d} -> "
-                    f"FAILED: {result['error']}"
-                )
-
-
-    # ========================================================
-    # Sort
-    # ========================================================
-
-    results.sort(
-        key=lambda x: x["nft_id"]
-    )
-
-
-    # ========================================================
-    # Write CSV
-    # ========================================================
-
-    with open(
-        OUTPUT_CSV,
-        "w",
-        newline="",
-        encoding="utf-8",
-    ) as f:
-
-        writer = csv.DictWriter(
-            f,
-            fieldnames=[
-                "nft_id",
-                "character_name",
-                "server",
-                "gp",
-                "character_class",
-                "starting_price",
-            ],
-        )
-
+def main():
+    parser = argparse.ArgumentParser(description="Refresh the archive and discover newer NFT IDs")
+    parser.add_argument("--ids", type=int, nargs="+", help="Refresh selected IDs only")
+    parser.add_argument("--discovery-batch", type=int, default=100)
+    parser.add_argument("--discovery-limit", type=int, default=1000,
+                        help="Maximum new sequential IDs to probe per full run")
+    args = parser.parse_args()
+    if args.discovery_batch < 1 or args.discovery_limit < 1 or (args.ids and min(args.ids) < 1):
+        parser.error("IDs and discovery settings must be positive")
+    history = load_history()
+    before = set(history)
+    frontier = discovery_frontier(history)
+    results = refresh(args.ids if args.ids else range(START_NFT_ID, frontier + 1), history)
+    discovery = {"mode": "selected IDs" if args.ids else "sequential probes",
+                 "start": frontier + 1, "last_probed": frontier, "limit_reached": False}
+    if not args.ids:
+        for offset in range(0, args.discovery_limit, args.discovery_batch):
+            start = frontier + 1 + offset
+            end = min(start + args.discovery_batch, frontier + 1 + args.discovery_limit)
+            batch = refresh(range(start, end), history)
+            results.extend(batch)
+            discovery["last_probed"] = end - 1
+            # Stop at a full batch of empty pages, never at a failed request.
+            if all(r["status"] == "not_found" for r in batch):
+                discovery["stop_reason"] = "Batch of empty NFT pages; higher IDs beyond gaps may exist"
+                break
+        else:
+            discovery["limit_reached"] = True
+            discovery["stop_reason"] = "Discovery budget reached; increase --discovery-limit to probe farther"
+    successful = sum(r["status"] == "found" for r in results)
+    if not successful:
+        raise RuntimeError("No characters fetched; preserving previous archive and scan report")
+    report = {
+        "checked_at": datetime.now(timezone.utc).isoformat(), "attempted": len(results),
+        "successful": successful, "archived": len(history), "new_characters": len(set(history) - before),
+        "failed_ids": [r["nft_id"] for r in results if r["status"] == "failed"],
+        "missing_archived_ids": [r["nft_id"] for r in results if r["status"] == "not_found" and str(r["nft_id"]) in before],
+        "market_failed_ids": [r["nft_id"] for r in results if r.get("market", {}).get("error")],
+        "history_failed_ids": [r["nft_id"] for r in results if r.get("transfers", {}).get("error")],
+        "discovery": discovery,
+    }
+    fields = ["nft_id", "character_name", "server", "gp", "character_class", "starting_price"]
+    temporary = Path(OUTPUT_CSV).with_suffix(".tmp")
+    with temporary.open("w", newline="", encoding="utf-8") as target:
+        writer = csv.DictWriter(target, fieldnames=fields)
         writer.writeheader()
-
-        writer.writerows(
-            results
-        )
-
-
-    # ========================================================
-    # Summary
-    # ========================================================
-
-    print()
-
-    print(
-        f"Found {len(results):,} characters."
-    )
-
-    print(
-        f"Failed requests: {len(failed):,}"
-    )
-
-    if failed:
-
-        print(
-            f"Failed NFT IDs: {failed}"
-        )
-
-    print(
-        f"Saved to {OUTPUT_CSV}"
-    )
+        for nft_id, entry in sorted(history.items(), key=lambda item: int(item[0])):
+            old = entry.get("character", {})
+            writer.writerow({key: int(nft_id) if key == "nft_id" else old.get(key, "") for key in fields})
+    save_history(history)
+    temporary.replace(OUTPUT_CSV)
+    Path("scan_report.json").write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
+    print(json.dumps(report, indent=2))
 
 
 if __name__ == "__main__":
