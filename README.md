@@ -10,9 +10,15 @@ YMIR's "Starting Price" can remain on an NFT after its listing ends. Current
 listing state and character metadata come from WEMIX's public JSON NFT detail endpoint.
 This avoids downloading and parsing large HTML pages, including the YMIR pages
 that may not expose newer characters.
-Listed price is shown only for a sale or an unexpired auction. Bid and offer
+Listed price is shown for a sale or an available/upcoming auction. Bid and offer
 availability use the marketplace's explicit flags. Missing data means Unknown.
-Expired auction deadlines override stale bidding flags.
+Auction deadlines are applied only when WEMIX reports an active bidding countdown.
+Before the first bid, `auctionEndTime` can contain a past provisional timestamp
+even though bidding is available. It must not mark the auction ended or hide its
+price. These auctions show “Awaiting first bid · no active countdown.” A real active
+countdown can still expire between scans, and the browser handles that separately.
+NFT #289 (5Flower), captured on November 21, 2026, is a regression case: 21,000
+starting bid, bidding available, offers unavailable, and no active countdown.
 
 Last known price preserves a previously observed listing, the marketplace's
 previous price, or an existing archive price. It is not proof of a completed sale.

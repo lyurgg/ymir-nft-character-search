@@ -26,6 +26,38 @@ def market_html(**changes):
 
 
 class MarketTests(unittest.TestCase):
+    def test_289_awaiting_first_bid_is_not_ended_by_provisional_deadline(self):
+        # Real WEMIX #289 state captured 2026-11-21: visible Bid button, No Bids,
+        # 21,000 starting price, no offer button and no displayed countdown.
+        flags = dict(isAuction=True, isBidding=True, isBidOngoing=False,
+                     isShowDetailBidCountDown=False, isBidSoon=False, isPossibleOffer=False)
+        html = market_html(tid=289, currentStatus=flags, auctionEndTime=1795098659,
+                           orderPrice=dict(amount="21000000000000000000000", valid=True))
+        market = parse_marketplace(html, 289, now=1795243171)
+        self.assertEqual(market["status"], "Auction")
+        self.assertEqual(market["listed_price"], "21,000")
+        self.assertTrue(market["can_bid"])
+        self.assertFalse(market["can_offer"])
+        self.assertFalse(market["auction_countdown_active"])
+        self.assertIsNone(market["auction_end"])
+        self.assertEqual(market["auction_phase"], "awaiting_bid")
+
+    def test_live_countdown_and_upcoming_auction_are_different_states(self):
+        active = parse_marketplace(market_html(currentStatus=dict(
+            isAuction=True, isBidding=True, isBidOngoing=True, isPossibleOffer=False),
+            auctionEndTime=200), 8, now=100)
+        self.assertTrue(active["auction_countdown_active"])
+        self.assertTrue(active["can_bid"])
+        self.assertEqual(active["auction_phase"], "bidding")
+        upcoming = parse_marketplace(market_html(currentStatus=dict(
+            isAuction=True, isBidding=True, isBidSoon=True, isShowDetailBidCountDown=True),
+            auctionEndTime=90, order=dict(startTime=150)), 8, now=100)
+        self.assertEqual(upcoming["status"], "Auction upcoming")
+        self.assertFalse(upcoming["can_bid"])
+        self.assertEqual(upcoming["listed_price"], "1,200")
+        self.assertIsNone(upcoming["auction_end"])
+        self.assertEqual(upcoming["auction_start"], 150)
+
     def test_previous_price_is_not_listing(self):
         market = parse_marketplace(market_html(), 8)
         self.assertEqual(market["listed_price"], "")

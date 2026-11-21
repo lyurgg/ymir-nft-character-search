@@ -45,3 +45,10 @@ assert.equal((elements.results.innerHTML.match(/<tr>/g)||[]).length,101);
 run('changePage(1)'); assert.match(elements.pagination.innerHTML,/Page 2 of 2/);
 assert.equal((elements.results.innerHTML.match(/<tr>/g)||[]).length,26);
 console.log('Frontend checks passed: four wallet relationships, wallet and former-name search, prices, freshness, details, favorites, escaping, and pagination.');
+
+// A pre-bid auction can carry an old provisional deadline, as with real NFT #289.
+assert.equal(run(`marketSnapshot({market:{status:'Auction',auction_end:100,auction_countdown_active:false,listed_price:'21,000',can_bid:true}}).listed_price`),'21,000');
+assert.equal(run(`marketSnapshot({market:{status:'Auction',auction_end:100,auction_countdown_active:false,listed_price:'21,000',can_bid:true}}).can_bid`),true);
+assert.equal(run(`marketSnapshot({market:{status:'Auction',auction_end:100,auction_countdown_active:true,listed_price:'21,000',can_bid:true}}).status`),'Auction ended');
+assert.match(run(`marketDetails({market:{status:'Auction',listed_price:'21,000',can_bid:true,can_offer:false,auction_phase:'awaiting_bid'}})`),/Listed: 21,000/);
+assert.match(run(`marketDetails({market:{status:'Auction',listed_price:'21,000',can_bid:true,can_offer:false,auction_phase:'awaiting_bid'}})`),/Bid: Available · Offer: Unavailable/);

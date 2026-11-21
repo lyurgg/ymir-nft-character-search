@@ -197,17 +197,19 @@ function showDetails(nftId) {
 
 function marketSnapshot(character) {
     const market = {...(character.market || {})};
-    if (market.status === "Auction" && market.auction_end && market.auction_end * 1000 <= Date.now()) {
+    if (market.status === "Auction" && market.auction_countdown_active === true && market.auction_end && market.auction_end * 1000 <= Date.now()) {
         market.status = "Auction ended";
         market.can_bid = false;
+        market.can_offer = false;
         market.listed_price = "";
+        market.auction_phase = "ended";
     }
     return market;
 }
 
 function marketDetails(character) {
     const market = marketSnapshot(character);
-    const listed = market.status === "Auction ended" ? "" : character.starting_price;
+    const listed = market.listed_price;
     return `<div class="market-details">
         ${freshnessLabel(character)}<br>
         <strong>${escapeHtml(market.status || "Unknown")}</strong>
@@ -215,6 +217,8 @@ function marketDetails(character) {
         <div title="${escapeHtml(character.last_known_currency || '')}">Last known: ${escapeHtml(character.last_known_price || "—")}</div>
         <small>${escapeHtml(character.last_known_price_source || "No price recorded")}${character.last_known_price ? " · " + escapeHtml(observedDate(character.last_known_price_at)) : ""}</small>
         <div>Bid: ${availability(market.can_bid)} · Offer: ${availability(market.can_offer)}</div>
+        ${market.auction_phase === 'awaiting_bid' ? '<small>Awaiting first bid · no active countdown</small>' : ''}
+        ${market.auction_start ? `<small>Bidding starts: ${escapeHtml(observedDate(market.auction_start * 1000))}</small>` : ''}
         ${listingValue(character) !== null ? `<small>Per 100k power: ${listingValue(character).toLocaleString(undefined, {maximumFractionDigits: 2})}</small>` : ''}
         ${market.auction_end ? `<small>Auction ends: ${escapeHtml(observedDate(market.auction_end * 1000))}</small>` : ""}
         <small>${market.checked_at ? "Checked: " + escapeHtml(observedDate(market.checked_at)) : "Marketplace check unavailable"}</small>

@@ -2,6 +2,7 @@
 import json
 import time
 import re
+import math
 from decimal import Decimal, InvalidOperation, localcontext
 from bs4 import BeautifulSoup
 
@@ -10,6 +11,7 @@ BASE_URL = f"https://wemixplay.com/nft/marketplace/detail/{COLLECTION}/"
 # Verified against the rendered 1,200 price and raw 1200 * 10**18 amount.
 TOKEN_DECIMALS = {"0x7d72b22a74a216af4a002a1095c8c707d6ec1c5f": 18}
 API_URL = "https://api.wemixplay.com"
+MARKET_SCHEMA_VERSION = 2
 
 
 def wallet_address(value):
@@ -81,21 +83,34 @@ def parse_market_info(info, nft_id, now=None):
     auction = flags.get("isAuction") is True
     sale = flags.get("isSales") is True
     deadline = info.get("auctionEndTime")
-    ended = auction and isinstance(deadline, (int, float)) and deadline > 0 and deadline <= (time.time() if now is None else now)
+    countdown = flags.get("isBidOngoing") is True or flags.get("isShowDetailBidCountDown") is True
+    upcoming = flags.get("isBidSoon") is True
+    # Before the first bid WEMIX can supply an old provisional auctionEndTime.
+    # Its UI only uses that value when a bidding countdown is active.
+    valid_deadline = isinstance(deadline, (int, float)) and math.isfinite(deadline) and deadline > 0
+    ended = auction and countdown and not upcoming and valid_deadline and deadline <= (time.time() if now is None else now)
+    order = info.get("order") or {}
+    cancelled = bool(order.get("canceledTime"))
+    sold = flags.get("isBidSuccess") is True or bool(order.get("concludedTime"))
     bid = flags.get("isBidOngoing") is True or flags.get("isBidding") is True
     offer = flags.get("isPossibleOffer")
-    status = ("Unavailable" if blocked else "Auction ended" if ended else "Auction" if auction else "Listed" if sale
+    status = ("Unavailable" if blocked else "Listing cancelled" if cancelled else "Sold" if sold else "Auction upcoming" if auction and upcoming else "Auction ended" if ended else "Auction" if auction else "Listed" if sale
               else "Open to offers" if offer is True else "Not listed" if info.get("onSale") == 0 else "Unknown")
+    closed = blocked or cancelled or sold or ended
     return {
+        "schema_version": MARKET_SCHEMA_VERSION,
         "owner": wallet_address(info.get("owner")),
         "status": status,
-        "listed_price": token_price(info.get("orderPrice"), info.get("orderCurrency")) if (auction or sale) and not blocked and not ended else "",
-        "listed_currency": info.get("orderCurrency", ""),
+        "listed_price": token_price(info.get("orderPrice") or order.get("price"), info.get("orderCurrency") or order.get("payment")) if (auction or sale) and not closed else "",
+        "listed_currency": info.get("orderCurrency") or order.get("payment", ""),
         "previous_price": token_price(info.get("lastPrice"), info.get("lastCurrency")),
         "previous_currency": info.get("lastCurrency", ""),
-        "can_bid": False if blocked or ended else bid if "isBidOngoing" in flags or "isBidding" in flags else None,
-        "can_offer": False if blocked else offer if isinstance(offer, bool) else None,
-        "auction_end": info.get("auctionEndTime"),
+        "can_bid": False if closed or upcoming else bid if "isBidOngoing" in flags or "isBidding" in flags else None,
+        "can_offer": False if closed else offer if isinstance(offer, bool) else None,
+        "auction_end": deadline if auction and countdown and not upcoming and valid_deadline else None,
+        "auction_countdown_active": bool(auction and countdown and not upcoming and valid_deadline),
+        "auction_phase": "upcoming" if upcoming else "ended" if ended else "bidding" if auction and countdown else "awaiting_bid" if auction and bid else None,
+        "auction_start": order.get("startTime") if upcoming else None,
     }
 
 
