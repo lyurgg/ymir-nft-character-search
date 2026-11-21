@@ -18,10 +18,8 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  build-and-deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  build:
+    name: Build and upload website
     runs-on: ubuntu-latest
     timeout-minutes: 120
     steps:
@@ -77,6 +75,17 @@ jobs:
         with:
           path: "_site"
 
+  # Upload and deployment must be separate jobs. Deploying immediately after
+  # upload can return zero artifacts while GitHub's artifact index catches up.
+  deploy:
+    name: Deploy website
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
