@@ -641,7 +641,7 @@ nft_id,character_name,server,gp,character_class,starting_price
 643,Dodgeee,HERO,,Archer,
 644,bdeb1elツ,Sombra,"517,401",Archer,
 645,Hasbic,Cadmus,,Archer,
-646,กsะบัJลม,Kings,"310,121",Berserker,420
+646,กsะบัJลม,Kings,"310,121",Berserker,
 647,FeelQ,NAEU004,,Warlord,
 648,メAeryn,Kings,"452,139",Archer,
 649,KappaRossa,ASIA044,"271,490",Archer,
@@ -3321,7 +3321,7 @@ nft_id,character_name,server,gp,character_class,starting_price
 3323,Warmachine,NAEU005,"228,786",Archer,
 3324,xGONx,Chess,"285,055",Volva,
 3325,션Senpai,Kings,"367,269",Archer,
-3326,Syllabear,ISEKAI,"377,281",Assassin,
+3326,Syllabear,ISEKAI,"377,818",Assassin,
 3327,KanTeksta,Moscow,"164,004",Archer,
 3328,Foz,ASTAROTH,"186,406",Archer,
 3329,Aeonie,PROSGARD,"157,865",Skald,
@@ -4167,7 +4167,7 @@ nft_id,character_name,server,gp,character_class,starting_price
 4169,JoyGirl,STEAM003,"263,803",Rune Fighter,
 4170,Adriannnn,Kings,"792,160",Assassin,
 4171,cyyyd,Tokyo,"271,316",Archer,
-4172,NFT01,Kings,"473,000",Archer,"25,000"
+4172,NFT01,Kings,"473,000",Archer,"20,000"
 4173,Beardbrand,sapPHire,"314,109",Warlord,
 4174,Jinnnn,ISEKAI,"263,503",Warlord,
 4175,xFALL,Kings,"284,728",Archer,999
