@@ -1,7 +1,7 @@
 {
   "_format": "ymir-split-json-v1",
   "kind": "array-field",
-  "record_count": 52032,
+  "record_count": 69423,
   "parts": [
     {
       "file": "funding_history.part-001-dd855902ee43.json",
@@ -100,10 +100,46 @@
       "records": 3152
     },
     {
-      "file": "funding_history.part-017-c5246bada049.json",
-      "bytes": 515913,
-      "sha256": "c5246bada049cba5fac4ad75dfaa1e2b63cd8c91cad766b2b5a32fe163b69461",
-      "records": 1625
+      "file": "funding_history.part-017-70e6d2f66ffc.json",
+      "bytes": 999879,
+      "sha256": "70e6d2f66ffc22edf932d3decd08934a17db68c2e191967f5645b4eb48de426f",
+      "records": 3150
+    },
+    {
+      "file": "funding_history.part-018-61d81f03d210.json",
+      "bytes": 999844,
+      "sha256": "61d81f03d210345f690c8a7a04f6b63759958a507472e92d129f4b521ac6484d",
+      "records": 3147
+    },
+    {
+      "file": "funding_history.part-019-0521dc3ca1da.json",
+      "bytes": 999750,
+      "sha256": "0521dc3ca1dae5c800a83393b870387e76704ba1e02a8d6ff8e36e863412e7b5",
+      "records": 3148
+    },
+    {
+      "file": "funding_history.part-020-05ccfad02c5e.json",
+      "bytes": 999684,
+      "sha256": "05ccfad02c5e7e3df4b39a809998f2b76cb91040d0ca43aece80d9d8ebf4543c",
+      "records": 3150
+    },
+    {
+      "file": "funding_history.part-021-f9f80dce2d6a.json",
+      "bytes": 999810,
+      "sha256": "f9f80dce2d6a93f474bc84971c892f4948c0828053975647a041ce256a0d016d",
+      "records": 3151
+    },
+    {
+      "file": "funding_history.part-022-243e84f2e59b.json",
+      "bytes": 999702,
+      "sha256": "243e84f2e59b924f05e21b468fb18f62d878b76e9c981229557b0035558f698e",
+      "records": 3146
+    },
+    {
+      "file": "funding_history.part-023-ceafbaa0a57a.json",
+      "bytes": 39321,
+      "sha256": "ceafbaa0a57a83d20672ea4e6bb32a1c34fae33a3ca1f46b85b43d5793740728",
+      "records": 124
     }
   ],
   "field": "transfers",
@@ -111,46 +147,46 @@
     "schema_version": 1,
     "chain_id": 1111,
     "asset": "WEMIX",
-    "checked_at": "2026-11-21T21:33:22.446516+00:00",
+    "checked_at": "2026-11-22T21:40:34.059469+00:00",
     "coverage": [
       {
         "wallet": "0x61f41cf8304d52085bb03d9f1b66921a24e9f54d",
         "complete": true,
         "records_checked": 24,
-        "attempted_at": "2026-11-21T21:33:22.797767+00:00",
-        "checked_at": "2026-11-21T21:33:23.899586+00:00",
+        "attempted_at": "2026-11-22T21:40:34.728439+00:00",
+        "checked_at": "2026-11-22T21:40:35.645577+00:00",
         "incremental": true
       },
       {
         "wallet": "0x7c60296f746d1ab31357dc1450023494f077e996",
         "complete": true,
         "records_checked": 393,
-        "attempted_at": "2026-11-21T21:33:23.899628+00:00",
-        "checked_at": "2026-11-21T21:33:24.990431+00:00",
+        "attempted_at": "2026-11-22T21:40:35.645622+00:00",
+        "checked_at": "2026-11-22T21:40:36.601976+00:00",
         "incremental": true
       },
       {
         "wallet": "0x7dda6bdce0a579a5470ba0cd7f341c9bf2d8abb4",
         "complete": true,
         "records_checked": 1000,
-        "attempted_at": "2026-11-21T21:33:24.990470+00:00",
-        "checked_at": "2026-11-21T21:33:26.260402+00:00",
+        "attempted_at": "2026-11-22T21:40:36.602012+00:00",
+        "checked_at": "2026-11-22T21:40:37.710900+00:00",
         "incremental": true
       },
       {
         "wallet": "0x93c0c224cbc91a16caacf9443431f743fd5d4719",
         "complete": true,
         "records_checked": 1000,
-        "attempted_at": "2026-11-21T21:33:26.260440+00:00",
-        "checked_at": "2026-11-21T21:33:27.868608+00:00",
+        "attempted_at": "2026-11-22T21:40:37.710936+00:00",
+        "checked_at": "2026-11-22T21:40:39.017150+00:00",
         "incremental": true
       },
       {
         "wallet": "0xb61a190f2b87a244460a080eaf3cd1490d01043a",
         "complete": true,
-        "records_checked": 99,
-        "attempted_at": "2026-11-21T21:33:27.868650+00:00",
-        "checked_at": "2026-11-21T21:33:28.889504+00:00",
+        "records_checked": 104,
+        "attempted_at": "2026-11-22T21:40:39.017184+00:00",
+        "checked_at": "2026-11-22T21:40:39.767820+00:00",
         "incremental": true
       },
       {
@@ -857,6 +893,671 @@
         "records_checked": 47,
         "attempted_at": "2026-11-21T21:35:01.298367+00:00",
         "checked_at": "2026-11-21T21:35:02.035171+00:00"
+      },
+      {
+        "wallet": "0x140d36090776326cf8c029918f7934e87de8b01e",
+        "complete": true,
+        "records_checked": 2,
+        "attempted_at": "2026-11-22T21:40:39.767853+00:00",
+        "checked_at": "2026-11-22T21:40:40.429361+00:00"
+      },
+      {
+        "wallet": "0x14a4d28d0846348de4a4df62ad7280043bb23506",
+        "complete": true,
+        "records_checked": 16,
+        "attempted_at": "2026-11-22T21:40:40.429397+00:00",
+        "checked_at": "2026-11-22T21:40:41.115960+00:00"
+      },
+      {
+        "wallet": "0x15ec663651579dab93ccdecab614b45db2428e6f",
+        "complete": true,
+        "records_checked": 6,
+        "attempted_at": "2026-11-22T21:40:41.115994+00:00",
+        "checked_at": "2026-11-22T21:40:41.809398+00:00"
+      },
+      {
+        "wallet": "0x1637bd32c78dbffbddbc2c35c0c49eb5d63a9afa",
+        "complete": true,
+        "records_checked": 18,
+        "attempted_at": "2026-11-22T21:40:41.809431+00:00",
+        "checked_at": "2026-11-22T21:40:42.517835+00:00"
+      },
+      {
+        "wallet": "0x174b90ce466e5eb9e59e83fd883cb6e196e6a6b1",
+        "complete": true,
+        "records_checked": 8,
+        "attempted_at": "2026-11-22T21:40:42.517862+00:00",
+        "checked_at": "2026-11-22T21:40:43.263260+00:00"
+      },
+      {
+        "wallet": "0x18a4a4e19558f8c461af890471d6fd891aa5c58f",
+        "complete": true,
+        "records_checked": 2,
+        "attempted_at": "2026-11-22T21:40:43.568644+00:00",
+        "checked_at": "2026-11-22T21:40:44.296897+00:00"
+      },
+      {
+        "wallet": "0x1936ac0487a11c4deb8ff098fa82b47fe9ea2769",
+        "complete": true,
+        "records_checked": 24,
+        "attempted_at": "2026-11-22T21:40:44.296925+00:00",
+        "checked_at": "2026-11-22T21:40:45.014858+00:00"
+      },
+      {
+        "wallet": "0x1a040e380f88b5867e190b208f25153492343efd",
+        "complete": true,
+        "records_checked": 8,
+        "attempted_at": "2026-11-22T21:40:45.014885+00:00",
+        "checked_at": "2026-11-22T21:40:45.788795+00:00"
+      },
+      {
+        "wallet": "0x1a0774e49a510688fb5fdecab842147a760f3132",
+        "complete": true,
+        "records_checked": 22,
+        "attempted_at": "2026-11-22T21:40:45.788823+00:00",
+        "checked_at": "2026-11-22T21:40:46.505165+00:00"
+      },
+      {
+        "wallet": "0x1a0b91ae59b5261293afd4d7a280368d66a39bb5",
+        "complete": true,
+        "records_checked": 2,
+        "attempted_at": "2026-11-22T21:40:46.505194+00:00",
+        "checked_at": "2026-11-22T21:40:47.166461+00:00"
+      },
+      {
+        "wallet": "0x1a9f7fbf91311902d0c99ebfd6ee08790c7ed7d0",
+        "complete": true,
+        "records_checked": 2,
+        "attempted_at": "2026-11-22T21:40:47.166489+00:00",
+        "checked_at": "2026-11-22T21:40:47.848045+00:00"
+      },
+      {
+        "wallet": "0x1aee9d417395ddcc3cb77349466ffbd482bc4381",
+        "complete": true,
+        "records_checked": 8,
+        "attempted_at": "2026-11-22T21:40:47.848076+00:00",
+        "checked_at": "2026-11-22T21:40:48.543864+00:00"
+      },
+      {
+        "wallet": "0x1c97af3f806bd15be08c13eee1921a39e7abab81",
+        "complete": true,
+        "records_checked": 16,
+        "attempted_at": "2026-11-22T21:40:48.543897+00:00",
+        "checked_at": "2026-11-22T21:40:49.219906+00:00"
+      },
+      {
+        "wallet": "0x1cb64daa1bb6582c2b02d10ff432a53364c3ebe9",
+        "complete": true,
+        "records_checked": 6,
+        "attempted_at": "2026-11-22T21:40:49.219938+00:00",
+        "checked_at": "2026-11-22T21:40:49.902125+00:00"
+      },
+      {
+        "wallet": "0x1d7666dab07ce7f716adacd4e1bc5b3857c016f5",
+        "complete": true,
+        "records_checked": 6,
+        "attempted_at": "2026-11-22T21:40:49.902162+00:00",
+        "checked_at": "2026-11-22T21:40:50.589009+00:00"
+      },
+      {
+        "wallet": "0x03488782a1c5fbd88883c76dce9ec9477865243c",
+        "complete": true,
+        "records_checked": 703,
+        "attempted_at": "2026-11-22T21:40:50.893789+00:00",
+        "checked_at": "2026-11-22T21:40:51.764365+00:00"
+      },
+      {
+        "wallet": "0x05bbad375e0bbe44c4ae95c524f3886657596da3",
+        "complete": true,
+        "records_checked": 954,
+        "attempted_at": "2026-11-22T21:40:51.764395+00:00",
+        "checked_at": "2026-11-22T21:40:52.802777+00:00"
+      },
+      {
+        "wallet": "0x05f6d7f81b2ddab8ca29542e6e1d944e8dbeec38",
+        "complete": true,
+        "records_checked": 15,
+        "attempted_at": "2026-11-22T21:40:52.802811+00:00",
+        "checked_at": "2026-11-22T21:40:53.525951+00:00"
+      },
+      {
+        "wallet": "0x06da84edf3abe570d609f92497c854600dc7dda3",
+        "complete": true,
+        "records_checked": 18,
+        "attempted_at": "2026-11-22T21:40:53.525981+00:00",
+        "checked_at": "2026-11-22T21:40:54.282963+00:00"
+      },
+      {
+        "wallet": "0x09960bb583b8e362b5ebc00dcf6735fe1f8b42b6",
+        "complete": false,
+        "records_checked": 3000,
+        "attempted_at": "2026-11-22T21:40:54.282992+00:00",
+        "checked_at": "2026-11-22T21:40:57.874848+00:00"
+      },
+      {
+        "wallet": "0x09aebb32c3f9d13245b919a76c8b39f17bad8446",
+        "complete": true,
+        "records_checked": 2929,
+        "attempted_at": "2026-11-22T21:40:57.874879+00:00",
+        "checked_at": "2026-11-22T21:41:00.988628+00:00"
+      },
+      {
+        "wallet": "0x09b8ca5bc4db52070c57a659a271c6f89f4ae565",
+        "complete": true,
+        "records_checked": 101,
+        "attempted_at": "2026-11-22T21:41:00.988663+00:00",
+        "checked_at": "2026-11-22T21:41:01.795815+00:00"
+      },
+      {
+        "wallet": "0x0a2770461184731cbe192b7fae1b44da8968d92d",
+        "complete": true,
+        "records_checked": 55,
+        "attempted_at": "2026-11-22T21:41:01.795845+00:00",
+        "checked_at": "2026-11-22T21:41:02.542253+00:00"
+      },
+      {
+        "wallet": "0x0a4dbfa743cb146d4ed59921b3439795a75459df",
+        "complete": true,
+        "records_checked": 7,
+        "attempted_at": "2026-11-22T21:41:02.542282+00:00",
+        "checked_at": "2026-11-22T21:41:03.212417+00:00"
+      },
+      {
+        "wallet": "0x0a4ea12ee64df56ce24a769df1f82b5113a2af13",
+        "complete": true,
+        "records_checked": 16,
+        "attempted_at": "2026-11-22T21:41:03.212449+00:00",
+        "checked_at": "2026-11-22T21:41:03.891210+00:00"
+      },
+      {
+        "wallet": "0x0a5ed6f33e16ec4cd8e9fcfbb3c476ee44d1e139",
+        "complete": true,
+        "records_checked": 141,
+        "attempted_at": "2026-11-22T21:41:04.216473+00:00",
+        "checked_at": "2026-11-22T21:41:04.969332+00:00"
+      },
+      {
+        "wallet": "0x0a613eb9ecff9ca1dfbe08927d12e3fe348b70ce",
+        "complete": true,
+        "records_checked": 149,
+        "attempted_at": "2026-11-22T21:41:04.969361+00:00",
+        "checked_at": "2026-11-22T21:41:05.721180+00:00"
+      },
+      {
+        "wallet": "0x0a944542e2479db0dd16eb977ca8cbe41e2b71fd",
+        "complete": true,
+        "records_checked": 496,
+        "attempted_at": "2026-11-22T21:41:05.721209+00:00",
+        "checked_at": "2026-11-22T21:41:06.511004+00:00"
+      },
+      {
+        "wallet": "0x0ac9f32badbb6e048b52aa7d9b218075adfe8018",
+        "complete": true,
+        "records_checked": 51,
+        "attempted_at": "2026-11-22T21:41:06.511034+00:00",
+        "checked_at": "2026-11-22T21:41:07.221723+00:00"
+      },
+      {
+        "wallet": "0x0acdf27d958777584c96cb94614dee8e5fce3b77",
+        "complete": true,
+        "records_checked": 388,
+        "attempted_at": "2026-11-22T21:41:07.806830+00:00",
+        "checked_at": "2026-11-22T21:41:08.697947+00:00"
+      },
+      {
+        "wallet": "0x0af3a8e423b90d527ec48a0a2b938a69f4f36789",
+        "complete": true,
+        "records_checked": 2744,
+        "attempted_at": "2026-11-22T21:41:08.697974+00:00",
+        "checked_at": "2026-11-22T21:41:11.620037+00:00"
+      },
+      {
+        "wallet": "0x0af471b72e5331a9e8e84abc8557ca10c55c5417",
+        "complete": true,
+        "records_checked": 79,
+        "attempted_at": "2026-11-22T21:41:11.620063+00:00",
+        "checked_at": "2026-11-22T21:41:12.442422+00:00"
+      },
+      {
+        "wallet": "0x0b3ad492d26af01cf22f84d64413d4eb702b65c6",
+        "complete": true,
+        "records_checked": 77,
+        "attempted_at": "2026-11-22T21:41:12.442448+00:00",
+        "checked_at": "2026-11-22T21:41:13.161403+00:00"
+      },
+      {
+        "wallet": "0x0b912550c26ebf7c8d366d444e29ad614a5a6c8b",
+        "complete": true,
+        "records_checked": 2016,
+        "attempted_at": "2026-11-22T21:41:13.161429+00:00",
+        "checked_at": "2026-11-22T21:41:15.859020+00:00"
+      },
+      {
+        "wallet": "0x0bc0d54ef05702a4d9dc30b63d4a1a7621d274cb",
+        "complete": true,
+        "records_checked": 151,
+        "attempted_at": "2026-11-22T21:41:15.859047+00:00",
+        "checked_at": "2026-11-22T21:41:16.576658+00:00"
+      },
+      {
+        "wallet": "0x0bdf1f3f03b3ca14f4d71589691743688e6ffc38",
+        "complete": true,
+        "records_checked": 4,
+        "attempted_at": "2026-11-22T21:41:16.919766+00:00",
+        "checked_at": "2026-11-22T21:41:17.617001+00:00"
+      },
+      {
+        "wallet": "0x0c1baa45fd08e3788719ed38c31eb65d409788a0",
+        "complete": true,
+        "records_checked": 6,
+        "attempted_at": "2026-11-22T21:41:17.617033+00:00",
+        "checked_at": "2026-11-22T21:41:18.290794+00:00"
+      },
+      {
+        "wallet": "0x0c208c9bbb95e42794363ba7865763e76f565737",
+        "complete": true,
+        "records_checked": 2,
+        "attempted_at": "2026-11-22T21:41:18.290834+00:00",
+        "checked_at": "2026-11-22T21:41:18.963813+00:00"
+      },
+      {
+        "wallet": "0x0c3d0f4ef33b0f58049c201bf0f53e750c0a407b",
+        "complete": true,
+        "records_checked": 2,
+        "attempted_at": "2026-11-22T21:41:18.963842+00:00",
+        "checked_at": "2026-11-22T21:41:19.624422+00:00"
+      },
+      {
+        "wallet": "0x0c41246555d38c8104e6da726a9681784503a8ff",
+        "complete": true,
+        "records_checked": 109,
+        "attempted_at": "2026-11-22T21:41:19.624448+00:00",
+        "checked_at": "2026-11-22T21:41:20.328609+00:00"
+      },
+      {
+        "wallet": "0x0c6b668795fc21c70f911c6c4b431fcefc94612a",
+        "complete": true,
+        "records_checked": 20,
+        "attempted_at": "2026-11-22T21:41:20.328634+00:00",
+        "checked_at": "2026-11-22T21:41:20.999909+00:00"
+      },
+      {
+        "wallet": "0x0c6c07da7ebc7dac79eb13d153df2fa73ef4c6d7",
+        "complete": true,
+        "records_checked": 141,
+        "attempted_at": "2026-11-22T21:41:20.999935+00:00",
+        "checked_at": "2026-11-22T21:41:21.738242+00:00"
+      },
+      {
+        "wallet": "0x0c70ada12430dc356a72abebf994afda24e2f172",
+        "complete": true,
+        "records_checked": 158,
+        "attempted_at": "2026-11-22T21:41:21.738269+00:00",
+        "checked_at": "2026-11-22T21:41:22.487438+00:00"
+      },
+      {
+        "wallet": "0x0c762d6aabbc571c485742b3f308eb39e62fa636",
+        "complete": true,
+        "records_checked": 137,
+        "attempted_at": "2026-11-22T21:41:22.487464+00:00",
+        "checked_at": "2026-11-22T21:41:23.325931+00:00"
+      },
+      {
+        "wallet": "0x0c9311108d9e2a60acfe96438d41c2b6dab4aa1d",
+        "complete": true,
+        "records_checked": 235,
+        "attempted_at": "2026-11-22T21:41:23.325955+00:00",
+        "checked_at": "2026-11-22T21:41:24.091903+00:00"
+      },
+      {
+        "wallet": "0x0c97762c065877732e198a96eee0bc5e622c878f",
+        "complete": true,
+        "records_checked": 158,
+        "attempted_at": "2026-11-22T21:41:24.437565+00:00",
+        "checked_at": "2026-11-22T21:41:25.166967+00:00"
+      },
+      {
+        "wallet": "0x0cae685a21459a6e9281727daf09cb7c758434ac",
+        "complete": true,
+        "records_checked": 315,
+        "attempted_at": "2026-11-22T21:41:25.166993+00:00",
+        "checked_at": "2026-11-22T21:41:25.938875+00:00"
+      },
+      {
+        "wallet": "0x0cd125fb824cd56b23333fa5e7c791651e6214be",
+        "complete": false,
+        "records_checked": 3000,
+        "attempted_at": "2026-11-22T21:41:25.938902+00:00",
+        "checked_at": "2026-11-22T21:41:28.907073+00:00"
+      },
+      {
+        "wallet": "0x0ce959619f8af12f869102fc1c49eea02a1b1220",
+        "complete": true,
+        "records_checked": 57,
+        "attempted_at": "2026-11-22T21:41:28.907101+00:00",
+        "checked_at": "2026-11-22T21:41:29.619978+00:00"
+      },
+      {
+        "wallet": "0x0d3b91d02f07e65d03ded9dea1b56f5d45fc5c8e",
+        "complete": true,
+        "records_checked": 14,
+        "attempted_at": "2026-11-22T21:41:29.620002+00:00",
+        "checked_at": "2026-11-22T21:41:30.299407+00:00"
+      },
+      {
+        "wallet": "0x0d7f4597a3bce5e4aa914391e61dc764d1471937",
+        "complete": true,
+        "records_checked": 69,
+        "attempted_at": "2026-11-22T21:41:30.299430+00:00",
+        "checked_at": "2026-11-22T21:41:30.991549+00:00"
+      },
+      {
+        "wallet": "0x0dcfb7a9f424a62f36995f09a1568f56f738a802",
+        "complete": true,
+        "records_checked": 118,
+        "attempted_at": "2026-11-22T21:41:30.991577+00:00",
+        "checked_at": "2026-11-22T21:41:31.703877+00:00"
+      },
+      {
+        "wallet": "0x0dd6b110f75d9b00ba8974f6bb4fad1392badf28",
+        "complete": true,
+        "records_checked": 76,
+        "attempted_at": "2026-11-22T21:41:31.703903+00:00",
+        "checked_at": "2026-11-22T21:41:32.420846+00:00"
+      },
+      {
+        "wallet": "0x0df9444e0a9b0cc214a9e12969116085ab0230ba",
+        "complete": true,
+        "records_checked": 248,
+        "attempted_at": "2026-11-22T21:41:32.420871+00:00",
+        "checked_at": "2026-11-22T21:41:33.174118+00:00"
+      },
+      {
+        "wallet": "0x0e31ed6336675d0b36d2937b238181fe804156ce",
+        "complete": true,
+        "records_checked": 19,
+        "attempted_at": "2026-11-22T21:41:33.174144+00:00",
+        "checked_at": "2026-11-22T21:41:33.836053+00:00"
+      },
+      {
+        "wallet": "0x0e62c08df0bd7b3d717e3136b692b6ae7cc92bbb",
+        "complete": true,
+        "records_checked": 190,
+        "attempted_at": "2026-11-22T21:41:34.207976+00:00",
+        "checked_at": "2026-11-22T21:41:34.962016+00:00"
+      },
+      {
+        "wallet": "0x0e63c2ce3f5d03108f548db2a2011865180bfc6e",
+        "complete": true,
+        "records_checked": 29,
+        "attempted_at": "2026-11-22T21:41:34.962042+00:00",
+        "checked_at": "2026-11-22T21:41:35.658209+00:00"
+      },
+      {
+        "wallet": "0x0e9874268950e049a846b6ec60a86185b4f66d61",
+        "complete": true,
+        "records_checked": 789,
+        "attempted_at": "2026-11-22T21:41:35.658247+00:00",
+        "checked_at": "2026-11-22T21:41:36.516805+00:00"
+      },
+      {
+        "wallet": "0x0e9b33d790e02a774f6fd7ecede60fc8df7d296f",
+        "complete": true,
+        "records_checked": 61,
+        "attempted_at": "2026-11-22T21:41:36.516835+00:00",
+        "checked_at": "2026-11-22T21:41:37.220687+00:00"
+      },
+      {
+        "wallet": "0x0eb4ca3cedb0ea9e79110147af10f3460608281b",
+        "complete": true,
+        "records_checked": 72,
+        "attempted_at": "2026-11-22T21:41:37.220712+00:00",
+        "checked_at": "2026-11-22T21:41:37.926114+00:00"
+      },
+      {
+        "wallet": "0x0ed374f986be5862a597502436f1ea027bc41329",
+        "complete": true,
+        "records_checked": 65,
+        "attempted_at": "2026-11-22T21:41:37.926139+00:00",
+        "checked_at": "2026-11-22T21:41:38.635703+00:00"
+      },
+      {
+        "wallet": "0x0ee9a50a9c8d07d9b5d3d2fb36b2910ceef97531",
+        "complete": true,
+        "records_checked": 23,
+        "attempted_at": "2026-11-22T21:41:38.635728+00:00",
+        "checked_at": "2026-11-22T21:41:39.349927+00:00"
+      },
+      {
+        "wallet": "0x005c766ea4159d5d6d3d0b463fccdc355849e0ed",
+        "complete": true,
+        "records_checked": 30,
+        "attempted_at": "2026-11-22T21:41:39.979126+00:00",
+        "checked_at": "2026-11-22T21:41:40.689859+00:00"
+      },
+      {
+        "wallet": "0x021a11da657139db4120c9ac7a4cec1cc454b590",
+        "complete": true,
+        "records_checked": 40,
+        "attempted_at": "2026-11-22T21:41:40.689893+00:00",
+        "checked_at": "2026-11-22T21:41:41.381154+00:00"
+      },
+      {
+        "wallet": "0x02e3c305e56938f20ba0d83f5ef74af567b6d7ce",
+        "complete": true,
+        "records_checked": 448,
+        "attempted_at": "2026-11-22T21:41:41.381181+00:00",
+        "checked_at": "2026-11-22T21:41:42.282835+00:00"
+      },
+      {
+        "wallet": "0x056e3a9c92ad1bf2b5b665c2cd98dafec613c9fc",
+        "complete": true,
+        "records_checked": 483,
+        "attempted_at": "2026-11-22T21:41:42.660069+00:00",
+        "checked_at": "2026-11-22T21:41:43.549991+00:00"
+      },
+      {
+        "wallet": "0x080c0d3375382c568af15542df68713b10503875",
+        "complete": true,
+        "records_checked": 43,
+        "attempted_at": "2026-11-22T21:41:43.550018+00:00",
+        "checked_at": "2026-11-22T21:41:44.265907+00:00"
+      },
+      {
+        "wallet": "0x0929991ab6748e469c3205581f6392a72cefdc1e",
+        "complete": true,
+        "records_checked": 26,
+        "attempted_at": "2026-11-22T21:41:44.265931+00:00",
+        "checked_at": "2026-11-22T21:41:44.943057+00:00"
+      },
+      {
+        "wallet": "0x0b39184b8d72d0600b4e2755a3b3baf7e98744a9",
+        "complete": true,
+        "records_checked": 75,
+        "attempted_at": "2026-11-22T21:41:44.943083+00:00",
+        "checked_at": "2026-11-22T21:41:45.646738+00:00"
+      },
+      {
+        "wallet": "0x0d7cd3c1e55af5c3e6881910c6afe918a427e54b",
+        "complete": true,
+        "records_checked": 226,
+        "attempted_at": "2026-11-22T21:41:45.646763+00:00",
+        "checked_at": "2026-11-22T21:41:46.398549+00:00"
+      },
+      {
+        "wallet": "0x0ea2c47b5a9a0a7dd3da9b542c757baa3559ff1c",
+        "complete": true,
+        "records_checked": 181,
+        "attempted_at": "2026-11-22T21:41:46.398575+00:00",
+        "checked_at": "2026-11-22T21:41:47.179706+00:00"
+      },
+      {
+        "wallet": "0x0edad91af2f57a629a504d6b682a2cf8a06b835a",
+        "complete": true,
+        "records_checked": 55,
+        "attempted_at": "2026-11-22T21:41:47.179732+00:00",
+        "checked_at": "2026-11-22T21:41:47.866305+00:00"
+      },
+      {
+        "wallet": "0x0efa6663c7a08dcff5f26582123a62b2106a5d62",
+        "complete": true,
+        "records_checked": 401,
+        "attempted_at": "2026-11-22T21:41:47.866332+00:00",
+        "checked_at": "2026-11-22T21:41:48.643410+00:00"
+      },
+      {
+        "wallet": "0x0f01e88414c056c0a9ee226e774d94a054c8ba3b",
+        "complete": true,
+        "records_checked": 1022,
+        "attempted_at": "2026-11-22T21:41:48.643439+00:00",
+        "checked_at": "2026-11-22T21:41:50.241677+00:00"
+      },
+      {
+        "wallet": "0x0f16d614bd7131df32e0010425c14db45f6683e2",
+        "complete": true,
+        "records_checked": 37,
+        "attempted_at": "2026-11-22T21:41:50.241704+00:00",
+        "checked_at": "2026-11-22T21:41:50.943760+00:00"
+      },
+      {
+        "wallet": "0x0f1e834b6d504c7b59e52574093e8181cf9ef390",
+        "complete": true,
+        "records_checked": 16,
+        "attempted_at": "2026-11-22T21:41:51.331617+00:00",
+        "checked_at": "2026-11-22T21:41:52.018919+00:00"
+      },
+      {
+        "wallet": "0x0f3c43fc60240b2808e222fa28357723436beae0",
+        "complete": true,
+        "records_checked": 7,
+        "attempted_at": "2026-11-22T21:41:52.018948+00:00",
+        "checked_at": "2026-11-22T21:41:52.696827+00:00"
+      },
+      {
+        "wallet": "0x0f84ba3c204734e5463e598bdf6ba7de5367dd86",
+        "complete": true,
+        "records_checked": 35,
+        "attempted_at": "2026-11-22T21:41:52.696853+00:00",
+        "checked_at": "2026-11-22T21:41:53.408248+00:00"
+      },
+      {
+        "wallet": "0x0f91bc1d488f880b47d214fb07e830da07481915",
+        "complete": true,
+        "records_checked": 43,
+        "attempted_at": "2026-11-22T21:41:53.408274+00:00",
+        "checked_at": "2026-11-22T21:41:54.117097+00:00"
+      },
+      {
+        "wallet": "0x0f96b2e2ea1eccb4951274a22b77f5b8e639733d",
+        "complete": true,
+        "records_checked": 8,
+        "attempted_at": "2026-11-22T21:41:54.117123+00:00",
+        "checked_at": "2026-11-22T21:41:54.783139+00:00"
+      },
+      {
+        "wallet": "0x0ff5ab52f7e5d97c17532d947f6bb057d2b0550a",
+        "complete": true,
+        "records_checked": 30,
+        "attempted_at": "2026-11-22T21:41:54.783169+00:00",
+        "checked_at": "2026-11-22T21:41:55.513567+00:00"
+      },
+      {
+        "wallet": "0x0ff818194eee4a0c1f2dce956cf6fca65b392a61",
+        "complete": true,
+        "records_checked": 341,
+        "attempted_at": "2026-11-22T21:41:55.513595+00:00",
+        "checked_at": "2026-11-22T21:41:56.287127+00:00"
+      },
+      {
+        "wallet": "0x10036ef2a50397bbdbe73ff9293b33979a4c445b",
+        "complete": true,
+        "records_checked": 2,
+        "attempted_at": "2026-11-22T21:41:56.287155+00:00",
+        "checked_at": "2026-11-22T21:41:57.142055+00:00"
+      },
+      {
+        "wallet": "0x100b813c7cc8328a38b08611b020c6632511d445",
+        "complete": true,
+        "records_checked": 6,
+        "attempted_at": "2026-11-22T21:41:57.142082+00:00",
+        "checked_at": "2026-11-22T21:41:57.806846+00:00"
+      },
+      {
+        "wallet": "0x100f566d71c9c8556fe800932ffd8ecb466dfe04",
+        "complete": true,
+        "records_checked": 19,
+        "attempted_at": "2026-11-22T21:41:57.806874+00:00",
+        "checked_at": "2026-11-22T21:41:58.493186+00:00"
+      },
+      {
+        "wallet": "0x1013074f9a26e4315c742e6585e075ba9f200471",
+        "complete": true,
+        "records_checked": 13,
+        "attempted_at": "2026-11-22T21:41:58.880658+00:00",
+        "checked_at": "2026-11-22T21:41:59.672950+00:00"
+      },
+      {
+        "wallet": "0x1028bfbe1faeba816fadc935df6263974ff027be",
+        "complete": true,
+        "records_checked": 24,
+        "attempted_at": "2026-11-22T21:41:59.672975+00:00",
+        "checked_at": "2026-11-22T21:42:00.345000+00:00"
+      },
+      {
+        "wallet": "0x1039e30b44463d1a61ebcbdec26157822375a61f",
+        "complete": true,
+        "records_checked": 126,
+        "attempted_at": "2026-11-22T21:42:00.345025+00:00",
+        "checked_at": "2026-11-22T21:42:01.092607+00:00"
+      },
+      {
+        "wallet": "0x1060a89954f02d0122b82452a0750bc70a483971",
+        "complete": true,
+        "records_checked": 87,
+        "attempted_at": "2026-11-22T21:42:01.092634+00:00",
+        "checked_at": "2026-11-22T21:42:01.799542+00:00"
+      },
+      {
+        "wallet": "0x107634cde20a61409799592f03a388a349f1c1c4",
+        "complete": true,
+        "records_checked": 14,
+        "attempted_at": "2026-11-22T21:42:01.799570+00:00",
+        "checked_at": "2026-11-22T21:42:02.463434+00:00"
+      },
+      {
+        "wallet": "0x108d5e5280aac52ac9f387b86a4d7df63b5eb9ea",
+        "complete": true,
+        "records_checked": 326,
+        "attempted_at": "2026-11-22T21:42:02.463462+00:00",
+        "checked_at": "2026-11-22T21:42:03.215634+00:00"
+      },
+      {
+        "wallet": "0x10ae8784c14676d41cffc48194fb6a72bc25f94b",
+        "complete": true,
+        "records_checked": 1635,
+        "attempted_at": "2026-11-22T21:42:03.215660+00:00",
+        "checked_at": "2026-11-22T21:42:05.107168+00:00"
+      },
+      {
+        "wallet": "0x10dbf6dad6273eb3e71a7129588b5bb96324dcf4",
+        "complete": true,
+        "records_checked": 225,
+        "attempted_at": "2026-11-22T21:42:05.107196+00:00",
+        "checked_at": "2026-11-22T21:42:05.859243+00:00"
+      },
+      {
+        "wallet": "0x10dfe7c62d98b6a58d901c7f583e56b2bc13490b",
+        "complete": false,
+        "records_checked": 3000,
+        "attempted_at": "2026-11-22T21:42:05.859269+00:00",
+        "checked_at": "2026-11-22T21:42:08.818771+00:00"
+      },
+      {
+        "wallet": "0x10f477a7f6f7da5927cb8991ab000eea16d9932e",
+        "complete": true,
+        "records_checked": 47,
+        "attempted_at": "2026-11-22T21:42:08.818806+00:00",
+        "checked_at": "2026-11-22T21:42:09.526885+00:00"
       }
     ],
     "source": "WEMIX Scan API (CertiK)",
@@ -864,11 +1565,11 @@
     "max_depth": 3,
     "lookback_days": 90,
     "wallet_limit_reached": true,
-    "search_limit_reached": false,
+    "search_limit_reached": true,
     "time_limit_reached": false,
     "refresh": {
       "mode": "nightly rotation",
-      "nft_count": 4199,
+      "nft_count": 4201,
       "priority_ids": [
         1358,
         3433,
@@ -880,8 +1581,8 @@
       "page_limit": 3,
       "wallet_limit": 100,
       "max_seconds": 600,
-      "wallets_remaining": 2305,
-      "finished_at": "2026-11-21T21:35:02.712343+00:00"
+      "wallets_remaining": 2550,
+      "finished_at": "2026-11-22T21:42:10.500547+00:00"
     },
     "status": "partial"
   }
