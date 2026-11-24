@@ -1020,3 +1020,4 @@ header h1 { font-family: var(--arcade); font-size: clamp(20px,3vw,32px); line-he
 .col-price { width:320px; } table { min-width:1340px; }
 .market-details, .market-details small, .name-history, .graph-help, footer, .footer { font-family:var(--sans); font-size:14px; letter-spacing:0; }
 @media(max-width:700px) { main,.container { padding:20px 14px 40px; } .site-nav .brand { font-size:12px; } .site-nav .brand span { display:block; margin:10px 0 0; } }
+.site-nav > div { flex-wrap: wrap; }

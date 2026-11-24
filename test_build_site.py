@@ -7,6 +7,8 @@ import json
 
 def wallet_assets(root):
     (root / "wallet.html").write_text('<a href="index.html">Characters</a>')
+    (root / "reports.html").write_text('<a href="reports-evidence.json">Evidence</a>')
+    (root / "reports-evidence.json").write_text('{}')
     assets = root / "wallet-data"
     assets.mkdir()
     (assets / "index.json").write_text(json.dumps(dict(schema_version=1, snapshots={})))
@@ -31,7 +33,39 @@ class SiteArtifactTests(unittest.TestCase):
             wallet_assets(root)
             prepare_site(root, root / "output")
             self.assertEqual({path.name for path in (root / "output").iterdir()},
-                             {"index.html", "graph.html", "wallet.html", "wallet-data", ".nojekyll"})
+                             {"index.html", "graph.html", "wallet.html", "reports.html", "reports-evidence.json", "wallet-data", ".nojekyll"})
+
+    def test_missing_report_cannot_publish_incomplete_section(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            (root / "index.html").write_text('<a href="reports.html">Report</a>')
+            (root / "graph.html").write_text("Graph")
+            wallet_assets(root)
+            (root / "reports-evidence.json").unlink()
+            with self.assertRaises(FileNotFoundError):
+                prepare_site(root, root / "output")
+            self.assertFalse((root / "output").exists())
+
+    def test_captured_report_has_linked_directed_paths_and_exact_totals(self):
+        from generate_reports import generate_reports
+        from html.parser import HTMLParser
+        class Purchases(HTMLParser):
+            def __init__(self):
+                super().__init__()
+                self.amounts = []
+            def handle_starttag(self, tag, attrs):
+                attrs = dict(attrs)
+                if tag == 'tr' and 'data-amount' in attrs:
+                    self.amounts.append(int(attrs['data-amount']))
+        html = generate_reports()
+        rows = Purchases()
+        rows.feed(html)
+        self.assertEqual(len(rows.amounts), 20)
+        self.assertEqual(sum(rows.amounts), 344500)
+        for text in ('Formerly kufuking (3433)', 'kufuking2 (1154)', 'kufuking3 (3871)', 'Bunn1eSSS (1358)', 'marker id="reportArrow"', 'reports-evidence.json'):
+            self.assertIn(text, html)
+        self.assertNotIn('__CONNECTION_GRAPH__', html)
+        self.assertIn('The item names are still missing', html)
 
     def test_missing_wallet_page_or_data_cannot_publish(self):
         with tempfile.TemporaryDirectory() as folder:

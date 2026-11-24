@@ -16,6 +16,7 @@ SOURCE_FILES = (
     "test_json_store.py", "theme.css", "verify_live.py",
     "wallet_activity.py", "collect_wallet_activity.py", "wallet_activity_config.json", "generate_wallet.py",
     "wallet-template.html", "wallet.css", "wallet-core.js", "wallet.js", "test_wallet_activity.py", "test_wallet.cjs",
+    "generate_reports.py", "reports-template.html", "reports.css", "reports.js", "wallet-investigation.json",
 )
 PACKAGE = "ymir-browser-upload-v1"
 REPORT = "UPLOAD_MANIFEST.json"
@@ -38,7 +39,7 @@ are sufficient; no data re-upload is needed.
    Do not upload the github-upload folder itself. Keep every filename unchanged.
    Commit the files together. All files are under 1 MB; no folder upload is needed.
 
-3. The upload triggers the workflow, which generates all three pages and wallet
+3. The upload triggers the workflow, which generates all four pages and wallet
    assets. The wallet-data folder is built automatically; do not upload it.
    A run triggered by step 1 may fail before step 2 supplies the new source files;
    the run after step 2 has everything it needs. Re-run that latest run if needed.
@@ -48,7 +49,7 @@ Their part files contain the original observations and transfers. Keep ALL of
 them together. Missing or mixed parts stop the build instead of dropping history.
 Unused old part files already on GitHub are ignored by the current indexes.
 
-Do not add index.html, graph.html, wallet.html, wallet-data, _site, .venv,
+Do not add index.html, graph.html, wallet.html, reports.html, reports-evidence.json, wallet-data, _site, .venv,
 __pycache__, or sample_* files.
 The workflow generates the large pages automatically. UPLOAD_MANIFEST.json and
 this instructions file may be uploaded with the rest; they are harmless records.
