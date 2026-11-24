@@ -32,19 +32,25 @@ async function pageChecks() {
  const get=id=>{if(!elements.has(id))elements.set(id,new Element());return elements.get(id);};
  get('walletDirection').value='all';get('walletSort').value='amount';get('walletMinimum').value='0';
  const target='0xbeaabc38996609c58c1de8d30acd368ef47d5b63',urls=[];
+ let simulateGrowth=false;
  const fetch=async path=>{
   urls.push(path);const file='wallet-data/'+path.split('wallet-data/')[1];
-  return {ok:true,json:async()=>JSON.parse(fs.readFileSync(file,'utf8'))};
+  return {ok:true,json:async()=>{
+   const data=JSON.parse(fs.readFileSync(file,'utf8'));
+   if(simulateGrowth&&data.wallet===target)data.transactions.push(...Array.from({length:35},(_,i)=>row(1000+i,'regular',{from:target,amount_wei:String(BigInt(1000000+i)*10n**18n)})));
+   return data;
+  }};
  };
  const context=vm.createContext({document:{getElementById:get},fetch,URL,URLSearchParams,location:{href:'https://example.test/project/wallet.html',search:'?wallet='+target},history:{replaceState(){}}});
  const run=code=>vm.runInContext(code,context);run(script);
  // Calling again also checks that an older asynchronous response cannot replace the latest search.
  await run('loadWallet()');
- assert.match(get('walletRows').innerHTML,/25,000/);
- assert.match(get('walletRows').innerHTML,/20,000/);
- assert.match(get('walletRows').innerHTML,/16,302.8151/);
+ const focused=run('filterActivity(activityData.transactions,activitySelected,walletOptions())');
+ const expectedHighs=['0xec88a04d75ab1affba8e304cd3431a2b436884952ce1b681aec881036cc51ed2','0x7c637391069cb5594ab7d62a163857afb78f7cfceadc404956b96e1199b8e0ab','0x02a2d4b0ab0d6286643c604b1fe15606a5ec7f27b283b62c8b4a422b1d077320','0x619db1428be5f89366783158d383a32d168513199d444a51db3df2c4f32e467a'];
+ for(const tx of expectedHighs)assert.ok(focused.some(row=>row.tx_hash===tx),'Captured high transfer must remain discoverable: '+tx);
+ for(const row of focused.slice(0,25))assert.ok(get('walletRows').innerHTML.includes(row.tx_hash),'The first page must contain the highest current records');
  assert.doesNotMatch(get('walletRows').innerHTML,/e957cbd4a0/,'August transfers must stay outside the focused period');
- assert.equal((get('walletRows').innerHTML.match(/<tr>/g)||[]).length,4);
+ assert.equal((get('walletRows').innerHTML.match(/<tr>/g)||[]).length,Math.min(25,focused.length));
  assert.match(get('walletCoverage').innerHTML,/Regular transactions/);
  assert.match(get('walletCoverage').innerHTML,/Internal transactions/);
  get('tabInternal').listeners.click();
@@ -53,12 +59,22 @@ async function pageChecks() {
  get('tabRegular').listeners.click();
  assert.doesNotMatch(get('walletRows').innerHTML,/Internal trace/);
  get('walletAllDates').listeners.click();
- assert.match(get('walletRows').innerHTML,/78,639/);
+ const highestAllTime=run('filterActivity(activityData.transactions,activitySelected,walletOptions())[0]');
+ assert.ok(get('walletRows').innerHTML.includes(highestAllTime.tx_hash));
  assert.match(get('walletPagination').innerHTML,/data-page="2"/);
  get('walletPagination').listeners.click({target:{closest:()=>({dataset:{page:'2'}})}});
  assert.match(get('walletPagination').innerHTML,/Page 2 of/);
  get('walletSort').value='fee';get('walletSort').listeners.change();
  assert.equal(run('activityTab'),'regular');
+ // New large transfers can push the original four off the first page. They
+ // remain discoverable on later pages without requiring a fixed live count.
+ simulateGrowth=true;get('tabAll').listeners.click();get('walletHighs').listeners.click();
+ await run('loadWallet()');
+ assert.equal((get('walletRows').innerHTML.match(/<tr>/g)||[]).length,25);
+ assert.doesNotMatch(get('walletRows').innerHTML,new RegExp(expectedHighs[0]));
+ get('walletPagination').listeners.click({target:{closest:()=>({dataset:{page:'2'}})}});
+ for(const tx of expectedHighs)assert.ok(get('walletRows').innerHTML.includes(tx),'Captured transfer must remain visible on a later page: '+tx);
+ simulateGrowth=false;
  assert.ok(urls.every(url=>url.startsWith('wallet-data/')),'Browser requests must stay on the site, not the CORS-blocked Scan API');
  get('walletAddress').value='bad';await run('loadWallet()');
  assert.match(get('walletStatus').textContent,/complete 0x wallet/);

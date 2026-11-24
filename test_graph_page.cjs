@@ -63,6 +63,21 @@ assert.equal(get('network').attributes['data-nft-labels'],'hidden');
 assert.equal(get('graphViewport').attributes.transform,transform);
 get('showNFTLabels').checked=true;get('showNFTLabels').listeners.change();
 assert.equal(get('network').attributes['data-nft-labels'],'shown');
+const capturedCase=JSON.parse(fs.readFileSync('funding_case_report.json','utf8'));
+const originalPurchases=run('JSON.stringify(graphCharacters.filter(c=>[1358,3871].includes(Number(c.nft_id))).map(c=>[Number(c.nft_id),c.transfers]))');
+function useCapturedPurchases() {
+    run(`{
+        const purchases=${JSON.stringify(capturedCase.purchases)};
+        for(const character of graphCharacters.filter(c=>[1358,3871].includes(Number(c.nft_id))))
+            character.transfers=purchases.filter(p=>p.nft_id===Number(character.nft_id)).map(p=>({event:'Auction-Buy',chain:'mainnet',to:p.buyer,at:p.at,tx_hash:p.tx_hash,price:p.price,currency:p.currency}));
+    }`);
+}
+function restorePurchases() {
+    run(`for(const [id,transfers] of ${originalPurchases})graphById.get(id).transfers=transfers;`);
+}
+// Exact evidence counts are assertions about the captured case, never about
+// later owners or additional purchases discovered by the nightly scraper.
+useCapturedPurchases();
 get('graphMode').value='funding';get('graphRoot').value='1358';get('graphTarget').value='3871';
 run('fundingData=null;');
 get('graphMode').listeners.change();
@@ -127,17 +142,41 @@ get('fundingBuyerRoots').checked=false;run('exploreGraph()');
 assert.match(get('graphStatus').textContent,/1 shared funding sources/);
 assert.doesNotMatch(get('connectionPath').innerHTML,/0 hops from this source/);
 // A single NFT discovers related characters; the real loaded snapshot is retained.
+restorePurchases();
 get('fundingBuyerRoots').checked=true;get('graphTarget').value='';
 run('fundingData=shippedFundingData;exploreGraph();');
 assert.match(get('graphStatus').textContent,/related NFTs found for/);
 assert.ok(get('graphStatus').textContent.includes(run('nftLabel(1358)')));
-assert.match(get('fundingResults').innerHTML,/data-funding-target="1154"/);
-assert.match(get('fundingResults').innerHTML,/data-funding-target="3871"/);
-assert.match(get('fundingResults').innerHTML,/data-funding-page="2"/);
-assert.ok(run('network.nodes.has("nft:1358")'));
+// Live discovery changes when the nightly collector adds evidence. Its first
+// page must not be pinned to a particular NFT, rank, source count or page count.
+const liveIds=[...get('fundingResults').innerHTML.matchAll(/data-funding-target="(\d+)"/g)].map(match=>Number(match[1]));
+assert.ok(liveIds.length<=20);
+assert.ok(!liveIds.includes(1358),'The focus must not appear as a related NFT');
+assert.equal(new Set(liveIds).size,liveIds.length);
+if(liveIds.length)assert.ok(run('network.nodes.has("nft:1358")'));
 const clickData=dataset=>clickHandlers.forEach(handler=>handler({target:{closest:()=>({dataset})}}));
-clickData({fundingPage:'2'});
-assert.match(get('fundingResults').innerHTML,/Page 2 of/);
+// Regression: the known NFT can legitimately move to a later page as data grows.
+const pageFixture=Array.from({length:45},(_,i)=>({nft_id:i===24?3871:10000+i,sources:['0x'+'a'.repeat(40)],depth:1,buyerOnly:false}));
+run('const paginationFixture='+JSON.stringify(pageFixture));
+const first=run('fundingDiscoveryHtml(paginationFixture,graphById.get(1358),1)');
+const second=run('fundingDiscoveryHtml(paginationFixture,graphById.get(1358),2)');
+assert.doesNotMatch(first.html,/data-funding-target="3871"/);
+assert.match(second.html,/data-funding-target="3871"/);
+assert.equal(first.shown.length,20);
+assert.equal(second.shown.length,20);
+assert.match(second.html,/Page 2 of 3/);
+assert.match(second.html,/data-funding-page="1"/);
+assert.match(second.html,/data-funding-page="3"/);
+assert.equal(run('fundingDiscoveryHtml(paginationFixture,graphById.get(1358),99).shown.length'),5);
+const growingFixture=Array.from({length:401},(_,i)=>({nft_id:i===400?3871:20000+i,sources:['0x'+'a'.repeat(40)],depth:1,buyerOnly:false}));
+run('const growingPaginationFixture='+JSON.stringify(growingFixture));
+assert.doesNotMatch(run('fundingDiscoveryHtml(growingPaginationFixture,graphById.get(1358),1).html'),/data-funding-target="3871"/);
+assert.match(run('fundingDiscoveryHtml(growingPaginationFixture,graphById.get(1358),21).html'),/data-funding-target="3871"/);
+assert.equal(run('fundingDiscoveryHtml(growingPaginationFixture,graphById.get(1358),21).shown.length'),1);
+// Navigation uses the captured evidence, whose expected two-source result is
+// fixed, rather than imposing that count on an ever-growing live database.
+useCapturedPurchases();
+run('fundingData='+JSON.stringify({schema_version:1,...capturedCase}));
 clickData({fundingTarget:'3871'});
 assert.equal(get('graphTarget').value,'3871');
 assert.match(get('graphStatus').textContent,/2 shared funding sources/);
@@ -153,6 +192,7 @@ assert.equal(get('fundingResults').innerHTML,'');
 get('graphTarget').value='';run('fundingData=null;exploreGraph();');
 assert.match(get('graphStatus').textContent,/not collected yet/);
 assert.equal(get('fundingResults').innerHTML,'');
+restorePurchases();
 get('graphMode').value='transfers';
 get('graphTarget').value='not-indexed';
 run('exploreGraph()');
