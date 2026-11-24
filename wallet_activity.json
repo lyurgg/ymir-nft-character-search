@@ -1,0 +1,65 @@
+{
+  "_format": "ymir-split-json-v1",
+  "kind": "array-field",
+  "record_count": 8584,
+  "parts": [
+    {
+      "file": "wallet_activity.part-001-8f3dc5b90ca8.json",
+      "bytes": 999729,
+      "sha256": "8f3dc5b90ca861796ceeec31b8968e1e3bc7bb1dab0588765f491003e90ad8c9",
+      "records": 2152
+    },
+    {
+      "file": "wallet_activity.part-002-dedafaf6d7a5.json",
+      "bytes": 999755,
+      "sha256": "dedafaf6d7a5873a7657eae68157cadf33bfebbd0cf3785c5944cced1a7aac53",
+      "records": 2074
+    },
+    {
+      "file": "wallet_activity.part-003-052d5bcce27e.json",
+      "bytes": 999988,
+      "sha256": "052d5bcce27e0b1749599107e347391f17e6b9d687c1451f9dc16fdb392f4bd8",
+      "records": 2077
+    },
+    {
+      "file": "wallet_activity.part-004-3a013464f29a.json",
+      "bytes": 999590,
+      "sha256": "3a013464f29a19cd8980fd45d94c5499d1e2b924b966f7be0caa2514f5af3239",
+      "records": 2229
+    },
+    {
+      "file": "wallet_activity.part-005-a7590faa5473.json",
+      "bytes": 25181,
+      "sha256": "a7590faa547305e5847dcf5a78713cb551aff4936cb1324178592bebacb36954",
+      "records": 52
+    }
+  ],
+  "field": "transactions",
+  "base": {
+    "schema_version": 1,
+    "chain_id": 1111,
+    "asset": "WEMIX",
+    "checked_at": "2026-11-24T13:53:41.879076+00:00",
+    "source": "WEMIX Scan",
+    "wallets": {
+      "0xbeaabc38996609c58c1de8d30acd368ef47d5b63": {
+        "attempted_at": "2026-11-24T13:53:37.980596+00:00",
+        "regular": {
+          "complete": true,
+          "records_checked": 1000,
+          "checked_at": "2026-11-24T13:53:40.416503+00:00",
+          "attempted_at": "2026-11-24T13:53:37.981619+00:00"
+        },
+        "internal": {
+          "complete": true,
+          "records_checked": 1000,
+          "checked_at": "2026-11-24T13:53:41.780560+00:00",
+          "attempted_at": "2026-11-24T13:53:40.417053+00:00"
+        }
+      }
+    },
+    "partial": false,
+    "time_limit_reached": false,
+    "wallets_checked": 1
+  }
+}

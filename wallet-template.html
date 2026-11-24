@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>YMIR · Wallet activity</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&amp;family=Patrick+Hand&amp;family=Press+Start+2P&amp;display=swap">
+<style>__THEME_CSS__
+__WALLET_CSS__</style></head><body><main>
+<nav class="site-nav"><a class="brand" href="index.html">YMIR <span>Character atlas</span></a><div><a href="index.html">Characters</a><a href="graph.html">Ownership graph</a><a href="wallet.html" aria-current="page">Wallet activity</a></div></nav>
+<header class="wallet-header"><p class="surface-eyebrow">Follow the WEMIX</p><h1>Wallet activity</h1><p>Find the largest transfers. Follow the source, destination and transaction evidence.</p></header>
+<form id="walletForm" class="wallet-search"><label for="walletAddress">WEMIX wallet address</label><div><input id="walletAddress" placeholder="0x…" autocomplete="off" spellcheck="false" required><button type="submit" id="loadWallet">Explore wallet</button></div><p>Search collected history, refreshed by the workflow. Amounts are native WEMIX; token transfers such as WWEMIX are a separate dataset.</p></form>
+<p id="walletStatus" class="wallet-notice" role="status" aria-live="polite">Enter a wallet to explore its activity.</p>
+<section id="walletCoverage" class="wallet-notice" aria-label="History coverage"></section>
+<section class="wallet-toolbar" aria-label="Transaction filters">
+<div class="wallet-presets"><button type="button" id="walletHighs">High outliers · Oct 30–today</button><button type="button" id="walletAllDates">All dates &amp; amounts</button></div>
+<p id="walletFocus" class="wallet-focus"></p>
+<div class="wallet-tabs" role="tablist" aria-label="Transaction types"><button id="tabAll" role="tab" aria-selected="true" data-tab="all">All activity</button><button id="tabRegular" role="tab" aria-selected="false" data-tab="regular">Regular transactions</button><button id="tabInternal" role="tab" aria-selected="false" data-tab="internal">Internal transactions</button></div>
+<p class="wallet-help">All activity combines regular transactions and internal traces. Root calls repeated by the internal API are excluded. Several internal traces can belong to one transaction.</p>
+<div class="wallet-filters"><label>Direction<select id="walletDirection"><option value="all">Sent &amp; received</option><option value="sent">Sent</option><option value="received">Received</option><option value="self">Self transfers</option></select></label>
+<label>Sort by<select id="walletSort"><option value="amount">Largest amount first</option><option value="newest">Newest first</option><option value="fee">Largest gas paid by this wallet</option></select></label>
+<label>Minimum WEMIX<input id="walletMinimum" inputmode="decimal" value="0"></label>
+<label>From date (Philippines)<input id="walletAfter" type="date"></label><label>Through date (Philippines)<input id="walletBefore" type="date"></label>
+<label class="wallet-checkbox"><input id="walletFailures" type="checkbox">Include failed transactions</label></div>
+</section>
+<div id="walletTotals" class="wallet-totals" aria-live="polite"></div>
+<section class="wallet-table-panel" aria-label="Wallet transaction records"><div class="wallet-table-scroll"><table class="wallet-table"><thead><tr><th scope="col">Date · PHT</th><th scope="col">Direction / type</th><th scope="col">Amount · WEMIX</th><th scope="col">Tx gas fee · WEMIX</th><th scope="col">Counterparty</th><th scope="col">Transaction / status</th></tr></thead><tbody id="walletRows"></tbody></table></div><div id="walletPagination" class="wallet-pagination"></div></section>
+<section id="walletRefresh" class="wallet-refresh"></section>
+<footer>Amounts are gross transfers, not NFT purchase prices or wallet balances. Gas fees are charged once to the regular transaction sender; internal traces do not have a separate fee. Reported internal traces without a loaded parent transaction have not had that parent's result independently checked. Missing history can hide larger transfers.</footer>
+</main><script>__WALLET_SCRIPT__</script></body></html>

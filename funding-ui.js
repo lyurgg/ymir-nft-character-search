@@ -70,7 +70,7 @@ function exploreFunding(page=1) {
 }
 
 function fundingNodeActions(node) {
-    return `<p><a href="${graphEscape(nodeUrl(node.id))}" target="_blank" rel="noopener noreferrer">${node.type==='wallet'?'Open WEMIX Scan':'Open character info'}</a></p>${node.type==='wallet'?`<button data-exclude-wallet="${node.wallet}">Exclude this wallet</button><p>Use the ownership/transfer inspector to add a local nickname or custody/exchange tag.</p>`:''}`;
+    return `<p><a href="${graphEscape(nodeUrl(node.id))}" target="_blank" rel="noopener noreferrer">${node.type==='wallet'?'Open WEMIX Scan':'Open character info'}</a></p>${node.type==='wallet'?`<p><a href="wallet.html?wallet=${node.wallet}">View wallet activity</a></p><button data-exclude-wallet="${node.wallet}">Exclude this wallet</button><p>Use the ownership/transfer inspector to add a local nickname or custody/exchange tag.</p>`:''}`;
 }
 
 document.getElementById('fundingImport').addEventListener('change',async event=>{

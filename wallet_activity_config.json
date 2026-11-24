@@ -1,0 +1,6 @@
+{
+  "wallets": ["0xbeaabc38996609c58c1de8d30acd368ef47d5b63"],
+  "page_limit": 3,
+  "wallet_limit": 5,
+  "max_seconds": 180
+}

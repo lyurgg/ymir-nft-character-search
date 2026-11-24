@@ -116,6 +116,7 @@ function nodeActions(node) {
     const url=nodeUrl(node.id);
     let html=`<p><a href="${graphEscape(url)}" target="_blank" rel="noopener noreferrer">${node.type==='wallet'?'Open WEMIX Scan':'Open character info'}</a></p><button data-focus-node="${node.id}">Center this node</button>`;
     if(node.type!=='wallet')return html;
+    html+=`<p><a href="wallet.html?wallet=${node.wallet}">View wallet activity</a></p>`;
     const stats=walletActivity(network.directed?network:transferNetwork,node.wallet),note=walletNotes[node.wallet] || {};
     html+=`<div class="wallet-stats"><span><b>${stats.nfts}</b> NFTs</span><span><b>${stats.sources}</b> sources</span><span><b>${stats.destinations}</b> destinations</span></div>
         <p>${stats.possibleIntermediary?'<strong>Possible intermediary pattern</strong><br>':''}${stats.forwarded} distinct NFTs received and later sent to a different wallet.</p>

@@ -1,10 +1,12 @@
-"""Generate and verify the complete two-page GitHub Pages artifact."""
+"""Generate and verify the complete GitHub Pages artifact and wallet data assets."""
 from pathlib import Path
+import json
+import re
 from urllib.parse import urlsplit, unquote
 from html.parser import HTMLParser
 import shutil
 
-PAGES = ("index.html", "graph.html")
+PAGES = ("index.html", "graph.html", "wallet.html")
 
 
 class LocalLinks(HTMLParser):
@@ -35,11 +37,22 @@ def prepare_site(source=Path("."), destination=Path("_site")):
         for relative in links.paths:
             if not (source / relative).is_file():
                 raise FileNotFoundError(f"Broken page link in {name}: {relative}")
+    assets = source / "wallet-data"
+    index = json.loads((assets / "index.json").read_text(encoding="utf-8"))
+    names = ["index.json", *(f"funding-{i:02x}.json" for i in range(256)), *index["snapshots"].values()]
+    for name in names:
+        if not re.fullmatch(r"index\.json|funding-[0-9a-f]{2}\.json|snapshot-0x[0-9a-f]{40}\.json", name):
+            raise ValueError("Invalid wallet asset path")
+        if not (assets / name).is_file():
+            raise FileNotFoundError(f"Wallet asset missing: {name}")
     destination.mkdir(parents=True, exist_ok=True)
     for name in PAGES:
         shutil.copyfile(source / name, destination / name)
         print(f"Staged {destination / name}")
     (destination / ".nojekyll").touch()
+    (destination / "wallet-data").mkdir(exist_ok=True)
+    for name in names:
+        shutil.copyfile(assets / name, destination / "wallet-data" / name)
 
 
 if __name__ == "__main__":

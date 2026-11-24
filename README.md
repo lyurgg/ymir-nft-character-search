@@ -43,7 +43,7 @@ upload the folder itself. No cloning, pushing, or folder upload is required.
    after the complete upload has all required inputs.
 
 The upload set excludes `index.html`, `graph.html`, `_site/`, `.venv/`, caches,
-and `sample_*` investigation files. The workflow builds the large HTML pages.
+and `sample_*` investigation files. The workflow builds all three HTML pages and the wallet data assets.
 There is no need to upload them manually or delete older generated pages on GitHub.
 `UPLOAD_MANIFEST.json` lists the prepared upload files and their checksums.
 `UPLOAD_INSTRUCTIONS.txt` contains these browser steps.
@@ -103,6 +103,62 @@ The existing `--nft-ids` command remains available for a specific investigation.
 To deploy this change, update `collect_funding.py`, `funding_refresh.json`,
 `funding-ui.js`, `prepare_upload.py`, the changed tests, and the workflow. Existing
 database parts on GitHub do not need to be replaced by an older local snapshot.
+
+## Wallet activity and high-value outliers
+
+Open **Wallet activity** from the navigation, or use **Activity** beside a wallet
+in character details or graph inspection. The original wallet links still open
+WEMIX Scan. `wallet.html` provides separate **All activity**, **Regular
+transactions**, and **Internal transactions** tabs. The combined view omits root
+calls duplicated by the internal API and preserves distinct traces in one parent
+transaction. Gas fees belong to regular senders and are never charged again to
+internal traces. Failed transfers move zero value; their regular gas fee remains
+available. Internal entries without a loaded successful parent remain labelled
+**Trace reported** rather than independently verified success.
+
+For `0xbeaabc38996609c58c1de8d30acd368ef47d5b63`, the default view focuses on
+**October 30, 2026 through today (Philippine time)**, with a visible **1,000 WEMIX
+minimum**. This isolates four large transfers in the captured history: 25,000
+received and 20,000 sent on October 30, plus 16,302.8151 and 16,302 received
+internally on November 1. The cutoff is a high-value filter, not a statistical
+outlier classification. Lower the minimum to include smaller unusual amounts.
+The **All dates & amounts** button restores the full loaded history. Both date
+boundaries use Philippine time. Filter settings are retained in the share URL.
+
+The page supports sent/received/self filters, largest-first or newest sorting,
+a minimum amount, and gas paid by the selected wallet. Wallet and transaction
+links point to Scan. Missing fee data is shown as uncollected, not as a zero fee.
+WEMIX, WWEMIX and other token assets are not combined into one numeric ranking.
+
+WEMIX Scan does not allow cross-origin browser reads from GitHub Pages. The page
+therefore fetches small, generated **same-origin** assets under `wallet-data/`.
+It loads a full wallet snapshot where available; other wallets can use the
+existing funding-transfer cache, explicitly labelled transfer-only and incomplete
+for zero-value calls, fees and internal history. A wallet absent from collected
+records shows instructions for collection rather than claiming no on-chain activity.
+
+To add or refresh a wallet, open the existing deployment workflow and choose
+**Run workflow → Wallet address (optional)**. The address is passed through an
+environment variable and validated before use. This targeted run skips the wider
+funding refresh, collects the requested wallet's regular and internal history,
+preserves prior evidence, and publishes the result. Tracked wallets also refresh
+nightly. `wallet_activity_config.json` sets watched addresses, a 5-wallet budget,
+3 pages per category, and a 180-second collection budget. Busy histories stay
+partial. Previously complete snapshots can refresh incrementally by overlap.
+
+The durable source is `wallet_activity.json` plus its small `wallet_activity.part-*.json`
+files. The initial example snapshot contains complete regular and internal API
+history as checked on November 24, 2026; API row counts include discarded duplicate
+root calls. The workflow commits wallet activity together with the other two
+databases. `collect_wallet_activity.py --wallet 0x...` runs a local refresh.
+
+`generate_html.py` now produces **three pages** and the generated `wallet-data/`
+assets. `build_site.py` verifies and stages all of them. Upload the source files and
+small durable JSON parts, not `wallet.html` or the generated `wallet-data/` folder.
+`prepare_upload.py` includes the new sources and the wallet snapshot automatically.
+For an existing repository, the `github-upload-wallet` patch excludes older local
+character/funding database snapshots so uploading it does not roll those databases
+back. Update `.github/workflows/deploy.yml` separately using GitHub's web editor.
 
 ## Prices and availability
 

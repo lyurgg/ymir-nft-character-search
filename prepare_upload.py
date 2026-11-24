@@ -14,6 +14,8 @@ SOURCE_FILES = (
     "prepare_upload.py", "test_build_site.py", "test_character_data.py", "test_frontend.cjs",
     "test_funding.cjs", "test_funding.py", "test_graph_page.cjs", "test_graph.cjs",
     "test_json_store.py", "theme.css", "verify_live.py",
+    "wallet_activity.py", "collect_wallet_activity.py", "wallet_activity_config.json", "generate_wallet.py",
+    "wallet-template.html", "wallet.css", "wallet-core.js", "wallet.js", "test_wallet_activity.py", "test_wallet.cjs",
 )
 PACKAGE = "ymir-browser-upload-v1"
 REPORT = "UPLOAD_MANIFEST.json"
@@ -36,7 +38,8 @@ are sufficient; no data re-upload is needed.
    Do not upload the github-upload folder itself. Keep every filename unchanged.
    Commit the files together. All files are under 1 MB; no folder upload is needed.
 
-3. The upload triggers the workflow, which generates and publishes both pages.
+3. The upload triggers the workflow, which generates all three pages and wallet
+   assets. The wallet-data folder is built automatically; do not upload it.
    A run triggered by step 1 may fail before step 2 supplies the new source files;
    the run after step 2 has everything it needs. Re-run that latest run if needed.
 
@@ -45,7 +48,8 @@ Their part files contain the original observations and transfers. Keep ALL of
 them together. Missing or mixed parts stop the build instead of dropping history.
 Unused old part files already on GitHub are ignored by the current indexes.
 
-Do not add index.html, graph.html, _site, .venv, __pycache__, or sample_* files.
+Do not add index.html, graph.html, wallet.html, wallet-data, _site, .venv,
+__pycache__, or sample_* files.
 The workflow generates the large pages automatically. UPLOAD_MANIFEST.json and
 this instructions file may be uploaded with the rest; they are harmless records.
 """
@@ -57,7 +61,7 @@ def prepare_upload(root=None, output=None):
     if output.resolve() == root.resolve() or root.resolve().is_relative_to(output.resolve()):
         raise ValueError("Upload output must be a separate folder")
     selected = list(SOURCE_FILES)
-    for name, field in (("character_history.json", None), ("funding_history.json", "transfers")):
+    for name, field in (("character_history.json", None), ("funding_history.json", "transfers"), ("wallet_activity.json", "transactions")):
         path = root / name
         if not path.exists():
             if field:
@@ -95,7 +99,7 @@ def prepare_upload(root=None, output=None):
         target = output / name
         if target.is_file():
             target.unlink()
-    for name in ("character_history.json", "funding_history.json"):
+    for name in ("character_history.json", "funding_history.json", "wallet_activity.json"):
         if name in current and load_json(output / name) != load_json(root / name):
             raise ValueError(f"Upload package history verification failed: {name}")
     report = dict(package=PACKAGE, files=sorted(current),

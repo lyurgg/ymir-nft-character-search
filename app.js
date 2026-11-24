@@ -146,7 +146,7 @@ function relatedCharacters(character, index = walletIndex) {
 
 function walletButton(wallet) {
     if (!validWallet(wallet)) return 'Mint / burn / unknown';
-    return `<a class="wallet-link wallet" href="https://scan.wemix.com/address/${escapeHtml(wallet.toLowerCase())}" target="_blank" rel="noopener noreferrer">${escapeHtml(wallet.toLowerCase())}</a> <button class="wallet-related" data-wallet="${escapeHtml(wallet.toLowerCase())}">Related</button>`;
+    return `<a class="wallet-link wallet" href="https://scan.wemix.com/address/${escapeHtml(wallet.toLowerCase())}" target="_blank" rel="noopener noreferrer">${escapeHtml(wallet.toLowerCase())}</a> <a href="wallet.html?wallet=${escapeHtml(wallet.toLowerCase())}">Activity</a> <button class="wallet-related" data-wallet="${escapeHtml(wallet.toLowerCase())}">Related</button>`;
 }
 
 function toggleFavorite(nftId) {

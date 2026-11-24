@@ -98,7 +98,7 @@ __DASHBOARD_CSS__</style>
          Header
     ===================================================== -->
 
-    <nav class="site-nav"><a class="brand" href="index.html">YMIR <span>Character atlas</span></a><div><a href="index.html" aria-current="page">Characters</a><a href="graph.html">Ownership graph</a></div></nav>
+    <nav class="site-nav"><a class="brand" href="index.html">YMIR <span>Character atlas</span></a><div><a href="index.html" aria-current="page">Characters</a><a href="graph.html">Ownership graph</a><a href="wallet.html">Wallet activity</a></div></nav>
     <div class="header">
 
         <span class="surface-eyebrow">
@@ -336,6 +336,8 @@ def main():
 
     from generate_graph import generate_graph
     Path("graph.html").write_text(generate_graph(characters), encoding="utf-8")
+    from generate_wallet import generate_wallet
+    Path("wallet.html").write_text(generate_wallet(), encoding="utf-8")
 
 
     print(
