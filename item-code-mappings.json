@@ -1,120 +1,43 @@
 {
-  "schema_version": 1,
-  "checked_at": "2026-11-24T16:24:06.9373428Z",
-  "source": "Installed Legend of YMIR global client; read-only runtime verification",
-  "client_content_build": "1.38.9",
-  "verification_chain": "ITEM record ID → item-name key → interned localization key → English display string",
-  "scope": "Base item names. Historical purchase enhancements are not established by this lookup.",
-  "items": {
-    "20124156": {
-      "name": "Fenrir Hammer",
-      "name_key": "StringTemplate_Item_Weapon_20104156",
-      "verification": "verified_base_item_name",
-      "enhancement": null
+  "_format": "ymir-split-json-v1",
+  "kind": "array-field",
+  "record_count": 7889,
+  "parts": [
+    {
+      "file": "item-code-mappings.part-001-211c72b692ee.json",
+      "bytes": 499930,
+      "sha256": "211c72b692eedcf55904d94630fe4a483ef00e8de69a0a05142bbda2c4854e05",
+      "records": 5062
     },
-    "20124506": {
-      "name": "Agelmund Recurve Bow",
-      "name_key": "StringTemplate_Item_Weapon_20104506",
-      "verification": "verified_base_item_name",
-      "enhancement": null,
-      "reported_enhancement": 15
+    {
+      "file": "item-code-mappings.part-002-c707fdc8d53b.json",
+      "bytes": 315404,
+      "sha256": "c707fdc8d53b4086ec99627893d8b8c2547edc3f348e9485eaeeda3b57401619",
+      "records": 2827
+    }
+  ],
+  "field": "items",
+  "base": {
+    "schema_version": 2,
+    "checked_at": "2026-11-24T16:47:00.9916579Z",
+    "source": "Installed Legend of YMIR global client; read-only runtime verification",
+    "client_content_build": "1.38.9",
+    "verification_chain": "ITEM record ID â†’ item-name key â†’ interned localization key â†’ English display string",
+    "scope": "Base names from observed loaded ITEM records. Includes client development records; presence does not establish obtainability or marketplace availability. Historical enhancements are not established.",
+    "verification": "verified_base_item_name",
+    "reported_enhancements": {
+      "20124506": 15,
+      "30425042": 15
     },
-    "20124508": {
-      "name": "Fenrir Recurve Bow",
-      "name_key": "StringTemplate_Item_Weapon_20104508",
-      "verification": "verified_base_item_name",
-      "enhancement": null
-    },
-    "20224220": {
-      "name": "Fenrir Binder",
-      "name_key": "StringTemplate_Item_SubWeapon_20204220",
-      "verification": "verified_base_item_name",
-      "enhancement": null
-    },
-    "30124032": {
-      "name": "Fenrir Top",
-      "name_key": "StringTemplate_Item_Armor_30104032",
-      "verification": "verified_base_item_name",
-      "enhancement": null
-    },
-    "30224029": {
-      "name": "Sindri Bottoms",
-      "name_key": "StringTemplate_Item_Armor_30204029",
-      "verification": "verified_base_item_name",
-      "enhancement": null
-    },
-    "30324029": {
-      "name": "Sindri Gloves",
-      "name_key": "StringTemplate_Item_Armor_30304029",
-      "verification": "verified_base_item_name",
-      "enhancement": null
-    },
-    "30424029": {
-      "name": "Sindri Shoes",
-      "name_key": "StringTemplate_Item_Armor_30404029",
-      "verification": "verified_base_item_name",
-      "enhancement": null
-    },
-    "30425042": {
-      "name": "Valtram Shoes",
-      "name_key": "StringTemplate_Item_30405042",
-      "verification": "verified_base_item_name",
-      "enhancement": null,
-      "reported_enhancement": 15
-    },
-    "30524029": {
-      "name": "Sindri Helmet",
-      "name_key": "StringTemplate_Item_Armor_30504029",
-      "verification": "verified_base_item_name",
-      "enhancement": null
-    },
-    "40124020": {
-      "name": "Sindri Necklace",
-      "name_key": "StringTemplate_Item_Accessary_40104020",
-      "verification": "verified_base_item_name",
-      "enhancement": null
-    },
-    "40224017": {
-      "name": "Muspel Bracelet",
-      "name_key": "StringTemplate_Item_Accessary_40204017",
-      "verification": "verified_base_item_name",
-      "enhancement": null
-    },
-    "40224023": {
-      "name": "Fenrir Bracelet",
-      "name_key": "StringTemplate_Item_Accessary_40204023",
-      "verification": "verified_base_item_name",
-      "enhancement": null
-    },
-    "40324023": {
-      "name": "Fenrir Ring",
-      "name_key": "StringTemplate_Item_Accessary_40304023",
-      "verification": "verified_base_item_name",
-      "enhancement": null
-    },
-    "250120010": {
-      "name": "Megingjord",
-      "name_key": "StringTemplate_Item_ID_250110010",
-      "verification": "verified_base_item_name",
-      "enhancement": null
-    },
-    "1000000995": {
-      "name": "Sindri Mining Pickaxe",
-      "name_key": "StringTemplate_Item_1000000994",
-      "verification": "verified_base_item_name",
-      "enhancement": null
-    },
-    "1000000997": {
-      "name": "Sindri Quarrying Hammer",
-      "name_key": "StringTemplate_Item_1000000996",
-      "verification": "verified_base_item_name",
-      "enhancement": null
-    },
-    "1000000999": {
-      "name": "Sindri Gathering Knife",
-      "name_key": "StringTemplate_Item_1000000998",
-      "verification": "verified_base_item_name",
-      "enhancement": null
+    "coverage": {
+      "observed_records": 8133,
+      "resolved_records": 8116,
+      "unresolved_records": 17,
+      "unique_english_names": 4022,
+      "stop_reason": "bounded 8 GiB scan of validated item-record heap",
+      "complete_game_catalog": false,
+      "english_mappings": 7889,
+      "untranslated_records": 227
     }
   }
 }

@@ -17,6 +17,9 @@ SOURCE_FILES = (
     "wallet_activity.py", "collect_wallet_activity.py", "wallet_activity_config.json", "generate_wallet.py",
     "wallet-template.html", "wallet.css", "wallet-core.js", "wallet.js", "test_wallet_activity.py", "test_wallet.cjs",
     "generate_reports.py", "reports-template.html", "reports.css", "reports.js", "wallet-investigation.json", "item-code-mappings.json",
+    "generate_items.py", "items-template.html", "items.css", "items.js",
+    "item-sales-template.html", "item-sales.css", "item-sales-core.js", "item-sales.js", "test_item_sales.cjs",
+    "item_mappings.py",
 )
 PACKAGE = "ymir-browser-upload-v1"
 REPORT = "UPLOAD_MANIFEST.json"
@@ -39,7 +42,7 @@ are sufficient; no data re-upload is needed.
    Do not upload the github-upload folder itself. Keep every filename unchanged.
    Commit the files together. All files are under 1 MB; no folder upload is needed.
 
-3. The upload triggers the workflow, which generates all four pages and wallet
+3. The upload triggers the workflow, which generates all six pages and wallet
    assets. The wallet-data folder is built automatically; do not upload it.
    A run triggered by step 1 may fail before step 2 supplies the new source files;
    the run after step 2 has everything it needs. Re-run that latest run if needed.
@@ -49,7 +52,7 @@ Their part files contain the original observations and transfers. Keep ALL of
 them together. Missing or mixed parts stop the build instead of dropping history.
 Unused old part files already on GitHub are ignored by the current indexes.
 
-Do not add index.html, graph.html, wallet.html, reports.html, reports-evidence.json, wallet-data, _site, .venv,
+Do not add index.html, graph.html, wallet.html, reports.html, reports-evidence.json, items.html, items.csv, items.json, item-sales.html, wallet-data, _site, .venv,
 __pycache__, or sample_* files.
 The workflow generates the large pages automatically. UPLOAD_MANIFEST.json and
 this instructions file may be uploaded with the rest; they are harmless records.
@@ -62,6 +65,10 @@ def prepare_upload(root=None, output=None):
     if output.resolve() == root.resolve() or root.resolve().is_relative_to(output.resolve()):
         raise ValueError("Upload output must be a separate folder")
     selected = list(SOURCE_FILES)
+    catalog = json.loads((root / 'item-code-mappings.json').read_text(encoding='utf-8'))
+    if catalog.get('_format'):
+        load_json(root / 'item-code-mappings.json')  # Verify every catalog part before packaging.
+        selected.extend(part['file'] for part in catalog['parts'])
     for name, field in (("character_history.json", None), ("funding_history.json", "transfers"), ("wallet_activity.json", "transactions")):
         path = root / name
         if not path.exists():

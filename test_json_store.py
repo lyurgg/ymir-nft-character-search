@@ -84,7 +84,8 @@ class SplitJsonTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             for name in SOURCE_FILES:
-                (root / name).write_text("source")
+                (root / name).write_text("{}" if name == 'item-code-mappings.json' else "source")
+            save_json(root / 'item-code-mappings.json', dict(schema_version=2, items=[{'code': '30424029', 'name': 'Sindri Shoes'}]), list_field='items', max_bytes=500000)
             history = {"1": "x" * 600000, "2": "y" * 600000}
             funding = dict(asset="WEMIX", transfers=[dict(amount_wei="60025000000000000000001")])
             (root / "character_history.json").write_text(json.dumps(history))
@@ -92,6 +93,7 @@ class SplitJsonTests(unittest.TestCase):
             (root / "index.html").write_text("large generated page")
             (root / "sample_private.json").write_text("never upload")
             output = prepare_upload(root)
+            self.assertEqual(load_json(output / 'item-code-mappings.json')['items'][0]['name'], 'Sindri Shoes')
             self.assertEqual(load_json(output / "character_history.json"), history)
             self.assertEqual(load_json(output / "funding_history.json"), funding)
             self.assertTrue(all(path.is_file() and path.stat().st_size <= 1000000 for path in output.iterdir()))

@@ -98,7 +98,7 @@ __DASHBOARD_CSS__</style>
          Header
     ===================================================== -->
 
-    <nav class="site-nav"><a class="brand" href="index.html">YMIR <span>Character atlas</span></a><div><a href="index.html" aria-current="page">Characters</a><a href="graph.html">Ownership graph</a><a href="wallet.html">Wallet activity</a><a href="reports.html">Special reports</a></div></nav>
+    <nav class="site-nav"><a class="brand" href="index.html">YMIR <span>Character atlas</span></a><div><a href="index.html" aria-current="page">Characters</a><a href="graph.html">Ownership graph</a><a href="wallet.html">Wallet activity</a><a href="reports.html">Special reports</a><a href="items.html">Item codes</a></div></nav>
     <div class="header">
 
         <span class="surface-eyebrow">
@@ -341,6 +341,12 @@ def main():
     from generate_reports import generate_reports, captured_report_evidence
     Path("reports.html").write_text(generate_reports(), encoding="utf-8")
     Path("reports-evidence.json").write_text(json.dumps(captured_report_evidence(), ensure_ascii=False, indent=2), encoding="utf-8")
+    from generate_items import generate_items, items_csv, generate_item_sales
+    Path("items.html").write_text(generate_items(), encoding="utf-8")
+    Path("items.csv").write_text(items_csv(), encoding="utf-8-sig", newline="")
+    from item_mappings import load_item_mappings
+    Path("items.json").write_text(json.dumps(load_item_mappings(), ensure_ascii=False, indent=2), encoding="utf-8")
+    Path("item-sales.html").write_text(generate_item_sales(), encoding="utf-8")
 
 
     print(

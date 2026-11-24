@@ -1,0 +1,23 @@
+.sales-paper {background:var(--bg-raised);border:2px solid var(--ink);border-radius:var(--r-md);box-shadow:var(--shadow);margin:24px 0;overflow:hidden;}
+.sales-search,.sales-progress {padding:22px;}
+.sales-fields {display:flex;gap:14px;align-items:end;flex-wrap:wrap;}
+.sales-fields label {display:flex;flex-direction:column;gap:8px;font-weight:900;flex:1;min-width:175px;font-size:15px;}
+.sales-fields input {width:100%;border:2px solid var(--ink);font-size:16px;min-height:48px;}
+.sales-fields button {min-height:48px;}
+.sales-paper p {font-size:15px;line-height:1.7;}
+#salesItemName {font-weight:900;font-size:18px;}
+#salesStatus {font-weight:900;margin-top:0;}
+#salesCoverage {color:var(--muted);margin-bottom:0;}
+#salesProgress {width:100%;height:12px;accent-color:var(--gold-dim);}
+.sales-toolbar {display:flex;gap:16px;flex-wrap:wrap;align-items:center;justify-content:space-between;font-weight:900;}
+.sales-scroll {overflow:auto;}
+.sales-table {min-width:800px;font-size:15px;table-layout:auto;}
+.sales-table th {font-family:var(--sans);font-size:14px;text-transform:none;letter-spacing:0;}
+.sales-table td,.sales-table th {padding:15px 16px;}
+.sales-table caption {text-align:left;padding:16px;color:var(--muted);font-size:14px;}
+.sales-table td:nth-child(2) {font-variant-numeric:tabular-nums;font-weight:900;}
+.sales-table a {font-family:ui-monospace,monospace;font-size:14px;}
+.sales-pages {display:flex;gap:20px;align-items:center;justify-content:center;border-top:1px solid var(--line-soft);padding:18px;}
+.sales-empty {text-align:center;padding:20px;}
+.sales-paper [hidden] {display:none!important;}
+@media(max-width:650px){.sales-search,.sales-progress{padding:16px;}.sales-fields label{min-width:100%;}.sales-pages{gap:12px;}}

@@ -463,3 +463,72 @@ Upload the small `funding_history.json` index **and every referenced
 snapshot in the deployed graph. `prepare_upload.py` assembles the complete set. `funding_case_report.json` is the captured evidence used by
 tests; keep it with the test files. Files beginning with `sample_` are local
 investigation scratch files and should stay excluded.
+
+## Special reports
+
+The **Special reports** navigation item opens `reports.html`, a dated wallet
+investigation with the same paper theme as the character atlas. It includes the
+20 captured marketplace payments of at least 5,000 WEMIX, recipient and amount
+filters, and directed transfer paths linking the investigated wallet to
+kufuking (former wallet), kufuking2, kufuking3, Bunn1eSSS and other characters.
+Every displayed path includes transaction links and timing qualifications.
+
+`wallet-investigation.json` contains the captured evidence; `generate_reports.py`,
+`reports-template.html`, `reports.css` and `reports.js` render it. The build creates
+`reports.html` and its downloadable `reports-evidence.json` and stages both in
+`_site`. Nightly collectors do not silently revise this dated investigation.
+To publish updates, upload the report source files and updated generators and
+templates together. Do not upload generated report pages or `sample_*` files.
+
+`item-code-mappings.json` supplies the verified base item names for all 18 codes
+in the 20 captured purchases. The names were checked against global client content
+build 1.38.9 through the runtime item record and English localization tables.
+The report displays names alongside their original codes and includes the lookup
+in its downloadable evidence. The two reported +15 levels remain explicitly
+unverified; the base-name lookup does not establish historical enhancement.
+This mapping is a captured lookup, not an automatic client-memory collector.
+
+## Item code lookup
+
+The **Item codes** navigation link opens `items.html`. Search by English name
+(for example, **Sindri Shoes** returns **30424029**), part of a name, or a code.
+Results update while typing. Sort by name or numeric code, share the URL with
+its search intact, or download the complete verified list as CSV or JSON.
+
+The recovered catalog contains **7,889 codes across 4,022 English names**, checked
+against loaded ITEM records and the English localization table in global client
+content 1.38.9. Some names have multiple observed codes; code variants are not
+invented from naming patterns. The bounded recovery found 8,133 records: 17 had no
+resolved name and another 227 retained untranslated names, so those are excluded
+from the English lookup. This includes development records and does not establish
+whether an item is obtainable or tradable. It is not a complete game catalog.
+
+`item-code-mappings.json` is a small index. Upload it **and both referenced
+`item-code-mappings.part-*.json` files together**. Every part stays below 500 KB.
+`item_mappings.py` validates and loads them; `generate_items.py`,
+`items-template.html`, `items.css` and `items.js` build the page. Search operates
+over the full catalog and displays 50 matches per page. `build_site.py` stages
+the page and the full `items.csv` and `items.json` downloads automatically.
+CSV names beginning with spreadsheet formula characters have a leading apostrophe
+to keep them literal; JSON preserves the exact recorded strings.
+Upload those source files with the updated build and navigation files. The
+existing GitHub Actions workflow generates the page; no workflow edit is needed.
+
+Each dictionary row has a **Find purchases** link to `item-sales.html?code=…`.
+Choose a start and end date (whole days in Philippine time, UTC+8) to search
+completed purchases across the YMIR item marketplace contract. You can also enter
+a code that has no English-name mapping yet. This reads the public WEMIX RPC
+endpoint directly; it needs no wallet connection, API key, or database refresh.
+
+`item-sales-core.js` locates the exact date boundaries by block timestamps, queries
+the contract's purchase-event topic in batches, and decodes the fourth data word
+as a padded ASCII item code. Results include gross WEMIX price, buyer, seller,
+date, and receipt links, with CSV export. Large ranges take longer because the
+code is event data rather than an indexed topic. Stop, network failures, and
+provider limits leave results explicitly incomplete; they are never reported as
+an empty completed scan. CSV exports retain the range and completion status.
+Listings, offers, cancellations, other contracts, and unique item-instance
+identification are outside this scan's coverage.
+
+The browser logic checks include `test_item_sales.cjs` through
+`test_frontend.cjs`, so the current workflow runs them without a workflow edit.

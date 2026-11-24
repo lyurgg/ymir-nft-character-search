@@ -1,10 +1,18 @@
-SPECIAL REPORT WITH VERIFIED ITEM NAMES
+ITEM DICTIONARY + MARKETPLACE PURCHASE SEARCH
 
-Upload the 13 source files inside this folder to the GitHub repository root in one commit. Skip this instructions file. Keep filenames unchanged. No workflow edit is required.
+Upload the 29 source/data files inside this folder to the GitHub repository ROOT in one commit. Skip this instructions file. Keep every filename unchanged. No workflow edit is required.
 
-This includes all sources for the Special reports section, the directed wallet graph, and verified base names for all 18 item codes across the 20 purchases. Historical +15 levels remain labelled as reported, not independently verified.
+IMPORTANT: upload item-code-mappings.json AND BOTH item-code-mappings.part-*.json files together. The small index requires its matching parts. Each catalog part is under 500 KB. No folders need uploading.
 
-After GitHub Actions finishes deploying, open:
-https://lyurgg.github.io/ymir-nft-character-search/reports.html
+After GitHub Actions finishes deploying:
+https://lyurgg.github.io/ymir-nft-character-search/items.html
 
-Do not upload sample_* investigation files or memory readers, generated reports.html, reports-evidence.json, _site or wallet-data. No character, funding or wallet database replacement is needed for this update. All supplied files are under 1 MB.
+The dictionary has 7,889 verified codes across 4,022 English names, search and pagination, CSV/JSON downloads, and Find purchases links. Some codes share a name; record presence does not establish marketplace availability. Untranslated/unresolved records are excluded.
+
+To search purchases: type Sindri Shoes, choose Find purchases next to 30424029, set the date range, and press Find purchases. Dates use Philippine time, UTC+8. The search scans completed purchases across the item marketplace contract directly from the public chain. No wallet login, API key, workflow edit, or transaction-database refresh is needed. Large date ranges take longer. Stop/failures retain explicitly incomplete results.
+
+For the known receipt, test August 2, 2026 through August 2, 2026. The live check found 6,000 and 25,000 WEMIX purchases of code 30424029. This identifies an item type, not a unique item instance.
+
+This bundle also includes the current Special reports sources and verified purchase names, so it works even if the previous report update has not been uploaded yet.
+
+Do not upload generated items.html, items.csv, items.json, item-sales.html, reports.html, reports-evidence.json, _site, wallet-data, sample_* files or memory readers. No character, funding or wallet database replacement is needed. All 29 supplied files are under 500 KB.

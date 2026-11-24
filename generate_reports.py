@@ -5,6 +5,7 @@ from datetime import datetime, timezone, timedelta
 from decimal import Decimal
 from html import escape
 from pathlib import Path
+from item_mappings import load_item_mappings
 
 ROOT = Path(__file__).parent
 COLLECTION = '0x58f803dcd53edd804cece0d59166785fdd4735f9'
@@ -72,7 +73,7 @@ def hop_list(path):
 
 def generate_reports():
     data = json.loads((ROOT / 'wallet-investigation.json').read_text(encoding='utf-8'))
-    item_names = json.loads((ROOT / 'item-code-mappings.json').read_text(encoding='utf-8'))
+    item_names = load_item_mappings()
     if data.get('schema_version') != 1:
         raise ValueError('Unsupported captured report schema')
     if item_names.get('schema_version') != 1:
@@ -129,5 +130,7 @@ def generate_reports():
 
 def captured_report_evidence():
     data = json.loads((ROOT / 'wallet-investigation.json').read_text(encoding='utf-8'))
-    data['item_name_mappings'] = json.loads((ROOT / 'item-code-mappings.json').read_text(encoding='utf-8'))
+    names = load_item_mappings()
+    required = {p['events'][0]['code'] for p in data['purchases']}
+    data['item_name_mappings'] = {**names, 'items': {code: names['items'][code] for code in sorted(required)}}
     return data

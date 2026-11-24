@@ -1,0 +1,29 @@
+.items-header { max-width: 960px; }
+.items-header > p { margin: 12px 0; }
+.items-meta { color: var(--muted); font-size: 14px; }
+.items-search, .items-paper { background: var(--bg-raised); border: 2px solid var(--ink); border-radius: var(--r-md); box-shadow: var(--shadow); }
+.items-search { padding: 22px; margin: 26px 0; }
+.items-search label { display: block; font-weight: 900; margin-bottom: 8px; }
+.items-search-line { display: flex; gap: 12px; }
+.items-search input { flex: 1; min-width: 0; border: 2px solid var(--ink); background: #fffdf7; font-size: 16px; }
+.items-search p { margin: 12px 0 0; color: var(--ink-soft); font-size: 15px; }
+.items-toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 24px; margin: 24px 0 16px; }
+.items-toolbar > p { margin: 0; font-weight: 800; }
+.items-toolbar > label { display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 800; }
+.items-toolbar select { font-size: 14px; }
+.items-downloads { display: flex; flex-wrap: wrap; gap: 16px; margin-left: auto; font-size: 15px; font-weight: 800; }
+.items-paper { overflow: hidden; }
+.items-scroll { overflow-x: auto; }
+.items-table { min-width: 630px; table-layout: auto; font-size: 16px; }
+.items-table caption { text-align: left; padding: 16px 20px; color: var(--muted); font-size: 14px; }
+.items-table th { font-family: var(--sans); font-size: 14px; text-transform: none; letter-spacing: 0; }
+.items-table th:first-child { width: 230px; }
+.items-table td, .items-table th { padding: 15px 20px; }
+.item-code { font-family: ui-monospace, monospace; font-size: 16px; font-weight: 700; }
+.items-empty { padding: 32px 20px; text-align: center; }
+.items-empty h2 { font-family: var(--serif); font-size: 28px; }
+.items-empty p { color: var(--ink-soft); }
+.items-paper [hidden] { display: none !important; }
+.items-pages { display:flex;gap:20px;align-items:center;justify-content:center;padding:18px;border-top:1px solid var(--line-soft); }
+.items-table td:last-child { font-size:14px;white-space:nowrap; }
+@media(max-width: 650px) { .items-search { padding: 16px; } .items-downloads { margin-left: 0; width: 100%; } .items-table td, .items-table th { padding: 14px; } .items-table th:first-child { width: 165px; } }

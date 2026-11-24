@@ -6,7 +6,8 @@ from urllib.parse import urlsplit, unquote
 from html.parser import HTMLParser
 import shutil
 
-PAGES = ("index.html", "graph.html", "wallet.html", "reports.html")
+PAGES = ("index.html", "graph.html", "wallet.html", "reports.html", "items.html", "item-sales.html")
+DOWNLOADS = ("reports-evidence.json", "items.csv", "items.json")
 
 
 class LocalLinks(HTMLParser):
@@ -45,8 +46,12 @@ def prepare_site(source=Path("."), destination=Path("_site")):
             raise ValueError("Invalid wallet asset path")
         if not (assets / name).is_file():
             raise FileNotFoundError(f"Wallet asset missing: {name}")
+    for name in DOWNLOADS:
+        if not (source / name).is_file():
+            raise FileNotFoundError(f"Download asset missing: {name}")
     destination.mkdir(parents=True, exist_ok=True)
-    shutil.copyfile(source / "reports-evidence.json", destination / "reports-evidence.json")
+    for name in DOWNLOADS:
+        shutil.copyfile(source / name, destination / name)
     for name in PAGES:
         shutil.copyfile(source / name, destination / name)
         print(f"Staged {destination / name}")

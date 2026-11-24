@@ -9,6 +9,10 @@ def wallet_assets(root):
     (root / "wallet.html").write_text('<a href="index.html">Characters</a>')
     (root / "reports.html").write_text('<a href="reports-evidence.json">Evidence</a>')
     (root / "reports-evidence.json").write_text('{}')
+    (root / "items.html").write_text('<a href="items.csv">CSV</a><a href="items.json">JSON</a>')
+    (root / "item-sales.html").write_text('<a href="items.html">Item codes</a>')
+    (root / "items.csv").write_text('item_code,english_name\n')
+    (root / "items.json").write_text('{}')
     assets = root / "wallet-data"
     assets.mkdir()
     (assets / "index.json").write_text(json.dumps(dict(schema_version=1, snapshots={})))
@@ -25,7 +29,7 @@ class SiteArtifactTests(unittest.TestCase):
                 prepare_site(root, root / "output")
             self.assertFalse((root / "output").exists())
 
-    def test_both_pages_and_query_links_are_staged(self):
+    def test_all_pages_and_query_links_are_staged(self):
         with tempfile.TemporaryDirectory() as folder:
             root = Path(folder)
             (root / "index.html").write_text('<a href="graph.html?root=4200">Graph</a>')
@@ -33,7 +37,49 @@ class SiteArtifactTests(unittest.TestCase):
             wallet_assets(root)
             prepare_site(root, root / "output")
             self.assertEqual({path.name for path in (root / "output").iterdir()},
-                             {"index.html", "graph.html", "wallet.html", "reports.html", "reports-evidence.json", "wallet-data", ".nojekyll"})
+                             {"index.html", "graph.html", "wallet.html", "reports.html", "reports-evidence.json", "items.html", "items.csv", "item-sales.html", "items.json", "wallet-data", ".nojekyll"})
+
+    def test_missing_item_download_cannot_publish(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            (root / "index.html").write_text('Characters')
+            (root / "graph.html").write_text('Graph')
+            wallet_assets(root)
+            (root / "items.csv").unlink()
+            with self.assertRaises(FileNotFoundError):
+                prepare_site(root, root / "output")
+            self.assertFalse((root / "output").exists())
+
+    def test_item_dictionary_and_csv_cover_every_verified_mapping(self):
+        import csv
+        import io
+        from html.parser import HTMLParser
+        from generate_items import generate_items, items_csv, load_items
+        class Items(HTMLParser):
+            def __init__(self):
+                super().__init__()
+                self.items = {}
+            def handle_starttag(self, tag, attrs):
+                attrs = dict(attrs)
+                if tag == 'tr' and 'data-code' in attrs:
+                    self.items[attrs['data-code']] = attrs['data-name']
+        data, expected = load_items()
+        page = generate_items()
+        parser = Items()
+        parser.feed(page)
+        self.assertGreaterEqual(len(expected), 7889)
+        self.assertEqual(parser.items, dict(expected[:50]))
+        self.assertEqual(dict(expected)['30424029'], 'Sindri Shoes')
+        self.assertEqual(dict(expected)['30414029'], 'Sindri Shoes')
+        import re
+        embedded = json.loads(re.search(r'<script type="application/json" id="itemData">(.*?)</script>', page, re.S).group(1))
+        self.assertEqual(dict(embedded), dict(expected))
+        exported = list(csv.DictReader(io.StringIO(items_csv())))
+        safe_expected = {code: "'"+name if name.startswith(('=', '+', '-', '@', '\t', '\r')) else name for code, name in expected}
+        self.assertEqual({row['item_code']: row['english_name'] for row in exported}, safe_expected)
+        self.assertNotIn('__ITEM_', page)
+        self.assertNotIn('__THEME_CSS__', page)
+        self.assertIn(data['client_content_build'], page)
 
     def test_missing_report_cannot_publish_incomplete_section(self):
         with tempfile.TemporaryDirectory() as folder:

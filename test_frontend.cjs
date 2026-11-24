@@ -52,3 +52,4 @@ assert.equal(run(`marketSnapshot({market:{status:'Auction',auction_end:100,aucti
 assert.equal(run(`marketSnapshot({market:{status:'Auction',auction_end:100,auction_countdown_active:true,listed_price:'21,000',can_bid:true}}).status`),'Auction ended');
 assert.match(run(`marketDetails({market:{status:'Auction',listed_price:'21,000',can_bid:true,can_offer:false,auction_phase:'awaiting_bid'}})`),/Listed: 21,000/);
 assert.match(run(`marketDetails({market:{status:'Auction',listed_price:'21,000',can_bid:true,can_offer:false,auction_phase:'awaiting_bid'}})`),/Bid: Available · Offer: Unavailable/);
+require('./test_item_sales.cjs');
