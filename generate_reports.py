@@ -72,8 +72,11 @@ def hop_list(path):
 
 def generate_reports():
     data = json.loads((ROOT / 'wallet-investigation.json').read_text(encoding='utf-8'))
+    item_names = json.loads((ROOT / 'item-code-mappings.json').read_text(encoding='utf-8'))
     if data.get('schema_version') != 1:
         raise ValueError('Unsupported captured report schema')
+    if item_names.get('schema_version') != 1:
+        raise ValueError('Unsupported item-name mapping schema')
     purchases = sorted(data['purchases'], key=lambda p:int(p['record']['amount_wei']), reverse=True)
     rows, recipients = [], set()
     for item in purchases:
@@ -82,7 +85,13 @@ def generate_reports():
             raise ValueError('Purchase event does not match its payer and gross payment')
         recipient = event['seller']
         recipients.add(recipient)
-        rows.append(f'<tr data-amount="{Decimal(row["amount_wei"])/10**18}" data-at="{row["at"]}" data-recipient="{recipient}"><td>{stamp(row["at"])}</td><td><strong>{amount(row["amount_wei"])}</strong></td><td><code>{escape(event["code"])}</code></td><td>{address_link(recipient)}</td><td>{tx_link(row["tx_hash"])}</td></tr>')
+        item = item_names['items'].get(event['code'], {})
+        name = item.get('name', 'Item name not mapped') if item.get('verification') == 'verified_base_item_name' else 'Item name not mapped'
+        level = item.get('reported_enhancement')
+        if level is not None and (type(level) is not int or not 0 <= level <= 100):
+            raise ValueError('Invalid reported enhancement')
+        level_note = f'<small>Reported +{level} · level unverified</small>' if level is not None else ''
+        rows.append(f'<tr data-amount="{Decimal(row["amount_wei"])/10**18}" data-at="{row["at"]}" data-recipient="{recipient}"><td>{stamp(row["at"])}</td><td><strong>{amount(row["amount_wei"])}</strong></td><td><strong>{escape(name)}</strong><small>Code <code>{escape(event["code"])}</code></small>{level_note}</td><td>{address_link(recipient)}</td><td>{tx_link(row["tx_hash"])}</td></tr>')
     cards = []
     for nft, label in [('1154', 'kufuking2'), ('4046', 'NARIOzzy')]:
         wallet = '0x'+data['owners'][nft][-40:]
@@ -103,6 +112,8 @@ def generate_reports():
         '__REPORTS_SCRIPT__': (ROOT/'reports.js').read_text(encoding='utf-8'),
         '__FOCUS_WALLET__': address_link(data['wallet'],data['wallet']),
         '__CHECKED_AT__': stamp(data['checked_at']),
+        '__ITEM_NAMES_CHECKED_AT__': stamp(item_names['checked_at']),
+        '__ITEM_CLIENT_BUILD__': escape(item_names['client_content_build']),
         '__REPORT_STATS__': ''.join(f'<article class="report-card"><strong>{escape(n)}</strong><span>{escape(label)}</span></article>' for n,label in totals),
         '__RECIPIENT_OPTIONS__': ''.join(f'<option value="{r}">{r[:10]}…{r[-6:]}</option>' for r in sorted(recipients)),
         '__PURCHASE_ROWS__': ''.join(rows),
@@ -114,3 +125,9 @@ def generate_reports():
     for token, value in replacements.items():
         html = html.replace(token,value)
     return html
+
+
+def captured_report_evidence():
+    data = json.loads((ROOT / 'wallet-investigation.json').read_text(encoding='utf-8'))
+    data['item_name_mappings'] = json.loads((ROOT / 'item-code-mappings.json').read_text(encoding='utf-8'))
+    return data

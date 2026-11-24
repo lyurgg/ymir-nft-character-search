@@ -338,9 +338,9 @@ def main():
     Path("graph.html").write_text(generate_graph(characters), encoding="utf-8")
     from generate_wallet import generate_wallet
     Path("wallet.html").write_text(generate_wallet(), encoding="utf-8")
-    from generate_reports import generate_reports
+    from generate_reports import generate_reports, captured_report_evidence
     Path("reports.html").write_text(generate_reports(), encoding="utf-8")
-    Path("reports-evidence.json").write_bytes(Path("wallet-investigation.json").read_bytes())
+    Path("reports-evidence.json").write_text(json.dumps(captured_report_evidence(), ensure_ascii=False, indent=2), encoding="utf-8")
 
 
     print(

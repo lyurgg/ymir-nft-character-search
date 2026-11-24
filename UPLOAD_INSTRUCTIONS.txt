@@ -1,10 +1,10 @@
-SPECIAL REPORT UPDATE
+SPECIAL REPORT WITH VERIFIED ITEM NAMES
 
-On GitHub, open the repository root, choose Add file > Upload files, then select the 12 source files inside this folder. Keep their filenames unchanged and commit them together. The instructions file itself does not need to be uploaded. No workflow edit is required.
+Upload the 13 source files inside this folder to the GitHub repository root in one commit. Skip this instructions file. Keep filenames unchanged. No workflow edit is required.
 
-The existing GitHub Actions workflow builds and publishes the new Special reports section, linked from all pages. After deployment succeeds, open:
+This includes all sources for the Special reports section, the directed wallet graph, and verified base names for all 18 item codes across the 20 purchases. Historical +15 levels remain labelled as reported, not independently verified.
+
+After GitHub Actions finishes deploying, open:
 https://lyurgg.github.io/ymir-nft-character-search/reports.html
 
-This patch includes the dated report evidence and its directed graph. It does not contain older character, funding, or wallet activity databases. Keep those existing files on GitHub.
-
-Do not upload reports.html, reports-evidence.json, _site, wallet-data, sample_* files, or this folder itself. The build generates the pages and downloadable evidence automatically. Each supplied file is under 1 MB.
+Do not upload sample_* investigation files or memory readers, generated reports.html, reports-evidence.json, _site or wallet-data. No character, funding or wallet database replacement is needed for this update. All supplied files are under 1 MB.

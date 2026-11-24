@@ -16,7 +16,7 @@ SOURCE_FILES = (
     "test_json_store.py", "theme.css", "verify_live.py",
     "wallet_activity.py", "collect_wallet_activity.py", "wallet_activity_config.json", "generate_wallet.py",
     "wallet-template.html", "wallet.css", "wallet-core.js", "wallet.js", "test_wallet_activity.py", "test_wallet.cjs",
-    "generate_reports.py", "reports-template.html", "reports.css", "reports.js", "wallet-investigation.json",
+    "generate_reports.py", "reports-template.html", "reports.css", "reports.js", "wallet-investigation.json", "item-code-mappings.json",
 )
 PACKAGE = "ymir-browser-upload-v1"
 REPORT = "UPLOAD_MANIFEST.json"

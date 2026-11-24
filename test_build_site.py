@@ -65,7 +65,16 @@ class SiteArtifactTests(unittest.TestCase):
         for text in ('Formerly kufuking (3433)', 'kufuking2 (1154)', 'kufuking3 (3871)', 'Bunn1eSSS (1358)', 'marker id="reportArrow"', 'reports-evidence.json'):
             self.assertIn(text, html)
         self.assertNotIn('__CONNECTION_GRAPH__', html)
-        self.assertIn('The item names are still missing', html)
+        self.assertIn('Agelmund Recurve Bow', html)
+        self.assertIn('Valtram Shoes', html)
+        self.assertIn('Megingjord', html)
+        self.assertIn('Reported +15 · level unverified', html)
+        self.assertNotIn('Item name not mapped', html)
+        from generate_reports import captured_report_evidence
+        evidence = captured_report_evidence()
+        required = {p['events'][0]['code'] for p in evidence['purchases']}
+        self.assertEqual(required, set(evidence['item_name_mappings']['items']))
+        self.assertTrue(all(m['enhancement'] is None for m in evidence['item_name_mappings']['items'].values()))
 
     def test_missing_wallet_page_or_data_cannot_publish(self):
         with tempfile.TemporaryDirectory() as folder:
