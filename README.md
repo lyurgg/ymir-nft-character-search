@@ -542,7 +542,8 @@ trade date in Philippine time, counterparty, and receipt. It uses purchase event
 for both directions; a seller does not need to collect proceeds before a sale
 can be found. Self-purchases appear once, labelled Bought & sold.
 
-Choose Bought & sold, Bought, or Sold; request the newest 20, 50, or 100 matches;
+Choose Bought & sold, Bought, or Sold; enter any positive whole-number result
+count, such as **1003** (quick suggestions include 20, 50, and 100);
 and look back 7, 30, 90, or 365 days. The default is the newest 20 within 30 days.
 The page scans the public chain backward in batches and stops at the selected
 result limit or date boundary. It reports the checked interval, unknown-code

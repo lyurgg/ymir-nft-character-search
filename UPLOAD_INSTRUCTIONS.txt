@@ -1,18 +1,7 @@
-RECENT WALLET ITEM PURCHASES AND SALES
+CUSTOM WALLET ITEM COUNT
 
-Upload the 36 source/data files inside this folder to the GitHub repository ROOT in one commit. Skip this instructions file. Keep every filename unchanged. No workflow edit is required. Select the files inside the folder; do not upload the folder itself.
+Upload the six source files inside this folder to the GitHub repository ROOT in one commit. Skip this instructions file. This patch updates the Wallet items feature from the previous 36-file upload. No workflow edit is needed.
 
-IMPORTANT: include item-code-mappings.json and BOTH item-code-mappings.part-*.json files. The small catalog index requires the matching parts. Every supplied file is under 500 KB.
+The Newest matches field now accepts any positive whole number, including 1003. The count is preserved in shareable URLs and CSV exports. The search stops at that count or the selected lookback boundary, whichever comes first. Pagination remains 25 rows per page. Larger searches take longer.
 
-After GitHub Actions finishes deploying, open:
-https://lyurgg.github.io/ymir-nft-character-search/wallet-items.html
-
-Enter a WEMIX wallet and press Find wallet items. The page shows newest mapped item purchases and sales, English name and code, gross WEMIX price, trade time in PHT, counterparty, and receipt. The paper theme is retained.
-
-Default: newest 20 matching trades within 30 days. Choose Bought and sold / Bought / Sold, 20 / 50 / 100 matches, and a 7 / 30 / 90 / 365 day lookback. Searches start from the newest blocks; they stop at the result limit or date boundary. Quiet wallets and long ranges take longer. Stopped/failed searches are labelled incomplete. CSV exports retain completion and limit status.
-
-This uses live public marketplace purchase events, so sales can appear before the seller collects the proceeds. No wallet login, API key, collected-wallet database, or workflow refresh is needed. Only codes in the English-name database are included. Enhancement levels are not inferred.
-
-This bundle includes the current item dictionary, item-code purchase search, report sources, build integration, navigation and tests, so upload all 36 files together even if an earlier item update has not been uploaded yet.
-
-Do not add generated wallet-items.html, items.html, item-sales.html, items.json, items.csv, reports.html, reports-evidence.json, _site, wallet-data, region-trade-reader, or sample_* files. No character, funding, or wallet database replacement is needed.
+If you have not uploaded the Wallet items feature yet, use the updated complete github-upload-wallet-items folder instead.

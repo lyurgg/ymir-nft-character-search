@@ -6,7 +6,8 @@
     const label=kind=>({bought:'Bought',sold:'Sold',self:'Bought & sold'}[kind]);
     let rows=[],page=0,controller=null,search=null,result=null,progress=null,finished=false;
     el('wiWallet').value=params.get('wallet')||'';
-    for(const [id,key,allowed] of [['wiDirection','direction',['all','bought','sold']],['wiDays','days',['7','30','90','365']],['wiLimit','limit',['20','50','100']]])if(allowed.includes(params.get(key)))el(id).value=params.get(key);
+    for(const [id,key,allowed] of [['wiDirection','direction',['all','bought','sold']],['wiDays','days',['7','30','90','365']]])if(allowed.includes(params.get(key)))el(id).value=params.get(key);
+    if(params.has('limit'))el('wiLimit').value=params.get('limit');
     function cell(tr,text,url,cls=''){
         const td=document.createElement('td');if(cls)td.className=cls;
         if(url){const a=document.createElement('a');a.textContent=text;a.href=url;a.target='_blank';a.rel='noopener noreferrer';td.append(a);}else td.textContent=text;
@@ -34,7 +35,9 @@
         event?.preventDefault();if(controller)return;
         const wallet=WalletItems.address(el('wiWallet').value);
         if(!wallet){el('wiStatus').textContent='Enter a full WEMIX wallet address (0x followed by 40 hexadecimal characters).';return;}
-        search={wallet,direction:el('wiDirection').value,days:Number(el('wiDays').value),limit:Number(el('wiLimit').value)};
+        let limit;try{limit=WalletItems.resultLimit(el('wiLimit').value);}catch(error){el('wiStatus').textContent=error.message;return;}
+        el('wiLimit').value=String(limit);
+        search={wallet,direction:el('wiDirection').value,days:Number(el('wiDays').value),limit};
         const url=new URL(location.href);for(const [key,value] of Object.entries(search))url.searchParams.set(key,value);history.replaceState(null,'',url);
         el('wiWallet').value=wallet;el('wiScan').href='https://scan.wemix.com/address/'+wallet;el('wiActivity').href='wallet.html?wallet='+wallet+'&sort=newest';el('wiLinks').hidden=false;
         controller=new AbortController();rows=[];result=null;progress=null;finished=false;page=0;render();

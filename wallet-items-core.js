@@ -4,10 +4,16 @@
     const side=(row,wallet)=>row.buyer===wallet&&row.seller===wallet?'self':row.buyer===wallet?'bought':row.seller===wallet?'sold':'';
     const order=(a,b)=>b.block-a.block||b.log_index-a.log_index;
     const accepts=(value,filter)=>filter==='all'||value===filter||value==='self';
+    function resultLimit(value){
+        if(typeof value==='string')value=/^\d+$/.test(value.trim())?Number(value.trim()):NaN;
+        if(!Number.isSafeInteger(value)||value<1)throw Error('Enter a positive whole number of items, for example 1003.');
+        return value;
+    }
     async function scan({wallet,names,days=30,limit=20,direction='all',rpc=Sales.client(),signal,onMatch=()=>{},onProgress=()=>{}}) {
         wallet=address(wallet);
         if(!wallet)throw Error('Enter a full WEMIX wallet address (0x followed by 40 hexadecimal characters).');
-        if(![7,30,90,365].includes(days)||![20,50,100].includes(limit)||!['all','bought','sold'].includes(direction))throw Error('Choose a supported search range, result limit and direction.');
+        limit=resultLimit(limit);
+        if(![7,30,90,365].includes(days)||!['all','bought','sold'].includes(direction))throw Error('Choose a supported search range and direction.');
         if(!names||typeof names!=='object')throw Error('The item-name database is unavailable.');
         const halt=new AbortController();signal=AbortSignal.any([halt.signal,...(signal?[signal]:[])]);
         const blocks=new Map(),hex=n=>'0x'+n.toString(16);
@@ -65,5 +71,5 @@
         }
         return {rows,wallet,head,latest,days,limit,direction,checked,total,oldestBlock,oldestAt,unknown,hitLimit:rows.length>=limit,rangeComplete:cursor<first};
     }
-    return {address,side,order,accepts,scan};
+    return {address,side,order,accepts,resultLimit,scan};
 });
