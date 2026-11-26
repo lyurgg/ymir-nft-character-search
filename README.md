@@ -532,3 +532,35 @@ identification are outside this scan's coverage.
 
 The browser logic checks include `test_item_sales.cjs` through
 `test_frontend.cjs`, so the current workflow runs them without a workflow edit.
+
+## Recent wallet items
+
+**Wallet items** opens `wallet-items.html`. Enter any WEMIX wallet address to find
+its newest completed purchases and sales whose codes occur in the verified item
+dictionary. The page shows the English name and original code, gross WEMIX price,
+trade date in Philippine time, counterparty, and receipt. It uses purchase events
+for both directions; a seller does not need to collect proceeds before a sale
+can be found. Self-purchases appear once, labelled Bought & sold.
+
+Choose Bought & sold, Bought, or Sold; request the newest 20, 50, or 100 matches;
+and look back 7, 30, 90, or 365 days. The default is the newest 20 within 30 days.
+The page scans the public chain backward in batches and stops at the selected
+result limit or date boundary. It reports the checked interval, unknown-code
+trades skipped, and whether older trades remain outside the loaded results.
+A stopped or failed search is explicitly incomplete. CSV exports retain the
+search settings and completion/limit status.
+
+URLs retain the address and options, for example
+`wallet-items.html?wallet=0x99e445f47211ef3ee91ee478244b42871187fc75&direction=all&days=30&limit=20`.
+A wallet link starts the live search automatically. No collected wallet snapshot,
+API key, connected wallet, or workflow refresh is required. Quiet wallets and
+long date ranges take longer because buyer and seller addresses are unindexed
+data fields in this contract's purchase events.
+
+This view covers the YMIR item marketplace purchase event, not character NFTs,
+unsold listings, offers, or other contracts. Codes absent from the English lookup
+are skipped; enhancement levels and unique item instances are not inferred.
+`generate_wallet_items.py`, `wallet-items-template.html`, `wallet-items.css`,
+`wallet-items-core.js`, and `wallet-items.js` build this page. Tests in
+`test_wallet_items.cjs` run through the existing frontend check. Upload the new
+sources and updated build/navigation files together; no workflow edit is needed.

@@ -6,7 +6,7 @@ from urllib.parse import urlsplit, unquote
 from html.parser import HTMLParser
 import shutil
 
-PAGES = ("index.html", "graph.html", "wallet.html", "reports.html", "items.html", "item-sales.html")
+PAGES = ("index.html", "graph.html", "wallet.html", "reports.html", "items.html", "item-sales.html", "wallet-items.html")
 DOWNLOADS = ("reports-evidence.json", "items.csv", "items.json")
 
 

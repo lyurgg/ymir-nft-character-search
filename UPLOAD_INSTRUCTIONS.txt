@@ -1,18 +1,18 @@
-ITEM DICTIONARY + MARKETPLACE PURCHASE SEARCH
+RECENT WALLET ITEM PURCHASES AND SALES
 
-Upload the 29 source/data files inside this folder to the GitHub repository ROOT in one commit. Skip this instructions file. Keep every filename unchanged. No workflow edit is required.
+Upload the 36 source/data files inside this folder to the GitHub repository ROOT in one commit. Skip this instructions file. Keep every filename unchanged. No workflow edit is required. Select the files inside the folder; do not upload the folder itself.
 
-IMPORTANT: upload item-code-mappings.json AND BOTH item-code-mappings.part-*.json files together. The small index requires its matching parts. Each catalog part is under 500 KB. No folders need uploading.
+IMPORTANT: include item-code-mappings.json and BOTH item-code-mappings.part-*.json files. The small catalog index requires the matching parts. Every supplied file is under 500 KB.
 
-After GitHub Actions finishes deploying:
-https://lyurgg.github.io/ymir-nft-character-search/items.html
+After GitHub Actions finishes deploying, open:
+https://lyurgg.github.io/ymir-nft-character-search/wallet-items.html
 
-The dictionary has 7,889 verified codes across 4,022 English names, search and pagination, CSV/JSON downloads, and Find purchases links. Some codes share a name; record presence does not establish marketplace availability. Untranslated/unresolved records are excluded.
+Enter a WEMIX wallet and press Find wallet items. The page shows newest mapped item purchases and sales, English name and code, gross WEMIX price, trade time in PHT, counterparty, and receipt. The paper theme is retained.
 
-To search purchases: type Sindri Shoes, choose Find purchases next to 30424029, set the date range, and press Find purchases. Dates use Philippine time, UTC+8. The search scans completed purchases across the item marketplace contract directly from the public chain. No wallet login, API key, workflow edit, or transaction-database refresh is needed. Large date ranges take longer. Stop/failures retain explicitly incomplete results.
+Default: newest 20 matching trades within 30 days. Choose Bought and sold / Bought / Sold, 20 / 50 / 100 matches, and a 7 / 30 / 90 / 365 day lookback. Searches start from the newest blocks; they stop at the result limit or date boundary. Quiet wallets and long ranges take longer. Stopped/failed searches are labelled incomplete. CSV exports retain completion and limit status.
 
-For the known receipt, test August 2, 2026 through August 2, 2026. The live check found 6,000 and 25,000 WEMIX purchases of code 30424029. This identifies an item type, not a unique item instance.
+This uses live public marketplace purchase events, so sales can appear before the seller collects the proceeds. No wallet login, API key, collected-wallet database, or workflow refresh is needed. Only codes in the English-name database are included. Enhancement levels are not inferred.
 
-This bundle also includes the current Special reports sources and verified purchase names, so it works even if the previous report update has not been uploaded yet.
+This bundle includes the current item dictionary, item-code purchase search, report sources, build integration, navigation and tests, so upload all 36 files together even if an earlier item update has not been uploaded yet.
 
-Do not upload generated items.html, items.csv, items.json, item-sales.html, reports.html, reports-evidence.json, _site, wallet-data, sample_* files or memory readers. No character, funding or wallet database replacement is needed. All 29 supplied files are under 500 KB.
+Do not add generated wallet-items.html, items.html, item-sales.html, items.json, items.csv, reports.html, reports-evidence.json, _site, wallet-data, region-trade-reader, or sample_* files. No character, funding, or wallet database replacement is needed.

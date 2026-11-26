@@ -1,0 +1,19 @@
+.wi-muted {color:var(--muted);font-size:14px;}
+.wi-wallet-label {display:block;font-weight:900;margin-bottom:9px;}
+.wi-wallet-line {display:flex;gap:12px;flex-wrap:wrap;}
+.wi-wallet-line input {flex:1;min-width:260px;font-family:ui-monospace,monospace;font-size:15px;border:2px solid var(--ink);}
+.wi-options {display:flex;flex-wrap:wrap;gap:18px;margin-top:20px;}
+.wi-options label {display:flex;flex-direction:column;gap:7px;font-weight:800;font-size:14px;min-width:170px;}
+.wi-options select {font-size:15px;}
+.wi-links {display:flex;gap:20px;flex-wrap:wrap;font-weight:800;}
+.wi-links[hidden] {display:none;}
+#wiStatus {font-weight:900;margin-top:0;}
+#wiCoverage {color:var(--muted);margin-bottom:0;}
+#wiProgress {width:100%;height:12px;accent-color:var(--gold-dim);}
+.wi-table {min-width:1000px;}
+.wi-table td:nth-child(2) {font-weight:900;font-family:var(--sans);white-space:nowrap;}
+.wi-table td:nth-child(4) {font-weight:900;font-variant-numeric:tabular-nums;}
+.wi-item-name {display:block;font-family:var(--sans)!important;font-size:16px!important;font-weight:900;}
+.wi-item-code {display:block;margin-top:5px;color:var(--muted);font-size:13px;font-family:ui-monospace,monospace;}
+.wi-bought {color:#2f644b;}.wi-sold {color:#8a4a1e;}.wi-self {color:#6c4f8b;}
+@media(max-width:650px){.wi-wallet-line input{min-width:100%;}.wi-wallet-line button{flex:1;}.wi-options label{flex:1;min-width:135px;}}

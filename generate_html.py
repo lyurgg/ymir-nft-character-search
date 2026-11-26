@@ -98,7 +98,7 @@ __DASHBOARD_CSS__</style>
          Header
     ===================================================== -->
 
-    <nav class="site-nav"><a class="brand" href="index.html">YMIR <span>Character atlas</span></a><div><a href="index.html" aria-current="page">Characters</a><a href="graph.html">Ownership graph</a><a href="wallet.html">Wallet activity</a><a href="reports.html">Special reports</a><a href="items.html">Item codes</a></div></nav>
+    <nav class="site-nav"><a class="brand" href="index.html">YMIR <span>Character atlas</span></a><div><a href="index.html" aria-current="page">Characters</a><a href="graph.html">Ownership graph</a><a href="wallet.html">Wallet activity</a><a href="wallet-items.html">Wallet items</a><a href="reports.html">Special reports</a><a href="items.html">Item codes</a></div></nav>
     <div class="header">
 
         <span class="surface-eyebrow">
@@ -347,6 +347,8 @@ def main():
     from item_mappings import load_item_mappings
     Path("items.json").write_text(json.dumps(load_item_mappings(), ensure_ascii=False, indent=2), encoding="utf-8")
     Path("item-sales.html").write_text(generate_item_sales(), encoding="utf-8")
+    from generate_wallet_items import generate_wallet_items
+    Path("wallet-items.html").write_text(generate_wallet_items(), encoding="utf-8")
 
 
     print(

@@ -11,6 +11,7 @@ def wallet_assets(root):
     (root / "reports-evidence.json").write_text('{}')
     (root / "items.html").write_text('<a href="items.csv">CSV</a><a href="items.json">JSON</a>')
     (root / "item-sales.html").write_text('<a href="items.html">Item codes</a>')
+    (root / "wallet-items.html").write_text('<a href="items.html">Item codes</a>')
     (root / "items.csv").write_text('item_code,english_name\n')
     (root / "items.json").write_text('{}')
     assets = root / "wallet-data"
@@ -37,7 +38,18 @@ class SiteArtifactTests(unittest.TestCase):
             wallet_assets(root)
             prepare_site(root, root / "output")
             self.assertEqual({path.name for path in (root / "output").iterdir()},
-                             {"index.html", "graph.html", "wallet.html", "reports.html", "reports-evidence.json", "items.html", "items.csv", "item-sales.html", "items.json", "wallet-data", ".nojekyll"})
+                             {"index.html", "graph.html", "wallet.html", "reports.html", "reports-evidence.json", "items.html", "items.csv", "item-sales.html", "wallet-items.html", "items.json", "wallet-data", ".nojekyll"})
+
+    def test_wallet_item_page_includes_catalog_and_no_unresolved_tokens(self):
+        from generate_wallet_items import generate_wallet_items
+        page = generate_wallet_items()
+        self.assertIn('Sindri Shoes', page)
+        self.assertIn('30424029', page)
+        self.assertIn('Muspel Gloves', page)
+        self.assertIn('wiWallet', page)
+        self.assertIn('wallet-items.html', page)
+        self.assertNotIn('__WALLET_ITEMS_', page)
+        self.assertNotIn('__SALE_NAMES__', page)
 
     def test_missing_item_download_cannot_publish(self):
         with tempfile.TemporaryDirectory() as folder:
