@@ -1,14 +1,14 @@
 {
-  "checked_at": "2026-11-25T00:32:28.171608+00:00",
-  "duration_seconds": 144.1,
+  "checked_at": "2026-11-26T00:07:52.676953+00:00",
+  "duration_seconds": 141.1,
   "attempted": 5000,
-  "successful": 4204,
-  "archived": 4204,
-  "new_characters": 2,
+  "successful": 4208,
+  "archived": 4208,
+  "new_characters": 4,
   "failed_ids": [
     3,
-    2,
-    1
+    1,
+    2
   ],
   "missing_archived_ids": [],
   "market_failed_ids": [],

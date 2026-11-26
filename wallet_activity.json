@@ -39,22 +39,22 @@
     "schema_version": 1,
     "chain_id": 1111,
     "asset": "WEMIX",
-    "checked_at": "2026-11-25T00:34:02.616724+00:00",
+    "checked_at": "2026-11-26T00:09:29.684712+00:00",
     "source": "WEMIX Scan",
     "wallets": {
       "0xbeaabc38996609c58c1de8d30acd368ef47d5b63": {
-        "attempted_at": "2026-11-25T00:34:00.899957+00:00",
+        "attempted_at": "2026-11-26T00:09:27.782683+00:00",
         "regular": {
           "complete": true,
           "records_checked": 1000,
-          "checked_at": "2026-11-25T00:34:01.825182+00:00",
-          "attempted_at": "2026-11-25T00:34:00.901671+00:00"
+          "checked_at": "2026-11-26T00:09:28.785376+00:00",
+          "attempted_at": "2026-11-26T00:09:27.784274+00:00"
         },
         "internal": {
           "complete": true,
           "records_checked": 1000,
-          "checked_at": "2026-11-25T00:34:02.554123+00:00",
-          "attempted_at": "2026-11-25T00:34:01.825967+00:00"
+          "checked_at": "2026-11-26T00:09:29.632175+00:00",
+          "attempted_at": "2026-11-26T00:09:28.786244+00:00"
         }
       }
     },
