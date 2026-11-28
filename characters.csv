@@ -50,7 +50,7 @@ nft_id,character_name,server,gp,character_class,starting_price
 52,VNPhucAnPika,ASIA048,"402,022",Archer,
 53,戦場BEEF,sapPHire,"358,231",Archer,
 54,PayMore,TheOrigin,"300,658",Rune Fighter,
-55,Sigrun,NAEU005,"351,443",Archer,
+55,Sigrun,NAEU005,"352,110",Archer,
 56,bemon,HERO,"145,897",Archer,
 57,ChoopaメG,ASIA044,"378,524",Archer,
 58,炎Bathory,Kings,"307,737",Archer,
@@ -124,7 +124,7 @@ nft_id,character_name,server,gp,character_class,starting_price
 126,ÂphroÐite,Kings,"509,249",Assassin,
 127,皇冠凛冽,ASIA030,"161,140",Archer,
 128,Hitozumaa,Kings,,Archer,
-129,TinkerVN,Kings,"240,652",Skald,
+129,TinkerVN,Kings,"236,823",Skald,
 130,Kaladorina,Sombragg,"202,187",Warlord,
 131,lFOCUS,Kings,"389,252",Assassin,
 132,ReaN,NAEU015,,Archer,
@@ -150,7 +150,7 @@ nft_id,character_name,server,gp,character_class,starting_price
 152,crøw,NAEU004,"221,658",Archer,
 153,ShogunLMTD,sapPHire,"335,818",Archer,
 154,시仗TripleStaR,HERO,"270,857",Rune Fighter,
-155,MusIimShady,Chess,"486,909",Rune Fighter,
+155,MusIimShady,Chess,"487,374",Rune Fighter,
 156,Readgen,NAEU006,"199,346",Archer,
 157,メHide,Kings,"414,764",Archer,
 158,Vent,TVJ,"266,925",Archer,
@@ -233,7 +233,7 @@ nft_id,character_name,server,gp,character_class,starting_price
 235,Kyelin,sapPHire,"224,229",Volva,
 236,ชาร์ลี,UniRevivaL,,Rune Fighter,
 237,Koraje,NAEU005,"258,576",Skald,400
-238,Batmen,Chess,"350,113",Skald,
+238,Batmen,Chess,"350,143",Skald,
 239,Joloboy,ISEKAI,"229,228",Archer,
 240,LoliRuri,MarcoVeio,"183,363",Skald,
 241,zPATEK,EBD,"221,840",Skald,
@@ -277,14 +277,14 @@ nft_id,character_name,server,gp,character_class,starting_price
 279,1Mongs,ASIA048,"236,223",Archer,
 280,NessSea,Bangkok,"184,348",Rune Fighter,
 281,NiPSLiPx999,ASIA044,"293,994",Archer,
-282,Vizuals,NAEU005,"287,364",Warlord,"2,499"
+282,Vizuals,NAEU005,"287,364",Warlord,550
 283,MooseF,EBD,"238,890",Warlord,
 284,Shadоw,NAEU005,"261,415",Rune Fighter,
 285,可頌大居居,HERO,"331,109",Rune Fighter,
 286,HOFGUMMY,IceXgame,"219,066",Rune Fighter,
 287,小速度,ASIA015,"291,680",Rune Fighter,
 288,TEMA399,NAEU007,"216,240",Rune Fighter,
-289,5Flower,Chess,"505,521",Assassin,"18,000"
+289,5Flower,Chess,"505,521",Assassin,
 290,Gwyneth,Sombra,,Volva,
 291,T乇nbitsz,ASIA014,"301,795",Warlord,
 292,LexDark,Moscow,"208,954",Berserker,
@@ -352,7 +352,7 @@ nft_id,character_name,server,gp,character_class,starting_price
 354,Pøoliv,NAEU006,"212,459",Archer,350
 355,BTxPhoenix五,sapPHire,"391,233",Rune Fighter,
 356,Kamisaru,TheOrigin,"180,340",Archer,
-357,Yaoyaki,ASIA014,"343,722",Archer,"1,199"
+357,Yaoyaki,ASIA014,"343,722",Archer,
 358,오Ingrid,ASIA044,"270,297",Skald,
 359,xCaliel,BRAVOS,"204,532",Archer,
 360,天下爲公,ASIA015,"321,785",Archer,
@@ -411,7 +411,7 @@ nft_id,character_name,server,gp,character_class,starting_price
 413,Yéji,ASIA021,"235,044",Archer,
 414,sedweddeee,ASIA054,"193,778",Archer,
 415,Xero,NAEU006,,Skald,
-416,Łoboo,São Paulo,"512,011",Archer,
+416,Łoboo,São Paulo,"497,392",Archer,
 417,KSANTE,NAEU005,"311,908",Rune Fighter,
 418,CampZ,Sombragg,"269,848",Skald,
 419,RedPandemic,NAEU006,"263,034",Skald,
@@ -447,7 +447,7 @@ nft_id,character_name,server,gp,character_class,starting_price
 449,Addalion,Moscow,"168,245",Skald,
 450,Hohenheim,HERO,"239,331",Skald,
 451,有茸奶大,Kings,"391,431",Skald,
-452,TWnOx,Kings,"455,955",Archer,
+452,TWnOx,Kings,"456,729",Archer,
 453,Schum4,BRAVOS,,Archer,
 454,Momoメ,,,Rune Fighter,
 455,Francis,São Paulo,,Volva,
@@ -468,7 +468,7 @@ nft_id,character_name,server,gp,character_class,starting_price
 470,Mouza,ASIA021,"197,729",Warlord,
 471,Gordinh4,Sombragg,"471,928",Skald,
 472,Wafflepie,UniRevivaL,,Skald,
-473,JeoLeenatixツ,Chess,"435,233",Archer,
+473,JeoLeenatixツ,Chess,"428,404",Archer,
 474,ПивнойМонстр,NAEU004,"171,642",Archer,
 475,LordHealz,Sombra,"247,651",Skald,
 476,Pђâท丶Tђâท,Taipei,"355,634",Archer,
@@ -632,7 +632,7 @@ nft_id,character_name,server,gp,character_class,starting_price
 634,sah,IceXgame,,Volva,
 635,zPuNiSher,Sombragg,"332,059",Archer,
 636,ElmaMaria文,Severance,"378,652",Archer,
-637,钰面小飛龙,ASIA015,"476,619",Rune Fighter,
+637,钰面小飛龙,ASIA015,"470,291",Rune Fighter,
 638,Lo8p,São Paulo,"146,750",Archer,
 639,Nipiz,Kings,"281,474",Archer,
 640,江南mimi,MarcoVeio,"257,005",Rune Fighter,
@@ -706,7 +706,7 @@ nft_id,character_name,server,gp,character_class,starting_price
 708,XRippIerX,HERO,,Rune Fighter,
 709,XamaOSAMU,Severance,"316,802",Skald,
 710,dilitand,NAEU015,"180,522",Archer,
-711,저격Artemis,Kings,"366,585",Archer,
+711,저격Artemis,Kings,"366,803",Archer,
 712,สนามรอง,UniRevivaL,"234,288",Skald,
 713,英俊的Kuyss,Chess,"210,462",Archer,
 714,TOMSSS69,Kings,,Skald,
@@ -759,7 +759,7 @@ nft_id,character_name,server,gp,character_class,starting_price
 761,Jilli44,UniRevivaL,"168,892",Archer,
 762,PUDGE,NAEU007,"177,146",Archer,
 763,W00NWAii,UniRevivaL,,Archer,
-764,Aishia,ASIA025,"451,890",Assassin,
+764,Aishia,ASIA025,"454,146",Assassin,
 765,Sp1teful,NAEU005,"295,657",Archer,
 766,CuraQueNada,Sombra,"219,988",Skald,
 767,UwUBamUwU,HERO,"303,244",Archer,
@@ -784,7 +784,7 @@ nft_id,character_name,server,gp,character_class,starting_price
 786,FORGETMENOT,UniRevivaL,"225,698",Rune Fighter,
 787,Литавит,NAEU004,"202,175",Berserker,
 788,火Chin,ISEKAI2,"252,549",Archer,
-789,晨1曦,ASIA015,"462,931",Assassin,
+789,晨1曦,ASIA015,"463,145",Assassin,
 790,ㅟAion,HERO,"201,249",Warlord,
 791,n0n33,NAEU015,"261,422",Warlord,
 792,TheCrow,NAEU004,"146,616",Archer,139
@@ -847,7 +847,7 @@ nft_id,character_name,server,gp,character_class,starting_price
 849,Zapphir3,UniRevivaL,"270,305",Archer,
 850,史帝芬葛格,Chess,"666,506",Assassin,
 851,WAKOLOVESALL,Chess,"193,393",Archer,
-852,LazyGirI,Chess,"474,973",Archer,"9,000"
+852,LazyGirI,Chess,"474,973",Archer,
 853,ClasSiquee,SAKURA,,Rune Fighter,
 854,Ylimitado,SA006,"210,934",Rune Fighter,
 855,Poseidonx,SA007,,Skald,
@@ -1108,7 +1108,7 @@ nft_id,character_name,server,gp,character_class,starting_price
 1110,・GACAL・,NAEU004,"257,389",Rune Fighter,
 1111,AutoIce強,Severance,"392,878",Archer,
 1112,mokomoko,ISEKAI,"174,007",Warlord,
-1113,YouCanYouUp,ASIA014,"286,263",Skald,700
+1113,YouCanYouUp,ASIA014,"286,263",Skald,500
 1114,IslaLyra,ASIA020,,Warlord,
 1115,绵绵小月亮,HERO,,Skald,
 1116,赫克爾,HERO,"423,741",Archer,
@@ -1202,7 +1202,7 @@ nft_id,character_name,server,gp,character_class,starting_price
 1204,MeduzaHellzツ,Sombra,"248,921",Archer,
 1205,運命Grae,Kings,,Archer,
 1206,鬼Mashu,HERO,"323,049",Archer,
-1207,3Palästina,NAEU005,"607,362",Archer,
+1207,3Palästina,NAEU005,"607,663",Archer,
 1208,WolFly,NAEU015,,Rune Fighter,
 1209,Munggo,sapPHire,"151,247",Archer,550
 1210,Dendena,Sombragg,"227,244",Archer,
@@ -1322,7 +1322,7 @@ nft_id,character_name,server,gp,character_class,starting_price
 1324,Nauza2,Chess,"152,300",Archer,
 1325,Maxsya,ASIA054,"182,193",Skald,
 1326,气运之神,ASIA015,"268,439",Archer,
-1327,Shannyシ,sapPHire,"282,297",Archer,
+1327,Shannyシ,sapPHire,"289,329",Archer,
 1328,BARBAR1AN,NAEU003,"202,466",Archer,
 1329,Espinossa,Kings,,Archer,
 1330,Herm3s,Sombra,"262,040",Archer,
@@ -1666,7 +1666,7 @@ nft_id,character_name,server,gp,character_class,starting_price
 1668,Zoe24,sapPHire,"239,745",Archer,
 1669,AieSama,Kings,"237,204",Skald,
 1670,愿我如月妾如星,HERO,"188,845",Archer,
-1671,dron322,TheOrigin,"250,965",Archer,200
+1671,dron322,TheOrigin,"250,965",Archer,
 1672,BiDado,OLIMPO,"242,315",Skald,
 1673,Roadkill,Kings,"279,050",Archer,
 1674,MomsSpadudi,HERO,,Archer,
@@ -1777,7 +1777,7 @@ nft_id,character_name,server,gp,character_class,starting_price
 1779,xSUHOx,NAEU005,"219,674",Skald,
 1780,KuliBangunan,IceXgame,"259,959",Archer,
 1781,garpia,NAEU006,"178,161",Archer,
-1782,Gissmo,ASIA054,"291,249",Archer,
+1782,Gissmo,ASIA054,"298,692",Archer,500
 1783,KyaedsYT,TVJ,,Volva,
 1784,Weasel,YakuGames,"252,405",Volva,275
 1785,LAMAMBANEGRA,NAEU008,"199,735",Archer,
@@ -1950,7 +1950,7 @@ nft_id,character_name,server,gp,character_class,starting_price
 1952,Rivian,NAEU004,"127,041",Skald,150
 1953,抖音萧远山,Kings,"200,945",Archer,
 1954,浪子KingAiz,Bayabas,"299,927",Archer,
-1955,Salvaje・Zac,Sombragg,"419,019",Assassin,
+1955,Salvaje・Zac,Sombragg,"419,746",Assassin,
 1956,doken1,NAEU015,"266,851",Archer,
 1957,Lambo,Sombragg,"221,857",Archer,
 1958,MULHEDOMEDIT,Sombra,,Archer,
@@ -2007,7 +2007,7 @@ nft_id,character_name,server,gp,character_class,starting_price
 2009,hublOt,HERO,"206,101",Skald,
 2010,Cacarolho,MarcoVeio,"209,364",Archer,
 2011,GuXsou,ASIA016,"203,723",Warlord,
-2012,ROMPETIBIAS,BRAVOS,"315,794",Rune Fighter,
+2012,ROMPETIBIAS,OLIMPO,"311,977",Rune Fighter,650
 2013,Ymirdon,ASIA020,"166,796",Berserker,
 2014,NVN97,鸿运当头,"200,461",Warlord,
 2015,PradaGG,ASIA015,"386,621",Rune Fighter,
@@ -2198,7 +2198,7 @@ nft_id,character_name,server,gp,character_class,starting_price
 2200,IBEER,UniRevivaL,,Archer,
 2201,abeshiのsub,SAKURA,"221,558",Rune Fighter,
 2202,Nightmare,Sombragg,"214,152",Archer,
-2203,亗DOS,Kings,"388,383",Rune Fighter,
+2203,亗DOS,Kings,"376,298",Rune Fighter,"1,700"
 2204,BIGxUHTEN,HERO,"270,229",Archer,
 2205,Letzin,SA005,,Skald,
 2206,Chachar0t,ASIA021,"295,783",Skald,
@@ -2266,7 +2266,7 @@ nft_id,character_name,server,gp,character_class,starting_price
 2268,kito,Sombra,"149,118",Skald,
 2269,来来去去,Taipei,"296,834",Skald,
 2270,PoeYan,YGG,"206,163",Archer,
-2271,HoTa2830,Kings,"345,239",Rune Fighter,"1,500"
+2271,HoTa2830,Kings,"345,239",Rune Fighter,999
 2272,ผัดหมี่ヅ,sapPHire,"240,640",Skald,
 2273,MishaX1,NAEU004,"135,075",Archer,
 2274,Kongxu,MarcoVeio,"155,501",Archer,
@@ -2442,7 +2442,7 @@ nft_id,character_name,server,gp,character_class,starting_price
 2444,AkapadaM,sapPHire,"280,243",Rune Fighter,
 2445,BoxWhun,Kings,"232,084",Archer,
 2446,XPyCT,NAEU004,"242,979",Archer,
-2447,Yaga,TheOrigin,"205,974",Archer,
+2447,Yaga,TheOrigin,"137,272",Archer,
 2448,Chappiie,sapPHire,,Skald,
 2449,Gazzik,NAEU004,"166,531",Archer,
 2450,0palite,TVJ,,Volva,
@@ -2459,7 +2459,7 @@ nft_id,character_name,server,gp,character_class,starting_price
 2461,X7Farmaz,ASIA044,"177,599",Berserker,
 2462,MRX,ASIA016,"180,722",Archer,
 2463,HOFBUNNYGIRL,Kings,"204,865",Archer,
-2464,Tamer,TheOrigin,"217,187",Warlord,140
+2464,Tamer,TheOrigin,"217,187",Warlord,130
 2465,Zanka,TheOrigin,"122,888",Skald,
 2466,Xevv,sapPHire,"213,301",Skald,
 2467,Farvar,TheOrigin,"214,859",Archer,900
@@ -2471,7 +2471,7 @@ nft_id,character_name,server,gp,character_class,starting_price
 2473,SChaeyoung,ASIA021,"211,053",Rune Fighter,
 2474,Purpledeath,Severance,"329,891",Archer,
 2475,iNway,Severance,"239,633",Archer,
-2476,Lilyanne,ASIA020,"343,448",Assassin,
+2476,Lilyanne,ASIA020,"343,463",Assassin,
 2477,Meya,SA007,"180,685",Volva,
 2478,史諦芬葛格,HERO,"300,912",Warlord,
 2479,Sylvra,IceXgame,,Archer,
@@ -2895,7 +2895,7 @@ nft_id,character_name,server,gp,character_class,starting_price
 2897,メH4DESANITYメ,Chess,"280,844",Skald,
 2898,Happïness,Chess,"511,141",Rune Fighter,
 2899,DEADLYHP,Kings,"295,935",Archer,
-2900,Aussi,NAEU005,"262,169",Archer,220
+2900,Aussi,NAEU005,"262,169",Archer,200
 2901,eXmakinå,Chess,"537,395",Archer,
 2902,DistantX,ASIA020,"246,752",Rune Fighter,
 2903,AntonioO,Kings,"332,320",Archer,
@@ -2931,7 +2931,7 @@ nft_id,character_name,server,gp,character_class,starting_price
 2933,Rageziinho,BRAVOS,"234,501",Archer,
 2934,lacuca,NAEU004,"203,505",Volva,
 2935,Ravaa,NAEU004,"204,403",Skald,
-2936,yDansz,SA005,"277,066",Archer,
+2936,yDansz,SA005,"277,096",Archer,
 2937,DoKgo2,Sombragg,"216,892",Archer,
 2938,NiceStatus,OLIMPO,"334,983",Volva,
 2939,2Dias100caga,OLIMPO,"264,157",Archer,
@@ -2978,7 +2978,7 @@ nft_id,character_name,server,gp,character_class,starting_price
 2980,keshii,Chess,"240,265",Skald,
 2981,ネPayLess,Kings,"261,532",Archer,
 2982,Ashenfortune,Chess,"240,491",Rune Fighter,
-2983,Nhimxz,ASIA038,"217,636",Archer,
+2983,Nhimxz,UniRevivaL,"293,319",Archer,800
 2984,2Epic,YGG,"272,194",Archer,
 2985,MiguelAce,NAEU005,"229,900",Skald,
 2986,KNz,UniRevivaL,"227,919",Archer,
@@ -3049,8 +3049,8 @@ nft_id,character_name,server,gp,character_class,starting_price
 3051,KiiN,UniRevivaL,"215,380",Archer,
 3052,赤초코丶LarS乄,IceXgame,"186,522",Archer,
 3053,caprice,ASIA054,"237,332",Archer,
-3054,Pogibel,Moscow,"241,950",Archer,
-3055,Tau,EBD,"287,907",Assassin,"1,500"
+3054,Pogibel,Moscow,"241,971",Archer,
+3055,Tau,EBD,"287,907",Assassin,999
 3056,HOFTENBITSZ,ASIA020,"149,683",Warlord,
 3057,SCAMBOX,NAEU004,"245,384",Archer,
 3058,Tarantinesco,Severance,"206,988",Archer,
@@ -3103,7 +3103,7 @@ nft_id,character_name,server,gp,character_class,starting_price
 3105,Newbie,NAEU005,"445,009",Assassin,
 3106,BRONKSzera,Severance,"165,873",Volva,
 3107,Geörgë,Sombragg,"511,435",Archer,
-3108,Polacco,NAEU006,"284,298",Warlord,
+3108,Polacco,NAEU006,"285,001",Warlord,
 3109,電電虫,ISEKAI,"158,357",Berserker,
 3110,BOOSTER,TheOrigin,"217,095",Archer,200
 3111,亗JAGER亗,TheOrigin,"277,250",Rune Fighter,
@@ -3186,7 +3186,7 @@ nft_id,character_name,server,gp,character_class,starting_price
 3188,Bลtลterล,Sombra,"387,359",Archer,
 3189,Z1000,NAEU005,"237,088",Archer,
 3190,왁즈Wackz,Chess,"421,542",Assassin,
-3191,Sleeper氷,SA005,"266,680",Archer,
+3191,Sleeper氷,SA005,"289,208",Archer,"1,000"
 3192,Lacazette,SA007,"176,418",Archer,
 3193,Asamaxツ,TVJ,"211,602",Rune Fighter,
 3194,Omanignikup,sapPHire,"237,026",Archer,
@@ -3265,7 +3265,7 @@ nft_id,character_name,server,gp,character_class,starting_price
 3267,メZaimeowVG,HERO,"194,227",Skald,
 3268,Unknown45,ASIA022,"204,806",Archer,
 3269,Seraphh,Chess,"210,891",Archer,
-3270,TubainaZero,Severance,"409,767",Archer,
+3270,TubainaZero,Severance,"410,108",Archer,
 3271,FearLess24,TVJ,"200,828",Berserker,
 3272,Aleh,SA007,"160,615",Skald,
 3273,Suzzybabeヅ,Chess,"250,910",Skald,
@@ -3414,7 +3414,7 @@ nft_id,character_name,server,gp,character_class,starting_price
 3416,ChiLLzzz,Chess,"246,049",Archer,
 3417,Conjuring,Chess,"246,455",Archer,
 3418,OldJoe,BRAVOS,"180,792",Archer,
-3419,Madoka,YakuGames,"251,679",Rune Fighter,
+3419,Madoka,YakuGames,"252,739",Rune Fighter,
 3420,WitchisDrunk,NAEU005,"163,467",Skald,
 3421,CharlNANA,UniRevivaL,"172,948",Skald,200
 3422,幸運の神Kyelin,Chess,"374,891",Skald,
@@ -3461,7 +3461,7 @@ nft_id,character_name,server,gp,character_class,starting_price
 3463,Papichu,ISEKAI,"280,402",Archer,
 3464,Reve,sapPHire,"234,774",Rune Fighter,
 3465,XCP,Tokyo,"273,473",Archer,
-3466,致命DanielAFK,Kings,"564,739",Assassin,"35,000"
+3466,致命DanielAFK,Kings,"564,739",Assassin,"30,000"
 3467,SmasherX,TVJ,"256,209",Archer,
 3468,구Hippocrates,sapPHire,"312,078",Skald,
 3469,xzHADESzx,Sombra,"303,703",Berserker,
@@ -3545,7 +3545,7 @@ nft_id,character_name,server,gp,character_class,starting_price
 3547,阿akaringo戈,YGG,"218,441",Rune Fighter,
 3548,LayfonRei,Kings,"280,538",Rune Fighter,
 3549,Chicossauro,Sombra,"224,547",Skald,
-3550,SOLIN愛,Severance,"341,193",Archer,899
+3550,SOLIN愛,Severance,"341,193",Archer,850
 3551,VyvyHelius,Bangkok,"241,310",Skald,
 3552,Guizao,Sombragg,"229,261",Archer,
 3553,Anestezya,Severance,"166,921",Archer,
@@ -3649,7 +3649,7 @@ nft_id,character_name,server,gp,character_class,starting_price
 3651,HOFBONGIN6,HOF2,"161,473",Skald,
 3652,Doanhwa,Kings,"192,751",Warlord,
 3653,КакТак,Moscow,"362,869",Archer,
-3654,Betobooster,NAEU004,"355,375",Archer,
+3654,Betobooster,NAEU004,"477,022",Archer,
 3655,xBer2,ASIA054,"406,453",Rune Fighter,
 3656,Köpi,Kings,"316,839",Rune Fighter,
 3657,lScorpionl,Chess,"285,364",Archer,
@@ -3661,7 +3661,7 @@ nft_id,character_name,server,gp,character_class,starting_price
 3663,Jubazzz,Sombragg,"193,764",Skald,
 3664,eLt1tY,NAEU004,"225,448",Archer,
 3665,Blackcookie,OLIMPO,"303,237",Rune Fighter,
-3666,DST乂Viserion,NAEU005,"456,505",Berserker,"9,500"
+3666,DST乂Viserion,NAEU005,"456,505",Berserker,"9,000"
 3667,・Bilge・,NAEU005,"345,693",Warlord,
 3668,LorenzoCris,Kings,"318,050",Archer,
 3669,Pearcy笑,Kings,"438,234",Archer,
@@ -3843,7 +3843,7 @@ nft_id,character_name,server,gp,character_class,starting_price
 3845,LichBear,EBD,"205,567",Volva,
 3846,DataQuire,Tokyo,"337,552",Assassin,
 3847,NotSevY,ISEKAI,"373,391",Archer,
-3848,Yuro,Tokyo,"330,536",Assassin,
+3848,Yuro,Tokyo,"330,266",Assassin,
 3849,Tawanna,ASIA015,"216,793",Skald,
 3850,Peggy,ASIA025,"194,627",Skald,
 3851,Asalim,ASIA016,"219,749",Skald,
@@ -3897,8 +3897,8 @@ nft_id,character_name,server,gp,character_class,starting_price
 3899,Aegonnn,Chess,"289,340",Skald,
 3900,pandesahl,Kings,"319,670",Skald,
 3901,oOPabzOo,ASIA022,"252,929",Skald,
-3902,Këis,ISEKAI2,"339,886",Archer,
-3903,JiN・Mori,OLIMPO,"363,467",Archer,"1,350"
+3902,Këis,ISEKAI2,"330,351",Archer,
+3903,JiN・Mori,OLIMPO,"363,467",Archer,"1,000"
 3904,PinkStar,Moscow,"314,632",Volva,
 3905,noisycat,ISEKAI,"188,154",Archer,
 3906,Yzimi,sapPHire,"248,405",Skald,
@@ -4001,18 +4001,18 @@ nft_id,character_name,server,gp,character_class,starting_price
 4003,Pai,NAEU005,"380,033",Volva,
 4004,Cielf,TheOrigin,"244,081",Skald,
 4005,searina,IceXgame,"274,091",Archer,
-4006,坏的・Jedi,YGG,"377,105",Rune Fighter,
+4006,坏的・Jedi,YGG,"377,126",Rune Fighter,
 4007,Iblis,Sombra,"289,044",Archer,
-4008,MIIITY,Chess,"290,180",Warlord,
+4008,MIIITY,Chess,"290,182",Warlord,
 4009,Ghuddist,sapPHire,"247,249",Warlord,
 4010,Miyuメ,HERO,"303,278",Skald,
 4011,Candelle,Kings,"281,990",Skald,
 4012,0xViper,NAEU004,"325,367",Rune Fighter,
 4013,Tom11267,Chess,"362,479",Rune Fighter,
 4014,4drian,NAEU005,"264,085",Warlord,
-4015,DarKKrueger,NAEU005,"346,955",Volva,
+4015,DarKKrueger,NAEU005,"347,424",Volva,
 4016,Aizii,PROSGARD,"290,065",Archer,
-4017,Mamamoooblue,Kings,"365,922",Archer,
+4017,Mamamoooblue,Kings,"366,534",Archer,
 4018,我們的隊伍向太陽丶,Kings,"302,622",Skald,
 4019,Lavigne,ISEKAI,"304,578",Skald,
 4020,MyDream,Kings,"231,928",Archer,
@@ -4049,7 +4049,7 @@ nft_id,character_name,server,gp,character_class,starting_price
 4051,F2POnly,Kings,"303,924",Rune Fighter,800
 4052,Ryla,TheOrigin,"346,482",Skald,
 4053,TheKingCris,NAEU006,"204,926",Skald,
-4054,AION2,NAEU005,"524,059",Rune Fighter,
+4054,AION2,NAEU005,"524,602",Rune Fighter,
 4055,BogeCN,HOF5,"360,714",Skald,
 4056,jaceDyGaming,Kings,"323,976",Rune Fighter,
 4057,N0va,HERO,"282,655",Archer,"1,000"
@@ -4066,7 +4066,7 @@ nft_id,character_name,server,gp,character_class,starting_price
 4068,Ra1zeL,Chess,"305,002",Archer,
 4069,Freak,Chess,"315,756",Archer,700
 4070,Striploin,NAEU004,"313,263",Rune Fighter,
-4071,TitanYmir,Kings,"356,626",Rune Fighter,
+4071,TitanYmir,Kings,"372,310",Rune Fighter,
 4072,ASTARIZ,Kings,"248,415",Archer,
 4073,xMAMAMOx,HERO,"304,217",Archer,
 4074,Bliseee,Chess,"238,804",Skald,300
@@ -4093,7 +4093,7 @@ nft_id,character_name,server,gp,character_class,starting_price
 4095,HOFx魔Ark,PROSGARD,"257,336",Archer,420
 4096,天成一笑,Kings,"320,972",Archer,
 4097,HOFXSTORM,HERO,"235,665",Archer,
-4098,Leianna,ASIA016,"341,163",Archer,
+4098,Leianna,ASIA016,"331,669",Archer,888
 4099,ミKarya,Chess,"271,328",Archer,
 4100,FabriciooMcz,Severance,"207,549",Archer,
 4101,Godriel,Chess,"257,657",Archer,600
@@ -4113,7 +4113,7 @@ nft_id,character_name,server,gp,character_class,starting_price
 4115,C3b,ASIA016,"252,829",Volva,
 4116,Todozukaari,Kings,"272,402",Archer,600
 4117,ミSaranu,Chess,"272,818",Archer,
-4118,開拉Zîan,HERO,"395,431",Assassin,
+4118,開拉Zîan,HERO,"395,745",Assassin,
 4119,ChewBacca,Severance,"246,044",Archer,
 4120,Jumia,Severance,"223,012",Skald,
 4121,Melvin,SA005,"186,149",Skald,
@@ -4127,12 +4127,12 @@ nft_id,character_name,server,gp,character_class,starting_price
 4129,萌著萌著就蒙了,ASIA014,"254,251",Skald,600
 4130,Dkdes,Bayabas,"266,131",Volva,
 4131,Dysalaque,YGG,"268,371",Archer,
-4132,Ymber,Chess,"393,331",Archer,
+4132,Ymber,Chess,"393,253",Archer,
 4133,LunaXcore,NAEU005,"180,207",Archer,
 4134,PIM,TVJ,"292,439",Archer,
 4135,Giyuu,Kings,"236,085",Archer,
 4136,ANSEL,Chess,"293,178",Archer,
-4137,Eury,Kings,"443,670",Archer,
+4137,Eury,Kings,"443,771",Archer,
 4138,HOFKENIAH,sapPHire,"256,563",Volva,
 4139,HOFNOWAY,sapPHire,"250,020",Archer,499
 4140,longniyou,STEAM001,"491,549",Archer,
@@ -4163,12 +4163,12 @@ nft_id,character_name,server,gp,character_class,starting_price
 4165,Himeno,NAEU005,"237,152",Volva,
 4166,JokerYurbas,EBD,"328,730",Archer,
 4167,Pjanka,EBD,"337,722",Archer,
-4168,Kuina00,ASIA054,"143,364",Skald,104
+4168,Kuina00,ASIA054,"143,364",Skald,98
 4169,JoyGirl,STEAM003,"263,803",Rune Fighter,
-4170,Adriannnn,Kings,"790,871",Assassin,
+4170,Adriannnn,Kings,"793,210",Assassin,
 4171,cyyyd,Tokyo,"271,316",Archer,
 4172,NFT01,Kings,"473,000",Archer,"20,000"
-4173,Beardbrand,sapPHire,"314,109",Warlord,
+4173,Beardbrand,sapPHire,"285,404",Warlord,"1,299"
 4174,Jinnnn,ISEKAI,"263,503",Warlord,
 4175,xFALL,Kings,"284,728",Archer,
 4176,么Finn,Bangkok,"400,050",Assassin,
@@ -4176,7 +4176,7 @@ nft_id,character_name,server,gp,character_class,starting_price
 4178,Edyshow,Severance,"318,120",Archer,
 4179,ApamPink,HERO,"261,403",Rune Fighter,555
 4180,LOFIGANDA,HERO,"352,430",Archer,
-4181,风萧萧,ASIA014,"350,157",Archer,
+4181,风萧萧,ASIA014,"349,866",Archer,
 4182,GG私はただの農家です,HERO,"325,755",Archer,
 4183,Airi,TheOrigin,"234,958",Skald,
 4184,Watts,NAEU004,"406,338",Rune Fighter,"5,999"
@@ -4186,7 +4186,7 @@ nft_id,character_name,server,gp,character_class,starting_price
 4188,Yuniss,Chess,"424,864",Archer,
 4189,Bisaiyan,ASIA036,"285,877",Skald,900
 4190,BTxxChiBi,Kings,"402,535",Assassin,
-4191,S3xyCricket,Chess,"365,708",Archer,
+4191,S3xyCricket,Chess,"348,748",Archer,
 4192,不朽Dragon,SAKURA,"257,091",Warlord,
 4193,Arashh,Chess,"262,471",Archer,
 4194,ふAndaya,Kings,"280,116",Archer,
@@ -4201,11 +4201,14 @@ nft_id,character_name,server,gp,character_class,starting_price
 4203,NooBasteR,EBD,"263,372",Archer,
 4204,MissFortune,Bayabas,"300,019",Archer,550
 4205,Mathinilda,TVJ,"244,431",Skald,369
-4206,DoT,NAEU005,"232,063",Archer,260
+4206,DoT,NAEU005,"232,063",Archer,220
 4207,ZeroTherion,Sombra,"198,579",Volva,
 4208,Huakk,TheOrigin,"197,992",Volva,
 4209,zaidenitos,YGG,"291,881",Rune Fighter,
 4210,SgtSwagger,Chess,"225,934",Archer,
-4211,LUCIO,ISEKAI,"344,886",Assassin,
+4211,LUCIO,ISEKAI,"346,209",Assassin,"1,400"
 4212,ALPHA1999,ASIA054,"342,204",Rune Fighter,
 4213,Thror,NAEU005,"239,087",Warlord,
+4214,NaMi,HERO,"322,058",Rune Fighter,
+4215,xGum,Chess,"235,281",Skald,
+4216,Kauevrau,Sombragg,"252,212",Archer,150
